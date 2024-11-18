@@ -22,12 +22,12 @@ import sys
 import threading
 from typing import Any, Optional
 
-# Add CST library path
-sys.path.append(r"C:\Program Files (x86)\CST Studio Suite 2023\AMD64\python_cst_libraries")
+import numpy as np
 
+# Import CST libraries
+sys.path.append(r"C:\Program Files (x86)\CST Studio Suite 2023\AMD64\python_cst_libraries")
 import cst.interface
 import cst.results
-import numpy as np
 
 LOG_LEVEL = logging.DEBUG
 
@@ -130,7 +130,6 @@ class CSTOptimizer:
         self.interrupt_flag.set()
 
     def run_solver_in_thread(self) -> bool:
-        # TODO Doesn't really work lol
         """
         Runs the CST solver in a separate thread, monitoring for interruption.
         Ensures proper thread cleanup and respects the interrupt flag.

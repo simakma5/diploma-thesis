@@ -3,9 +3,9 @@
 #
 # TODO Nelder-Mead Simplex Algoritm doesn't support defining constraints
 # TODO Automate setting up the mesh prior to optimization with parametrization
-# TODO Disable all TBPP to avoid failures
+# TODO Disable all irrelevant TBPP to avoid failures
 # TODO Ensure that the class always parses the correct results
-# TODO Test saving the optimal parameters when exiting (EXIT GRACEFULLY)
+# TODO Ensure saving the optimal parameters when exiting (EXIT GRACEFULLY)
 
 import os
 
@@ -13,10 +13,7 @@ import numpy as np
 from CSTOptimizer import CSTOptimizer
 from scipy.optimize import minimize  # noqa
 
-CST_PROJECT_PATH = (
-    r"C:\Users\marti\Repositories\Workspace\IDE projects\CST\diploma_thesis"
-    r"\coax-to-waveguide-adapter\CoaxToWaveguideAdapter.cst"
-)
+CST_PROJECT_PATH = r"C:\Users\marti\Repositories\diploma-thesis\cst\dual-feed\dual_feed.cst"
 OPTIMIZATION_CONFIG = {
     "method": "nelder-mead",
     "frequencyRange": [5, 6],
@@ -39,11 +36,7 @@ VBA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gratingAdju
 
 
 def main() -> None:
-    """
-    The main function that initializes the optimizer and runs the CST optimization using the Nelder-Mead method.
-    This function configures logging, initializes the CSTOptimizer with necessary parameters, and runs the optimization.
-    """
-    # Initialize the CSTOptimizer with the project, variable, goal, and frequency range
+    # Initialize the CSTOptimizer
     optimizer = CSTOptimizer(
         project_path=CST_PROJECT_PATH,
         optimization_config=OPTIMIZATION_CONFIG,
@@ -56,11 +49,11 @@ def main() -> None:
     # Run optimization using the minimize function from scipy.optimize
     optimization_variables = [var for var in OPTIMIZATION_CONFIG["variables"] if var["optimize"]]
     result = minimize(
-        optimizer.objective_function,  # Objective function to minimize
-        x0=np.array([var["initialValue"] for var in optimization_variables]),  # Initial guess
-        method=OPTIMIZATION_CONFIG["method"],  # Optimization method (Nelder-Mead)
-        bounds=[var["bounds"] for var in optimization_variables],  # Bounds for each variable
-        constraints=optimizer.get_constraints(),  # Constraints for the optimization
+        optimizer.objective_function,
+        x0=np.array([var["initialValue"] for var in optimization_variables]),
+        method=OPTIMIZATION_CONFIG["method"],
+        bounds=[var["bounds"] for var in optimization_variables],
+        constraints=optimizer.get_constraints(),
         options={
             "disp": True,  # Display optimization progress
             "initial_simplex": None,  # Initial simplex for Nelder-Mead

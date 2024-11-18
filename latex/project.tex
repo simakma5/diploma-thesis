@@ -1,0 +1,120 @@
+%========== Document settings ==========
+\documentclass[11pt,a4paper,twoside,openany]{report}
+\setlength\textwidth{145mm}
+\setlength\textheight{247mm}
+\setlength\oddsidemargin{14.2mm}
+\setlength\evensidemargin{0mm}
+\setlength\topmargin{0mm}
+\setlength\headsep{0mm}
+\setlength\headheight{0mm}
+\let\openright=\cleardoublepage
+
+%========== Language settings ==========
+\usepackage[main=british,czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%========== Packages =============
+\usepackage{stddoc}
+\usepackage{circuitikz}
+
+%========== Date format ===============
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+%========== Declaration ==========
+\newcommand\declarationpage{\input{declarationpage.tex}}
+
+%========== Acknowledgements ==========
+\newcommand\acknowledgementspage{\input{acknowledgementspage.tex}}
+
+%========== Abstract ==========
+\newcommand\abstractpage{\input{abstractpage.tex}}
+
+%========== Bibliography ==========
+\bibliographystyle{abbrvnat}
+
+%========== Custom commands ==========
+\newcommand{\Tx}{\mathrm{Tx}}
+\newcommand{\Rx}{\mathrm{Rx}}
+
+%========== Draft settings ==========
+\usepackage{lipsum}
+
+
+\makeindex
+\begin{document}
+
+    \pagenumbering{gobble}
+    
+    %========== Title page ==========
+    % Suppress displaying the page number on the title page + count the following page as page 1 (not used)
+    \begin{titlepage}
+        \input{titlepage.tex}
+    \end{titlepage}
+
+    %========== Blank page ==========
+    \newpage\blankpage
+
+    % %========== Assignment ==========
+    % \includepdf[pages=-]{src/assignment.pdf}
+
+    % %========== Blank page ==========
+    % \newpage\blankpage
+
+    % Start counting pages in roman numerals
+    \pagenumbering{roman}
+
+    % %========== Declaration ==========
+    % \declarationpage
+
+    % %========== Acknowledgements ==========
+    % \acknowledgementspage
+
+    % %========== Abstract ==========
+    % \abstractpage
+
+    % Start counting pages in arabic numerals
+    \pagenumbering{arabic}
+
+    %========== Table of contents ==========
+    \tableofcontents
+
+    %========== Introduction ==========
+    % This is just a very vague introduction for the thesis project which is to be rewritten later on.
+    \chapter*{Introduction}
+    \label{chap:introduction}
+    \addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
+    
+    \lipsum[1-2]
+
+    \paragraph*{Synopsis.} In \textbf{Chapter~\ref{chap:first-chapter}}, \lipsum[3]
+
+    \paragraph*{Methodology.} \lipsum[4]
+
+
+    %========== Chapter 1: First chapter ==========
+    \chapter{Chapter}
+    \label{chap:first-chapter}
+
+    \lipsum[5-6] Random citation~\cite{kracek-mazanek:power-balance-of-inductive-wireless-power-transfer}.
+
+    \section{Section}
+    \label{sec:first-section}
+
+        \lipsum[7-9]
+
+    
+    %========== Conclusion ==========
+    \chapter*{Conclusion}
+    \label{chap:conclusion}
+    \addcontentsline{toc}{chapter}{\nameref{chap:conclusion}}
+    
+    \lipsum[10-13]
+
+    %========== Bibliography ==========
+    \bibliography{bibliography}
+	
+    % %========== Index ==========
+	% \printindex
+
+\end{document}
