@@ -1,0 +1,22 @@
+{
+    // Ruff
+    "[python]": {
+        "editor.formatOnSave": true,  // true/false
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",  // explicit/never
+            "source.organizeImports": "explicit"  // explicit/never
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "notebook.formatOnSave.enabled": true,
+    "notebook.codeActionsOnSave": {
+        "notebook.source.fixAll": "explicit",
+        "notebook.source.organizeImports": "explicit"
+    },
+    "ruff.lint.run": "onType",
+    "ruff.lint.args": ["--config", "line-length=120"],
+    "ruff.format.args": [
+        "--config",
+        "line-length=120"
+    ],
+}
