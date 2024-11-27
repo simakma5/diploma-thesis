@@ -5,25 +5,25 @@ Option Explicit
 Sub Main()
 
 	' Optimization variables
-	Dim GratingGap As Double
-	Dim WireDiameter As Double
+	Dim gratingGap As Double
+	Dim wireDiameter As Double
 
 	' Read-only variables
-	Dim WaveguideSide As Double
-	Dim WireCount As Double
+	Dim waveguideSide As Double
+	Dim wireCount As Double
 
 	' Infinite loop indicator
 	Dim safetyCounter As Integer
 
-    WaveguideSide = GetParameter("WaveguideSide")
-    GratingGap = GetParameter("GratingGap")
-    WireDiameter = GetParameter("WireDiameter")
-    WireCount = GetParameter("WireCount")
+    waveguideSide = GetParameter("waveguideSide")
+    gratingGap = GetParameter("gratingGap")
+    wireDiameter = GetParameter("wireDiameter")
+    wireCount = GetParameter("wireCount")
 
     ' Check if the grating is too narrow
     safetyCounter = 0
-    Do While isGratingTooNarrow(WaveguideSide, GratingGap, WireDiameter, WireCount)
-        WireCount = WireCount + 2
+    Do While isGratingTooNarrow(waveguideSide, gratingGap, wireDiameter, wireCount)
+        wireCount = wireCount + 2
 
         safetyCounter = safetyCounter + 1
         If safetyCounter > 100 Then
@@ -34,9 +34,9 @@ Sub Main()
 
     ' Check if the grating is too wide
     safetyCounter = 0
-    Do While isIntersecting(WaveguideSide, GratingGap, WireDiameter, WireCount)
-        WireCount = WireCount - 2
-        If WireCount < 1 Then
+    Do While isIntersecting(waveguideSide, gratingGap, wireDiameter, wireCount)
+        wireCount = wireCount - 2
+        If wireCount < 1 Then
             Err.Raise vbObjectError + 100, "Main", "No feasible grating geometry found."
             Exit Sub
         End If
@@ -49,42 +49,44 @@ Sub Main()
     Loop
 
     ' Update the model parameters and rebuild structure
-    StoreParameter "WireCount", WireCount
-    Call RebuildOnParametricChange(True, False)
+    If wireCount <> GetParameter("wireCount") Then
+        StoreParameter "wireCount", wireCount
+        Call RebuildOnParametricChange(True, False)
+    End If
 
 End Sub
 
 Private Function GetParameter(ParameterName As String) As Double
 
 	Dim i As Integer
-	Dim ParameterCount As Double
-	ParameterCount = GetNumberOfParameters()
+	Dim parameterCount As Double
+	parameterCount = GetNumberOfParameters()
 
-	For i = 0 To ParameterCount - 1
+	For i = 0 To parameterCount - 1
 		If GetParameterName(i) = ParameterName Then
 			GetParameter = GetParameterSValue(i)
 			Exit For
 		End If
 	Next i
 
-	If i = ParameterCount Then
+	If i = parameterCount Then
 		Err.Raise vbObjectError + 200, "GetParameter", "Parameter '" & ParameterName & "' not found."
 	End If
 
 End Function
 
-' Check if 
+' Check if
 Private Function isGratingTooNarrow( _
-    WaveguideSide As Double, _
-    GratingGap As Double, _
-    WireDiameter As Double, _
-    WireCount As Integer _
+    waveguideSide As Double, _
+    gratingGap As Double, _
+    wireDiameter As Double, _
+    wireCount As Integer _
 ) As Boolean
 
-    Dim GapAroundGrating As Double
-    GapAroundGrating = (WaveguideSide - WireCount * GratingGap - WireDiameter) / 2
+    Dim gapAroundGrating As Double
+    gapAroundGrating = (waveguideSide - wireCount * gratingGap - wireDiameter) / 2
 
-    If GapAroundGrating > GratingGap Then
+    If gapAroundGrating > gratingGap Then
         isGratingTooNarrow = True
     Else
         isGratingTooNarrow = False
@@ -94,16 +96,16 @@ End Function
 
 ' Check if the grating is being pushed out into the waveguide walls
 Private Function isIntersecting( _
-    WaveguideSide As Double, _
-    GratingGap As Double, _
-    WireDiameter As Double, _
-    WireCount As Integer _
+    waveguideSide As Double, _
+    gratingGap As Double, _
+    wireDiameter As Double, _
+    wireCount As Integer _
 ) As Boolean
 
-    Dim GratingEdge As Double
-    GratingEdge = (WireCount - 1) / 2 * GratingGap + WireDiameter / 2
+    Dim gratingEdge As Double
+    gratingEdge = (wireCount - 1) / 2 * gratingGap + wireDiameter / 2
 
-    If GratingEdge > WaveguideSide / 2 Then
+    If gratingEdge > waveguideSide / 2 Then
         isIntersecting = True
     Else
         isIntersecting = False
