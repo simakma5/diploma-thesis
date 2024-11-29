@@ -202,7 +202,6 @@ class CSTOptimizer:
                 break
             except Exception as e:
                 self.logger.warning(e)
-                continue
         if not results:
             self.logger.error(
                 f"Run ID {self.last_run_id} not found! Step count: {self.step_counter}, run ID: {self.last_run_id}"
@@ -214,7 +213,7 @@ class CSTOptimizer:
         for result, goal in zip(results, self.goals):
             # Maximum difference
             if goal["norm"] == "MD":
-                max_difference = np.max(np.abs(result - goal["target"]))
+                max_difference = np.max(result - goal["target"])
                 self.logger.info(
                     f"Result: {goal['result']} | Weight: {goal['weight']} | "
                     f"Target: {goal['target']} | Maximum difference: {max_difference :.2f}"
@@ -222,7 +221,7 @@ class CSTOptimizer:
                 objective_value += goal["weight"] * max_difference
             # Sum of differences
             elif goal["norm"] == "SoD":
-                average_difference = sum(np.abs(result - goal["target"])) / len(result)
+                average_difference = sum(result - goal["target"]) / len(result)
                 self.logger.info(
                     f"Result: {goal['result']} | Weight: {goal['weight']} | "
                     f"Target: {goal['target']} | Average difference: {average_difference :.2f}"
