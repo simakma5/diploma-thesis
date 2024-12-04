@@ -1,0 +1,83 @@
+close all; clear; clc;
+script_directory = fileparts(matlab.desktop.editor.getActiveFilename) + "\";
+addpath(genpath(script_directory))
+s = settings;
+s.matlab.appearance.figure.GraphicsTheme.TemporaryValue = "light";
+
+%% Main
+sweep_parameters = ["feed_length", "outlet_length", "polarizer_length", "chamfer_width", "chamfer_angle", "probe_distance", "probe_length"];
+titles = ["|S_{11}|", "|S_{21}|", "|S_{12}|", "|S_{22}|"];
+
+for sweep_parameter = sweep_parameters
+    data_directory = script_directory + strrep(sweep_parameter, "_", "-") + "\";
+    if isfile(data_directory + sweep_parameter + "_1.s2p")
+        frequency = (sparameters(sweep_parameter + "_1.s2p").Frequencies) * 1e-9;
+    else
+        throw(MException("s_parameters:fileNotFound", "Data for " + sweep_parameter + " sweep not found!"))
+    end
+    [s11, s21, s12, s22] = deal(zeros(1, length(frequency)));
+    sweep_count = 1;
+    while isfile(data_directory + sweep_parameter + "_" + sweep_count + ".s2p")
+        data = sparameters(sweep_parameter + "_" + sweep_count + ".s2p");
+        s11(sweep_count, :) = squeeze(data.Parameters(1, 1, :));
+        s21(sweep_count, :) = squeeze(data.Parameters(2, 1, :));
+        s12(sweep_count, :) = squeeze(data.Parameters(1, 2, :));
+        s22(sweep_count, :) = squeeze(data.Parameters(2, 2, :));
+        sweep_count = sweep_count + 1;
+    end
+    sweep_values = importdata(data_directory + "sweep_values.txt")';
+
+    figure("Name", strrep(sweep_parameter, "_", " ") + " sweep");
+    tiles = tiledlayout(2, 2, "TileSpacing", "compact");
+    S = shiftdim(cat(3, s11, s21, s12, s22), 2);
+    line_groups = cell(sweep_count-1, 1);
+    for ij = 1:4
+        nexttile;
+        hold on
+        for sweep = 1:sweep_count-1
+            handle = plot(frequency, 20*log10(abs(squeeze(S(ij, sweep, :)))));
+            if isempty(line_groups{sweep})
+                line_groups{sweep} = handle;
+            else
+                line_groups{sweep} = [line_groups{sweep}, handle];
+            end
+        end
+        yline(0)
+        yline(-10, "--")
+        hold off
+        grid on
+        axis tight
+        ylim([-40, 0])
+        title(titles(ij))
+    end
+    xlabel(tiles, "Frequency [GHz]")
+    ylabel(tiles, "Magnitude [dB]")
+
+    leg = legend(sweep_values + " mm", "Orientation", "vertical", 'ItemHitFcn', @(src, event) cb_legend(event));
+    leg.UserData = line_groups;
+    leg.Layout.Tile = "east";
+end
+
+%% Functions
+function cb_legend(event)
+    % disp('Legend item clicked!');
+    clicked_line = event.Peer;
+    line_groups = event.Source.UserData;
+
+    for group_idx = 1:length(line_groups)
+        group = line_groups{group_idx};
+        if strcmp(group(4).DisplayName, clicked_line.DisplayName)
+            % disp(['Group ' num2str(group_idx) ' toggled']);
+            if strcmp(group(1).Visible, 'on')
+                for line = group
+                    line.Visible = 'off';
+                end
+            else
+                for line = group
+                    line.Visible = 'on';
+                end
+            end
+            break;
+        end
+    end
+end

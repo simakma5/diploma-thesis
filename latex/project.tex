@@ -16,7 +16,6 @@
 
 %========== Packages =============
 \usepackage{stddoc}
-\usepackage{circuitikz}
 
 %========== Date format ===============
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
@@ -32,10 +31,6 @@
 
 %========== Bibliography ==========
 \bibliographystyle{abbrvnat}
-
-%========== Custom commands ==========
-\newcommand{\Tx}{\mathrm{Tx}}
-\newcommand{\Rx}{\mathrm{Rx}}
 
 %========== Draft settings ==========
 \usepackage{lipsum}
@@ -56,7 +51,7 @@
     \newpage\blankpage
 
     % %========== Assignment ==========
-    % \includepdf[pages=-]{src/assignment.pdf}
+    \includepdf[pages=-]{src/assignment.pdf}
 
     % %========== Blank page ==========
     % \newpage\blankpage
