@@ -1,3 +1,8 @@
+%========== Compiler Directives ==========
+% !TeX program = lualatex                                   
+% !TeX encoding = utf8
+% !TeX spellcheck = english
+
 %========== Document settings ==========
 \documentclass[11pt,a4paper,twoside,openany]{report}
 \setlength\textwidth{145mm}
@@ -11,32 +16,22 @@
 
 %========== Language settings ==========
 \usepackage[main=british,czech]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 
 %========== Packages =============
-\usepackage{stddoc}
+\usepackage{thesis-package}
 
 %========== Date format ===============
 \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
-%========== Declaration ==========
-\newcommand\declarationpage{\input{declarationpage.tex}}
-
-%========== Acknowledgements ==========
-\newcommand\acknowledgementspage{\input{acknowledgementspage.tex}}
-
-%========== Abstract ==========
-\newcommand\abstractpage{\input{abstractpage.tex}}
-
 %========== Bibliography ==========
-\bibliographystyle{abbrvnat}
+\addbibresource{bibliography.bib}
 
 %========== Draft settings ==========
 \usepackage{lipsum}
 
-
-\makeindex
+\makeindex[intoc]
+\makenomenclature
+\renewcommand{\nomname}{Glossary of Symbols}
 \begin{document}
 
     \pagenumbering{gobble}
@@ -44,7 +39,7 @@
     %========== Title page ==========
     % Suppress displaying the page number on the title page + count the following page as page 1 (not used)
     \begin{titlepage}
-        \input{titlepage.tex}
+        \input{frontpage.tex}
     \end{titlepage}
 
     %========== Blank page ==========
@@ -53,20 +48,17 @@
     % %========== Assignment ==========
     \includepdf[pages=-]{src/assignment.pdf}
 
-    % %========== Blank page ==========
-    % \newpage\blankpage
-
     % Start counting pages in roman numerals
     \pagenumbering{roman}
 
     % %========== Declaration ==========
-    % \declarationpage
+    % \input{declaration.tex}
 
     % %========== Acknowledgements ==========
-    % \acknowledgementspage
+    % \input{acknowledgements.tex}
 
     % %========== Abstract ==========
-    % \abstractpage
+    % \input{abstract.tex}
 
     % Start counting pages in arabic numerals
     \pagenumbering{arabic}
@@ -75,29 +67,259 @@
     \tableofcontents
 
     %========== Introduction ==========
-    % This is just a very vague introduction for the thesis project which is to be rewritten later on.
     \chapter*{Introduction}
     \label{chap:introduction}
     \addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
     
+    Write a couple of words on literature survey. Present the difference construction and design choices, compare them both theoretically and by the results presented in gathered papers.
+    \\
+    \cite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges}
+    \index{index entry}
+
     \lipsum[1-2]
 
-    \paragraph*{Synopsis.} In \textbf{Chapter~\ref{chap:first-chapter}}, \lipsum[3]
+    \paragraph*{Synopsis.} In \textbf{Chapter~\ref{chap:theory}}, \lipsum[3]
 
     \paragraph*{Methodology.} \lipsum[4]
 
 
-    %========== Chapter 1: First chapter ==========
-    \chapter{Chapter}
-    \label{chap:first-chapter}
+    %========== Chapter 1: Theory of Operation ==========
+    \chapter{Theory of operation}
+    \label{chap:theory}
 
-    \lipsum[5-6] Random citation~\cite{kracek-mazanek:power-balance-of-inductive-wireless-power-transfer}.
+    \lipsum[5]
 
-    \section{Section}
+    Throughout the theory chapter, I will omit using the common \enquote{notation candy} of \emph{del}, or \emph{nabla}, for the vector differential operator $\nabla$ which gives rise to the formally proper differential operators of gradient ($\nabla$), divergence ($\nabla\cdot$), curl ($\nabla\times$), and sometimes even the Laplace operator ($\nabla\cdot\nabla$ or $\nabla^2$). Instead, I will use the standard notations of $\Grad$, $\Div$, $\Curl$, and $\Delta$, respectively. There are various reasons for this decision, e.g., that the definition of such an operator is inherently dependent on the working coordinate system, while the differential operators can be broadly extended beyond Cartesian or even Euclidean geometries, or that it promotes a notational ambiguity with the covariant derivative used in differential geometry. The main reason, however, is simply that the fundamental nature of the operator is undefinable and thus unclear.
+    \nomenclature{$\Grad$}{gradient }%
+    \nomenclature{$\Div$}{divergence }%
+    \nomenclature{$\Curl$}{curl }%
+    \nomenclature{$\Delta$}{Laplace operator }%
+
+    Inspired by~\cite{balanis:advanced-engineering-electromagnetics}~and~\cite{griffiths:introduction-to-electrodynamics}.
+
+    \section{Laws of electrodynamics}
     \label{sec:first-section}
+        Lay out \texttt{the equations}, brr\\
+        \begin{subequations}
+            \label{eq:maxwell-general}
+            \noindent\centering
+            \begin{minipage}{0.45\textwidth}
+                \begin{align}
+                    \label{maxwell-general-div-d}
+                    \Div\vec D &= \rho_{\mathrm e},
+                \\
+                    \label{maxwell-general-curl-e}
+                    \Curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
+                \end{align}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.45\textwidth}
+                \begin{align}
+                    \label{maxwell-general-div-b}
+                    \Div\vec B &= \rho_{\mathrm m},
+                \\
+                    \label{maxwell-general-curl-h}
+                    \Curl\vec H &= \vec J_{\mathrm e} + \partial_t\vec D,
+                \end{align}
+            \end{minipage}
+        \end{subequations}\\%
+        % \nomenclature{$E$}{electric field intensity }%
+        % \nomenclature{$B$}{magnetic field intensity }%
+        % \nomenclature{$D$}{electric flux density }%
+        % \nomenclature{$H$}{magnetic flux density }%
+        % \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
+        % \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
+        % \nomenclature{$J_{\mathrm e}$}{source electric current density }%
+        % \nomenclature{$J_{\mathrm m}$}{source magnetic current density }%
+        \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }
+        \begin{itemize}
+            \item $J_{\mathrm e}$ is total electric current made up of the source current $J_{\mathrm s}$ and conductive current $J_{\mathrm c}$. 
+            \item $\rho_{\mathrm m}$ and $\vec J_{\mathrm m}$ are part of the \enquote{generalized} current concept.
+            \item Explain the concept of these equations being expressed in \emph{free} charge and \emph{free} current. Give example of the Maxwell's equations neglecting the matter properties, to the convenience of which the \emph{free} sources are introduced, and make comments how equally general and useful they are.
+            \item Comment on mathematical completeness together with boundary conditions which are usually \enquote{obvious}, such as vanishing potentials at infinity etc. Source Griffiths for that from his formulation without material properties. This might need the inclusion of Lorentz's force law for absolute completeness of electrodynamics.
+        \end{itemize}
+        
+        \begin{align}
+            \Div \vec J_{\mathrm{e}} &= -\partial_t\rho_{\mathrm{e}}
+        \end{align}
 
-        \lipsum[7-9]
+        \subsection{Constitutive relations in time domain}
+            \begin{subequations}
+                \label{eq:constitutive-relations}
+                \begin{align}
+                    \label{eq:constitutive-relations-permittivity}
+                    \vec D &= \hat\epsilon \ast \vec E,
+                \\
+                    \label{eq:constitutive-relations-permeability}
+                    \vec B &= \hat\mu \ast \vec H,
+                \\
+                    \label{eq:constitutive-relations-conductivity}
+                    \vec J_{\mathrm c} &= \hat\sigma \ast \vec E,
+                \end{align}
+            \end{subequations}
+            % \nomenclature{$\hat\epsilon$}{permittivity }%
+            % \nomenclature{$\hat\mu$}{permeability }%
+            % \nomenclature{$\hat\sigma$}{conductivity }%
+            where $\hat\epsilon$, $\hat\mu$, and $\hat\sigma$ are generally second rank tensors and $\ast$ denotes \emph{convolution}.
+            
+            \noindent%
+            Talk about materials characterization
+            \begin{enumerate}
+                \item \emph{dielectrics}, \emph{magnetics}, and \emph{conductors}, with regard to their \emph{polarization}, \emph{magnetization}, and \emph{conduction};
+                \item \emph{linear} versus \emph{nonlinear}, \emph{homogeneous} versus \emph{inhomogeneous}, \emph{isotropic} versus \emph{anisotropic}, and \emph{dispersive} versus \emph{nondispersive}. Mention the simplification of material tensors ($\ast\to\cdot$, $F(\vec r,t) \to F(t)$, matrix $\to$ scalar, $\partial_\omega = 0$).
+            \end{enumerate}
 
+            \noindent%
+            In the simplest case of free space,~\eqref{eq:constitutive-relations-permittivity},~\eqref{eq:constitutive-relations-permeability},~and~\eqref{eq:constitutive-relations-conductivity} become
+            \begin{align}
+                \hat\epsilon &= \epsilon_0 \approx 8.854\times 10^{-12}\ \unit{F.m^{-1}},
+            \\
+                \hat\mu &= \mu_0 = 4\pi\times 10^{-7}\ \unit{H.m^{-1}},
+            \\
+                \hat\sigma &= 0\ \unit{S.m^{-1}}.
+            \end{align}
+
+        \subsection{Boundary conditions}
+            Include if needed (probably will be).
+
+        \subsection{Power and energy}
+            Include Poynting theorem if needed.
+    
+        \subsection{Electromagnetic properties of matter}
+            This one will, hopefully, be skippable. If not, talk about
+            \begin{itemize}
+                \item $\rho = \rho_{\mathrm f} + \rho_{\mathrm b} = \rho_{\mathrm f} - \Div\vec P$ due to free and bound charges,
+                \item $\vec J_{\mathrm e} = \vec J_{\mathrm f} + \vec J_{\mathrm b} + \vec J_{\mathrm p} = \vec J_{\mathrm f} + \Curl \vec M + \partial_t\vec P$, where $\vec M$ is magnetic polarization (magnetization), due to free, bound and polarization currents,
+            \end{itemize}
+            from~\cite{griffiths:introduction-to-electrodynamics}.
+    
+    \section{Electromagnetic waves}
+    \label{sec:electromagnetic-waves}
+        
+        \subsection{The wave equations}
+            Inside regions with no \emph{free} charge or \emph{free} current,%
+                \footnote{Expand on the notions of \emph{free} and \emph{bound} sources.}
+            Maxwell's equations take the form of\\
+            \begin{subequations}
+                \label{eq:maxwell-sourceless}
+                \noindent\centering
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:maxwell-sourceless-div-d}
+                        \Div \vec D &= 0,
+                    \\
+                        \label{eq:maxwell-sourceless-curl-e}
+                        \Curl \vec E &= -\partial_t\vec B,
+                    \end{align}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:maxwell-sourceless-div-b}
+                        \Div\vec B &= 0,
+                    \\
+                        \label{eq:maxwell-sourceless-curl-h}
+                        \Curl\vec H &= \sigma\vec E + \partial_t\vec D.
+                    \end{align}
+                \end{minipage}\bigskip
+            \end{subequations}\\
+            Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, equations \eqref{eq:maxwell-sourceless-curl-e}~and~\eqref{eq:maxwell-sourceless-curl-h} simplify to\\
+            \begin{subequations}
+                \label{eq:maxwell-sourceless-easy}
+                \noindent\centering
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:maxwell-sourceless-easy-div-e}
+                        \Div \vec E &= 0,
+                    \\
+                        \label{eq:maxwell-sourceless-easy-curl-e}
+                        \Curl \vec E &= -\partial_t\vec B,
+                    \end{align}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:maxwell-sourceless-easy-div-b}
+                        \Div\vec B &= 0,
+                    \\
+                        \label{eq:maxwell-sourceless-easy-curl-b}
+                        \Curl\vec B &= \mu\sigma\vec E + \mu\epsilon\partial_t\vec E.
+                    \end{align}
+                \end{minipage}\bigskip
+            \end{subequations}
+
+            Applying the curl to~\eqref{eq:maxwell-sourceless-easy-curl-e}~and~\eqref{eq:maxwell-sourceless-easy-curl-b} and using the identity $\Curl\Curl = \Grad\Div - \Delta$ from vector calculus, we obtain\\
+            \begin{subequations}
+                \label{eq:wave-equations}
+                \noindent\centering
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equation-e}
+                        \Delta\vec E &= \mu\sigma\partial_t\vec E + \mu\epsilon\partial^2_t\vec E,
+                    \end{align}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equation-b}
+                        \Delta\vec B &= \mu\sigma\partial_t\vec B + \mu\epsilon\partial^2_t\vec B.
+                    \end{align}
+                \end{minipage}\bigskip
+            \end{subequations}\\
+            Therefore electric and magnetic fields in linear homogeneous media both clearly satisfy the wave equation with a linear damping term $\mu\sigma\partial_t$ introduced by conductive losses. Furthermore, electromagnetic fields propagating in regions of zero conductive current, such as free space or ideal insulators, take the shape of the wave equations\\
+            \begin{subequations}
+                \label{eq:wave-equations-lossless}
+                \noindent\centering
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equation-e-lossless}
+                        \Delta\vec E &= \mu\epsilon\partial^2_t\vec E,
+                    \end{align}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equations-b-lossless}
+                        \Delta\vec B &= \mu\epsilon\partial^2_t\vec B,
+                    \end{align}
+                \end{minipage}\bigskip
+            \end{subequations}\\
+            which are ubiquitous in theoretical physics. Following the general notation, we can write\\
+            \begin{subequations}
+                \label{eq:wave-equations-lossless-dalembert}
+                \noindent\centering
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equation-e-lossless-dalembert}
+                        \square\vec E &= 0,
+                    \end{align}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.45\textwidth}
+                    \begin{align}
+                        \label{eq:wave-equations-b-lossless-dalembert}
+                        \square\vec B &= 0,
+                    \end{align}
+                \end{minipage}\bigskip
+            \end{subequations}\\
+            where $\square = \Delta - 1/c^2\partial^2_t$ is the d'Alembert operator. Recognizing these as the wave equations hence immediately gives rise to the formula
+            \begin{align}
+                v &= \frac{1}{\sqrt{\epsilon\mu}} = \frac{c}{\sqrt{\epsilon_r\mu_r}}
+            \end{align}
+            for the speed of electromagnetic waves in linear homogeneous media.
+            
+            Compared with the original Maxwell's equations~\eqref{eq:maxwell-general}, these equations form two systems of partial differential equations of second order but are now decoupled and provide us with an additional solving method for given boundary-value problems. However, it is important to note that the wave equations~\eqref{eq:wave-equation-e}~and~\eqref{eq:wave-equation-b} were derived from Maxwell's equation by differentiation. This impedes their mathematical equivalence. More specifically (as stated in~\cite{griffiths:introduction-to-electrodynamics}), whereas every solution to Maxwell's equations is also a solution for the wave equations, the converse is not true.
+        
+        \subsection{Monochromatic plane waves}
+            
+            Maxwell's equations along with the constitutive relations all the theory outlined so far involves description of general vector fields which vary in space and time. However, we have shown in Section~\ref{sec:electromagnetic-waves}, the fields, given certain conditions, exhibit wave behaviour. Nonetheless, these fields still take the form of general vector fields which is far too complex for analysis in any practical systems. Luckily, many of these systems, such as just about any laboratory conditions can produce, the time variations of the produced fields are of harmonious nature. We may, therefore, confine our attention to \emph{time-harmonic} waves, also called \emph{monochromatic} waves,%
+                \footnote{The etymology of this nomenclature comes from the Greek words \emph{m\'onos} (\enquote{sole, single}) and \emph{khr\^oma} (\enquote{color}).}
+            of given frequency $\omega$.
+            \begin{itemize}
+                \item Chat about the possibility to express just about any function described as \enquote{wave} by a Fourier transform, consisting of such monochromatic waves, \url{https://en.wikipedia.org/wiki/Dirichlet%E2%80%93Jordan_test#Dirichlet_conditions_in_signal_processing}.
+                \item Chat about plane waves travelling in the direction of wave vector $\vec k$ and find a way to introduce it.
+                \item Finish the \emph{monochromatic} wave footnote.
+            \end{itemize}
     
     %========== Conclusion ==========
     \chapter*{Conclusion}
@@ -106,10 +328,13 @@
     
     \lipsum[10-13]
 
+    %========== Nomenclature ==========
+    \printnomenclature
+    
     %========== Bibliography ==========
-    \bibliography{bibliography}
-	
+    \printbibliography[heading=bibintoc]
+
     % %========== Index ==========
-	% \printindex
+	\printindex
 
 \end{document}

@@ -20,11 +20,14 @@
 *.xdv
 *.nav
 *.snm
-*.bib
 *.brf
 *.idx
 *.ilg
 *.ind
+*.bcf
+*.nlo
+*.nls
+*.run.xml
 
 # Packages #
 ############
