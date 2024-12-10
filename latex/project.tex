@@ -34,307 +34,417 @@
 \renewcommand{\nomname}{Glossary of Symbols}
 \begin{document}
 
-    \pagenumbering{gobble}
-    
-    %========== Title page ==========
-    % Suppress displaying the page number on the title page + count the following page as page 1 (not used)
-    \begin{titlepage}
-        \input{frontpage.tex}
-    \end{titlepage}
+\pagenumbering{gobble}
 
-    %========== Blank page ==========
-    \newpage\blankpage
+%========== Title page ==========
+% Suppress displaying the page number on the title page + count the following page as page 1 (not used)
+\begin{titlepage}
+    \input{frontpage.tex}
+\end{titlepage}
 
-    % %========== Assignment ==========
-    \includepdf[pages=-]{src/assignment.pdf}
+%========== Blank page ==========
+\newpage\blankpage
 
-    % Start counting pages in roman numerals
-    \pagenumbering{roman}
+% %========== Assignment ==========
+\includepdf[pages=-]{src/assignment.pdf}
 
-    % %========== Declaration ==========
-    % \input{declaration.tex}
+% Start counting pages in roman numerals
+\pagenumbering{roman}
 
-    % %========== Acknowledgements ==========
-    % \input{acknowledgements.tex}
+% %========== Declaration ==========
+% \input{declaration.tex}
 
-    % %========== Abstract ==========
-    % \input{abstract.tex}
+% %========== Acknowledgements ==========
+% \input{acknowledgements.tex}
 
-    % Start counting pages in arabic numerals
-    \pagenumbering{arabic}
+% %========== Abstract ==========
+% \input{abstract.tex}
 
-    %========== Table of contents ==========
-    \tableofcontents
+% Start counting pages in arabic numerals
+\pagenumbering{arabic}
 
-    %========== Introduction ==========
-    \chapter*{Introduction}
-    \label{chap:introduction}
-    \addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
-    
-    Write a couple of words on literature survey. Present the difference construction and design choices, compare them both theoretically and by the results presented in gathered papers.
-    \\
-    \cite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges}
-    \index{index entry}
+%========== Table of contents ==========
+\tableofcontents
 
-    \lipsum[1-2]
+%========== Introduction ==========
+\chapter*{Introduction}
+\label{chap:introduction}
+\addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
 
-    \paragraph*{Synopsis.} In \textbf{Chapter~\ref{chap:theory}}, \lipsum[3]
+Do not write a couple of words on literature survey. Present the difference construction and design choices, compare them both theoretically and by the results presented in gathered papers, but in their respective sections of the design process. Use them a nice foreword for each of the parts, going through existing approaches.
 
-    \paragraph*{Methodology.} \lipsum[4]
+\lipsum[1]
+
+Throughout the theoretical chapter, I omit using the common \emph{del}, or \emph{nabla}, notation for the vector differential operator $\nabla$ which gives rise to the formally proper differential operators of gradient ($\nabla$), divergence ($\nabla\cdot$), curl ($\nabla\times$), and sometimes even the Laplace operator ($\nabla\cdot\nabla$ or $\nabla^2$). Instead, I will use the standard notations of $\Grad$, $\Div$, $\Curl$, and $\Delta$, respectively. While I am aware of the mnemonic merits it brings when working in coordinates, this does not come to fruition as I do not carry out any computations in this text. On the other hand, there are various reasons to avoid it, such as that it promotes a notational ambiguity with the covariant derivative used in differential geometry, or to distinguish the individual operators at first sight better.
+\nomenclature{$\Grad$}{gradient }%
+\nomenclature{$\Div$}{divergence }%
+\nomenclature{$\Curl$}{curl }%
+\nomenclature{$\Delta$}{Laplace operator }%
+
+\paragraph*{Synopsis.} In \textbf{\cref{chap:electrodynamics}}, \lipsum[4]
+
+\paragraph*{Methodology.} \lipsum[4]
 
 
-    %========== Chapter 1: Theory of Operation ==========
-    \chapter{Theory of operation}
-    \label{chap:theory}
+%========== Chapter 1: Electrodynamics of guided waves ==========
+\chapter{Electrodynamics of guided waves}
+\label{chap:electrodynamics}
+This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided modes are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
 
-    \lipsum[5]
+The exposition endeavours to build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive foundation for further chapters.
 
-    Throughout the theory chapter, I will omit using the common \enquote{notation candy} of \emph{del}, or \emph{nabla}, for the vector differential operator $\nabla$ which gives rise to the formally proper differential operators of gradient ($\nabla$), divergence ($\nabla\cdot$), curl ($\nabla\times$), and sometimes even the Laplace operator ($\nabla\cdot\nabla$ or $\nabla^2$). Instead, I will use the standard notations of $\Grad$, $\Div$, $\Curl$, and $\Delta$, respectively. There are various reasons for this decision, e.g., that the definition of such an operator is inherently dependent on the working coordinate system, while the differential operators can be broadly extended beyond Cartesian or even Euclidean geometries, or that it promotes a notational ambiguity with the covariant derivative used in differential geometry. The main reason, however, is simply that the fundamental nature of the operator is undefinable and thus unclear.
-    \nomenclature{$\Grad$}{gradient }%
-    \nomenclature{$\Div$}{divergence }%
-    \nomenclature{$\Curl$}{curl }%
-    \nomenclature{$\Delta$}{Laplace operator }%
+\section{Fundamentals of electrodynamics}
+\label{sec:fundamentals-of-electrodynamics}
 
-    Inspired by~\cite{balanis:advanced-engineering-electromagnetics}~and~\cite{griffiths:introduction-to-electrodynamics}.
+The differential form of Maxwell's equations constitutes the cornerstone of classical electromagnetism, providing a complete%
+    \footnote{For actual completeness (save for some special properties stemming from interactions in matter), the equations must also be supplemented by the Lorentz's force law $\vec F = q(\vec E + \vec v \times \vec B)$.}
+framework for analysing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field intensity}~$\vec E$ and \emph{magnetic flux density}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions, exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur. These discontinuities, often stemming from discrete changes in electrical parameters across the interface, necessitate the introduction of \emph{boundary conditions}.
 
-    \section{Laws of electrodynamics}
-    \label{sec:first-section}
-        Lay out \texttt{the equations}, brr\\
-        \begin{subequations}
-            \label{eq:maxwell-general}
-            \noindent\centering
-            \begin{minipage}{0.45\textwidth}
-                \begin{align}
-                    \label{maxwell-general-div-d}
-                    \Div\vec D &= \rho_{\mathrm e},
-                \\
-                    \label{maxwell-general-curl-e}
-                    \Curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
-                \end{align}
-            \end{minipage}
-            \hfill
-            \begin{minipage}{0.45\textwidth}
-                \begin{align}
-                    \label{maxwell-general-div-b}
-                    \Div\vec B &= \rho_{\mathrm m},
-                \\
-                    \label{maxwell-general-curl-h}
-                    \Curl\vec H &= \vec J_{\mathrm e} + \partial_t\vec D,
-                \end{align}
-            \end{minipage}
-        \end{subequations}\\%
-        % \nomenclature{$E$}{electric field intensity }%
-        % \nomenclature{$B$}{magnetic field intensity }%
-        % \nomenclature{$D$}{electric flux density }%
-        % \nomenclature{$H$}{magnetic flux density }%
-        % \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
-        % \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
-        % \nomenclature{$J_{\mathrm e}$}{source electric current density }%
-        % \nomenclature{$J_{\mathrm m}$}{source magnetic current density }%
-        \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }
-        \begin{itemize}
-            \item $J_{\mathrm e}$ is total electric current made up of the source current $J_{\mathrm s}$ and conductive current $J_{\mathrm c}$. 
-            \item $\rho_{\mathrm m}$ and $\vec J_{\mathrm m}$ are part of the \enquote{generalized} current concept.
-            \item Explain the concept of these equations being expressed in \emph{free} charge and \emph{free} current. Give example of the Maxwell's equations neglecting the matter properties, to the convenience of which the \emph{free} sources are introduced, and make comments how equally general and useful they are.
-            \item Comment on mathematical completeness together with boundary conditions which are usually \enquote{obvious}, such as vanishing potentials at infinity etc. Source Griffiths for that from his formulation without material properties. This might need the inclusion of Lorentz's force law for absolute completeness of electrodynamics.
-        \end{itemize}
-        
+\begin{subequations}
+    \label[pluralequation]{subeq:maxwell-general}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
         \begin{align}
-            \Div \vec J_{\mathrm{e}} &= -\partial_t\rho_{\mathrm{e}}
+            \label{eq:maxwell-general-div-e}
+            \Div\vec E &= \frac1{\epsilon_0}\rho_{\mathrm e},
+        \\
+            \label{eq:maxwell-general-curl-e}
+            \Curl\vec E &= -\mu_0\vec J_{\mathrm m} - \partial_t\vec B,
         \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:maxwell-general-div-b}
+            \Div\vec B &= \mu_0\rho_{\mathrm m},
+        \\
+            \label{eq:maxwell-general-curl-b}
+            \Curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
+        \end{align}
+    \end{minipage}
+    \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }%
+    \nomenclature{$\vec E$}{electric field intensity }%
+    \nomenclature{$\vec B$}{magnetic flux density }%
+    \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
+    \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
+    \nomenclature{$\vec J_{\mathrm e}$}{source electric current density }%
+    \nomenclature{$\vec J_{\mathrm m}$}{magnetic current density }%
+    \bigskip
+\end{subequations}
 
-        \subsection{Constitutive relations in time domain}
-            \begin{subequations}
-                \label{eq:constitutive-relations}
-                \begin{align}
-                    \label{eq:constitutive-relations-permittivity}
-                    \vec D &= \hat\epsilon \ast \vec E,
-                \\
-                    \label{eq:constitutive-relations-permeability}
-                    \vec B &= \hat\mu \ast \vec H,
-                \\
-                    \label{eq:constitutive-relations-conductivity}
-                    \vec J_{\mathrm c} &= \hat\sigma \ast \vec E,
-                \end{align}
-            \end{subequations}
-            % \nomenclature{$\hat\epsilon$}{permittivity }%
-            % \nomenclature{$\hat\mu$}{permeability }%
-            % \nomenclature{$\hat\sigma$}{conductivity }%
-            where $\hat\epsilon$, $\hat\mu$, and $\hat\sigma$ are generally second rank tensors and $\ast$ denotes \emph{convolution}.
-            
-            \noindent%
-            Talk about materials characterization
-            \begin{enumerate}
-                \item \emph{dielectrics}, \emph{magnetics}, and \emph{conductors}, with regard to their \emph{polarization}, \emph{magnetization}, and \emph{conduction};
-                \item \emph{linear} versus \emph{nonlinear}, \emph{homogeneous} versus \emph{inhomogeneous}, \emph{isotropic} versus \emph{anisotropic}, and \emph{dispersive} versus \emph{nondispersive}. Mention the simplification of material tensors ($\ast\to\cdot$, $F(\vec r,t) \to F(t)$, matrix $\to$ scalar, $\partial_\omega = 0$).
-            \end{enumerate}
+There is one oddity about \cref{subeq:maxwell-general} and that is the inclusion of the magnetic charge density $\rho_{\mathrm m}$ and magnetic current density $\vec J_{\mathrm m}$ as part of the \enquote{generalized concept}. Although these quantities, in spite of diligent search, were never physically observed, their introduction establishes a pleasing balance in Maxwell's equations which is theoretically sound as well. This concept is further utilized when solving advanced physical problems in applied physics and engineering. This is facilitated by the introduction of equivalent magnetic charge and current which can be used to conveniently express fields as if generated by these fictitious sources, especially in problems where the exact form of the electromagnetic field would otherwise be complicated to elucidate.
 
-            \noindent%
-            In the simplest case of free space,~\eqref{eq:constitutive-relations-permittivity},~\eqref{eq:constitutive-relations-permeability},~and~\eqref{eq:constitutive-relations-conductivity} become
-            \begin{align}
-                \hat\epsilon &= \epsilon_0 \approx 8.854\times 10^{-12}\ \unit{F.m^{-1}},
-            \\
-                \hat\mu &= \mu_0 = 4\pi\times 10^{-7}\ \unit{H.m^{-1}},
-            \\
-                \hat\sigma &= 0\ \unit{S.m^{-1}}.
-            \end{align}
+Mathematically, \cref{subeq:maxwell-general}, like any differential equations, form a complete problem only when supplemented with suitable boundary conditions in a more traditional sense, such as behaviour of the vector fields \enquote{in infinity}. These are typically \enquote{obvious} from the problem-solving context, e.g., fields vanishing at large distance from localized charge distribution, etc.
 
-        \subsection{Boundary conditions}
-            Include if needed (probably will be).
+\subsection{Electromagnetic properties of matter}
+Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-general} provide a complete description of electromagnetic phenomena, an alternative formulation offers a more convenient approach for analysing materials susceptible to electric and magnetic polarization. Within such media, the total electric charge density~$\rho_{\mathrm e}$ can be expressed as a sum of the \emph{free charge} density~$\rho_{\mathrm f}$, which constitutes the \emph{actual source} charge,%
+    \footnote{It is important to reinforce the idea that the magnetic charge and current are fictitious \enquote{source} quantities. Therefore, they are already, by definition, purely \emph{free} quantities.}
+and the \emph{bound charge}~$\rho_{\mathrm b}=-\Div\vec P$, produced by an electric polarization~$\vec P$ of the material. Moreover, changing electric fields also induce changing polarization, producing \emph{polarization current}~$\vec J_{\mathrm p}=\partial_t\vec P$ which add to the \emph{free current}~$\vec J_{\mathrm f}$. Similarly to electric polarization, a magnetic polarization~$\vec M$ results in a bound current~$\vec J_{\mathrm b}=\Curl\vec M$. These effects, inherently connected to the susceptibility of materials to be polarized, hence influence the total electromagnetic field in their vicinity. This led to the introduction of convenient field quantities that account for the presence of such media.
 
-        \subsection{Power and energy}
-            Include Poynting theorem if needed.
-    
-        \subsection{Electromagnetic properties of matter}
-            This one will, hopefully, be skippable. If not, talk about
-            \begin{itemize}
-                \item $\rho = \rho_{\mathrm f} + \rho_{\mathrm b} = \rho_{\mathrm f} - \Div\vec P$ due to free and bound charges,
-                \item $\vec J_{\mathrm e} = \vec J_{\mathrm f} + \vec J_{\mathrm b} + \vec J_{\mathrm p} = \vec J_{\mathrm f} + \Curl \vec M + \partial_t\vec P$, where $\vec M$ is magnetic polarization (magnetization), due to free, bound and polarization currents,
-            \end{itemize}
-            from~\cite{griffiths:introduction-to-electrodynamics}.
-    
-    \section{Electromagnetic waves}
-    \label{sec:electromagnetic-waves}
-        
-        \subsection{The wave equations}
-            Inside regions with no \emph{free} charge or \emph{free} current,%
-                \footnote{Expand on the notions of \emph{free} and \emph{bound} sources.}
-            Maxwell's equations take the form of\\
-            \begin{subequations}
-                \label{eq:maxwell-sourceless}
-                \noindent\centering
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:maxwell-sourceless-div-d}
-                        \Div \vec D &= 0,
-                    \\
-                        \label{eq:maxwell-sourceless-curl-e}
-                        \Curl \vec E &= -\partial_t\vec B,
-                    \end{align}
-                \end{minipage}
-                \hfill
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:maxwell-sourceless-div-b}
-                        \Div\vec B &= 0,
-                    \\
-                        \label{eq:maxwell-sourceless-curl-h}
-                        \Curl\vec H &= \sigma\vec E + \partial_t\vec D.
-                    \end{align}
-                \end{minipage}\bigskip
-            \end{subequations}\\
-            Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, equations \eqref{eq:maxwell-sourceless-curl-e}~and~\eqref{eq:maxwell-sourceless-curl-h} simplify to\\
-            \begin{subequations}
-                \label{eq:maxwell-sourceless-easy}
-                \noindent\centering
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:maxwell-sourceless-easy-div-e}
-                        \Div \vec E &= 0,
-                    \\
-                        \label{eq:maxwell-sourceless-easy-curl-e}
-                        \Curl \vec E &= -\partial_t\vec B,
-                    \end{align}
-                \end{minipage}
-                \hfill
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:maxwell-sourceless-easy-div-b}
-                        \Div\vec B &= 0,
-                    \\
-                        \label{eq:maxwell-sourceless-easy-curl-b}
-                        \Curl\vec B &= \mu\sigma\vec E + \mu\epsilon\partial_t\vec E.
-                    \end{align}
-                \end{minipage}\bigskip
-            \end{subequations}
+Within the framework of Maxwell's equations, \emph{electric flux density}~$\vec D$ (also called the \emph{electric displacement field}) and the \emph{magnetic field intensity}~$\vec H$ offer a more convenient representation, explicitly separating the free and bound sources. This approach allows for expressing Maxwell's equations in a form that directly relates the fields to the free charge and free current, which are sources that can be controlled directly. Using these field quantities, \cref{subeq:maxwell-general} read
 
-            Applying the curl to~\eqref{eq:maxwell-sourceless-easy-curl-e}~and~\eqref{eq:maxwell-sourceless-easy-curl-b} and using the identity $\Curl\Curl = \Grad\Div - \Delta$ from vector calculus, we obtain\\
-            \begin{subequations}
-                \label{eq:wave-equations}
-                \noindent\centering
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equation-e}
-                        \Delta\vec E &= \mu\sigma\partial_t\vec E + \mu\epsilon\partial^2_t\vec E,
-                    \end{align}
-                \end{minipage}
-                \hfill
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equation-b}
-                        \Delta\vec B &= \mu\sigma\partial_t\vec B + \mu\epsilon\partial^2_t\vec B.
-                    \end{align}
-                \end{minipage}\bigskip
-            \end{subequations}\\
-            Therefore electric and magnetic fields in linear homogeneous media both clearly satisfy the wave equation with a linear damping term $\mu\sigma\partial_t$ introduced by conductive losses. Furthermore, electromagnetic fields propagating in regions of zero conductive current, such as free space or ideal insulators, take the shape of the wave equations\\
-            \begin{subequations}
-                \label{eq:wave-equations-lossless}
-                \noindent\centering
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equation-e-lossless}
-                        \Delta\vec E &= \mu\epsilon\partial^2_t\vec E,
-                    \end{align}
-                \end{minipage}
-                \hfill
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equations-b-lossless}
-                        \Delta\vec B &= \mu\epsilon\partial^2_t\vec B,
-                    \end{align}
-                \end{minipage}\bigskip
-            \end{subequations}\\
-            which are ubiquitous in theoretical physics. Following the general notation, we can write\\
-            \begin{subequations}
-                \label{eq:wave-equations-lossless-dalembert}
-                \noindent\centering
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equation-e-lossless-dalembert}
-                        \square\vec E &= 0,
-                    \end{align}
-                \end{minipage}
-                \hfill
-                \begin{minipage}{0.45\textwidth}
-                    \begin{align}
-                        \label{eq:wave-equations-b-lossless-dalembert}
-                        \square\vec B &= 0,
-                    \end{align}
-                \end{minipage}\bigskip
-            \end{subequations}\\
-            where $\square = \Delta - 1/c^2\partial^2_t$ is the d'Alembert operator. Recognizing these as the wave equations hence immediately gives rise to the formula
-            \begin{align}
-                v &= \frac{1}{\sqrt{\epsilon\mu}} = \frac{c}{\sqrt{\epsilon_r\mu_r}}
-            \end{align}
-            for the speed of electromagnetic waves in linear homogeneous media.
-            
-            Compared with the original Maxwell's equations~\eqref{eq:maxwell-general}, these equations form two systems of partial differential equations of second order but are now decoupled and provide us with an additional solving method for given boundary-value problems. However, it is important to note that the wave equations~\eqref{eq:wave-equation-e}~and~\eqref{eq:wave-equation-b} were derived from Maxwell's equation by differentiation. This impedes their mathematical equivalence. More specifically (as stated in~\cite{griffiths:introduction-to-electrodynamics}), whereas every solution to Maxwell's equations is also a solution for the wave equations, the converse is not true.
-        
-        \subsection{Monochromatic plane waves}
-            
-            Maxwell's equations along with the constitutive relations all the theory outlined so far involves description of general vector fields which vary in space and time. However, we have shown in Section~\ref{sec:electromagnetic-waves}, the fields, given certain conditions, exhibit wave behaviour. Nonetheless, these fields still take the form of general vector fields which is far too complex for analysis in any practical systems. Luckily, many of these systems, such as just about any laboratory conditions can produce, the time variations of the produced fields are of harmonious nature. We may, therefore, confine our attention to \emph{time-harmonic} waves, also called \emph{monochromatic} waves,%
-                \footnote{The etymology of this nomenclature comes from the Greek words \emph{m\'onos} (\enquote{sole, single}) and \emph{khr\^oma} (\enquote{color}).}
-            of given frequency $\omega$.
-            \begin{itemize}
-                \item Chat about the possibility to express just about any function described as \enquote{wave} by a Fourier transform, consisting of such monochromatic waves, \url{https://en.wikipedia.org/wiki/Dirichlet%E2%80%93Jordan_test#Dirichlet_conditions_in_signal_processing}.
-                \item Chat about plane waves travelling in the direction of wave vector $\vec k$ and find a way to introduce it.
-                \item Finish the \emph{monochromatic} wave footnote.
-            \end{itemize}
-    
-    %========== Conclusion ==========
-    \chapter*{Conclusion}
-    \label{chap:conclusion}
-    \addcontentsline{toc}{chapter}{\nameref{chap:conclusion}}
-    
-    \lipsum[10-13]
+\begin{subequations}
+    \label[pluralequation]{subeq:maxwell-general-matter}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:maxwell-general-matter-div-d}
+            \Div\vec D &= \rho_{\mathrm f},
+        \\
+            \label{eq:maxwell-general-matter-curl-e}
+            \Curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:maxwell-general-matter-div-b}
+            \Div\vec B &= \mu_0\rho_{\mathrm{m}},
+        \\
+            \label{eq:maxwell-general-matter-curl-h}
+            \Curl\vec H &= \vec J_{\mathrm f} + \partial_t\vec D,
+        \end{align}
+    \end{minipage}
+    \nomenclature{$\vec D$}{electric flux density }%
+    \nomenclature{$\vec H$}{magnetic field intensity }%
+    \bigskip
+\end{subequations}
 
-    %========== Nomenclature ==========
-    \printnomenclature
-    
-    %========== Bibliography ==========
-    \printbibliography[heading=bibintoc]
+While \cref{subeq:maxwell-general-matter} effectively express electromagnetic laws within media, their hybrid notation, involving both $\vec E$ and $\vec D$, and both $\vec B$ and $\vec H$, necessitates the use of \emph{constitutive relations}. These relations, which establish correspondence between the respective electric and magnetic field quantities, are material-dependent and reflect the specific response of a medium to electric and magnetic fields. In general, these relationships can be expressed as
+\begin{subequations}
+    \index{constitutive relations}
+    \index{constitutive parameters}
+    \label[pluralequation]{subeq:constitutive-relations}
+    \begin{align}
+        \label{eq:constitutive-relation-permittivity}
+        \vec D &= \hat\epsilon \ast \vec E,
+    \\
+        \label{eq:constitutive-relation-permeability}
+        \vec B &= \hat\mu \ast \vec H,
+    \end{align}
+    \nomenclature{$\epsilon$}{permittivity }%
+    \nomenclature{$\mu$}{permeability }%
+\end{subequations}
+where $\hat\epsilon$ and $\hat\mu$ are the material's \emph{permittivity} and \emph{permeability}, respectively, and the asterisk denotes \emph{convolution}.
 
-    % %========== Index ==========
-	\printindex
+\begin{remark}
+    In formulations of akin to \cref{subeq:maxwell-general-matter}, with emphasis on the separation of free and bound sources, some authors prefer to further dissect the free current, too. This current is generally conceptualized as the current \enquote{not directly tied to the bound charges} within a material. To name a few commonly recognized, \emph{convection current}, \emph{beam current}, or \emph{conduction current}. It is the conduction current which is, in electrical engineering, especially worth mentioning because it arises from the movement of charges, typically electrons, that can move freely throughout the material. This kinetic energy of charges in conductors is the main cause of losses in waveguides and can be expressed by
+    \begin{align}
+        \label{eq:constitutive-relation-conductivity}
+        \vec J_{\mathrm c} &= \hat\sigma \ast \vec E,
+        \nomenclature{$\sigma$}{conductivity }%
+    \end{align}
+    where $\sigma$ is the material's \emph{conductivity}. \Cref{eq:constitutive-relation-conductivity}, together with \cref{subeq:constitutive-relations}, completes the required set of constitutive relations.
+\end{remark}
+
+The \emph{constitutive parameters} of permittivity, permeability, and conductivity, generally represented as complex second-rank tensors, establish the relationship between the applied electromagnetic fields and the material's response. The functional dependencies of these tensors provide a classification scheme for material properties:
+\begin{itemize}
+    \item \emph{Linearity:} A material is classified as linear if its constitutive parameters are independent of the applied field strength; otherwise, it is considered nonlinear.
+    \item \emph{Homogeneity:} If the constitutive parameters are invariant with respect to position within the material, it is deemed homogeneous; conversely, spatial dependence indicates an inhomogeneous medium.
+    \item \emph{Isotropy:} Materials exhibiting constitutive parameters independent of the applied field's direction are classified as isotropic. Conversely, direction-dependent parameters signify an anisotropic material, with crystals being a prime example.
+    \item \emph{Dispersion:} Materials whose constitutive parameters exhibit frequency dependence are categorized as dispersive. While some materials demonstrate negligible frequency dependence and can be effectively considered nondispersive, all materials encountered in practice exhibit some degree of dispersion.
+\end{itemize}
+
+\begin{example}[Constitutive relations in free space]
+    In the simplest case of free space, equations~\eqref{eq:constitutive-relation-permittivity},~\eqref{eq:constitutive-relation-permeability},~and~\eqref{eq:constitutive-relation-conductivity} become
+    \begin{subequations}
+        \begin{align}
+            \hat\epsilon &= \epsilon_0 \approx 8.854\times 10^{-12}\ \unit{F.m^{-1}},
+        \\
+            \hat\mu &= \mu_0 = 4\pi\times 10^{-7}\ \unit{H.m^{-1}},
+        \\
+            \hat\sigma &= 0\ \unit{S.m^{-1}}.
+        \end{align}
+    \end{subequations}
+\end{example}
+
+\subsection{Boundary conditions}
+While the differential forms of Maxwell's equations are powerful tools for analysing electromagnetic fields within continuous media, material boundaries introduce discontinuities that require special treatment. These discontinuities in the fields $E$, $B$, $D$, and $H$ arise at interfaces between media with different electrical properties or at surfaces carrying charge or current densities. To accurately describe the behaviour of the fields across such boundaries, Maxwell's equations in their integral form, which naturally incorporate these discontinuities, are more convenient. This form is obtained by applying integral theorems from vector calculus to \cref{subeq:maxwell-general-matter} which then take on the form of\\
+\begin{subequations}
+    \index{boundary conditions}
+    \label[pluralequation]{subeq:maxwell-equations-integral}
+    \noindent\centering
+    \begin{align}
+        \label{eq:maxwell-equations-integral-div-d}
+        \oint_S \vec D \cdot \d\vec a &= Q_{\mathrm{e}},
+    \\
+        \label{eq:maxwell-equations-integral-curl-e}
+        \oint_{\partial S} \vec E \cdot \d\vec l &= -\int_S \vec J_{\mathrm m} \cdot \d\vec a - \frac{\d}{\d t}\int_S \vec B \cdot \d\vec a,
+    \\
+        \label{eq:maxwell-equations-integral-div-b}
+        \oint_S \vec B \cdot \d\vec a &= Q_{\mathrm{m}},
+    \\
+        \label{eq:maxwell-equations-integral-curl-h}
+        \oint_{\partial S} \vec H \cdot \d\vec l &= \int_S \vec J_{\mathrm e} \cdot \d\vec a + \frac{\d}{\d t}\int_S \vec D \cdot \d\vec a.
+    \end{align}
+    \nomenclature{$\partial\Omega$}{boundary of set $\Omega$ }%
+\end{subequations}\\
+where $S$ is any closed surface.
+
+Consider a boundary between two different media. The first medium is characterized by permittivity $\epsilon_1$ and permeability $\mu_1$, while the second medium is characterized by permittivity $\epsilon_2$ and permeability $\mu_2$. At this interface, electric and magnetic surface charge densities, denoted by $q_f$ and $q_m$ respectively, may be present. Additionally, electric and magnetic surface current densities, denoted by $j_f$ and $j_m$ respectively, may also exist. The general \emph{boundary conditions} for electrodynamics are then obtained by applying equations \cref{subeq:maxwell-equations-integral} to arbitrary surfaces encompassing a portion of the interface, yielding
+
+\begin{subequations}
+    \label[pluralequation]{subeq:boundary-conditions}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:boundary-conditions-d-normal}
+            \vec e_n \cdot (\vec D_1 - \vec D_2) &= q_{\mathrm f},
+        \\
+            \label{eq:boundary-conditions-e-tangential}
+            -\vec e_n \times (\vec E_1 - \vec E_2) &= \vec j_{\mathrm m},
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:boundary-conditions-b-normal}
+            \vec e_n \cdot (\vec B_1 - \vec B_2) &= q_{\mathrm m},
+        \\
+            \label{eq:boundary-conditions-H-tangential}
+            \vec e_n \times (\vec H_1 - \vec H_2) &= \vec j_{\mathrm f}.
+        \end{align}
+    \end{minipage}
+    \bigskip
+\end{subequations}
+
+\section{Electromagnetic waves}
+\label{sec:electromagnetic-waves}
+\paragraph{TODO:} Add general talk about waves or motivation for them, or skip entirely.
+
+\subsection{The wave equations}
+Inside regions with no \emph{free} charge or \emph{free} current, Maxwell's \cref{subeq:maxwell-general-matter} take the form of\\
+\begin{subequations}
+    \label[pluralequation]{subeq:maxwell-sourceless}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:maxwell-sourceless-div-d}
+            \Div \vec D &= 0,
+        \\
+            \label{eq:maxwell-sourceless-curl-e}
+            \Curl \vec E &= -\partial_t\vec B,
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:maxwell-sourceless-div-b}
+            \Div\vec B &= 0,
+        \\
+            \label{eq:maxwell-sourceless-curl-h}
+            \Curl\vec H &= \sigma\vec E + \partial_t\vec D.
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}\\
+Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, \cref{eq:maxwell-sourceless-curl-h} can be fully expressed in terms of $\vec E$. With this simplification, applying the curl to \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields
+
+\begin{subequations}
+    \label[pluralequation]{subeq:wave-equations}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:wave-equation-e}
+            \Delta\vec E &= \mu\sigma\partial_t\vec E + \mu\epsilon\partial^2_t\vec E,
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:wave-equation-b}
+            \Delta\vec B &= \mu\sigma\partial_t\vec B + \mu\epsilon\partial^2_t\vec B.
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}
+
+Therefore, electric and magnetic fields in linear homogeneous media both clearly satisfy the wave equation with a linear damping term $\mu\sigma\partial_t$, introduced by conductive losses. Moreover, in regions of zero conductive current, such as free space or ideal insulators, \cref{subeq:wave-equations} simplify even more to\\
+\begin{subequations}
+    \label[pluralequation]{subeq:wave-equations-lossless}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:wave-equation-e-lossless}
+            \Delta\vec E &= \mu\epsilon\partial^2_t\vec E,
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:wave-equations-b-lossless}
+            \Delta\vec B &= \mu\epsilon\partial^2_t\vec B,
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}\\
+taking on the form of classical wave equations which are ubiquitous in physics. This also immediately gives rise to the formula
+\begin{align}
+    v &= \frac{1}{\sqrt{\epsilon\mu}} = \frac{c}{\sqrt{\epsilon_r\mu_r}}
+\end{align}
+for the speed of electromagnetic waves in linear homogeneous media.
+
+\begin{remark}
+    \label{remark:nonequivalence-of-wave-equations-with-maxwells-equations}
+    Compared with the original Maxwell's \cref{subeq:maxwell-general-matter}, these equations form two systems of partial differential equations of second order but are now decoupled and provide us with an additional solving method for given boundary-value problems. However, it is important to note that the wave \cref{eq:wave-equation-e,eq:wave-equation-b} were derived from Maxwell's \cref{subeq:maxwell-sourceless} by differentiation. This impedes their mathematical equivalence. More specifically (as stated in~\parencite{griffiths:introduction-to-electrodynamics}), whereas every solution to Maxwell's equations is also a solution for the wave equations, the converse is not true.
+\end{remark}
+
+\subsection{Monochromatic plane waves}
+\index{monochromatic plane wave}
+Maxwell's equations along with the constitutive relations and all the theory outlined so far involve the description of general vector fields which vary in space and time. However, as shown in \cref{sec:electromagnetic-waves}, electromagnetic fields in source-free regions exhibit wave behaviour. Nonetheless, they still take on the form of time-varying vector fields which are far too complex for analysis in any practical system. Let us, for a moment, turn our attention to the elementary solution to the wave equation
+\begin{align}
+    \label{eq:monochromatic-plane-wave}
+    \hat{\vec\psi}(\vec r,t) &= \hat{\vec\Psi}_0\e^{\i(\vec k \cdot \vec r-\omega t)},
+\end{align}
+\nomenclature{$\vec k$}{wave vector }%
+where $\vec k$ is the \emph{wave vector} giving the direction of wave propagation and $\omega$ is the angular frequency of the wave. It is important to note that \cref{eq:monochromatic-plane-wave} is expressed in the form of a \emph{complex wave function}, with the \emph{complex amplitude} $\hat{\vec\Psi}_0 \equiv \vec\Psi_0\e^{\i\delta}$, and that a sinusoidal wave representing this solution in physical reality can be extracted from \cref{eq:monochromatic-plane-wave}, using the \emph{Euler's formula}, as
+\begin{align}
+    \label{eq:sinusoidal-wave}
+    \vec{\psi}(\vec r, t) &= \Re\[\vec\Psi_0\e^{\i(\vec k \cdot \vec r - \omega t + \delta)}\] = \Re\[\hat{\vec\psi}(\vec r, t)\],
+\end{align}
+with the \emph{real amplitude} $\vec\Phi_0$ and \emph{phase shift} $\delta$. It is easy to see that if \cref{eq:sinusoidal-wave} is a solution to \cref{subeq:wave-equations-lossless} and obeys Maxwell's equations, the same holds true for \cref{eq:monochromatic-plane-wave} since the imaginary part differs from the real part only by the replacement of sine by cosine.
+
+Waves described by \cref{eq:monochromatic-plane-wave} are called \emph{monochromatic}, or \emph{time-harmonic}, \emph{plane}
+waves. Dissecting these terms, monochromaticity refers to the fact that the wave oscillates at a single frequency $\omega$ through time, while planarity stands for the condition where the fields are uniform over every plane perpendicular to the direction of propagation. Although the term is not commonly used, plane waves could alternatively be called \emph{space-harmonic}.%
+    \footnote{Therefore, monochromatic plane waves are something one could call \emph{spacetime-harmonic} or simply \emph{harmonic}.}
+After all, both of these terms refer to the fact that the wave has a sinusoidal dependence on a given variable. In the case of monochromaticity, the variable is time, oscillating with an angular frequency $\omega$. Similarly, planarity reflects the waveform repetition in the spatial coordinates, projected into the propagation direction, with a well-defined spatial frequency $k = \norm{\vec k}$ also called the \emph{wave number}.
+
+The reason for us to be concerned with this particular solution is the fact that, in practice, any wave we will be dealing with can be expressed as a linear combination of these monochromatic plane waves, i.e.,
+\begin{align}
+    \label{eq:fourier-transform}
+    \hat{\vec\psi}(\vec r,t) &= \int_{\R^3} \hat{\vec{\Psi}}_0(\vec k)\e^{\i(\vec k \cdot \vec r - \omega t)}\, \d\vec k.
+\end{align}
+This superposition principle mathematically reflects the Fourier transform over all plane waves corresponding to the given frequency $\omega$. With this formally sound mathematical description, the existence of a unique linear combination for \enquote{any wave we will be dealing with}, as vaguely stated above, can be properly reasoned by stating the following theorem.
+\begin{theorem}[Dirichlet-Jordan test]
+    \label{theorem:dirichlet-jordan-test}
+    Let $f$ be a function in $L^1(-\infty,\infty)$ and of bounded variation in a neighbourhood of the point $x$. Then
+    \begin{align}
+        \frac1\pi \lim_{M\to\infty}\int_0^M\,\d u \int_\R f(t)\cos(u(x-t))\,\d t = \lim_{\epsilon\to0}\frac{f(x+\epsilon)+f(x-\epsilon)}2.
+    \end{align}
+    If $f$ is continuous in an open interval, then the integral on the left-hand side converges uniformly in the interval, and the limit on the right-hand side is $f(x)$.
+\end{theorem}
+More details on this mathematical theory can be found in~\parencite{titchmarsh:introduction-to-the-theory-of-fourier-integrals}. A version of \cref{theorem:dirichlet-jordan-test}, retaining the original form due to Dirichlet, is often used in signal processing. More details on that formulation can be found, e.g., in~\parencite{oppenheim:signals-and-systems}.
+
+
+Since any signal that can be physically produced in a laboratory not only satisfies these conditions but also is square-integrable and has compact support,%
+    \footnote{In the field of signal processing, these signal propertes are often described as the having finite energy and duration, respectively.}
+let us confine the attention of this text to monochromatic plane waves. Therefore, the fields take on the form of\\
+\begin{subequations}
+    \label[pluralequation]{subeq:monochromatic-plane-waves-fields}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:monochromatic-plane-wave-e}
+            \hat{\vec E}(\vec r, t) &= \hat{\vec E}_0 \e^{\i(\vec k \cdot \vec r - \omega t)},
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:monochromatic-plane-wave-b}
+            \hat{\vec B}(\vec r, t) &= \hat{\vec B}_0 \e^{\i(\vec k \cdot \vec r - \omega t)},
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}\\
+where $\hat{\vec E}_0$ and $\hat{\vec B}_0$ are complex amplitudes. As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equations}, the fact that \cref{eq:monochromatic-plane-wave-e,eq:monochromatic-plane-wave-b} are solutions to the wave equations is not a sufficient condition for them to be solutions to Maxwell's equations, too.
+
+\begin{example}[Monochromatic plane waves in free space]
+    In free space, from \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} it follows that
+    \begin{align}
+        \hat{\vec E_0} \cdot \vec e_z = \hat{\vec B_0} \cdot \vec e_z = 0,
+    \end{align}
+    \nomenclature{$\vec e_\xi$}{unit vector in the $\xi$-coordinate axis }%
+    i.e., the electromagnetic fields are \emph{transverse}. Furthermore, either of \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields
+    \begin{align}
+        \hat{\vec B}_0 &= \frac k\omega\(\vec e_z \times \hat{\vec E}_0\) = \frac 1c\(\vec e_z \times \hat{\vec E}_0\).
+    \end{align}
+    Drawing a conclusion, in free space, $\vec E$ and $\vec B$ are \emph{in phase} and \emph{mutually perpendicular}. Moreover, defining the \emph{polarization vector} as a unit vector in the direction of electric field oscillations, i.e.,
+    \begin{align}
+        \vec e_n \cdot \vec E &= \vec E
+    &
+        \norm{\vec e_n} &= 1,
+    \end{align}
+    the actual solution to Maxwell's equations in free space takes the form of
+    \begin{align}
+        \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \delta) \vec e_n,
+    \\
+        \vec B(\vec r, t) &= \frac 1c E_0\cos(\vec k \cdot \vec r - \omega t + \delta) (\vec k \times \vec e_n).
+    \end{align}
+
+    As will soon become evident, monochromatic plane waves confined in waveguides are generally not transverse. This is caused by the fact that the solution to \cref{subeq:maxwell-sourceless} will be subject to boundary conditions which will enforce the existence of longitudinal components in order to fit them.
+\end{example}
+
+%========== Conclusion ==========
+\chapter*{Conclusion}
+\label{chap:conclusion}
+\addcontentsline{toc}{chapter}{\nameref{chap:conclusion}}
+
+\lipsum[10-13]
+
+%========== Nomenclature ==========
+\printnomenclature
+
+%========== Bibliography ==========
+\printbibliography[heading=bibintoc]
+
+% %========== Index ==========
+\printindex
 
 \end{document}
