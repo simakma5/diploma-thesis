@@ -366,12 +366,12 @@ Here, $\hat{\vec k}$ is the complex \emph{wave vector} indicating the direction 
     Clearly, if \cref{eq:sinusoidal-wave} satisfies \cref{subeq:wave-equations-lossless} and Maxwell's equations, the same holds true for \cref{eq:monochromatic-plane-wave}, as the imaginary part differs from the real part only by the replacement of sine with cosine.
 \end{remark}
 
-\Cref{eq:monochromatic-plane-wave} serves as as an established elementary solution to the general wave equation, and hence also to \cref{subeq:wave-equations-lossless}. Substituting this solution into \cref{subeq:wave-equations-lossy}, it becomes evident that these \enquote{lossy wave equations} also admit plane-wave solutions. Furthermore, this substitution allows for the derivation of a general formula for the complex \emph{wave number}
+\Cref{eq:monochromatic-plane-wave} serves as as an established elementary solution to the general wave equation, and hence also to \cref{subeq:wave-equations-lossless}. Substituting this solution into \cref{subeq:wave-equations-lossy}, it becomes evident that these \enquote{lossy wave equations} also admit plane-wave solutions. Furthermore, this substitution allows for the derivation of a general formula for the complex \emph{wavenumber}
 \begin{align}
     \label{eq:wave-number}
     \hat k^2 = \hat{\vec k} \cdot \hat{\vec k} = \mu\epsilon\omega^2 + \i\mu\sigma\omega.
 \end{align}
-In the context of \cref{eq:monochromatic-plane-wave}, it is evident that the real part of the complex wave number $\hat k$ is the \emph{actual} wave number as it determines the change of phase with spatial propagation. For this reason, the real part is simply denoted $k$ and is called the \emph{phase constant}. In contrast, the imaginary part of $\hat k$ is responsible for the exponential damping, or attenuation, in conductive media, and hence is called the \emph{attenuation constant}.
+In the context of \cref{eq:monochromatic-plane-wave}, it is evident that the real part of the complex wavenumber $\hat k$ is the \emph{actual} wavenumber as it determines the change of phase with spatial propagation. For this reason, the real part is simply denoted $k$ and is called the \emph{phase constant}. In contrast, the imaginary part of $\hat k$ is responsible for the exponential damping, or attenuation, in conductive media, and hence is called the \emph{attenuation constant}.
 
 Waves described by \cref{eq:monochromatic-plane-wave} are called \emph{monochromatic}, or \emph{time-harmonic}, \emph{plane}
 waves. Monochromaticity refers to the fact that the wave oscillates at a single frequency $\omega$ through time, while planarity indicates that the fields are uniform over every plane perpendicular to the direction of propagation. Although less common, plane waves could alternatively be called \emph{space-harmonic},%
@@ -398,7 +398,7 @@ Since any physically realizable signal is square-integrable and has compact supp
     \footnote{In the field of signal processing, these signal properties are often described as having \emph{finite energy} and \emph{duration}, respectively.}
 this text's attention is confined to monochromatic plane waves. Therefore, the fields take on the form of\\
 \begin{subequations}
-    \label[pluralequation]{subeq:monochromatic-plane-waves-fields}
+    \label[pluralequation]{subeq:monochromatic-plane-wave-fields}
     \begin{align}
         \label{eq:monochromatic-plane-wave-e}
         \hat{\vec E}(\vec r, t) &= \hat{\vec E}_0 \exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\],
@@ -412,124 +412,117 @@ where $\hat{\vec E}_0$ and $\hat{\vec B}_0$ are complex amplitudes.
 As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equations}, satisfying the wave equations does not guarantee solutions to Maxwell's equations. Substituting the solutions of the wave equations into Maxwell's equations is necessary, as it might refine the solutions or yield more information. As an example, consider the plane waves in vacuum.
 
 \begin{example}[Monochromatic plane waves in free space]
-    In free space, from \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} it follows that
+    Substituting \cref{eq:monochromatic-plane-wave-e,eq:monochromatic-plane-wave-b} for the electric and magnetic field in the free-space version of \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} read
     \begin{align}
-        \hat{\vec E_0} \cdot \vec e_z = \hat{\vec B_0} \cdot \vec e_z = 0,
+        \vec k \cdot \hat{\vec E}_0 = \vec k \cdot \hat{\vec B}_0 = 0,
     \end{align}
-    \nomenclature{$\vec e_\xi$}{unit vector in the $\xi$-coordinate axis }%
+    \nomenclature{$\vec e_\xi$}{unit vector in the $\xi$-direction }%
     i.e., the electromagnetic fields are \emph{transverse}. Furthermore, either of \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields
     \begin{align}
-        \hat{\vec B}_0 &= \frac k\omega\(\vec e_z \times \hat{\vec E}_0\) = \frac 1c\(\vec e_z \times \hat{\vec E}_0\).
+        \hat{\vec B}_0 &= \frac1\omega\(\vec k \times \hat{\vec E}_0\) = \frac 1c\(\vec e_k \times \hat{\vec E}_0\).
     \end{align}
-    Drawing a conclusion, in free space, $\vec E$ and $\vec B$ are \emph{in phase} and \emph{mutually perpendicular}. Moreover, defining the \emph{polarization vector} as a unit vector in the direction of electric field oscillations, i.e.,
+    Clearly, in free space, $\vec E$ and $\vec B$ are \emph{mutually perpendicular} and \emph{in phase}, meaning their oscillations reach their peaks and troughs simultaneously.
+    
+    To further characterize the plane wave, a \emph{polarization vector} is introduced. This unit vector points in the direction of electric field oscillations, i.e.,
     \begin{align}
         \vec e_n \cdot \vec E &= \vec E
     &
-        \norm{\vec e_n} &= 1,
+        \norm{\vec e_n} &= 1.
     \end{align}
-    the actual solution to Maxwell's equations in free space takes the form of
+    With this definition, the complete solution to Maxwell's equations for a plane wave in free space takes the form of
     \begin{align}
         \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \varphi) \vec e_n,
     \\
         \vec B(\vec r, t) &= \frac 1c E_0\cos(\vec k \cdot \vec r - \omega t + \varphi) (\vec k \times \vec e_n).
     \end{align}
 
-    As will soon become evident, electromagnetic waves confined in waveguides are generally not transverse. The result we have just obtained is unique to lossless regions, i.e., regions with $\sigma = 0$, where the solution is not subject to boundary conditions.
+    It's important to note that this transversality of the electromagnetic fields is a specific property of plane waves in free space or lossless media. When waves are confined in waveguides or propagate through lossy media, the fields generally have longitudinal components as well. This distinction arises because the boundary conditions imposed by the waveguide or the interactions with the medium can alter the field structure.
 \end{example}
 
 \subsection{Guided waves}
-Assumptions:
-\begin{itemize}
-    \item Materials: PEC with no surface sources, i.e., according to \cref{subeq:boundary-conditions}\\
-    \begin{subequations}
-        \noindent\centering
-        \begin{minipage}{0.45\textwidth}
-            \begin{align}
-                \label{eq:guided-waves-boundary-condition-e}
-                \vec e_n \times \vec E &= 0,
-            \end{align}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.45\textwidth}
-            \begin{align}
-                \label{eq:guided-waves-boundary-condition-b}
-                \vec e_n \cdot \vec B &= 0.
-            \end{align}
-        \end{minipage}\bigskip
-    \end{subequations}\\
-    Free charges and currents will be induced on the surface in such a way as to enforce these constraints.
-
-    \item Waves: Monochromatic waves that propagate down the tube, so $\vec E$ and $\vec B$ have the generic form (WLOS: $\hat{\vec k} \cdot \vec e_z = \hat{\vec k}$)
-    \begin{subequations}
-        \begin{align}
-            \hat{\vec E}(\vec r,t) &= \hat{\vec E}_0(x,y)\exp\[\i\(\hat kz-\omega t\)\],
-        \\
-            \hat{\vec B}(\vec r,t) &= \hat{\vec B}_0(x,y)\exp\[\i\(\hat kz-\omega t\)\].
-        \end{align}
-    \end{subequations}
-    \begin{subequations}
-        \begin{align}
-            \hat{\vec E}_0(x,y) &= E_x(x,y)\vec e_x + E_y(x,y)\vec e_y + E_z(x,y)\vec e_z,
-        \\
-            \hat{\vec B}_0(x,y) &= B_x(x,y)\vec e_x + B_y(x,y)\vec e_y + B_z(x,y)\vec e_z.
-        \end{align}
-    \end{subequations}
-
-    \item Maxwell's equations: sourceless, i.e., \cref{subeq:maxwell-sourceless} which we will express in terms $\vec E$ and $\vec B$ in this sections due to the assumed linearity.
-\end{itemize}
-
-From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} for a linear medium\\
+The behavior of electromagnetic waves within a waveguide is now explored. To provide a clear framework for analysis, it is assumed that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
 \begin{subequations}
-    % \label[pluralequation]{subeq:maxwell-sourceless}
+    \label{subeq:guided-waves-boundary-conditions}
     \noindent\centering
     \begin{minipage}{0.45\textwidth}
         \begin{align}
-            \partial_xE_y-\partial_yE_x &= \i\omega B_z\vphantom{\frac{\i\omega}{c^2}}
-        \\
-            \partial_yE_z-\i kE_y &= \i\omega B_x\vphantom{\frac{\i\omega}{c^2}}
-        \\
-            \i\hat kE_x - \partial_xE_z &= \i\omega B_y\vphantom{\frac{\i\omega}{c^2}}
+            \label{eq:guided-waves-boundary-condition-e}
+            \vec e_n \times \vec E &= 0,
         \end{align}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \begin{align}
-            \partial_xB_y-\partial_yB_x &= -\frac{\i\omega}{c^2} E_z
-        \\
-            \partial_yB_z-\i\hat kB_y &= -\frac{\i\omega}{c^2} E_x
-        \\
-            \i\hat kB_x - \partial_xB_z &= -\frac{\i\omega}{c^2} E_y
+            \label{eq:guided-waves-boundary-condition-b}
+            \vec e_n \cdot \vec B &= 0.
         \end{align}
     \end{minipage}\bigskip
 \end{subequations}\\
-Equations b, c, e, and f can be solved for $E_x$, $E_y$, $B_x$, and $B_y$:
+It is important to recognize that free charges and currents will be induced on the surface precisely to enforce these constraints.
+
+Furthermore, the focus is placed on monochromatic waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direciton. The complex amplitudes of the fields,\\
 \begin{subequations}
-    \begin{align}
-        \label{eq:guided-wave-ex}
-        E_x &= \frac{\i}{(\omega/c)^2-\hat k^2}\(\hat k\partial_xE_z+\omega\partial_yB_z\),
-    \\
-        \label{eq:guided-wave-ey}
-        E_y &= \frac{\i}{(\omega/c)^2-\hat k^2}\(\hat k\partial_yE_z-\omega\partial_xB_z\),
-    \\
-        \label{eq:guided-wave-bx}
-        B_x &= \frac{\i}{(\omega/c)^2-\hat k^2}\(\hat k\partial_xB_z-\frac{\omega}{c^2}\partial_yE_z\),
-    \\
-        \label{eq:guided-wave-by}
-        B_y &= \frac{\i}{(\omega/c)^2-\hat k^2}\(\hat k\partial_yB_z+\frac{\omega}{c^2}\partial_xE_z\).
-    \end{align}
-\end{subequations}
-Substituting all equations a, b, c, and d into \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} yields uncoupled equations for $E_z$ and $B_z$:
+    \label{subeq:complex-amplitudes}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{subeq:complex-amplitude-e}
+            \hat{\vec E}_0 &= E_x\vec e_x + E_y\vec e_y + E_z\vec e_z,
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{subeq:complex-amplitude-b}
+            \hat{\vec B}_0 &= B_x\vec e_x + B_y\vec e_y + B_z\vec e_z,
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}\\
+are functions of the transverse coordinates, $x$ and $y$, reflecting the spatial variations of the fields within the waveguide cross-section.
+
+To further simplify the analysis, the waveguide is considered to be source-free, meaning that there are no free charges or currents \emph{impressed} within the waveguide itself. This allows the utilization of the simplified form of Maxwell's equations \eqref{subeq:maxwell-sourceless}. Due to the assumed linearity of the medium within the waveguide, these equations are expressed in terms of $E$ and $B$.
+
+With these assumptions in place, the wave behavior within the waveguide can be analysed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
 \begin{subequations}
+    \label{subeq:guided-wave-transverse-fields}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:guided-wave-ex}
+            E_x &= \zeta\(k\partial_xE_z+\omega\partial_yB_z\)\vphantom{\frac{\omega}{c^2}},
+        \\
+            \label{eq:guided-wave-ey}
+            E_y &= \zeta\(k\partial_yE_z-\omega\partial_xB_z\)\vphantom{\frac{\omega}{c^2}},
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:guided-wave-bx}
+            B_x &= \zeta\(k\partial_xB_z-\frac{\omega}{c^2}\partial_yE_z\),
+        \\
+            \label{eq:guided-wave-by}
+            B_y &= \zeta\(k\partial_yB_z+\frac{\omega}{c^2}\partial_xE_z\),
+        \end{align}
+    \end{minipage}\bigskip
+\end{subequations}\\
+where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-wave-transverse-fields} into \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} leads to uncoupled equations
+\begin{subequations}
+    \label{subeq:guided-wave-longitudinal-fields}
     \begin{align}
         \label{eq:guided-wave-ez}
-        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-\hat k^2\)E_z &= 0,
+        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)E_z &= 0,
     \\
         \label{eq:guided-wave-bz}
-        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-\hat k^2\)B_z &= 0.
+        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)B_z &= 0.
     \end{align}
 \end{subequations}
+These equations, often referred to as the \emph{Helmholtz equations},%
+    \footnote{Mathematically speaking, the Helmholtz equation is the eigenvalue problem for the Laplace operator and is a very common equation in theoretical physics, emerging as the \emph{diffusion equation}, the \emph{Schr\"odinger equation} for a free particle, or, of course, the wave equation.}
+govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide.
 
 \begin{remark}
+    \label{remark:nonexistence-of-tem-modes-in-hollow-waveguides}
     TE, TM and TEM solutions stemming from equation above. Reason why a hollow waveguide cannot have TEM modes.
     \begin{itemize}
         \item $E_z = 0$ implies $\partial_xE_x+\partial_yE_x = 0$, given by \cref{eq:maxwell-sourceless-div-d}.
@@ -540,7 +533,7 @@ Substituting all equations a, b, c, and d into \cref{eq:maxwell-sourceless-div-d
 
 Let us go for TE, i.e., $B_z = 0$, in a rectangular shape of height $a$ oriented in the $x$-direction and width $b$ in the $y$-direction. By \emph{separation of variables}, i.e., putting $B_z(x,y) = X(x)Y(y)$, \cref{eq:guided-wave-bz} reads
 \begin{align}
-    YX''+XY''+\[\(\frac\omega c\)^2 - \hat k^2\]XY &= 0.
+    YX''+XY''+\[\(\frac\omega c\)^2 - k^2\]XY &= 0.
 \end{align}
 Divide by $B_z$ and note that the $x$- and $y$-dependent terms must be constant:\\
 \begin{subequations}
@@ -559,9 +552,9 @@ Divide by $B_z$ and note that the $x$- and $y$-dependent terms must be constant:
 \end{subequations}\\
 while
 \begin{align}
-    -k_x^2-k_y^2+\(\frac\omega c\)^2 - \hat k^2 &= 0.
+    -k_x^2-k_y^2+\(\frac\omega c\)^2 - k^2 &= 0.
 \end{align}
-The equations for $X$ and $Y$ are simple second order ODRs with the general solution
+The equations for $X$ and $Y$ are simple second order ODEs with the general solution
 \begin{align}
     A\sin(\lambda x)+B\cos(\lambda x).
 \end{align}
@@ -578,17 +571,28 @@ Together, the particular solution takes the form of
 \begin{align}
     B_z(x,y) &= B_0\cos\(\frac{m\pi}{a}x\)\cos\(\frac{n\pi}{b}y\).
 \end{align}
-That is the TE$_{mn}$ mode and the wave number is
+That is the TE$_{mn}$ mode and the wavenumber is
 \begin{align}
-    \hat k &= \sqrt{\(\frac\omega c\)^2 - \(\frac{\pi m}a\)^2 - \(\frac{\pi n}b\)^2}.
+    k &= \sqrt{\(\frac\omega c\)^2 - \(\frac{m\pi}a\)^2 - \(\frac{n\pi}b\)^2}.
 \end{align}
 Clearly, if
 \begin{align}
     f < \frac c2\sqrt{\(\frac ma\)^2 + \(\frac nb\)^2} \equiv f_{mn},
 \end{align}
-where $f$ is frequency from $\omega = 2\pi f$, the wave number is imaginary. On such frequencies, the travelling wave becomes \emph{evanescent}, i.e., exponentially attenuated. For this reason, we talk about $f_{mn}$ as the \emph{cutoff frequency} for the TE$_{mn}$ mode in question.
+where $f$ is frequency from $\omega = 2\pi f$, the wavenumber is imaginary. On such frequencies, the travelling wave becomes \emph{evanescent}, i.e., exponentially attenuated. For this reason, we talk about $f_{mn}$ as the \emph{cutoff frequency} for the TE$_{mn}$ mode in question. Modes having the same cutoff frequency are called \emph{degenerate}.
 
-\paragraph{TODO:} Derive the \emph{guide wavelength} and try to think if there is anything else worth talking about.
+The wavelength corresponding to wavenumber $k$ in the direction of guided wave propagation is called the \emph{guide wavelength} and is given by
+\begin{align}
+    \label{eq:guide-wavelength}
+    \lambda_{\mathrm g} \equiv \frac{2\pi}{k} &= \frac{\lambda}{\sqrt{1-\(\dfrac{f_{mn}}{f}\)^2}} = \frac{\lambda}{\sqrt{1-\(\dfrac{\lambda}{\lambda_{mn}}\)^2}}.
+\end{align}
+
+\paragraph{To do:} Finish the text of guided waves, beginning with \cref{remark:nonexistence-of-tem-modes-in-hollow-waveguides} until the end and think about any other additions to the theoretical chapter.
+\begin{itemize}
+    \item Definitely show how all modes are orthogonal to each other.
+    \item Perhaps show the expansion into the infinite basis of TE/TM modes.
+    \item Add some talk about modes to finish the chapter smoothly. Perhaps something about frequency dependence of modes' evansecence or something along the lines of that\dots
+\end{itemize}
 
 
 %========== Conclusion ==========
