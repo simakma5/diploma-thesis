@@ -89,7 +89,7 @@ Throughout the theoretical chapter, I omit using the common \emph{del}, or \emph
 %========== Chapter 1: Electrodynamics of guided waves ==========
 \chapter{Electrodynamics of guided waves}
 \label{chap:electrodynamics}
-This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided modes are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
+This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided waves are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
 
 The exposition endeavours to build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive foundation for further chapters.
 
@@ -429,6 +429,8 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
     &
         \norm{\vec e_n} &= 1.
     \end{align}
+    \nomenclature{$\vec e_n$}{polarization vector }%
+    \index{polarization vector}%
     With this definition, the complete solution to Maxwell's equations for a plane wave in free space takes the form of
     \begin{align}
         \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \varphi) \vec e_n,
@@ -440,7 +442,7 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
 \end{example}
 
 \subsection{Guided waves}
-The behavior of electromagnetic waves within a waveguide is now explored. To provide a clear framework for analysis, it is assumed that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
+The behaviour of electromagnetic waves within a waveguide is now explored. To provide a clear framework for analysis, it is assumed that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
 \begin{subequations}
     \label{subeq:guided-waves-boundary-conditions}
     \noindent\centering
@@ -460,7 +462,7 @@ The behavior of electromagnetic waves within a waveguide is now explored. To pro
 \end{subequations}\\
 It is important to recognize that free charges and currents will be induced on the surface precisely to enforce these constraints.
 
-Furthermore, the focus is placed on monochromatic waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direciton. The complex amplitudes of the fields,\\
+Furthermore, the focus is placed on monochromatic waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direction. The complex amplitudes of the fields,\\
 \begin{subequations}
     \label{subeq:complex-amplitudes}
     \noindent\centering
@@ -482,7 +484,7 @@ are functions of the transverse coordinates, $x$ and $y$, reflecting the spatial
 
 To further simplify the analysis, the waveguide is considered to be source-free, meaning that there are no free charges or currents \emph{impressed} within the waveguide itself. This allows the utilization of the simplified form of Maxwell's equations \eqref{subeq:maxwell-sourceless}. Due to the assumed linearity of the medium within the waveguide, these equations are expressed in terms of $E$ and $B$.
 
-With these assumptions in place, the wave behavior within the waveguide can be analysed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
+With these assumptions in place, the wave behaviour within the waveguide can be analysed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
 \begin{subequations}
     \label{subeq:guided-wave-transverse-fields}
     \noindent\centering
@@ -519,79 +521,87 @@ where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-
 \end{subequations}
 These equations, often referred to as the \emph{Helmholtz equations},%
     \footnote{Mathematically speaking, the Helmholtz equation is the eigenvalue problem for the Laplace operator and is a very common equation in theoretical physics, emerging as the \emph{diffusion equation}, the \emph{Schr\"odinger equation} for a free particle, or, of course, the wave equation.}
-govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide.
+govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide. These modes are categorized based on the presence or absence of longitudinal components in the electric and magnetic fields. \emph{Transverse electric} (TE) waves have $E_z=0$, while \emph{transverse magnetic} (TM) waves have $B_z=0$. The simplest waves, with both $E_z=B_z=0$ are called \emph{transverse electromagnetic} (TEM) waves, but these cannot exist within a hollow waveguide due to boundary conditions and Maxwell's equations.
 
-\begin{remark}
-    \label{remark:nonexistence-of-tem-modes-in-hollow-waveguides}
-    TE, TM and TEM solutions stemming from equation above. Reason why a hollow waveguide cannot have TEM modes.
-    \begin{itemize}
-        \item $E_z = 0$ implies $\partial_xE_x+\partial_yE_x = 0$, given by \cref{eq:maxwell-sourceless-div-d}.
-        \item $B_z = 0$ implies $\partial_xE_y-\partial_yE_x = 0$, given by \cref{eq:maxwell-sourceless-curl-h} in the $z$-coordinate.
-    \end{itemize}
-    Since $\hat{\vec E}_0$ is a function of $x$ and $y$ only, these equations translate to $\Div \hat{\vec E}_0 = 0$ and $\Curl \hat{\vec E}_0 = 0$. Therefore, it can be expressed as the gradient of a scalar potential which satisfies the Laplace's equation $\Delta\hat{\vec E}_0 = 0$. However, the boundary condition on electric field, i.e., \cref{eq:guided-waves-boundary-condition-e}, enforces an equipotential at the conductor surface. Since Laplace's equation admits no local extrema, the potential must be constant throughout, and hence the electric field zero.
+\begin{remark}[Non-existence of TEM waves in hollow waveguides]
+    \label{remark:nonexistence-of-tem-waves-in-hollow-waveguides}
+    To further illustrate this point, consider the case of a waveguide with perfectly conducting walls.
+    
+    Beginning with the scenario where the longitudinal component of the electric field, $E_z$, is zero, it follows from \cref{eq:maxwell-sourceless-div-d} that the divergence of the electric field in the transverse plane must also be zero. Similarly, when the longitudinal component of the magnetic field, $B_z$, is zero, \cref{eq:maxwell-sourceless-curl-e} dictates that the curl of the electric field in the transverse plane must vanish.
+    
+    Combining these results, the complex amplitude of the electric field, $\hat{\vec E}_0$, can be expressed as the gradient of a scalar potential that satisfies the Laplace's equation $\Delta\hat{\vec E}_0 = 0$. However, the boundary condition on the electric field, as expressed in \cref{eq:guided-waves-boundary-condition-e}, enforces an equipotential at the conductor surface. Since Laplace's equation admits no local extrema, the potential must be constant throughout the waveguide, leading to a zero electric field.
 \end{remark}
 
-Let us go for TE, i.e., $B_z = 0$, in a rectangular shape of height $a$ oriented in the $x$-direction and width $b$ in the $y$-direction. By \emph{separation of variables}, i.e., putting $B_z(x,y) = X(x)Y(y)$, \cref{eq:guided-wave-bz} reads
-\begin{align}
-    YX''+XY''+\[\(\frac\omega c\)^2 - k^2\]XY &= 0.
-\end{align}
-Divide by $B_z$ and note that the $x$- and $y$-dependent terms must be constant:\\
-\begin{subequations}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \frac1X X'' &= -k_x^2,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \frac1Y Y'' &= -k_y^2,
-        \end{align}
-    \end{minipage}
-\end{subequations}\\
-while
-\begin{align}
-    -k_x^2-k_y^2+\(\frac\omega c\)^2 - k^2 &= 0.
-\end{align}
-The equations for $X$ and $Y$ are simple second order ODEs with the general solution
-\begin{align}
-    A\sin(\lambda x)+B\cos(\lambda x).
-\end{align}
-Boundary condition \eqref{eq:guided-waves-boundary-condition-b} enforces vanishing $B_x$, which can be expressed, according to \cref{eq:guided-wave-bx}, as $\partial_xB_z$, at $x=0$ and $x=a$. This implies $A=0$ and
-\begin{align}
-    \label{eq:guided-waves-kx}
-    k_x &= \frac{m\pi}{a},\quad m \in \N_0.
-\end{align}
-Similarly, for $Y$,
-\begin{align}
-    k_y &= \frac{n\pi}{b},\quad n \in \N_0.
-\end{align}
-Together, the particular solution takes the form of
-\begin{align}
-    B_z(x,y) &= B_0\cos\(\frac{m\pi}{a}x\)\cos\(\frac{n\pi}{b}y\).
-\end{align}
-That is the TE$_{mn}$ mode and the wavenumber is
-\begin{align}
-    k &= \sqrt{\(\frac\omega c\)^2 - \(\frac{m\pi}a\)^2 - \(\frac{n\pi}b\)^2}.
-\end{align}
-Clearly, if
-\begin{align}
-    f < \frac c2\sqrt{\(\frac ma\)^2 + \(\frac nb\)^2} \equiv f_{mn},
-\end{align}
-where $f$ is frequency from $\omega = 2\pi f$, the wavenumber is imaginary. On such frequencies, the travelling wave becomes \emph{evanescent}, i.e., exponentially attenuated. For this reason, we talk about $f_{mn}$ as the \emph{cutoff frequency} for the TE$_{mn}$ mode in question. Modes having the same cutoff frequency are called \emph{degenerate}.
+\begin{example}[TE waves in a rectangular waveguide]
+    This example delves into the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned waveguide's longitudinal direction.  The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
 
-The wavelength corresponding to wavenumber $k$ in the direction of guided wave propagation is called the \emph{guide wavelength} and is given by
-\begin{align}
-    \label{eq:guide-wavelength}
-    \lambda_{\mathrm g} \equiv \frac{2\pi}{k} &= \frac{\lambda}{\sqrt{1-\(\dfrac{f_{mn}}{f}\)^2}} = \frac{\lambda}{\sqrt{1-\(\dfrac{\lambda}{\lambda_{mn}}\)^2}}.
-\end{align}
+    Substituting this product into equation \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
+    \begin{subequations}
+        \label{subeq:guided-waves-te-odes}
+        \noindent\centering
+        \begin{minipage}{0.45\textwidth}
+            \begin{align}
+                \label{eq:guided-waves-te-ode-x}
+                \frac1X X'' &= -k_x^2,
+            \end{align}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \begin{align}
+                \label{eq:guided-waves-te-ode-y}
+                \frac1Y Y'' &= -k_y^2.
+            \end{align}
+        \end{minipage}\bigskip
+    \end{subequations}\\
+    Additionally, a relationship between the separation constants, $k_x$ and $k_y$, and the wave number, $k$, is established as
+    \begin{align}
+        \label{eq:guided-waves-te-k}
+        -k_x^2-k_y^2+\(\frac\omega c\)^2 - k^2 &= 0.
+    \end{align}
 
-\paragraph{To do:} Finish the text of guided waves, beginning with \cref{remark:nonexistence-of-tem-modes-in-hollow-waveguides} until the end and think about any other additions to the theoretical chapter.
+    \Cref{eq:guided-waves-te-ode-x} is a simple second-order ordinary differential equation, with a general solution of the form
+    \begin{align}
+        X(x) &= A\sin(k_xx)+B\cos(k_xx).
+    \end{align}
+    To determine the particular solution, boundary conditions must be applied. The boundary condition~\eqref{eq:guided-waves-boundary-condition-b} enforces the vanishing of $B_x$ at $x=0$ and $x=a$. According to \cref{eq:guided-wave-bx}, this translates to enforcing the vanishing of $\partial_xB_z = X'$ at those points. This implies $A=0$ and the separation constant $k_x$ must satisfy the condition
+    \begin{align}
+        \label{eq:guided-waves-te-kx}
+        k_x &= \frac{m\pi}{a},\quad m \in \N_0.
+    \end{align}
+    Similarly, for the function $Y(y)$, the boundary condition leads to the condition
+    \begin{align}
+        \label{eq:guided-waves-te-ky}
+        k_y &= \frac{n\pi}{b},\quad n \in \N_0.
+    \end{align}
+    Combining these results, the particular solution for $B_z$ takes the form of
+    \begin{align}
+        \label{eq:guided-waves-te-bz}
+        B_z(x,y) &= B_0\cos\(\frac{m\pi}{a}x\)\cos\(\frac{n\pi}{b}y\),
+    \end{align}
+    representing the TE$_{mn}$ wave with the corresponding wavenumber given by \cref{eq:guided-waves-te-k}. This information is a complete solution to the wave propagation since the remaining field components are given by \cref{subeq:guided-wave-transverse-fields}.
+
+    Examining \cref{eq:guided-waves-te-k}, it becomes evident that if the frequency falls below a certain \emph{cutoff frequency},
+    \begin{align}
+        f_{mn} \equiv \frac c2\sqrt{\(\frac ma\)^2 + \(\frac nb\)^2},
+    \end{align}
+    \index{cutoff frequency}
+    the wavenumber becomes imaginary. This signifies that the wave cannot propagate and instead decays exponentially within the waveguide. Such solutions are referred to as \emph{evanescent waves}. This cutoff frequency depends on the mode numbers $(m, n)$ and the dimensions of the waveguide $(a, b)$. Modes having the same cutoff frequency are called \emph{degenerate}.
+    \index{degenerate modes}
+
+    The wavelength corresponding to wavenumber $k$ in the direction of guided wave propagation is called the \emph{guide wavelength} and is given by
+    \begin{align}
+        \label{eq:guide-wavelength}
+        \lambda_{\mathrm g} \equiv \frac{2\pi}{k} &= \frac{\lambda}{\sqrt{1-\(\dfrac{f_{mn}}{f}\)^2}} = \frac{\lambda}{\sqrt{1-\(\dfrac{\lambda}{\lambda_{mn}}\)^2}}.
+    \end{align}
+    \index{guide wavelength}
+    This guide wavelength is related to the free-space wavelength, $\lambda$, and the cutoff wavelength, $\lambda_{mn}$, for the TE$_{mn}$ mode.
+\end{example}
+
+\paragraph{To do:}
 \begin{itemize}
     \item Definitely show how all modes are orthogonal to each other.
-    \item Perhaps show the expansion into the infinite basis of TE/TM modes.
-    \item Add some talk about modes to finish the chapter smoothly. Perhaps something about frequency dependence of modes' evansecence or something along the lines of that\dots
+    \item Perhaps show the expansion into the infinite basis of TE/TM waves.
+    \item Add some talk about modes to finish the chapter smoothly. Perhaps something about frequency dependence of modes' evanescence or something along the lines of that\dots
 \end{itemize}
 
 
