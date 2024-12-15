@@ -91,7 +91,7 @@ Throughout the theoretical chapter, I omit using the common \emph{del}, or \emph
 \label{chap:electrodynamics}
 This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided waves are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
 
-The exposition endeavours to build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive foundation for further chapters.
+The exposition endeavours to build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics,zangwill:modern-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive foundation for further chapters.
 
 \section{Fundamentals of electrodynamics}
 \label{sec:fundamentals-of-electrodynamics}
@@ -444,7 +444,7 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
 \subsection{Guided waves}
 The behaviour of electromagnetic waves within a waveguide is now explored. To provide a clear framework for analysis, it is assumed that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
 \begin{subequations}
-    \label{subeq:guided-waves-boundary-conditions}
+    \label[pluralequation]{subeq:guided-waves-boundary-conditions}
     \noindent\centering
     \begin{minipage}{0.45\textwidth}
         \begin{align}
@@ -464,18 +464,18 @@ It is important to recognize that free charges and currents will be induced on t
 
 Furthermore, the focus is placed on monochromatic waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direction. The complex amplitudes of the fields,\\
 \begin{subequations}
-    \label{subeq:complex-amplitudes}
+    \label[pluralequation]{subeq:complex-amplitudes}
     \noindent\centering
     \begin{minipage}{0.45\textwidth}
         \begin{align}
-            \label{subeq:complex-amplitude-e}
+            \label[pluralequation]{subeq:complex-amplitude-e}
             \hat{\vec E}_0 &= E_x\vec e_x + E_y\vec e_y + E_z\vec e_z,
         \end{align}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \begin{align}
-            \label{subeq:complex-amplitude-b}
+            \label[pluralequation]{subeq:complex-amplitude-b}
             \hat{\vec B}_0 &= B_x\vec e_x + B_y\vec e_y + B_z\vec e_z,
         \end{align}
     \end{minipage}\bigskip
@@ -486,7 +486,7 @@ To further simplify the analysis, the waveguide is considered to be source-free,
 
 With these assumptions in place, the wave behaviour within the waveguide can be analysed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
 \begin{subequations}
-    \label{subeq:guided-wave-transverse-fields}
+    \label[pluralequation]{subeq:guided-wave-transverse-fields}
     \noindent\centering
     \begin{minipage}{0.45\textwidth}
         \begin{align}
@@ -510,7 +510,7 @@ With these assumptions in place, the wave behaviour within the waveguide can be 
 \end{subequations}\\
 where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-wave-transverse-fields} into \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} leads to uncoupled equations
 \begin{subequations}
-    \label{subeq:guided-wave-longitudinal-fields}
+    \label[pluralequation]{subeq:guided-wave-longitudinal-fields}
     \begin{align}
         \label{eq:guided-wave-ez}
         \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)E_z &= 0,
@@ -519,9 +519,7 @@ where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-
         \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)B_z &= 0.
     \end{align}
 \end{subequations}
-These equations, often referred to as the \emph{Helmholtz equations},%
-    \footnote{Mathematically speaking, the Helmholtz equation is the eigenvalue problem for the Laplace operator and is a very common equation in theoretical physics, emerging as the \emph{diffusion equation}, the \emph{Schr\"odinger equation} for a free particle, or, of course, the wave equation.}
-govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide. These modes are categorized based on the presence or absence of longitudinal components in the electric and magnetic fields. \emph{Transverse electric} (TE) waves have $E_z=0$, while \emph{transverse magnetic} (TM) waves have $B_z=0$. The simplest waves, with both $E_z=B_z=0$ are called \emph{transverse electromagnetic} (TEM) waves, but these cannot exist within a hollow waveguide due to boundary conditions and Maxwell's equations.
+These equations, often referred to as the \emph{Helmholtz equations}, govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide. These modes are categorized based on the presence or absence of longitudinal components in the electric and magnetic fields. \emph{Transverse electric} (TE) waves have $E_z=0$, while \emph{transverse magnetic} (TM) waves have $B_z=0$. The simplest waves, with both $E_z=B_z=0$ are called \emph{transverse electromagnetic} (TEM) waves, but these cannot exist within a hollow waveguide due to boundary conditions.
 
 \begin{remark}[Non-existence of TEM waves in hollow waveguides]
     \label{remark:nonexistence-of-tem-waves-in-hollow-waveguides}
@@ -532,12 +530,49 @@ govern the longitudinal field components and play a crucial role in determining 
     Combining these results, the complex amplitude of the electric field, $\hat{\vec E}_0$, can be expressed as the gradient of a scalar potential that satisfies the Laplace's equation $\Delta\hat{\vec E}_0 = 0$. However, the boundary condition on the electric field, as expressed in \cref{eq:guided-waves-boundary-condition-e}, enforces an equipotential at the conductor surface. Since Laplace's equation admits no local extrema, the potential must be constant throughout the waveguide, leading to a zero electric field.
 \end{remark}
 
+\begin{remark}[Modal decomposition of guided waves]
+    \label{remark:modal-decomposition-of-guided-waves}
+    The equations for $E_z$ and $B_z$, \cref{subeq:guided-wave-longitudinal-fields}, are instances of the \emph{Helmholtz equation} with Dirichlet and Neumann boundary conditions, respectively. This mathematical structure is analogous to the eigenvalue problem for the Laplace operator, which arises in various physical contexts.
+    
+    For instance, the same equation and boundary conditions govern the vertical displacements of a vibrating drumhead. In this analogy, TM modes correspond to a drumhead with fixed boundaries, while TE modes correspond to a drumhead with free boundaries. The TM case is also isomorphic to the Schr\"odinger problem for the wave functions and energy eigenvalues of a free particle in a two-dimensional box with hard walls. Seeking inspiration in these analogous problems provides useful intuition when thinking about the modal eigenfunctions and eigenvalues of a waveguide. Some key mathematical results stemming from these analogies include:
+    \begin{enumerate}[label=(\alph*)]
+        \item There are an infinite number of TE- and TM-mode eigenfunctions.
+        \item The eigenvalues are all real and positive.
+        \item The eigenfunctions can always be chosen real.
+        \item The eigenfunctions form a complete set of functions.
+        \item Eigenfunctions belonging to different eigenvalues are orthogonal.
+    \end{enumerate}
+
+    Perhaps the most significant result in terms of applied electrodynamics is the completeness of the eigenfunctions, which implies that any field within a waveguide can be composed of its modes. Specifically, if $\alpha$ denotes a distinct mode%
+        \footnote{For example, in the case of a rectangular waveguide, a mode is given by the combination of two integers, $m$ and $n$.}
+    then any wave travelling in the positive direction (denoted by the $+$ superscript) can be decomposed as
+    \begin{align}
+        \hat{\vec E}^+ &= \sum_\alpha C_\alpha^+\[\hat{\vec E}_{0,\alpha} + \vec e_zE_{z,\alpha}\]\exp\(-\i k_{\alpha}z\),
+    \\
+        \hat{\vec B}^+ &= \sum_\alpha C_\alpha^+\[\hat{\vec B}_{0,\alpha} + \vec e_zB_{z,\alpha}\]\exp\(-\i k_{\alpha}z\).
+    \end{align}
+    Similarly, for the negative direction (denoted by the $-$ superscript), the decomposition is given by
+    \begin{align}
+        \hat{\vec E}^- &= \sum_\alpha C_\alpha^-\[\hat{\vec E}_{0,\alpha} - \vec e_zE_{z,\alpha}\]\exp\(\i k_{\alpha}z\),
+    \\
+        \hat{\vec B}^- &= \sum_\alpha C_\alpha^-\[-\hat{\vec B}_{0,\alpha} + \vec e_zB_{z,\alpha}\]\exp\(\i k_{\alpha}z\).
+    \end{align}
+    Furthermore, thanks to the mutual orthogonality of modes, the modal decomposition is uniquely given by the orthogonal projection
+    \begin{align}
+        C_{\alpha}^\pm &= \frac 12 \frac{\displaystyle\int_S \[\hat{\vec E}_{0,\alpha}^\ast \cdot \hat{\vec E} \pm \(\frac{\omega}{k_\alpha}\)^2 \hat{\vec B}_{0,\alpha}^\ast \cdot \hat{\vec B}\]\,\d S}{\displaystyle\int_S \hat{\vec E}_{0,\alpha}^\ast \cdot \hat{\vec E}_{0,\alpha}\,\d S}\exp\(\pm\i k_\alpha z\),
+    \end{align}
+    where $S$ is an arbitrary cross-section of the waveguide.
+    
+    These two results combined lead to a powerful conclusion: the tangential fields within an arbitrary cross-section of the waveguide fully determine the field everywhere within the waveguide. This means that if the tangential components of the electric and magnetic fields are known on a single transverse plane, the entire field distribution within the waveguide can be uniquely determined, both in the transverse plane and along the direction of propagation.
+\end{remark}
+
 \begin{example}[TE waves in a rectangular waveguide]
+    \label{example:te-waves-in-a-rectangular-waveguide}
     This example delves into the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned waveguide's longitudinal direction.  The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
 
     Substituting this product into equation \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
     \begin{subequations}
-        \label{subeq:guided-waves-te-odes}
+        \label[pluralequation]{subeq:guided-waves-te-odes}
         \noindent\centering
         \begin{minipage}{0.45\textwidth}
             \begin{align}
@@ -597,12 +632,7 @@ govern the longitudinal field components and play a crucial role in determining 
     This guide wavelength is related to the free-space wavelength, $\lambda$, and the cutoff wavelength, $\lambda_{mn}$, for the TE$_{mn}$ mode.
 \end{example}
 
-\paragraph{To do:}
-\begin{itemize}
-    \item Definitely show how all modes are orthogonal to each other.
-    \item Perhaps show the expansion into the infinite basis of TE/TM waves.
-    \item Add some talk about modes to finish the chapter smoothly. Perhaps something about frequency dependence of modes' evanescence or something along the lines of that\dots
-\end{itemize}
+\paragraph{To do:} Maybe add some talk about modes to finish the theoretical chapter smoothly. Perhaps something about frequency dependence of modes' evanescence or something along the lines of that\dots
 
 
 %========== Conclusion ==========
