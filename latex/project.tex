@@ -99,7 +99,7 @@ In this section, the fundamental principles of electromagnetism are presented, s
 
 \subsection{Maxwell's equations}
 The differential form of Maxwell's equations, as presented below, constitutes the cornerstone of classical electromagnetism, providing a complete%
-    \footnote{For actual completeness (save for some special properties stemming from interactions in matter), the equations must also be supplemented by the Lorentz's force law $\vec F = q(\vec E + \vec v \times \vec B)$.}
+    \footnote{For actual completeness, save for some special properties stemming from interactions in matter, the equations must also be supplemented by the Lorentz's force law $\vec F = q(\vec E + \vec v \times \vec B)$.}
 framework for analysing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field intensity}~$\vec E$ and \emph{magnetic flux density}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions, exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur.
 
 \begin{subequations}
@@ -143,8 +143,7 @@ Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-gene
     \footnote{It is important to reinforce the idea that the magnetic charge and current are fictitious \enquote{source} quantities. Therefore, they are already, by definition, purely \emph{free} quantities.}
 and the \emph{bound charge}~$\rho_{\mathrm b}=-\Div\vec P$, produced by an electric polarization~$\vec P$ of the material. Moreover, changing electric fields also induce changing polarization, producing \emph{polarization current}~$\vec J_{\mathrm p}=\partial_t\vec P$ which add to the \emph{free current}~$\vec J_{\mathrm f}$. Similarly to electric polarization, a magnetic polarization~$\vec M$ results in a bound current~$\vec J_{\mathrm b}=\Curl\vec M$. These effects, inherently connected to the susceptibility of materials to be polarized, hence influence the total electromagnetic field in their vicinity. This led to the introduction of convenient field quantities that account for the presence of such media.
 
-Within the framework of Maxwell's equations, \emph{electric flux density}~$\vec D$ (also called the \emph{electric displacement field}) and the \emph{magnetic field intensity}~$\vec H$ offer a more convenient representation, explicitly separating the free and bound sources. This approach allows for expressing Maxwell's equations in a form that directly relates the fields to the free charge and free current, which are sources that can be controlled directly. Using these field quantities, \cref{subeq:maxwell-general} read
-
+Within the framework of Maxwell's equations, \emph{electric flux density}~$\vec D$ (also called the \emph{electric displacement field}) and the \emph{magnetic field intensity}~$\vec H$ offer a more convenient representation, explicitly separating the free and bound sources. This approach allows for expressing Maxwell's equations in a form that directly relates the fields to the free charge and free current, which are sources that can be controlled directly. Using these field quantities, \cref{subeq:maxwell-general} read\\
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-general-matter}
     \noindent\centering
@@ -174,8 +173,6 @@ Within the framework of Maxwell's equations, \emph{electric flux density}~$\vec 
 
 While \cref{subeq:maxwell-general-matter} effectively express electromagnetic laws within media, their hybrid notation, involving both $\vec E$ and $\vec D$, and both $\vec B$ and $\vec H$, necessitates the use of \emph{constitutive relations}. These relations, which establish correspondence between the respective electric and magnetic field quantities, are material-dependent and reflect the specific response of a medium to electric and magnetic fields. In general, these relationships can be expressed as
 \begin{subequations}
-    \index{constitutive relations}
-    \index{constitutive parameters}
     \label[pluralequation]{subeq:constitutive-relations}
     \begin{align}
         \label{eq:constitutive-relation-permittivity}
@@ -186,6 +183,8 @@ While \cref{subeq:maxwell-general-matter} effectively express electromagnetic la
     \end{align}
     \nomenclature{$\epsilon$}{permittivity }%
     \nomenclature{$\mu$}{permeability }%
+    \index{constitutive relations}
+    \index{constitutive parameters}
 \end{subequations}
 where $\hat\epsilon$ and $\hat\mu$ are the material's \emph{permittivity} and \emph{permeability}, respectively, and the asterisk denotes \emph{convolution}.
 
@@ -221,11 +220,9 @@ The \emph{constitutive parameters} $\hat\epsilon$, $\hat\mu$, and $\hat\sigma$, 
 \end{example}
 
 \subsection{Boundary conditions}
-While the differential forms of Maxwell's equations are powerful tools for analysing electromagnetic fields within continuous media, material boundaries introduce discontinuities that require special treatment. These discontinuities in the fields $E$, $B$, $D$, and $H$ arise at interfaces between media with different electrical properties or at surfaces carrying charge or current densities. To accurately describe the behaviour of the fields across such boundaries, Maxwell's equations in their integral form, which naturally incorporate these discontinuities, are more convenient. This form is obtained by applying integral theorems from vector calculus to \cref{subeq:maxwell-general-matter} which then take on the form of\\
+While the differential form of Maxwell's equations is a powerful tool for analysing electromagnetic fields within continuous media, material boundaries introduce discontinuities that require special treatment. These discontinuities in the fields arise at interfaces between media with different electrical properties or at surfaces carrying charge or current densities. To accurately describe the behaviour of the fields across such boundaries, Maxwell's equations in their integral form, which naturally incorporate these discontinuities, are more convenient. This form is obtained by applying integral theorems from vector calculus to \cref{subeq:maxwell-general-matter} which then take on the form of
 \begin{subequations}
-    \index{boundary conditions}
     \label[pluralequation]{subeq:maxwell-equations-integral}
-    \noindent\centering
     \begin{align}
         \label{eq:maxwell-equations-integral-div-d}
         \oint_S \vec D \cdot \d\vec a &= Q_{\mathrm{e}},
@@ -237,14 +234,14 @@ While the differential forms of Maxwell's equations are powerful tools for analy
         \oint_S \vec B \cdot \d\vec a &= Q_{\mathrm{m}},
     \\
         \label{eq:maxwell-equations-integral-curl-h}
-        \oint_{\partial S} \vec H \cdot \d\vec l &= \int_S \vec J_{\mathrm e} \cdot \d\vec a + \frac{\d}{\d t}\int_S \vec D \cdot \d\vec a.
+        \oint_{\partial S} \vec H \cdot \d\vec l &= \int_S \vec J_{\mathrm e} \cdot \d\vec a + \frac{\d}{\d t}\int_S \vec D \cdot \d\vec a,
     \end{align}
     \nomenclature{$\partial\Omega$}{boundary of set $\Omega$ }%
-\end{subequations}\\
+\end{subequations}
+\index{boundary conditions}
 where $S$ is any closed surface.
 
-Consider a boundary between two different media. The first medium is characterized by permittivity $\epsilon_1$ and permeability $\mu_1$, while the second medium is characterized by permittivity $\epsilon_2$ and permeability $\mu_2$. At this interface, electric and magnetic surface charge densities, denoted by $q_f$ and $q_m$ respectively, may be present. Additionally, electric and magnetic surface current densities, denoted by $j_f$ and $j_m$ respectively, may also exist. The general \emph{boundary conditions} for electrodynamics are then obtained by applying equations \cref{subeq:maxwell-equations-integral} to arbitrary surfaces encompassing a portion of the interface, yielding
-
+Consider a boundary between two different media. The first medium is characterized by permittivity $\epsilon_1$ and permeability $\mu_1$, while the second medium is characterized by permittivity $\epsilon_2$ and permeability $\mu_2$. At this interface, electric and magnetic surface charge densities, denoted by $q_{\mathrm f}$ and $q_{\mathrm m}$, respectively, may be present. Additionally, electric and magnetic surface current densities, denoted by $j_{\mathrm f}$ and $j_{\mathrm m}$, respectively, may also exist. The general \emph{boundary conditions} for electrodynamics are then obtained by applying \cref{subeq:maxwell-equations-integral} to arbitrary surfaces encompassing a portion of the interface, yielding\\
 \begin{subequations}
     \label[pluralequation]{subeq:boundary-conditions}
     \noindent\centering
@@ -275,6 +272,7 @@ Consider a boundary between two different media. The first medium is characteriz
 Having established the foundations of electromagnetism, the focus is now shifted to one of its most significant consequences: the existence of electromagnetic waves. In this section, the manner in which Maxwell's equations predict the propagation of these waves is explored.  The wave equations for the electric and magnetic fields are derived, revealing their interconnected nature and their ability to sustain each other even in the absence of sources. Subsequently, the simplest and most fundamental solutions to these equations, \emph{monochromatic plane waves}, are investigated. Finally, the confinement and guidance of these plane waves within conducting cavities is examined, laying the groundwork for understanding waveguides and resonant structures.
 
 \subsection{The wave equations}
+\label{subsection:the-wave-equations}
 Maxwell's equations provide a comprehensive description of electromagnetic phenomena, but their coupled nature can make them challenging to solve directly. To facilitate analysis, particularly in source-free regions, it's often advantageous to decouple the equations and express them in terms of the electric and magnetic fields individually. Inside regions with no \emph{free} charge or \emph{free} current, Maxwell's \cref{subeq:maxwell-general-matter} take on the form of\\
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-sourceless}
@@ -299,8 +297,7 @@ Maxwell's equations provide a comprehensive description of electromagnetic pheno
         \end{align}
     \end{minipage}\bigskip
 \end{subequations}\\
-Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, \cref{eq:maxwell-sourceless-curl-h} can be fully expressed in terms of $\vec E$. With this simplification, applying the curl to \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields
-
+Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, \cref{eq:maxwell-sourceless-curl-h} can be fully expressed in terms of $\vec E$. With this simplification, applying the curl to \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields\\
 \begin{subequations}
     \label[pluralequation]{subeq:wave-equations-lossy}
     \noindent\centering
@@ -345,12 +342,12 @@ for the speed of electromagnetic waves in linear homogeneous media.
 
 \begin{remark}
     \label{remark:nonequivalence-of-wave-equations-with-maxwells-equations}
-    Compared with the original Maxwell's \cref{subeq:maxwell-general-matter}, these equations form two systems of partial differential equations of second order but are now decoupled and provide us with an additional solving method for given boundary-value problems. However, it is important to note that the wave \cref{eq:wave-equation-e,eq:wave-equation-b} were derived from Maxwell's \cref{subeq:maxwell-sourceless} by differentiation. This impedes their mathematical equivalence. More specifically (as stated in~\parencite{griffiths:introduction-to-electrodynamics}), whereas every solution to Maxwell's equations is also a solution for the wave equations, the converse is not true.
+    Compared with the original Maxwell's \cref{subeq:maxwell-general-matter}, these equations form two systems of second-order partial differential equations but are now decoupled and provide us with an additional solving method for given boundary-value problems. However, it is important to note that the wave \cref{eq:wave-equation-e,eq:wave-equation-b} were derived from Maxwell's \cref{subeq:maxwell-sourceless} by differentiation. This impedes their mathematical equivalence. More specifically, as stated in~\parencite{griffiths:introduction-to-electrodynamics}, whereas every solution to Maxwell's equations is also a solution for the wave equations, the converse is not true.
 \end{remark}
 
 \subsection{Monochromatic plane waves}
 \index{monochromatic plane wave}
-The electromagnetic theory presented thus far describes general vector fields that vary in space and time. However, as shown in \cref{sec:electromagnetic-waves}, electromagnetic fields in source-free regions exhibit wave behaviour. Nonetheless, these time-varying vector fields remain complex and challenging to analyse in practical systems. Consider the elementary solution to the wave equation
+The electromagnetic theory presented thus far describes general vector fields that vary in space and time. However, as shown in \cref{subsection:the-wave-equations}, electromagnetic fields in source-free regions exhibit wave behaviour. Nonetheless, these time-varying vector fields remain complex and challenging to analyse in practical systems. Consider the elementary solution to the wave equation
 \begin{align}
     \label{eq:monochromatic-plane-wave}
     \hat{\vec\psi}(\vec r,t) &= \hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\].
@@ -396,7 +393,7 @@ More details on this mathematical theory can be found in~\parencite{titchmarsh:i
 
 Since any physically realizable signal is square-integrable and has compact support,%
     \footnote{In the field of signal processing, these signal properties are often described as having \emph{finite energy} and \emph{duration}, respectively.}
-this text's attention is confined to monochromatic plane waves. Therefore, the fields take on the form of\\
+this text's attention is confined to monochromatic plane waves. Therefore, the fields take on the form of
 \begin{subequations}
     \label[pluralequation]{subeq:monochromatic-plane-wave-fields}
     \begin{align}
@@ -462,7 +459,7 @@ The behaviour of electromagnetic waves within a waveguide is now explored. To pr
 \end{subequations}\\
 It is important to recognize that free charges and currents will be induced on the surface precisely to enforce these constraints.
 
-Furthermore, the focus is placed on monochromatic waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direction. The complex amplitudes of the fields,\\
+Furthermore, the focus is placed on monochromatic plane waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields} where the $z$-axis is aligned with the waveguide's longitudinal direction. The complex amplitudes of the fields,\\
 \begin{subequations}
     \label[pluralequation]{subeq:complex-amplitudes}
     \noindent\centering
@@ -513,12 +510,13 @@ where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-
     \label[pluralequation]{subeq:guided-wave-longitudinal-fields}
     \begin{align}
         \label{eq:guided-wave-ez}
-        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)E_z &= 0,
+        \[\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\]E_z &= 0,
     \\
         \label{eq:guided-wave-bz}
-        \(\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\)B_z &= 0.
+        \[\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\]B_z &= 0.
     \end{align}
 \end{subequations}
+\index{Helmholtz equations}
 These equations, often referred to as the \emph{Helmholtz equations}, govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide. These modes are categorized based on the presence or absence of longitudinal components in the electric and magnetic fields. \emph{Transverse electric} (TE) waves have $E_z=0$, while \emph{transverse magnetic} (TM) waves have $B_z=0$. The simplest waves, with both $E_z=B_z=0$ are called \emph{transverse electromagnetic} (TEM) waves, but these cannot exist within a hollow waveguide due to boundary conditions.
 
 \begin{remark}[Non-existence of TEM waves in hollow waveguides]
@@ -527,12 +525,12 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
     
     Beginning with the scenario where the longitudinal component of the electric field, $E_z$, is zero, it follows from \cref{eq:maxwell-sourceless-div-d} that the divergence of the electric field in the transverse plane must also be zero. Similarly, when the longitudinal component of the magnetic field, $B_z$, is zero, \cref{eq:maxwell-sourceless-curl-e} dictates that the curl of the electric field in the transverse plane must vanish.
     
-    Combining these results, the complex amplitude of the electric field, $\hat{\vec E}_0$, can be expressed as the gradient of a scalar potential that satisfies the Laplace's equation $\Delta\hat{\vec E}_0 = 0$. However, the boundary condition on the electric field, as expressed in \cref{eq:guided-waves-boundary-condition-e}, enforces an equipotential at the conductor surface. Since Laplace's equation admits no local extrema, the potential must be constant throughout the waveguide, leading to a zero electric field.
+    Combining these results, the complex amplitude of the electric field, $\hat{\vec E}_0$, can be expressed as the gradient of a scalar potential $\varphi$ that satisfies the Laplace's equation $\Delta\varphi = 0$. However, the boundary condition on the electric field, as expressed in \cref{eq:guided-waves-boundary-condition-e}, enforces an equipotential at the conductor surface. Since Laplace's equation admits no local extrema, the potential must be constant throughout the waveguide, leading to a zero electric field.
 \end{remark}
 
 \begin{remark}[Modal decomposition of guided waves]
     \label{remark:modal-decomposition-of-guided-waves}
-    The equations for $E_z$ and $B_z$, \cref{subeq:guided-wave-longitudinal-fields}, are instances of the \emph{Helmholtz equation} with Dirichlet and Neumann boundary conditions, respectively. This mathematical structure is analogous to the eigenvalue problem for the Laplace operator, which arises in various physical contexts.
+    The equations for $E_z$ and $B_z$, \cref{subeq:guided-wave-longitudinal-fields}, are instances of the \emph{Helmholtz equation} with Dirichlet and Neumann boundary conditions, respectively. This mathematical structure the eigenvalue problem for the Laplace operator arising in various physical contexts.
     
     For instance, the same equation and boundary conditions govern the vertical displacements of a vibrating drumhead. In this analogy, TM modes correspond to a drumhead with fixed boundaries, while TE modes correspond to a drumhead with free boundaries. The TM case is also isomorphic to the Schr\"odinger problem for the wave functions and energy eigenvalues of a free particle in a two-dimensional box with hard walls. Seeking inspiration in these analogous problems provides useful intuition when thinking about the modal eigenfunctions and eigenvalues of a waveguide. Some key mathematical results stemming from these analogies include:
     \begin{enumerate}[label=(\alph*)]
@@ -551,6 +549,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
     \\
         \hat{\vec B}^+ &= \sum_\alpha C_\alpha^+\[\hat{\vec B}_{0,\alpha} + \vec e_zB_{z,\alpha}\]\exp\(-\i k_{\alpha}z\).
     \end{align}
+    \index{modal decomposition}
     Similarly, for the negative direction (denoted by the $-$ superscript), the decomposition is given by
     \begin{align}
         \hat{\vec E}^- &= \sum_\alpha C_\alpha^-\[\hat{\vec E}_{0,\alpha} - \vec e_zE_{z,\alpha}\]\exp\(\i k_{\alpha}z\),
@@ -568,9 +567,9 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \begin{example}[TE waves in a rectangular waveguide]
     \label{example:te-waves-in-a-rectangular-waveguide}
-    This example delves into the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned waveguide's longitudinal direction.  The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
+    This example delves into the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned with the waveguide's longitudinal direction.  The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
 
-    Substituting this product into equation \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
+    Substituting this product into \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
     \begin{subequations}
         \label[pluralequation]{subeq:guided-waves-te-odes}
         \noindent\centering
