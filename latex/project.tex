@@ -73,13 +73,13 @@
 
 Do not write a couple of words on literature survey. Present the difference construction and design choices, compare them both theoretically and by the results presented in gathered papers, but in their respective sections of the design process. Use them a nice foreword for each of the parts, going through existing approaches.
 
-\lipsum[1]
+Say a few words about the simulation software of choice, the CST Studio Suite.
 
-Throughout the theoretical chapter, I omit using the common \emph{del}, or \emph{nabla}, notation for the vector differential operator $\nabla$ which gives rise to the formally proper differential operators of gradient ($\nabla$), divergence ($\nabla\cdot$), curl ($\nabla\times$), and sometimes even the Laplace operator ($\nabla\cdot\nabla$ or $\nabla^2$). Instead, I will use the standard notations of $\Grad$, $\Div$, $\Curl$, and $\Delta$, respectively. While I am aware of the mnemonic merits it brings when working in coordinates, this does not come to fruition as I do not carry out any computations in this text. On the other hand, there are various reasons to avoid it, such as that it promotes a notational ambiguity with the covariant derivative used in differential geometry, or to distinguish the individual operators at first sight better.
-\nomenclature{$\Grad$}{gradient }%
-\nomenclature{$\Div$}{divergence }%
-\nomenclature{$\Curl$}{curl }%
-\nomenclature{$\Delta$}{Laplace operator }%
+% Throughout the theoretical chapter, I omit using the common \emph{del}, or \emph{nabla}, notation for the vector differential operator $\nabla$ which gives rise to the formally proper differential operators of gradient ($\nabla$), divergence ($\nabla\cdot$), curl ($\nabla\times$), and sometimes even the Laplace operator ($\nabla\cdot\nabla$ or $\nabla^2$). Instead, I will use the standard notations of $\Grad$, $\Div$, $\Curl$, and $\Delta$, respectively. While I am aware of the mnemonic merits it brings when working in coordinates, this does not come to fruition as I do not carry out any computations in this text. On the other hand, there are various reasons to avoid it, such as that it promotes a notational ambiguity with the covariant derivative used in differential geometry, or to distinguish the individual operators at first sight better.
+% \nomenclature{$\Grad$}{gradient }%
+% \nomenclature{$\Div$}{divergence }%
+% \nomenclature{$\Curl$}{curl }%
+% \nomenclature{$\Delta$}{Laplace operator }%
 
 \paragraph*{Synopsis.} In \textbf{\cref{chap:electrodynamics}}, \lipsum[4]
 
@@ -100,7 +100,7 @@ In this section, the fundamental principles of electromagnetism are presented, s
 \subsection{Maxwell's equations}
 The differential form of Maxwell's equations, as presented below, constitutes the cornerstone of classical electromagnetism, providing a complete%
     \footnote{For actual completeness, save for some special properties stemming from interactions in matter, the equations must also be supplemented by the Lorentz's force law $\vec F = q(\vec E + \vec v \times \vec B)$.}
-framework for analysing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field intensity}~$\vec E$ and \emph{magnetic flux density}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions, exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur.
+framework for analysing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field}~$\vec E$ and \emph{magnetic field}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions, exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur.
 
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-general}
@@ -108,28 +108,28 @@ framework for analysing electromagnetic phenomena at any point in space and time
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-general-div-e}
-            \Div\vec E &= \frac1{\epsilon_0}\rho_{\mathrm e},
+            \div\vec E &= \frac1{\epsilon_0}\rho_{\mathrm e},
         \\
             \label{eq:maxwell-general-curl-e}
-            \Curl\vec E &= -\mu_0\vec J_{\mathrm m} - \partial_t\vec B,
+            \curl\vec E &= -\mu_0\vec J_{\mathrm m} - \partial_t\vec B,
         \end{align}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-general-div-b}
-            \Div\vec B &= \mu_0\rho_{\mathrm m},\vphantom{\frac1{\epsilon_0}}
+            \div\vec B &= \mu_0\rho_{\mathrm m},\vphantom{\frac1{\epsilon_0}}
         \\
             \label{eq:maxwell-general-curl-b}
-            \Curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
+            \curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
         \end{align}
     \end{minipage}
     \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }%
-    \nomenclature{$\vec E$}{electric field intensity }%
-    \nomenclature{$\vec B$}{magnetic flux density }%
+    \nomenclature{$\vec E$}{electric field }%
+    \nomenclature{$\vec B$}{magnetic field }%
     \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
     \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
-    \nomenclature{$\vec J_{\mathrm e}$}{source electric current density }%
+    \nomenclature{$\vec J_{\mathrm e}$}{electric current density }%
     \nomenclature{$\vec J_{\mathrm m}$}{magnetic current density }%
     \bigskip
 \end{subequations}
@@ -139,35 +139,55 @@ There is one oddity about \cref{subeq:maxwell-general} and that is the inclusion
 Mathematically, \cref{subeq:maxwell-general}, like any differential equations, form a complete problem only when supplemented with suitable boundary conditions in a more traditional sense, such as behaviour of the vector fields \enquote{in infinity}. These are typically \enquote{obvious} from the problem-solving context, e.g., fields vanishing at large distance from localized charge distribution, etc.
 
 \subsection{Electromagnetic properties of matter}
-Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-general} provide a complete description of electromagnetic phenomena, an alternative formulation offers a more convenient approach for analysing materials susceptible to electric and magnetic polarization. Within such media, the total electric charge density~$\rho_{\mathrm e}$ can be expressed as a sum of the \emph{free charge} density~$\rho_{\mathrm f}$, which constitutes the \emph{actual source} charge,%
-    \footnote{It is important to reinforce the idea that the magnetic charge and current are fictitious \enquote{source} quantities. Therefore, they are already, by definition, purely \emph{free} quantities.}
-and the \emph{bound charge}~$\rho_{\mathrm b}=-\Div\vec P$, produced by an electric polarization~$\vec P$ of the material. Moreover, changing electric fields also induce changing polarization, producing \emph{polarization current}~$\vec J_{\mathrm p}=\partial_t\vec P$ which add to the \emph{free current}~$\vec J_{\mathrm f}$. Similarly to electric polarization, a magnetic polarization~$\vec M$ results in a bound current~$\vec J_{\mathrm b}=\Curl\vec M$. These effects, inherently connected to the susceptibility of materials to be polarized, hence influence the total electromagnetic field in their vicinity. This led to the introduction of convenient field quantities that account for the presence of such media.
+Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-general} provide a complete description of electromagnetic phenomena, an alternative formulation offers a more convenient approach for analysing materials susceptible to electric and magnetic polarization.
 
-Within the framework of Maxwell's equations, \emph{electric flux density}~$\vec D$ (also called the \emph{electric displacement field}) and the \emph{magnetic field intensity}~$\vec H$ offer a more convenient representation, explicitly separating the free and bound sources. This approach allows for expressing Maxwell's equations in a form that directly relates the fields to the free charge and free current, which are sources that can be controlled directly. Using these field quantities, \cref{subeq:maxwell-general} read\\
+Within such media, the total electric charge density~$\rho_{\mathrm e}$ can be expressed as a sum of the \emph{free charge} density~$\rho_{\mathrm f}$, which constitutes the \emph{actual source} charge,%
+    \footnote{It is important to reinforce the idea that the magnetic charge and current are fictitious \enquote{source} quantities. Therefore, they are already, by definition, purely \emph{free} quantities.}
+and the \emph{bound charge}~$\rho_{\mathrm b}=-\div\vec P$, produced by an electric polarization~$\vec P$ of the material. Moreover, changing electric fields also induce changing polarization, producing \emph{polarization current}~$\vec J_{\mathrm p}=\partial_t\vec P$ which add to the \emph{free current}~$\vec J_{\mathrm f}$. Similarly to electric polarization, a magnetic polarization~$\vec M$ results in a bound current~$\vec J_{\mathrm b}=\curl\vec M$. These effects, inherently connected to the susceptibility of materials to be polarized, hence influence the total electromagnetic field in their vicinity. This led to the introduction of auxiliary field quantities that account for the presence of such media\\
+\begin{subequations}
+    \label[pluralequation]{subeq:auxiliary-fields}
+    \noindent\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:eq:auxiliary-field-d}
+            \vec D &= \epsilon_0(\vec E + \vec P)\vphantom{\frac{1}{\mu_0}},
+        \end{align}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{align}
+            \label{eq:eq:auxiliary-field-h}
+            \vec H &= \frac{1}{\mu_0}\vec H - \vec M.
+        \end{align}
+    \end{minipage}
+    \nomenclature{$\vec D$}{auxiliary electric field }%
+    \nomenclature{$\vec H$}{auxiliary magnetic field }%
+    \bigskip
+\end{subequations}\\
+
+This approach allows for expressing Maxwell's equations in a form that directly relates the electric and magnetic fields to the free charge and free current, which are sources that can be controlled directly. Using the field quantities defined by \cref{subeq:auxiliary-fields}, Maxwell's \cref{subeq:maxwell-general} read\\
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-general-matter}
     \noindent\centering
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-general-matter-div-d}
-            \Div\vec D &= \rho_{\mathrm f},
+            \div\vec D &= \rho_{\mathrm f},
         \\
             \label{eq:maxwell-general-matter-curl-e}
-            \Curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
+            \curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
         \end{align}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-general-matter-div-b}
-            \Div\vec B &= \mu_0\rho_{\mathrm{m}},
+            \div\vec B &= \rho_{\mathrm{m}},
         \\
             \label{eq:maxwell-general-matter-curl-h}
-            \Curl\vec H &= \vec J_{\mathrm f} + \partial_t\vec D,
+            \curl\vec H &= \vec J_{\mathrm f} + \partial_t\vec D,
         \end{align}
     \end{minipage}
-    \nomenclature{$\vec D$}{electric flux density }%
-    \nomenclature{$\vec H$}{magnetic field intensity }%
     \bigskip
 \end{subequations}
 
@@ -280,20 +300,20 @@ Maxwell's equations provide a comprehensive description of electromagnetic pheno
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-sourceless-div-d}
-            \Div \vec D &= 0,
+            \div \vec D &= 0,
         \\
             \label{eq:maxwell-sourceless-curl-e}
-            \Curl \vec E &= -\partial_t\vec B,
+            \curl \vec E &= -\partial_t\vec B,
         \end{align}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \begin{align}
             \label{eq:maxwell-sourceless-div-b}
-            \Div\vec B &= 0,
+            \div\vec B &= 0,
         \\
             \label{eq:maxwell-sourceless-curl-h}
-            \Curl\vec H &= \sigma\vec E + \partial_t\vec D.
+            \curl\vec H &= \sigma\vec E + \partial_t\vec D.
         \end{align}
     \end{minipage}\bigskip
 \end{subequations}\\
@@ -353,10 +373,10 @@ The electromagnetic theory presented thus far describes general vector fields th
     \hat{\vec\psi}(\vec r,t) &= \hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\].
 \end{align}
 \nomenclature{$\vec k$}{wave vector }%
-Here, $\hat{\vec k}$ is the complex \emph{wave vector} indicating the direction of wave propagation, and $\omega$ is the angular frequency of the wave. \Cref{eq:monochromatic-plane-wave} is expressed in terms of a \emph{complex wave function} with a \emph{complex amplitude} $\hat{\vec\Psi}_0 \equiv \vec\Psi_0\e^{\i\varphi}$. This quantity encapsulates both the \emph{real amplitude} $\vec\Phi_0$ and the \emph{phase shift} $\varphi$, of the physical wave. A sinusoidal wave representing this solution in physical reality can be extracted from \cref{eq:monochromatic-plane-wave} using the \emph{Euler's formula}, yielding
+Here, $\hat{\vec k}$ is the complex \emph{wave vector} indicating the direction of wave propagation, and $\omega$ is the angular frequency of the wave. \Cref{eq:monochromatic-plane-wave} is expressed in terms of a \emph{complex wave function} with a \emph{complex amplitude} $\hat{\vec\Psi}_0 \equiv \vec\Psi_0\e^{\i\delta}$. This quantity encapsulates both the \emph{real amplitude} $\vec\Phi_0$ and the \emph{phase shift} $\delta$, of the physical wave. A sinusoidal wave representing this solution in physical reality can be extracted from \cref{eq:monochromatic-plane-wave} using the \emph{Euler's formula}, yielding
 \begin{align}
     \label{eq:sinusoidal-wave}
-    \vec{\psi}(\vec r, t) &= \Re\[\hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t+\varphi\)\]\] = \Re\[\hat{\vec\psi}(\vec r, t)\].
+    \vec{\psi}(\vec r, t) &= \Re\[\hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t+\delta\)\]\] = \Re\[\hat{\vec\psi}(\vec r, t)\].
 \end{align}
 
 \begin{remark}
@@ -430,13 +450,101 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
     \index{polarization vector}%
     With this definition, the complete solution to Maxwell's equations for a plane wave in free space takes the form of
     \begin{align}
-        \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \varphi) \vec e_n,
+        \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \delta) \vec e_n,
     \\
-        \vec B(\vec r, t) &= \frac 1c E_0\cos(\vec k \cdot \vec r - \omega t + \varphi) (\vec k \times \vec e_n).
+        \vec B(\vec r, t) &= \frac 1c E_0\cos(\vec k \cdot \vec r - \omega t + \delta) (\vec k \times \vec e_n).
     \end{align}
 
     It's important to note that this transversality of the electromagnetic fields is a specific property of plane waves in free space or lossless media. When waves are confined in waveguides or propagate through lossy media, the fields generally have longitudinal components as well. This distinction arises because the boundary conditions imposed by the waveguide or the interactions with the medium can alter the field structure.
 \end{example}
+
+\subsection{Polarization}
+\label{subsection:polarization}
+A brief examination of the general polarization properties of monochromatic plane waves is now undertaken. For the sake of simplicity, consideration is restricted to propagation within a vacuum. Consequently, the Cartesian coordinate system is aligned such that the unit vector $e_z$ coincides with the unit vector $e_{\vec k}$ which defines the direction of propagation. The remaining real unit vectors, $\vec e_x$ and $\vec e_y$, are then defined such that $(\vec e_x, \vec e_y, \vec e_z)$ constitutes a right-handed orthogonal triad of unit vectors. Thus, the ordered set of vectors $(\vec e_x, \vec e_y)$ forms a basis for the complex amplitude of the electric field E, and the electric field can thereby be expressed as
+\begin{align}
+    \label{eq:polarization-e}
+    \hat{\vec E}(\vec r,t) &= \[\hat E_x\vec e_x + \hat E_y\vec e_y\]\exp\[\i\phi(\vec r,t)\],
+\end{align}
+where
+\begin{align}
+    \hat E_x &= E_x\exp\(\i\delta_x\),
+&
+    \hat E_y &= E_y\exp\(\i\delta_y\),
+\end{align}
+for some real numbers $E_x$, $E_y$, $\delta_x$, and $\delta_y$, and
+\begin{align}
+    \phi(\vec r,t) &= \hat{\vec k} \cdot \vec r - \omega t.
+\end{align}
+Expressing the real part of \cref{eq:polarization-e} yields
+\begin{align}
+    \label{eq:polarization-e-real-part}
+    \Re\[\hat{\vec E}\] &= E_x\cos\(\phi + \delta_x\)\vec e_x + E_y\cos\(\phi + \delta_y\)\vec e_y = A_x\vec e_x + A_y\vec e_y.
+\end{align}
+Equating the components from the second relation in \cref{eq:polarization-e-real-part} and applying goniometric identities, the following relationships are obtained:
+\begin{subequations}
+    \begin{align}
+        \label{eq:polarization-ellipse-a}
+        \frac{A_x}{E_x}\sin(\delta_y)-\frac{A_y}{E_y}\sin(\delta_x) &= \sin(\delta_y-\delta_x)\cos(\phi),
+    \\
+        \label{eq:polarization-ellipse-b}
+        \frac{A_x}{E_x}\sin(\delta_y)-\frac{A_y}{E_y}\sin(\delta_x) &= \sin(\delta_y-\delta_x)\cos(\phi).
+    \end{align}
+\end{subequations}
+Subsequent squaring and addition of \cref{eq:polarization-ellipse-a,eq:polarization-ellipse-b} yields
+\begin{align}
+    \label{eq:polarization-ellipse}
+    \(\frac{A_x}{E_x}\)^2 + \(\frac{A_y}{E_y}\)^2 - 2\frac{A_x}{E_x}\frac{A_y}{E_y}\cos\(\delta\) &= \sin^2\(\delta\),
+\end{align}
+\index{elliptical polarization}
+where $\delta \equiv \delta_y-\delta_x$. Clearly, \cref{eq:polarization-ellipse} defines an ellipse in the plane transverse to the propagation direction. Accordingly, it can be stated that the general monochromatic plane wave described in \cref{eq:monochromatic-plane-wave} exhibits \emph{elliptical polarization}. The eccentricity and orientation of the ellipse are related to the phase difference $\delta$ and the amplitude ratio $E_y/E_x$. Inspecting \cref{eq:polarization-ellipse}, two special types of polarization can be identified for specific parameter values.
+
+\paragraph{Linear polarization.\index{linear polarization}} The first situation arises when the polarization ellipse degenerates into a straight line. This condition occurs when the electric field components are either in-phase or out-of-phase by half-wavelength, i.e.,
+\begin{align}
+    \label{eq:polarization-linear-condition}
+    \delta = \delta_y-\delta_x = m\pi, \quad m \in \N_0.
+\end{align}
+This situation corresponds to \emph{linear polarization} and \cref{eq:polarization-e-real-part} is rendered as
+\begin{align}
+    \label{eq:polarization-linear-e}
+    \Re\[\hat{\vec E}(\vec r,t)\] &= \[E_x\vec e_x \pm E_y\vec e_y\]\cos\(\phi + \delta_x\).
+\end{align}
+
+\paragraph{Circular polarization.\index{circular polarization}} The alternative scenario arises when the polarization ellipse simplifies into a circle. This simplification occurs exclusively when the orthogonal electric field components possess equal amplitude and are out-of-phase by one-quarter wavelength, i.e.,
+\begin{align}
+    \label{eq:polarization-circular-condition}
+    E_x = E_y &= \frac{E}{\sqrt 2},
+&
+    \delta = \delta_y-\delta_x &= (2m+1)\frac{\pi}{2}, \quad m \in \Z.
+\end{align}
+This condition corresponds to \emph{circular polarization}, as the tip of the polarization vector traces a circle within every fixed transverse plane. To ascertain the direction of circular movement, the plane $z=0$ is considered. By setting $\delta_x = 0$,%
+    \footnote{The choice $\delta_x=0$ is inconsequential to the resulting polarization as it depends only on the phase difference $\delta$.}
+\cref{eq:polarization-e-real-part} is expressed as
+\begin{align}
+    \label{eq:polarization-circular-e-r0}
+    \Re\[\hat{\vec E}_\pm(\vec 0,t)\] &= \frac{E}{\sqrt 2}\[\cos(\omega t)\vec e_x \pm \sin(\omega t)\vec e_y\].
+\end{align}
+This expression demonstrates that, when viewed from the direction defined by $\hat{\vec k}$, the electric field $\hat{\vec E}^+$ represents a circularly polarized wave with the polarization vector rotating anticlockwise, thus defining \emph{left-hand circular polarization} (LHCP). Conversely, the case of $\hat{\vec E}^-$ represents a circularly polarized wave with the polarization vector rotating clockwise, defining \emph{right-hand circular polarization} (RHCP).
+
+The exposition given so far is aligned with Augustin-Jean Fresnel's general definition of elliptical polarization, as presented in his memoir to the French Academy of Sciences on 9 December 1822, wherein the concepts of the three types of polarization--general elliptical polarization, and its specific forms, linear and circular polarization--were coined. The following remark, however, provides an alternative, and often advantageous, approach.
+
+\begin{remark}[Complex basis for circular polarization]
+    For the electric field decomposition basis, the following complex conjugate vectors, rather than the Cartesian vectors $\vec e_x$ and $\vec e_y$, are now considered:
+    \begin{align}
+        \label{eq:polarization-circular-complex-vectors}
+        \vec e_+ &= \frac{1}{\sqrt 2}\(\vec e_x + \i\vec e_y\),
+    &
+        \vec e_- &= \frac{1}{\sqrt 2}\(\vec e_x - \i\vec e_y\).
+    \end{align}
+    These vectors maintain orthonormality. Using this basis, it is evident that the real part of the thus formed complex electric field
+    \begin{align}
+        \hat{\vec E}_\pm(\vec r,t) &= E\vec e_\pm\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\] = \frac{E}{\sqrt 2}\[\vec e_x \pm \i\vec e_y\]\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\],
+    \end{align}
+    evaluated at $\vec r = 0$, is equivalent to \cref{eq:polarization-circular-e-r0}. Because the ordered set of vectors defined by \cref{eq:polarization-circular-complex-vectors} constitutes a valid basis for the transverse plane, analogous to the $(\vec e_x,\vec e_y)$ basis, the expression
+    \begin{align}
+        \hat{\vec E} &= \[E_+\vec e_+ + E_-\vec e_-\]\exp\[\i\phi\]
+    \end{align}
+    is an equivalent representation to \cref{eq:polarization-e}. Consequently, any monochromatic plane wave can be decomposed into RHCP and LHCP components, in a manner analogous to its decomposition into orthogonal linearly polarized components.
+\end{remark}
 
 \subsection{Guided waves}
 The behaviour of electromagnetic waves within a waveguide is now explored. To provide a clear framework for analysis, it is assumed that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
@@ -538,8 +646,14 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
         \item The eigenvalues are all real and positive.
         \item The eigenfunctions can always be chosen real.
         \item The eigenfunctions form a complete set of functions.
-        \item Eigenfunctions belonging to different eigenvalues are orthogonal.
+        \item Eigenfunctions belonging to different eigenvalues are orthogonal, i.e.,
+        \begin{align}
+            \label{eq:mode-orthogonality}
+            \int_S \[\hat{\vec E}_{0,\alpha} \times \hat{\vec B}_{0,\beta}^\ast\]\,\d S = C\delta_{\alpha\beta},
+        \end{align}
+        where $S$ is an arbitrary waveguide cross-section and $\delta_{\alpha\beta}$ is the Kronecker's delta distribution.
     \end{enumerate}
+
 
     Perhaps the most significant result in terms of applied electrodynamics is the completeness of the eigenfunctions, which implies that any field within a waveguide can be composed of its modes. Specifically, if $\alpha$ denotes a distinct mode%
         \footnote{For example, in the case of a rectangular waveguide, a mode is given by the combination of two integers, $m$ and $n$.}
@@ -633,6 +747,35 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \paragraph{To do:} Maybe add some talk about modes to finish the theoretical chapter smoothly. Perhaps something about frequency dependence of modes' evanescence or something along the lines of that\dots
 
+\chapter{Design process}
+\label{chapter:design process}
+\paragraph{Add text}
+
+\section{Polarizer}
+The design process of a waveguide polarizer is detailed in this section. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is then proposed, with a rationale provided for the selected approach. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed, with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
+
+\subsection{Literature survey}
+To achieve dual polarization, the inherent characteristics of symmetric waveguides, which support two orthogonal fundamental modes of propagation, are leveraged. This property forms the foundation for the design of the dual linear-to-circular polarizer presented in this work. This crucial characteristic arises from the combination of the waveguide's transverse coordinate symmetry and the fundamental orthogonality of distinct modes. The geometric symmetry of these waveguides (manifesting as mirror or rotational symmetry) allows for the existence of two fundamental modes with orthogonal polarization vectors in the transverse plane. A rectangular waveguide, as illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, exhibits this with itsTE$_{10}$ and TE$_{01}$ modes. Concurrently, \cref{remark:modal-decomposition-of-guided-waves} details a fundamental principle derived from Maxwell's equations which dictates that any two distinct modes within a waveguide are orthogonal. Mathematically, this orthogonality, expressed in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. Consequently, the transverse symmetry of the waveguide enables the existence of orthogonally polarized modes, while their inherent orthogonality guarantees their independent propagation without coupling or interference. This independent propagation is essential for polarization control, as it allows for the manipulation of the relative phase and amplitude of these orthogonal modes to achieve the desired polarization states, a capability directly leveraged in the design of the dual linear-to-circular polarizer detailed in this work. The desired polarization states of RHCP and LHCP were mathematically elaborated on in \cref{subsection:polarization}.
+
+\paragraph{Continue with refining from here and onwards.}
+This description of circular polarization establishes a clear objective for the design of a waveguide polarizer: the creation of a segment based on a symmetrical waveguide that introduces a one-quarter wavelength phase difference between its two mutually orthogonal modes along its length, while maintaining the magnitudes as equal as possible. During subsequent design stages, the latter criterion is transformed into a singular metric, known as the \emph{axial ratio} of the emitted wave, which describes the polarization purity based on its far-field properties. Several approaches--widely adopted in implementation--exist that we may refer to as standard methods for achieving these objectives. Notable mentions include the following:
+\begin{itemize}
+    \item \emph{Dielectric vane polarizers} feature a dielectric vane (a so-called quarter-wave plate) inserted into the segment of a symmetrical waveguide under an angle of $\pm 45\degree$ relative to the incident electrical field. The inserted dielectric introduces a difference in the propagation velocity of the two orthogonal modes along this segment. This is due to one of the modes being parallel to the vane, hence having its propagation velocity reduced, while the other is unaffected thanks to being perpendicular to the vane.
+    \item \emph{Septum polarizers} have two rectangular ports that converge at a stepped septum and extend into a symmetrical waveguide. When fed through one of these ports, the septum polarizer converts approximately half of the energy to the opposite polarity, achieving circular polarization through a phase shift of one-quarter wavelength at the output port. Feeding the structure through the alternate port results in circular polarization in the opposite direction.
+    \item \emph{Iris polarizers} utilize a symmetrical waveguide cross-section with ridges, also called corrugations or irises, typically positioned symmetrically on two opposing sides. These polarizers operate on a linearly polarized wave directed diagonally into the waveguide. In this configuration, the ridges appear to one of the waveguide's modes as inductive while to the other as capacitive. This differential treatment results in a phase delay of one-quarter wavelength at the output port.
+\end{itemize}
+
+While these established methods can be refined and adjusted to achieve favourable results in typical metrics for linear-to-circular polarizers, each also exhibits shortcomings in other respects. Dielectric vane polarizers encounter narrow bandwidth issues with significant power limitations due to inherent losses associated with the use of dielectric materials. In contrast, septum polarizers offer promising capabilities for a wide range of applications in terms of power handling and the ability to generate both right-hand and left-hand circular polarizations efficiently. However, their size and weight can pose constraints for many applications. Iris polarizers, while capable of converting linearly polarized input into both polarizations and operating at higher power levels, often exhibit \enquote{overmoding} in their structures and require precise mode-matching to maintain a good axial ratio across a broad frequency band. Moreover, designing irises involves complex mathematical analyses, adding to their operational challenges.
+
+This thesis strives to design a novel approach aimed at achieving optimal polarization purity across a wide frequency band, utilizing a straightforward cross-sectional geometry. Beginning with the symmetrical structure of a square or circular waveguide, the polarization effect is achieved by inserting obstructive shapes into two opposing ends of the cross-section. Specifically, triangular prisms are introduced into the corners of the square waveguide, while protruding circular segments (maintaining rotational symmetry) are inserted opposite each other in the case of a circular waveguide. A linearly polarized wave launched into this structure is decomposed into two orthogonal modes, each of which propagates along electrical paths of different lengths, providing the required phase delay.
+
+The cross-sections of such polarizers must be optimized to maximize phase difference per unit length while maintaining equal amplitudes as closely as possible. These objectives inherently conflict, necessitating a trade-off. From an application perspective, a balance must be struck between the length of the structure, which compensates for lower phase delay per unit length, and polarization purity, which is compromised by unequal mode magnitudes.
+
+\newpage
+\section{Feeding structure}
+
+\newpage
+\section{Antenna}
 
 %========== Conclusion ==========
 \chapter*{Conclusion}
