@@ -66,6 +66,9 @@
 %========== Table of contents ==========
 \tableofcontents
 
+%========== List of figures ==========
+\listoffigures
+
 %========== Introduction ==========
 \chapter*{Introduction}
 \label{chap:introduction}
@@ -94,7 +97,7 @@
 \label{chap:electrodynamics}
 This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided waves are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
 
-The exposition endeavours to build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics,zangwill:modern-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive foundation for further chapters.
+The exposition endeavours to take inspiration and build upon the foundations laid in \parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics,zangwill:modern-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive theoretical framework for further chapters.
 
 \section{Fundamentals of electrodynamics}
 \label{sec:fundamentals-of-electrodynamics}
@@ -401,22 +404,15 @@ as both of these terms signify a sinusoidal dependence on a given variable. In t
 The significance of this particular solution stems from the fact that, in practice, any wave we will be dealing with can be expressed as a linear combination of these monochromatic plane waves, i.e.,
 \begin{align}
     \label{eq:fourier-transform}
-    \hat{\vec\psi}(\vec r,t) &= \int_{\R^3} \hat{\vec{\Psi}}_0(\vec k)\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\]\, \d\vec k.
+    \hat{\vec\psi}(\vec r,t) &= \int_{\R^3} \hat{\vec{\Psi}}_0(\vec k)\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\]\,\d\vec k.
 \end{align}
-This superposition principle mathematically reflects the Fourier transform over every plane wave corresponding to a given frequency $\omega$. With this formally sound mathematical description, the existence of a unique linear combination for \enquote{any wave we will be dealing with}, as vaguely stated above, can be rigorously established through the following theorem.
-\begin{theorem}[Dirichlet-Jordan test]
-    \label{theorem:dirichlet-jordan-test}
-    Let $f$ be a function in $L^1(-\infty,\infty)$ and of bounded variation in a neighbourhood of the point $x$. Then
-    \begin{align}
-        \frac1\pi \lim_{M\to\infty}\int_0^M\,\d u \int_\R f(t)\cos(u(x-t))\,\d t = \lim_{\epsilon\to0}\frac{f(x+\epsilon)+f(x-\epsilon)}2.
-    \end{align}
-    If $f$ is continuous in an open interval, then the integral on the left-hand side converges uniformly in the interval, and the limit on the right-hand side is $f(x)$.
-\end{theorem}
-More details on this mathematical theory can be found in~\parencite{titchmarsh:introduction-to-the-theory-of-fourier-integrals}. A version of \cref{theorem:dirichlet-jordan-test}, retaining the original form due to Dirichlet, is often used in signal processing. More details on that formulation can be found, e.g., in~\parencite{oppenheim:signals-and-systems}.
+This superposition principle mathematically reflects the Fourier transform over every plane wave corresponding to a given frequency $\omega$. With this formally sound mathematical description, the existence of a unique linear combination for \enquote{any wave we will be dealing with}, as vaguely stated above, can be rigorously established.
 
-Since any physically realizable signal is square-integrable and has compact support,%
+Indeed, since any physically realizable signal is square-integrable and has compact support,%
     \footnote{In the field of signal processing, these signal properties are often described as having \emph{finite energy} and \emph{duration}, respectively.}
-this text's attention is confined to monochromatic plane waves. Therefore, the fields take on the form of
+the existence of its Fourier transform is guaranteed. This implication is granted by recalling that the combination of square-integrability and compact support implies, by the Cauchy-Schwarz inequality, absolute integrability which forms a sufficient condition for the existence of the Fourier transform. Therefore, any such physical signal can be confidently decomposed into a superposition of monochromatic plane waves, as expressed in equation \cref{eq:fourier-transform}. This decomposition into a unique linear combination of plane waves of different frequencies underpins much of the mathematical theory concerning Fourier analysis. For a deeper dive into the mathematical foundations of Fourier integrals, \parencite{titchmarsh:introduction-to-the-theory-of-fourier-integrals} can be consulted. Furthermore, a formulation of Dirichlet conditions which are more attuned to signal processing applications can be found in \parencite{oppenheim:signals-and-systems}.
+
+Because the focus of this text is confined to signals that are physically realizable and thus possess these crucial properties, a restriction of our attention to monochromatic plane waves is justified. Therefore, fields taking on the form of
 \begin{subequations}
     \label[pluralequation]{subeq:monochromatic-plane-wave-fields}
     \begin{align}
@@ -424,10 +420,10 @@ this text's attention is confined to monochromatic plane waves. Therefore, the f
         \hat{\vec E}(\vec r, t) &= \hat{\vec E}_0 \exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\],
     \\
         \label{eq:monochromatic-plane-wave-b}
-        \hat{\vec B}(\vec r, t) &= \hat{\vec B}_0 \exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\],
+        \hat{\vec B}(\vec r, t) &= \hat{\vec B}_0 \exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\]
     \end{align}
 \end{subequations}
-where $\hat{\vec E}_0$ and $\hat{\vec B}_0$ are complex amplitudes.
+are considered, where $\hat{\vec E}_0$ and $\hat{\vec B}_0$ are complex amplitudes.
 
 As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equations}, satisfying the wave equations does not guarantee solutions to Maxwell's equations. Substituting the solutions of the wave equations into Maxwell's equations is necessary, as it might refine the solutions or yield more information. As an example, consider the plane waves in vacuum.
 
@@ -688,50 +684,50 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
     Substituting this product into \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
     \begin{subequations}
-        \label[pluralequation]{subeq:guided-waves-te-odes}
+        \label[pluralequation]{subeq:rectangular-waveguide-te-odes}
         \noindent\centering
         \begin{minipage}{0.45\textwidth}
             \begin{align}
-                \label{eq:guided-waves-te-ode-x}
+                \label{eq:rectangular-waveguide-te-ode-x}
                 \frac1X X'' &= -k_x^2,
             \end{align}
         \end{minipage}
         \hfill
         \begin{minipage}{0.45\textwidth}
             \begin{align}
-                \label{eq:guided-waves-te-ode-y}
+                \label{eq:rectangular-waveguide-te-ode-y}
                 \frac1Y Y'' &= -k_y^2.
             \end{align}
         \end{minipage}\bigskip
     \end{subequations}\\
     Additionally, a relationship between the separation constants, $k_x$ and $k_y$, and the wave number, $k$, is established as
     \begin{align}
-        \label{eq:guided-waves-te-k}
+        \label{eq:rectangular-waveguide-te-k}
         -k_x^2-k_y^2+\(\frac\omega c\)^2 - k^2 &= 0.
     \end{align}
 
-    \Cref{eq:guided-waves-te-ode-x} is a simple second-order ordinary differential equation, with a general solution of the form
+    \Cref{eq:rectangular-waveguide-te-ode-x} is a simple second-order ordinary differential equation, with a general solution of the form
     \begin{align}
         X(x) &= A\sin(k_xx)+B\cos(k_xx).
     \end{align}
-    To determine the particular solution, boundary conditions must be applied. The boundary condition~\eqref{eq:guided-waves-boundary-condition-b} enforces the vanishing of $B_x$ at $x=0$ and $x=a$. According to \cref{eq:guided-wave-bx}, this translates to enforcing the vanishing of $\partial_xB_z = X'$ at those points. This implies $A=0$ and the separation constant $k_x$ must satisfy the condition
+    To determine the particular solution, boundary conditions must be applied. The boundary condition~\eqref{eq:rectangular-waveguide-boundary-condition-b} enforces the vanishing of $B_x$ at $x=0$ and $x=a$. According to \cref{eq:guided-wave-bx}, this translates to enforcing the vanishing of $\partial_xB_z = X'$ at those points. This implies $A=0$ and the separation constant $k_x$ must satisfy the condition
     \begin{align}
-        \label{eq:guided-waves-te-kx}
+        \label{eq:rectangular-waveguide-te-kx}
         k_x &= \frac{m\pi}{a},\quad m \in \N_0.
     \end{align}
     Similarly, for the function $Y(y)$, the boundary condition leads to the condition
     \begin{align}
-        \label{eq:guided-waves-te-ky}
+        \label{eq:rectangular-waveguide-te-ky}
         k_y &= \frac{n\pi}{b},\quad n \in \N_0.
     \end{align}
     Combining these results, the particular solution for $B_z$ takes the form of
     \begin{align}
-        \label{eq:guided-waves-te-bz}
+        \label{eq:rectangular-waveguide-te-bz}
         B_z(x,y) &= B_0\cos\(\frac{m\pi}{a}x\)\cos\(\frac{n\pi}{b}y\),
     \end{align}
-    representing the $\TE mn$ wave with the corresponding wavenumber given by \cref{eq:guided-waves-te-k}. This information is a complete solution to the wave propagation since the remaining field components are given by \cref{subeq:guided-wave-transverse-fields}.
+    representing the $\TE mn$ wave with the corresponding wavenumber given by \cref{eq:rectangular-waveguide-te-k}. This information is a complete solution to the wave propagation since the remaining field components are given by \cref{subeq:guided-wave-transverse-fields}.
 
-    Examining \cref{eq:guided-waves-te-k}, it becomes evident that if the frequency falls below a certain \emph{cutoff frequency},
+    Examining \cref{eq:rectangular-waveguide-te-k}, it becomes evident that if the frequency falls below a certain \emph{cutoff frequency},
     \begin{align}
         f_{mn} \equiv \frac c2\sqrt{\(\frac ma\)^2 + \(\frac nb\)^2},
     \end{align}
@@ -750,19 +746,16 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \paragraph{To do:} Maybe add some talk about modes to finish the theoretical chapter smoothly. Perhaps something about frequency dependence of modes' evanescence or something along the lines of that\dots
 
-\chapter{Design process}
-\label{chapter:design process}
-\paragraph{Add text}
+\chapter{Polarizer}
+\label{chapter:polarizer}
+The design process of a waveguide polarizer is detailed in this chapter. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is then proposed, with a rationale provided for the selected approach. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed, with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
 
-\section{Polarizer}
-The design process of a waveguide polarizer is detailed in this section. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is then proposed, with a rationale provided for the selected approach. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed, with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
+\section{Principle of operation}
+To achieve dual polarization, the inherent characteristics of symmetric waveguides are leveraged. This choice stems from their unique ability to enable independent control over two orthogonal polarization states possessing identical propagation characteristics.  Such independent control is essential for polarization manipulation, allowing for the adjustment of the relative phase and amplitude of these orthogonal modes to achieve the desired polarization states. This capability is directly applied in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were mathematically elaborated on in \cref{subsection:the-wave-equations}.
 
-\subsection{Principle of operation}
-To achieve dual polarization, the inherent characteristics of symmetric waveguides are leveraged. The choice stems from the unique properties of symmetric waveguides, which enable independent control over two orthogonal polarization states possessing identical propagation characteristics. This independent control is essential for polarization manipulation, as it allows for adjusting the relative phase and amplitude of these orthogonal modes to achieve desired polarization states, a capability directly leveraged in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were mathematically elaborated on in \cref{subsection:the-wave-equations}.
+This crucial characteristic arises from two fundamental properties rooted in the electrodynamics of symmetric waveguides. Firstly, their geometric symmetry (manifesting as mirror or rotational symmetry) permits the existence of two fundamental degenerate modes. A rectangular waveguide, as illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, exhibits this with its $\TE 10$ and $\TE 01$ modes. Secondly, as detailed in \cref{remark:modal-decomposition-of-guided-waves}, a fundamental principle derived from Maxwell's equations dictates that any two distinct modes within a waveguide are orthogonal. This orthogonality, expressed mathematically in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. In essence, transverse symmetry enables the existence of orthogonally polarized modes, while their inherent orthogonality guarantees their independent propagation without coupling or interference.
 
-This crucial characteristic arises from two fundamental properties rooted in the electrodynamics of symmetric waveguides. Firstly, the geometric symmetry of these waveguides (manifesting as mirror or rotational symmetry) allows for the existence of two fundamental modes. A rectangular waveguide, as illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, exhibits this with its $\TE 10$ and $\TE 01$ modes. Secondly, as detailed in \cref{remark:modal-decomposition-of-guided-waves}, a fundamental principle derived from Maxwell's equations dictates that any two distinct modes within a waveguide are orthogonal. Mathematically, this orthogonality, expressed in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. In conclusion, the transverse symmetry enables the existence of orthogonally polarized modes, while their inherent orthogonality guarantees their independent propagation without coupling or interference.
-
-The description of circular polarization expressed compactly in \cref{eq:polarization-circular-condition} establishes a clear objective for the design of a waveguide polarizer: the creation of a segment, based on a symmetrical waveguide, that introduces a one-quarter wavelength phase difference between the two orthogonal modes along its length, while maintaining the magnitudes as equal as possible. In subsequent design stages, this latter criterion is quantified by a singular metric known as the \emph{axial ratio} of the emitted wave, which characterizes the polarization purity based on its far-field properties. Several approaches, widely adopted in practical implementations, exist for achieving these objectives; these may be referred to as standard methods. Notable examples include the following:
+The description of circular polarization expressed compactly in \cref{eq:polarization-circular-condition} establishes a clear objective for the design of a waveguide polarizer: the creation of a segment, based on a symmetrical waveguide, that introduces a one-quarter wavelength phase difference between the two orthogonal modes along its length, while maintaining equal magnitudes. In subsequent design stages, this latter criterion is quantified by a singular metric known as the \emph{axial ratio} of the emitted wave, which characterizes the polarization purity based on its far-field properties. Several widely adopted approaches exist for achieving these objectives; these may be referred to as standard methods. Notable examples include the following:
 \begin{itemize}
     \item \emph{Dielectric vane polarizers} utilize a dielectric element (a so-called quarter-wave plate) inserted into a segment of a symmetrical waveguide at an angle of $\pm \ang{45}$ relative to the incident electric field. The inserted dielectric introduces a difference in the propagation velocities of the two orthogonal modes along this segment. This differential propagation velocity arises from the interaction of one mode with the vane, which reduces its propagation velocity due to its parallel orientation relative to the vane, while the orthogonal mode remains unaffected due to its perpendicular orientation.
 
@@ -771,25 +764,182 @@ The description of circular polarization expressed compactly in \cref{eq:polariz
     \item \emph{Iris polarizers} utilize symmetrical waveguides with non-trivial cross-sections, incorporating ridges, also referred to as corrugations or irises, typically positioned symmetrically on two opposing sides. These polarizers operate on a linearly polarized wave incident diagonally into the waveguide. In this configuration, the ridges present inductive characteristics to one of the waveguide modes and capacitive characteristics to the orthogonal mode. This differential interaction results in a one-quarter wavelength phase delay at the output port.
 \end{itemize}
 
-\subsection{Literature survey}
+\section{Literature survey}
 While the methods established above can be refined and adjusted to achieve favourable results in typical metrics for linear-to-circular polarizers, each also exhibits inherent limitations. Dielectric vane polarizers, while simple to implement, are known to encounter narrow bandwidth issues and suffer from significant power limitations due to inherent dielectric losses. The dielectric losses are encompassed in \cref{eq:wave-number} as any real dielectric exhibits a small but non-zero conductivity $\sigma > 0$. These losses become particularly pronounced at higher frequencies and power levels, restricting their applicability in certain scenarios. In contrast, septum polarizers offer promising capabilities for a wide range of applications, particularly in terms of power handling and the efficient generation of both right-hand and left-hand circular polarizations. As noted by \parencite{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer} modifications to septum designs, such as the integration of RF MEMS switches, can achieve reconfigurability and control over the handedness of the produced circular polarization elegantly. However, the size and weight of septum structures can pose significant constraints, especially in compact or weight-sensitive applications. Furthermore, as highlighted by \parencite{wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}, alternative septum geometries, such as tapered slots, while offering potential design variations, do not necessarily demonstrate substantial performance improvements over conventional stepped septum designs. Iris polarizers, while capable of converting linearly polarized input into both circular polarizations and operating at higher power levels, often exhibit challenges related to \enquote{overmoding} within their structures, necessitating precise mode-matching to maintain a satisfactory axial ratio across a broad frequency band. As observed by \parencite{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer}, variations in iris design, such as incorporating ridges on four sides instead of two, can be explored. Moreover, as emphasized by \parencite{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}, the design of iris arrays requires extensive analysis of the optimal geometry, often involving complex mathematical techniques, to achieve desired performance characteristics. This complexity is further compounded when considering wider bandwidth operation, as noted by \parencite{piltyay-et-al:new-tunable-iris-post-square-waveguide-polarizers-for-satelliste-information-systems}, which may necessitate cascading individual sections and careful consideration of different ridge types and transmission matrix approaches. Finally, as demonstrated by \parencite{deutschmann-arne:broadband-septum-polarizer-with-triangular-common-port}, innovative manufacturing techniques, such as additive manufacturing, combined with alternative waveguide geometries like triangular waveguides, offer potential avenues for further advancement in polarizer design, encompassing design, manufacturing, and measurement aspects.
 
 Departing from these standard methods, various waveguide geometries can be employed for electromagnetic wave manipulation. While standard rectangular and circular waveguides are commonplace, specialized applications such as polarization control often necessitate the use of waveguides with modified cross-sections to introduce a controlled phase difference between orthogonal modes, thereby achieving the desired polarization state. Two prominent examples of such modified waveguides include elliptical waveguides and waveguides with shaped metallic inserts. Elliptical waveguides, as demonstrated in \parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer} in the context of a wideband circularly polarized horn antenna, leverage their inherent anisotropy to induce the required phase shift. The use of tapered elliptical waveguides, as also explored in \parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}, facilitates wideband operation. Waveguides with shaped metallic inserts, on the other hand, introduce field perturbations to achieve the desired polarization transformation. As shown in \parencite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges,bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns,bhardwaj-volakis:hexagonal-waveguide-based-circularly-polarized-horn-antennas-for-submmwave-terahertz-band,bhardwaj-volakis:circularly-polarized-horn-antennas-for-terahertz-communications-using-differential-mode-dispersion-in-hexagonal-waveguides}, these inserts can take various forms, including square or triangular blocks inserted into diagonally opposite corners of a square waveguide. This configuration, as validated in \parencite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges} and \parencite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, introduces a shorter electrical path for one mode, resulting in a phase delay along the polarizer's length. Furthermore, as explored in \parencite{garcia-marin-masa-campos:bowtie-shaped-radiating-element-for-single-and-dual-circular-polarization}, more optimal cross-sectional shapes, such as a bow-tie configuration, can enhance performance, although often at the expense of increased manufacturing complexity. While the higher frequency regions targeted in most of the explored articles are not the primary focus of this work, the underlying principles of achieving polarization control through modified waveguide cross-sections provide valuable insights and inspiration for the design of the polarizer presented herein.
 
-\paragraph{Selected approach.} This thesis introduces a novel approach to achieving enhanced polarization purity by employing a straightforward and robust cross-sectional geometry. This geometry is realized by inserting simple prisms into two opposing sides of a waveguide's cross-section. Initially, both square and circular waveguides, each suitable for dual linear-to-circular polarization conversion, are examined and compared to determine the more advantageous geometry. For the square waveguide, triangular prisms are inserted into two opposing corners, similarly to the hexagonal waveguides from \parencite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, while circular segments are used for the circular waveguide. This concept is inspired by the established technique of chamfering opposing corners of a circularly polarized patch antenna. The resulting waveguide structures can be considered Babinet-complementary%
-    \footnote{This comment refers to the notion of complementary structures according to \emph{Babinet's principle} which is out of scope for this text. More details can be found, e.g., in \parencite{born-wolf:principles-of-optics}.}
+\paragraph{Selected approach.} This thesis introduces a novel approach to achieving enhanced polarization purity by employing a straightforward and robust cross-sectional geometry. This geometry is realized by inserting simple prisms into two opposing sides of a waveguide's cross-section. Initially, both square and circular waveguides, each suitable for dual linear-to-circular polarization conversion, are examined and compared to determine the more advantageous geometry. For the square waveguide illustrated in \cref{fig:polarizer-square-perspective}, triangular prisms are inserted into two opposing corners, forming a hexagonal waveguide as seen in \parencite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, while circular segments are used for the circular waveguide in \cref{fig:polarizer-circular-perspective}. This concept is inspired by the established technique of chamfering opposing corners of a circularly polarized patch antenna. The resulting waveguide structures can be considered Babinet-complementary%
+    \footnote{This name refers to the notion of complementary structures according to \emph{Babinet's principle} which is out of scope for this text. More details can be found, e.g., in \parencite{born-wolf:principles-of-optics}.}
 to this antenna configuration.
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/polarizer_square_perspective.png}
+        \caption{\label{fig:polarizer-square-perspective}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/polarizer_circular_perspective.png}
+        \caption{\label{fig:polarizer-circular-perspective}}
+    \end{subfigure}
+    \caption{\label{fig:polarizers}Polarizers based on symmetric waveguides}
+\end{figure}
 
-This approach is selected primarily for its relative ease of fabrication, particularly at higher frequencies, and its potential for adaptation to various frequency bands. However, due to the resonant, and hence geometry-dependent, nature of the mode dispersion introduced by the prismatic inserts, optimal performance is anticipated over a moderately wide bandwidth, rather than an ultrawide one. This bandwidth limitation represents a trade-off for the design's simplicity, robustness, and manufacturability. The use of triangular prisms, in particular, simplifies fabrication compared to more complex curved geometries while still providing effective field manipulation for polarization control.
+This approach was selected primarily for its relative ease of fabrication, particularly at higher frequencies, and its potential for adaptation to various frequency bands. However, due to the resonant, and hence geometry-dependent, nature of the mode dispersion introduced by the prismatic inserts, optimal performance is anticipated over a moderately wide bandwidth, rather than an ultrawide one. This bandwidth limitation represents a trade-off for the design's simplicity, robustness, and manufacturability. The use of triangular prisms, in particular, simplifies fabrication compared to more complex curved geometries while still providing effective field manipulation for polarization control.
 
-\subsection{WIP}
-The cross-sections of such polarizers must be optimized to maximize phase difference per unit length while maintaining equal amplitudes as closely as possible. These objectives inherently conflict, necessitating a trade-off. From an application perspective, a balance must be struck between the length of the structure, which compensates for lower phase delay per unit length, and polarization purity, which is compromised by unequal mode magnitudes.
+\section{Eigenmode analysis}
+The focus now shifts to the \emph{eigenmode analysis} the two waveguides illustrated in \cref{fig:polarizers}. This powerful technique, based on the theory outlined in \cref{remark:modal-decomposition-of-guided-waves}, facilitates the establishment of figures of merit intrinsic to polarizing structures, enabling performance tracking and aiding in the determination of the more advantageous geometry.
+
+Initially, the fundamental modes of propagation in the symmetric waveguides, \emph{without} the inserted prisms, are considered. In the case of the square waveguide, it is the $\TE 10$ and $\TE 01$ modes illustrated in \cref{fig:square-waveguide-mode1,fig:square-waveguide-mode2}, whereas the two degenerate $\TE 11$ modes%
+    \footnote{Note that circular waveguides posses an infinite number of degenerate $\TE 11$ modes due to their rotational symmetry. Here, two are chosen for their perpendicular oscillations which aligns well with the definition of circular polarization in \cref{subsection:polarization}.}
+of the circular waveguide are presented in \cref{fig:circular-waveguide-mode1,fig:circular-waveguide-mode2}. For both waveguides individually, these two degenerate modes represent the two waves launched into the polarizer via a section of standard waveguide. Upon encountering the metallic inserts, such incident wave no longer represents the eigenmode of the simple waveguide structure and its energy is coupled into a linear combination of the fundamental eigenmodes of the respective polarizer.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/waveguide_square_mode1.png}
+        \caption{\label{fig:square-waveguide-mode1}}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/waveguide_square_mode2.png}
+        \caption{\label{fig:square-waveguide-mode2}}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/waveguide_circular_mode1.png}
+        \caption{\label{fig:circular-waveguide-mode1}}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/waveguide_circular_mode2.png}
+        \caption{\label{fig:circular-waveguide-mode2}}
+    \end{subfigure}
+    \caption{\label{fig:symmetric-waveguide-modes}Fundamental modes of the symmetric waveguides}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.7\textwidth]{src/polarizer_square_mode1.png}
+        \caption{\label{fig:square-polarizer-mode1}}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.7\textwidth]{src/polarizer_square_mode2.png}
+        \caption{\label{fig:square-polarizer-mode2}}
+    \end{subfigure}
+    \\
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/polarizer_circular_mode1.png}
+        \caption{\label{fig:circular-polarizer-mode1}}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=.75\textwidth]{src/polarizer_circular_mode2.png}
+        \caption{\label{fig:circular-polarizer-mode2}}
+    \end{subfigure}
+    \caption{\label{fig:symmetric-polarizer-modes}Fundamental modes of the symmetric waveguides with metallic inserts}
+\end{figure}
+
+With the basic modes established, the eigenmodes of the polarizers, i.e., the same waveguides but now \emph{with} the prisms inserted, are analysed. The eigenmodes take the form presented in \cref{fig:square-polarizer-mode1,fig:square-polarizer-mode2} for the square geometry, whereas the circular waveguide with inserts supports two fundamental modes depicted in \cref{fig:circular-polarizer-mode1,fig:circular-polarizer-mode2}. As expected, in both cases, the transverse field exhibits a standing wave behaviour as dictated by the boundary conditions on a conductive surface. More importantly for the polarization transformation, the prisms perturb the electromagnetic fields, leading to a change in the propagation constants of the existing modes. Crucially, the presence of these inserts breaks the original symmetry of the waveguide, causing a dispersion, or difference in phase velocity, between the two fundamental modes of propagation. This fact is illustrated in \cref{fig:symmetric-polarizer-modes}, where in both geometries, one of the modes perceives a different electric path than the other. This dispersion is the key mechanism for achieving circular polarization. As the electromagnetic wave propagates along the waveguide, the phase difference between the two fundamental modes accumulates. By carefully selecting the geometry and placement of the inserts, as well as the length of the waveguide, this cumulative phase lag can be precisely controlled. In the context of a polarizer designed to generate circular polarization, the goal is to achieve exactly one-quarter wavelength phase difference between the two modes at the output. As shown in \cref{eq:polarization-circular-condition}, this quadrature phase relationship, combined with equal amplitudes of the two modes, results in the generation of a circularly polarized wave. The eigenmode analysis allows for the accurate determination of the modal field distributions, enabling precise design and optimization of the polarizer to achieve the desired phase shift and polarization state.
+
+\begin{remark}[Dual polarization capability]
+    \label{remark:dual-polarization-capatibility}
+    It is important to note that, with respect to the diagonal symmetry of the polarizer, one of its eigenmodes is always antisymmetric. This means that if exciting the square-waveguide-based polarizer with the $\TE 01$ results in a RHCP, the $\TE 10$ must result in LHCP, or vice versa. This principle can be visualized as decomposing the incident waves from \cref{fig:square-waveguide-mode1,fig:square-waveguide-mode2} into the basis formed by polarizer eigenmodes depicted in \cref{fig:square-polarizer-mode1,fig:circular-polarizer-mode2}: While the horizontal waveguide mode (\cref{fig:square-waveguide-mode1}) can be expressed as a simple sum of the two polarizer modes, the vertical waveguide mode (\cref{fig:square-waveguide-mode2}) requires the negative%
+        \footnote{A positive sum of the two eigenmodes is equivalent to the plus sign option in \cref{eq:polarization-circular-e-r0}, as the condition on circular polarization expressed in \cref{eq:polarization-circular-condition} is fulfilled due to the two eigenmodes oscillating perpendicular to each other, i.e., $\delta = \pi/2$. Conversely, adding one eigenmode to the negative of the other introduces an additional $\pi$ to the phase difference $\delta$. The condition for circular polarization is again fulfilled, but with $\delta = 3\pi/2$, causing the sine in \cref{eq:polarization-circular-e-r0} to take a negative value, resulting in the opposite circular polarization.}
+    of the antisymmetric polarizer mode (\cref{fig:square-polarizer-mode2}). Although this principle was illustrated using the square waveguide structure, the same holds true for the circular geometry with its two orthogonal degenerate modes (\cref{fig:circular-waveguide-mode1,fig:circular-waveguide-mode2}). This unique property enables the structures to produce dual circular polarization simply by switching between two excitations.
+
+    Furthermore, due to the mirror symmetry of both polarizers, optimizing the structure with respect to just a single orientation of circular polarization is sufficient. By the essence of the matter, the other polarization must retain the same performance parameters, as will be proven by simulation.
+\end{remark}
+
+A crucial outcome of the eigenmode analysis is the gained insight into the operational principles, which helps define relevant variables and performance parameters intrinsic to the structure's geometry, ultimately aiding in polarizer optimization. The optimization process aims to produce circular polarization while minimizing production costs, primarily by reducing the polarizer length, L. This necessitates maximizing the phase lag per unit length, given by
+\begin{align}
+    \label{eq:polarizer-phase-difference-per-unit-length}
+    \phi_L(f) &= \frac 1L \int_0^L \[k_2(z,f)-k_1(z,f)\]\,\d z,
+\end{align}
+where $k_1$ and $k_2$ are the propagation constants of the two polarizer modes and $z$ is the Cartesian coordinate aligned with the propagation direction. However, \cref{eq:polarizer-phase-difference-per-unit-length} addresses only one of the two conditions for circular polarization \eqref{eq:polarization-circular-condition}, the other being the requirement for equal mode amplitudes:
+\begin{align}
+    \label{eq:polarizer-amplitude-ratio}
+    \frac{E_2}{E_1} = 1,
+\end{align}
+where $E_1$ and $E_2$ are the amplitudes of the two polarizer modes. A weighted aggregate of \cref{eq:polarizer-phase-difference-per-unit-length,eq:polarizer-amplitude-ratio} forms the objective function of the optimization problem, with the variables being the geometric parameters of the polarizer cross-section. Intuitively, larger inserted prisms induce a greater phase lag per unit length but also introduce larger amplitude distortions between the modes. This reveals an inherent conflict within the problem, necessitating a trade-off. From an application perspective, a balance must be struck between the length of the structure, which compensates for a lower phase delay per unit length, and polarization purity, which is compromised by unequal mode magnitudes.
+
+Let's draft up some numbers for the geometries and compare the polarizer geometries. Also simplify \cref{eq:polarizer-phase-difference-per-unit-length} and talk about how we extract both metrics in CST.
+
+
+\section{Square waveguide polarizer}
+
+\subsection{Selection of parameters}
+Frequency band, reference commercial waveguide for recommended band, side length determination, polarizer length determination, \dots
+
+\subsection{Cross-section tuning}
+Trade-off: unit mode amplitude ratio vs. high mode phase lag per unit length, \dots
+
+\section{Simulation results}
+Add text, \dots
+
+\subsection{Waveguide feed simulation}
+Exciting the structure with a waveguide feed with two modes, mode metrics \dots
+
+\subsection{Radiation properties}
+Using open-ended waveguide, \dots
+
+\chapter{Feeding structure}
+\label{chapter:feeding-structure}
+
+\section{Coaxial-to-waveguide transition}
+Single feed, dual feed from \parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, \dots
+
+\section{Dual feed}
+Add text, \dots
+
+\subsection{Single feed}
+Right-angle transition, simulation boundary consideration, effects of individual parameters, optimization, \dots
+
+\subsection{Grating}
+Isolation of optimization variables, reflection vs. cross-talk minimization trade-off, \dots
+
+\subsection{Dual feed optimization}
+Initial results, optimization script, \dots
+
+\chapter{Antenna}
+\label{chapter:antenna}
+Add text including target gain
+
+\section{Conical horn}
+Theoretical guidelines from \parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns}, Antenna Magus, adaptation of a conical horn to a square waveguide \dots
+
+\section{Simulation results}
+Design using Antenna Magus, effects of individual parameters when adapting the geometry, \dots
 
 \newpage
-\section{Feeding structure}
+\chapter{Assembly}
+\label{chapter:assembly}
+Add text, \dots
 
-\newpage
-\section{Antenna}
+\section{First results}
+The tragic results, analysis, \dots
+
+\section{Grating removal}
+Decision reasoning, lack of grating's meaning, \dots
+
+\section{Product finalization}
+Tuning results vs. optimization, fine-mesh and high-precision verifications, practical assembly adjustments by UMT, \dots
+
+\section{Measurement results}
+Comparison of measurement results with simulation data, \dots
 
 %========== Conclusion ==========
 \chapter*{Conclusion}
