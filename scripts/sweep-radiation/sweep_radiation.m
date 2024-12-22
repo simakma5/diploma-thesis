@@ -21,7 +21,6 @@ for sweep_parameter = sweep_parameters
     figure("Name", strrep(sweep_parameter, "_", " ") + " sweep");
     tiles = tiledlayout(3, 2, "TileSpacing", "compact");
     for file = files
-        file_index = find(strcmpi(files, file));
         [tit, sweep_count, sweep_value] = deal(0);
         frequency = [];
         data = {};

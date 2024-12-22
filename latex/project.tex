@@ -710,7 +710,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
     \begin{align}
         X(x) &= A\sin(k_xx)+B\cos(k_xx).
     \end{align}
-    To determine the particular solution, boundary conditions must be applied. The boundary condition~\eqref{eq:rectangular-waveguide-boundary-condition-b} enforces the vanishing of $B_x$ at $x=0$ and $x=a$. According to \cref{eq:guided-wave-bx}, this translates to enforcing the vanishing of $\partial_xB_z = X'$ at those points. This implies $A=0$ and the separation constant $k_x$ must satisfy the condition
+    To determine the particular solution, boundary conditions must be applied. The boundary condition~\eqref{eq:guided-waves-boundary-condition-b} enforces the vanishing of $B_x$ at $x=0$ and $x=a$. According to \cref{eq:guided-wave-bx}, this translates to enforcing the vanishing of $\partial_xB_z = X'$ at those points. This implies $A=0$ and the separation constant $k_x$ must satisfy the condition
     \begin{align}
         \label{eq:rectangular-waveguide-te-kx}
         k_x &= \frac{m\pi}{a},\quad m \in \N_0.
@@ -748,7 +748,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \chapter{Polarizer}
 \label{chapter:polarizer}
-The design process of a waveguide polarizer is detailed in this chapter. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is then proposed, with a rationale provided for the selected approach. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed, with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
+The design process of a waveguide polarizer is detailed in this chapter. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is then proposed, with a rationale provided for the selected approach. Following this selection, an in-depth eigenmode analysis of the chosen structure is performed. This analysis, as will be demonstrated in this chapter, yields crucial insights into the operational principles, allows for the recognition of key performance parameters, and provides the foundation for the definition of the optimization problem. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed, with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
 
 \section{Principle of operation}
 To achieve dual polarization, the inherent characteristics of symmetric waveguides are leveraged. This choice stems from their unique ability to enable independent control over two orthogonal polarization states possessing identical propagation characteristics.  Such independent control is essential for polarization manipulation, allowing for the adjustment of the relative phase and amplitude of these orthogonal modes to achieve the desired polarization states. This capability is directly applied in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were mathematically elaborated on in \cref{subsection:the-wave-equations}.
@@ -770,8 +770,9 @@ While the methods established above can be refined and adjusted to achieve favou
 Departing from these standard methods, various waveguide geometries can be employed for electromagnetic wave manipulation. While standard rectangular and circular waveguides are commonplace, specialized applications such as polarization control often necessitate the use of waveguides with modified cross-sections to introduce a controlled phase difference between orthogonal modes, thereby achieving the desired polarization state. Two prominent examples of such modified waveguides include elliptical waveguides and waveguides with shaped metallic inserts. Elliptical waveguides, as demonstrated in \parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer} in the context of a wideband circularly polarized horn antenna, leverage their inherent anisotropy to induce the required phase shift. The use of tapered elliptical waveguides, as also explored in \parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}, facilitates wideband operation. Waveguides with shaped metallic inserts, on the other hand, introduce field perturbations to achieve the desired polarization transformation. As shown in \parencite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges,bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns,bhardwaj-volakis:hexagonal-waveguide-based-circularly-polarized-horn-antennas-for-submmwave-terahertz-band,bhardwaj-volakis:circularly-polarized-horn-antennas-for-terahertz-communications-using-differential-mode-dispersion-in-hexagonal-waveguides}, these inserts can take various forms, including square or triangular blocks inserted into diagonally opposite corners of a square waveguide. This configuration, as validated in \parencite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges} and \parencite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, introduces a shorter electrical path for one mode, resulting in a phase delay along the polarizer's length. Furthermore, as explored in \parencite{garcia-marin-masa-campos:bowtie-shaped-radiating-element-for-single-and-dual-circular-polarization}, more optimal cross-sectional shapes, such as a bow-tie configuration, can enhance performance, although often at the expense of increased manufacturing complexity. While the higher frequency regions targeted in most of the explored articles are not the primary focus of this work, the underlying principles of achieving polarization control through modified waveguide cross-sections provide valuable insights and inspiration for the design of the polarizer presented herein.
 
 \paragraph{Selected approach.} This thesis introduces a novel approach to achieving enhanced polarization purity by employing a straightforward and robust cross-sectional geometry. This geometry is realized by inserting simple prisms into two opposing sides of a waveguide's cross-section. Initially, both square and circular waveguides, each suitable for dual linear-to-circular polarization conversion, are examined and compared to determine the more advantageous geometry. For the square waveguide illustrated in \cref{fig:polarizer-square-perspective}, triangular prisms are inserted into two opposing corners, forming a hexagonal waveguide as seen in \parencite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, while circular segments are used for the circular waveguide in \cref{fig:polarizer-circular-perspective}. This concept is inspired by the established technique of chamfering opposing corners of a circularly polarized patch antenna. The resulting waveguide structures can be considered Babinet-complementary%
-    \footnote{This name refers to the notion of complementary structures according to \emph{Babinet's principle} which is out of scope for this text. More details can be found, e.g., in \parencite{born-wolf:principles-of-optics}.}
+    \footnote{This name refers to the notion of complementary structures according to \emph{Babinet's principle}, derivation of which is out of scope for this text. More details can be found, e.g., in \parencite{born-wolf:principles-of-optics}.}
 to this antenna configuration.
+
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}{.45\textwidth}
@@ -864,20 +865,62 @@ With the basic modes established, the eigenmodes of the polarizers, i.e., the sa
     Furthermore, due to the mirror symmetry of both polarizers, optimizing the structure with respect to just a single orientation of circular polarization is sufficient. By the essence of the matter, the other polarization must retain the same performance parameters, as will be proven by simulation.
 \end{remark}
 
-A crucial outcome of the eigenmode analysis is the gained insight into the operational principles, which helps define relevant variables and performance parameters intrinsic to the structure's geometry, ultimately aiding in polarizer optimization. The optimization process aims to produce circular polarization while minimizing production costs, primarily by reducing the polarizer length, L. This necessitates maximizing the phase lag per unit length, given by
+\subsection{Figures of merit}
+A crucial outcome of the eigenmode analysis is the gained insight into the operational principles, which helps define relevant variables and performance parameters intrinsic to the structure's geometry, ultimately aiding in polarizer optimization. The optimization process aims to produce circular polarization while minimizing production costs, primarily by reducing the polarizer length, $L$. This necessitates maximizing the \emph{specific mode phase shift}, given by
 \begin{align}
-    \label{eq:polarizer-phase-difference-per-unit-length}
-    \phi_L(f) &= \frac 1L \int_0^L \[k_2(z,f)-k_1(z,f)\]\,\d z,
+    \label{eq:polarizer-specific-phase-shift}
+    \Delta k_L(f) &= \frac 1L \int_0^L \[k_2-k_1\](z,f)\,\d z,
 \end{align}
-where $k_1$ and $k_2$ are the propagation constants of the two polarizer modes and $z$ is the Cartesian coordinate aligned with the propagation direction. However, \cref{eq:polarizer-phase-difference-per-unit-length} addresses only one of the two conditions for circular polarization \eqref{eq:polarization-circular-condition}, the other being the requirement for equal mode amplitudes:
+where $k_1$ and $k_2$ are the propagation constants of the two polarizer modes and $z$ is the Cartesian coordinate aligned with the propagation direction. This quantity represents the average difference in propagation constants between the two modes along the polarizer,%
+    \footnote{This quantity is analogous to the birefringence effect observed in optics, where a material exhibits different refractive indices for different polarizations, causing a phase difference to accumulate between them as they propagate. Here, the waveguide structure, due to its geometry, effectively creates different propagation constants for the two orthogonal modes, leading to a similar effect.}
+effectively quantifying the rate at which the phase difference between them accumulates as they propagate. However, \cref{eq:polarizer-specific-phase-shift} addresses only one of the two conditions for circular polarization \eqref{eq:polarization-circular-condition}, the other being the requirement for equal mode amplitudes:
 \begin{align}
     \label{eq:polarizer-amplitude-ratio}
-    \frac{E_2}{E_1} = 1,
+    \left.\frac{E_2}{E_1}\right|_{z=L} = 1,
 \end{align}
-where $E_1$ and $E_2$ are the amplitudes of the two polarizer modes. A weighted aggregate of \cref{eq:polarizer-phase-difference-per-unit-length,eq:polarizer-amplitude-ratio} forms the objective function of the optimization problem, with the variables being the geometric parameters of the polarizer cross-section. Intuitively, larger inserted prisms induce a greater phase lag per unit length but also introduce larger amplitude distortions between the modes. This reveals an inherent conflict within the problem, necessitating a trade-off. From an application perspective, a balance must be struck between the length of the structure, which compensates for a lower phase delay per unit length, and polarization purity, which is compromised by unequal mode magnitudes.
+where $E_1$ and $E_2$ are the amplitudes of the two modes and the polarizer output. A weighted aggregate of \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio} forms the objective function of the optimization problem, with the variables being the geometric parameters of the polarizer cross-section. Intuitively, larger inserted prisms induce a greater phase lag per unit length but also introduce larger amplitude distortions between the modes. This reveals an inherent conflict within the problem, necessitating a trade-off. From an application perspective, a balance must be struck between the length of the structure, which compensates for a lower phase delay per unit length, and polarization purity, which is compromised by unequal mode magnitudes.
 
-Let's draft up some numbers for the geometries and compare the polarizer geometries. Also simplify \cref{eq:polarizer-phase-difference-per-unit-length} and talk about how we extract both metrics in CST.
+Let's draft up some numbers for the geometries and compare the polarizer geometries. Also simplify \cref{eq:polarizer-specific-phase-shift} and talk about how we extract both metrics in CST.
 
+\subsection{Comparison of symmetric waveguides}
+To conclude the eigenmode analysis, a determination will be made, using the previously introduced figures of merit, regarding which geometry is better suited for polarization control, considering both practical and performance aspects. Ideally, minimal frequency dependence of both figures, \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio}, is desired. However, due to the inherently resonant operational principle of the waveguide, achieving feasible performance across an ultrawide band with a single section of such a polarizing structure is not considered possible.
+
+Before proceeding, the practical evaluation of \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio}  should be addressed. Given that both polarizers are analysed as uniform waveguides (\cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}), the propagation dispersion between the two modes, and consequently both metrics, can be approximated as constant throughout the polarizer. This approximation allows \cref{eq:polarizer-specific-phase-shift} to be expressed as
+\begin{align}
+    \label{eq:polarizer-phase-shift}
+    \Delta k_L(f) &= \[k_2-k_1\](f)
+\end{align}
+and the overall mode phase shift at the polarizer output is given by
+\begin{align}
+    \Delta\phi(f) &= L\[k_2-k_1\](f).
+\end{align}
+
+Furthermore, this simplification permits the evaluation of both \cref{eq:polarizer-amplitude-ratio,eq:polarizer-phase-shift} from a single reading at the polarizer output. For this purpose, an \emph{E-field probe} functionality within CST Studio Suite can be utilized, allowing the magnitude and phase of the electric field to be determined at a specified point in space, evaluated across all frequencies. Consequently, the objective function for maximum specific phase shift, \cref{eq:polarizer-specific-phase-shift}, is transformed into the minimization of
+\begin{align}
+    L_\perp(f) &= \frac\pi4\frac{L}{\Delta\phi}(f)
+\end{align}
+representing the polarizer length required to achieve a mode phase shift of $\pi/4$.%
+    \footnote{It is important to note that, due to phase wrapping, the cross-section tuning simulations must be
+    conducted for a polarizer shorter than that required to produce a $\pi/4$ phase shift.}
+This modified objective function can be readily computed using the \emph{Template-Based Post-Processing} feature within CST Studio Suite, using $\Delta\phi(f)$ obtained from the E-field probe result. Moreover, the practical feasibility of the polarizer is inherently incorporated into this formulation.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{src/circular_polarizer_cross_section.eps}
+    \caption{\label{fig:circular-polarizer-cross-section}Circular polarizer cross-section}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{src/square_polarizer_cross_section.eps}
+    \caption{\label{fig:square-polarizer-cross-section}Square polarizer cross-section}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{src/polarizers_cutoff_frequencies.eps}
+    \caption{\label{fig:polarizers-cutoff-frequencies}Polarizers -- cutoff frequencies}
+\end{figure}
 
 \section{Square waveguide polarizer}
 
