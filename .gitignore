@@ -28,6 +28,7 @@
 *.nlo
 *.nls
 *.run.xml
+*.lof
 
 # Packages #
 ############
@@ -73,15 +74,15 @@ Thumbs.db
 
 # Media files #
 ###############
-# *.png
-# *.jpg
-# *.jpeg
-# *.gif
-# *.bmp
-# *.ico
-# *.webp
-# *.svg
-# *.eps
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.webp
+*.svg
+*.eps
 *.mp4
 *.avi
 *.mkv
