@@ -15,7 +15,7 @@ from scipy.optimize import minimize
 CST_PROJECT_PATH = r"C:\Users\marti\Repositories\diploma-thesis\cst\dual-feed\dual_feed.cst"
 OPTIMIZATION_CONFIG = {
     "method": "nelder-mead",
-    "frequencyRange": [5, 6],
+    "frequencyRange": [4.7, 5.7],
     "goals": [
         {"result": "1D Results\S-Parameters\S1,1", "target": -15, "weight": 1, "norm": "SoD", "active": True},
         {"result": "1D Results\S-Parameters\S2,2", "target": -15, "weight": 1, "norm": "SoD", "active": True},
@@ -43,19 +43,13 @@ def main() -> None:
     )
 
     # Run optimization using the minimize function from scipy.optimize
-    optimization_variables = [var for var in OPTIMIZATION_CONFIG["variables"] if var["optimize"]]
     result = minimize(
         optimizer.objective_function,
-        x0=np.array([var["initialValue"] for var in optimization_variables]),
-        method=OPTIMIZATION_CONFIG["method"],
-        bounds=[var["bounds"] for var in optimization_variables],
+        x0=np.array(optimizer.initial_values),
+        method=optimizer.method,
+        bounds=optimizer.bounds,
         constraints=optimizer.get_constraints(),
-        options={
-            "disp": True,  # Display optimization progress
-            "initial_simplex": None,  # Initial simplex for Nelder-Mead
-            "maxiter": None,  # Max iterations (default is 200 * len(variables))
-            "xatol": 1e-2,  # Tolerance for convergence in terms of x (parameter change)
-        },
+        options=optimizer.get_options(),
     )
     print(f"Optimization finished, result: {result}")
 

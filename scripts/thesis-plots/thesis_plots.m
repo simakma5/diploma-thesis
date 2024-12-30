@@ -170,8 +170,94 @@ xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
 title("Axial ratio (identical for both modes)")
 
-set(gcf, "Position", [680, 80, 560, 700])
+set(gcf, "Position", [680, 160, 560, 700])
 saveas(gcf, fullfile(pwd, '\latex\src\polarizer_radiation.svg'), 'svg')
+
+%% Feed - single (reflection)
+[freq, reflection] = get_single_plot_data("single_feed_reflection.txt");
+
+figure("Name", "Feed - single (reflection)");
+plot(freq, reflection)
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$S_{11}\ [\mathrm{dB}]$")
+set(gcf, "Position", [680, 458, 560, 260])
+saveas(gcf, fullfile(pwd, '\latex\src\single_feed_reflection.svg'), 'svg')
+
+%% Feed - grating distance sweep (reflection)
+sweep_values = importdata("grating_distance_sweep_values.txt")';
+[freq, reflection] = get_sweep_plot_data("grating_distance_sweep_data.txt", "gratingDistance", sweep_values);
+
+figure("Name", "Feed - grating distance sweep (reflection)");
+hold on;
+for sweep = 1:length(sweep_values)
+    plot(freq, reflection{sweep});
+end
+hold off;
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$S_{11}\ [\mathrm{dB}]$")
+sweep_values_legend = ["$\lambda_{\mathrm g}/4$", "$3\lambda_{\mathrm g}/8$", "$\lambda_{\mathrm g}/2$", "$5\lambda_{\mathrm g}/8$", "$3\lambda_{\mathrm g}/4$"];
+legend(sweep_values_legend, "Orientation", "horizontal", "Location", "northoutside");
+
+set(gcf, "Position", [680, 458, 560, 420])  % [680, 458, 560, 420]
+saveas(gcf, fullfile(pwd, '\latex\src\grating_distance_sweep.svg'), 'svg')
+
+%% Feed - single with grating (reflection)
+[freq, reflection] = get_single_plot_data("single_feed_with_grating_reflection.txt");
+
+figure("Name", "Feed - single with grating (reflection)");
+plot(freq, reflection)
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$S_{11}\ [\mathrm{dB}]$")
+set(gcf, "Position", [680, 458, 560, 260])
+saveas(gcf, fullfile(pwd, '\latex\src\single_feed_with_grating_reflection.svg'), 'svg')
+
+%% Feed - dual with guideline values (S-parameters)
+sdata = sparameters("dual_feed.s2p");
+freq = sdata.Frequencies*1e-9;
+s11 = 20*log10(abs(squeeze(sdata.Parameters(1, 1, :))));
+s21 = 20*log10(abs(squeeze(sdata.Parameters(2, 1, :))));
+s12 = 20*log10(abs(squeeze(sdata.Parameters(1, 2, :))));
+s22 = 20*log10(abs(squeeze(sdata.Parameters(2, 2, :))));
+
+figure("Name", "Feed - dual with guideline values (S-parameters)");
+tiledlayout(2, 1, "TileSpacing", "compact");
+
+nexttile;
+hold on;
+plot(freq, s11)
+plot(freq, s22)
+hold off;
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylabel("$[\mathrm{dB}]$")
+
+nexttile;
+hold on;
+plot(0,0)
+plot(0,0)
+plot(freq, s21)
+plot(freq, s12)
+hold off;
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$[\mathrm{dB}]$")
+
+leg = legend(["$S_{11}$", "$S_{22}$", "$S_{21}$", "$S_{12}$"], "Orientation", "horizontal");
+leg.Layout.Tile = "north";
+
+saveas(gcf, fullfile(pwd, '\latex\src\dual_feed_sparameters.svg'), 'svg')
 
 %% Functions - get_sweep_plot_data
 function [xdata, ydata] = get_sweep_plot_data(file, sweep_parameter, sweep_values)

@@ -23,7 +23,7 @@ from typing import Any, Optional
 import numpy as np
 
 # Import CST libraries
-sys.path.append(r"C:\Program Files (x86)\CST Studio Suite 2023\AMD64\python_cst_libraries")
+sys.path.append(r"C:\Program Files (x86)\CST Studio Suite 2024\AMD64\python_cst_libraries")
 from cst.interface import DesignEnvironment
 from cst.results import ProjectFile, ResultItem
 
@@ -60,8 +60,12 @@ class CSTOptimizer:
 
         # Runtime variables
         self.step_counter = 0
-        self.variable_names, self.initial_values = zip(
-            *((var["name"], var["initialValue"]) for var in optimization_config["variables"] if var["optimize"])
+        self.variable_names, self.initial_values, self.bounds = zip(
+            *(
+                (var["name"], var["initialValue"], var["bounds"])
+                for var in optimization_config["variables"]
+                if var["optimize"]
+            )
         )
         self.frequency_mask = None
         self.best_parameters = {"objectiveValue": float("inf")}
@@ -120,6 +124,17 @@ class CSTOptimizer:
             diameter_index = self.variable_names.index("wireDiameter")
             return [{"type": "ineq", "fun": lambda x: x[gap_index] > x[diameter_index]}]
         return []
+
+    def get_options(self) -> dict[str, Any]:
+        if self.method == "nelder-mead":
+            return {
+                "disp": True,  # Display optimization progress
+                "initial_simplex": None,  # Initial simplex for Nelder-Mead
+                "maxiter": None,  # Max iterations (default is 200 * len(variables))
+                "xatol": 1e-2,  # Tolerance for convergence in terms of x (parameter change)
+            }
+        else:
+            return {}
 
     def update_parameters(self, names: list[str], values: np.ndarray) -> tuple[str, dict[str, Any]]:
         """
@@ -195,7 +210,7 @@ class CSTOptimizer:
             try:
                 results = [
                     self.parse_results(
-                        self.result_module.get_result_item(treepath=goal["result"], run_id=self.last_run_id),
+                        self.result_module.get_result_item(treepath=goal["result"], run_id=self.last_run_id)
                     )
                     for goal in self.goals
                 ]
