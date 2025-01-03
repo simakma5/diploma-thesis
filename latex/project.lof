@@ -1,22 +1,39 @@
 \babel@toc {british}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Polarizers based on symmetric waveguides}}{21}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Fundamental modes of the symmetric waveguides}}{22}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Fundamental modes of the symmetric polarizers}}{22}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Polarizers -- cutoff frequencies}}{25}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Square polarizer cross-section}}{26}{figure.caption.14}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Circular polarizer cross-section}}{26}{figure.caption.15}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Final polarizer model}}{28}{figure.caption.17}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Polarizer radiation properties ($\varphi = \ang {90}$)}}{29}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Symmetric polarizers: models}}{22}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Symmetric waveguides: fundamental modes}}{23}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Symmetric polarizers: fundamental modes}}{23}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Polarizers: cutoff frequencies}}{26}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Square polarizer: cross-section tuning}}{27}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Circular polarizer: cross-section tuning}}{27}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Final polarizer: model}}{29}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Final polarizer: radiation properties}}{30}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Single feed adapter}}{31}{figure.caption.19}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Single feed reflection}}{32}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Dual feed adapter}}{33}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Grating distance sweep}}{34}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Cavity resonance plane cuts}}{35}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Single feed with grating reflection}}{35}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Dual feed S-parameters}}{36}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Single feed: section views}}{32}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Single feed: reflection}}{33}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Dual feed: section views}}{34}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Single feed with grating: grating distance sweep}}{35}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Cavity resonance: electric field section views}}{36}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Single feed with grating: reflection}}{36}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Dual feed: S-parameters}}{37}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Final dual feed: model}}{38}{figure.caption.28}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Conical horn: models}}{40}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Conical horn: performance}}{41}{figure.caption.30}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Final structure: grating performance}}{43}{figure.caption.31}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Final structure: MVP model}}{43}{figure.caption.32}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Final structure: DFM model}}{44}{figure.caption.33}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Measurement results: S-parameters}}{45}{figure.caption.34}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Measurement results: polarization gains}}{45}{figure.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Measurement 1: S-parameters}}{53}{figure.caption.38}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Measurement 1: polarization gains}}{53}{figure.caption.39}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Measurement 1: elevation radiation pattern}}{54}{figure.caption.40}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Measurement 1: azimuth radiation pattern}}{55}{figure.caption.41}%
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Measurement 2: S-parameters}}{56}{figure.caption.42}%
+\contentsline {figure}{\numberline {B.6}{\ignorespaces Measurement 2: polarization gains}}{56}{figure.caption.43}%
+\contentsline {figure}{\numberline {B.7}{\ignorespaces Measurement 2: elevation radiation pattern}}{57}{figure.caption.44}%
+\contentsline {figure}{\numberline {B.8}{\ignorespaces Measurement 2: azimuth radiation pattern}}{58}{figure.caption.45}%
