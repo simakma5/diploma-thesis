@@ -218,7 +218,7 @@ While \cref{subeq:maxwell-general-matter} effectively express electromagnetic la
 where $\hat\epsilon$ and $\hat\mu$ are the material's \emph{permittivity} and \emph{permeability}, respectively, and the asterisk denotes \emph{convolution}.
 
 \begin{remark}
-    In formulations akin to \cref{subeq:maxwell-general-matter}, emphasizing the separation of free and bound sources, some authors also prefer to dissect the free current further. This current is generally conceptualized as the current \enquote{not directly tied to the bound charges} within a material. A few commonly recognized examples are \emph{convection current}, \emph{beam current}, and \emph{conduction current}. IIn electrical engineering, it is the conduction current that arises from the movement of charges, typically electrons, that can move freely throughout the material. This kinetic energy of charges in conductors is the main cause of losses in waveguides and can be expressed by
+    In formulations akin to \cref{subeq:maxwell-general-matter}, emphasizing the separation of free and bound sources, some authors also prefer to dissect the free current further. This current is generally conceptualized as the current \enquote{not directly tied to the bound charges} within a material. A few commonly recognized examples are \emph{convection current}, \emph{beam current}, and \emph{conduction current}. In electrical engineering, it is the conduction current that arises from the movement of charges, typically electrons, that can move freely throughout the material. This kinetic energy of charges in conductors is the main cause of losses in waveguides and can be expressed by
     \begin{align}
         \label{eq:constitutive-relation-conductivity}
         \vec J_{\mathrm c} &= \hat\sigma \ast \vec E,
@@ -683,7 +683,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \begin{example}[TE waves in a rectangular waveguide]
     \label{example:te-waves-in-a-rectangular-waveguide}
-    This example explores the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned with the waveguide's longitudinal direction.  The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
+    This example explores the specific case of TE waves within a rectangular waveguide. A waveguide with height $a$ in the $x$-direction and width $b$ in the $y$-direction is considered, the $z$-axis again being aligned with the waveguide's longitudinal direction. The objective is to derive an expression for the longitudinal component of the magnetic field, $B_z$, using the method of separation of variables. This method involves assuming that, for every $x$ and $y$, $B_z(x,y)$ can be expressed as the product of two independent functions, $X(x)$ and $Y(y)$.
 
     Substituting this product into \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
     \begin{subequations}
@@ -757,7 +757,7 @@ The design process of a waveguide polarizer is detailed in this chapter. An init
 \section{Principle of operation}
 Typically, the inherent characteristics of symmetric waveguides are leveraged to achieve dual polarization This choice stems from their unique ability to enable independent control over two orthogonal polarization states possessing identical propagation characteristics. Such independent control is essential for polarization manipulation, facilitating the adjustment of these orthogonal modes' relative phase and amplitude to achieve the desired polarization states. This capability is applied directly in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were elaborated on mathematically in \cref{subsection:the-wave-equations}.
 
-This crucial characteristic arises from two fundamental properties rooted in the electrodynamics of symmetric waveguides. Firstly, their geometric symmetry, manifesting as mirror or rotational symmetry, permits the existence of two fundamental degenerate modes. As illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, a rectangular waveguide exhibits this characteristic with its $\TE 10$ and $\TE 01$ modes. Secondly, as detailed in \cref{remark:modal-decomposition-of-guided-waves}, a fundamental principle derived from Maxwell's equations dictates that any two distinct modes within a waveguide are mutually orthogonal. This orthogonality expressed mathematically in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. In essence, transverse symmetry enables the existence of orthogonally polarized modes, while their inherent orthogonality ensures their independent propagation without coupling or interference.
+This crucial characteristic arises from two fundamental properties rooted in the electrodynamics of symmetric waveguides. Firstly, their geometric symmetry, manifesting as mirror or rotational symmetry, permits the existence of two fundamental degenerate modes. As illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, a square waveguide exhibits this characteristic with its $\TE 10$ and $\TE 01$ modes. Secondly, as detailed in \cref{remark:modal-decomposition-of-guided-waves}, a fundamental principle derived from Maxwell's equations dictates that any two distinct modes within a waveguide are mutually orthogonal. This orthogonality expressed mathematically in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. In essence, transverse symmetry enables the existence of orthogonally polarized modes, while their inherent orthogonality ensures their independent propagation without coupling or interference.
 
 The description of circular polarization expressed compactly in \cref{eq:polarization-circular-condition} establishes a clear objective for the design of a waveguide polarizer: the creation of a segment, based on a symmetrical waveguide, that introduces a one-quarter wavelength phase difference between the two orthogonal modes along its length while maintaining equal magnitudes. In subsequent design stages, this latter criterion is quantified by a singular metric known as the \emph{axial ratio} of the emitted wave, characterizing the polarization purity based on its far-field properties. Several widely adopted approaches exist for achieving these objectives; these may be referred to as standard methods. Notable examples include the following:
 \begin{itemize}
@@ -802,7 +802,7 @@ Initially, the fundamental propagation modes in the symmetric waveguides are con
     \footnote{Note that circular waveguides posses an infinite number of degenerate $\TE 11$ modes due to their rotational symmetry. Here, two are chosen for their perpendicular oscillations which aligns well with the definition of circular polarization in \cref{subsection:polarization}.}
 of the circular waveguide are presented in \cref{fig:circular-waveguide-mode1,fig:circular-waveguide-mode2}. For both waveguides individually, these two degenerate modes represent the waves launched into the polarizer via a standard waveguide section. Upon encountering the metallic inserts, incident waves can no longer be represented by the eigenmodes of the simple waveguide structure; their energy is coupled into a linear combination of the fundamental eigenmodes of the respective polarizer.
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \begin{subfigure}{.45\textwidth}
         \centering
@@ -830,7 +830,7 @@ of the circular waveguide are presented in \cref{fig:circular-waveguide-mode1,fi
     \caption{\label{fig:symmetric-waveguide-modes}Symmetric waveguides: fundamental modes}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \begin{subfigure}{.45\textwidth}
         \centering
@@ -910,19 +910,19 @@ This modified objective function can be readily computed using the \emph{Templat
 
 The two polarizers depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective} are modelled with a similar cutoff frequency to facilitate a fair comparison. A diameter of $\qty{50}{mm}$ for the circular waveguide and a side length of $\qty{50}{mm}$ for the square waveguide are selected for the operating band of $\frequencyrange$. This selection results in a cutoff frequency of approximately $\qty{3}{GHz}$ for both underlying waveguides. As previously discussed, both polarizer metrics, \cref{eq:polarizer-amplitude-ratio,eq:polarizer-length-for-90deg}, are predominantly influenced by the cross-sectional geometry. Consequently, both polarizers have been parameterized by the width, $w$, of their chamfering inserts, as depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}.
 
-\begin{figure}[!ht]
+\begin{figure}[h]
     \centering
     \includesvg[width=\textwidth]{src/polarizers_cutoff_frequencies.svg}
     \caption{\label{fig:polarizers-cutoff-frequencies}Polarizers: cutoff frequencies}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \includesvg[width=\textwidth]{src/square_polarizer_cross_section.svg}
     \caption{\label{fig:square-polarizer-cross-section}Square polarizer: cross-section tuning}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \includesvg[width=\textwidth]{src/circular_polarizer_cross_section.svg}
     \caption{\label{fig:circular-polarizer-cross-section}Circular polarizer: cross-section tuning}
@@ -1189,7 +1189,7 @@ Ultimately, the latter configuration (b) was selected for the final design, prio
 This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Due to fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design to ensure compatibility with CNC machining processes while preserving the desired electromagnetic performance---this involved modifications such as modularizing the antenna and adapting features for CNC drilling feasibility. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc. The measured performance data and a comparative analysis against the simulated results are presented herein.
 
 \section{Feed rework}
-Preliminary simulations indicate that the performance of the final structure deviates significantly from expectations, particularly concerning the operation of the dual-feeding mechanism. This discrepancy is primarily reflected in the S-parameters, as illustrated in \cref{fig:grating-vs-mvp-sparameters}. While the performance of the feed incorporating a grating polarizer is acceptable in isolation, the figure also presents the S-parameters for a configuration with the grating entirely removed. This latter configuration represents the most straightforward implementation of a dual-feeding structure, previously discussed and dismissed in \cref{section:dual-feed} due to inherent high cross-talk between ports. However, as demonstrated in \cref{fig:grating-vs-mvp-sparameters}, despite exhibiting excellent individual performance, the grating polariser provides only negligible improvement in cross-talk mitigation. This minimal benefit comes at the expense of a substantial increase in manufacturing complexity, overall size, and, consequently, the cost of the final product.
+Preliminary simulations indicate that the performance of the final structure deviates significantly from expectations, particularly concerning the operation of the dual-feeding mechanism. This discrepancy is primarily reflected in the S-parameters, as illustrated in \cref{fig:grating-vs-mvp-sparameters}. While the performance of the feed incorporating a grating polarizer is acceptable in isolation, the figure also presents the S-parameters for a configuration with the grating entirely removed. This latter configuration represents the most straightforward implementation of a dual-feeding structure, previously discussed and dismissed in \cref{section:dual-feed} due to inherent high cross-talk between ports. However, as demonstrated in \cref{fig:grating-vs-mvp-sparameters}, despite exhibiting excellent individual performance, the grating polarizer provides only negligible improvement in cross-talk mitigation. This minimal benefit comes at the expense of a substantial increase in manufacturing complexity, overall size, and, consequently, the cost of the final product.
 
 As previously addressed in \cref{section:dual-feed}, the manipulation of cross-talk levels can be achieved through increased grating density. Unfortunately, this approach concurrently results in significantly degrading port reflections, with the values established in \cref{eq:dual-feed-optimum} representing the optimal compromise. Consequently, integrating a grating polarizer fails to yield the anticipated performance improvements attributable to an as-yet-unidentified mechanism. A comprehensive investigation of this underlying mechanism necessitates further research, which falls outside this thesis's current scope and timeline, particularly considering the impending fabrication deadlines. Therefore, the MVP solution depicted in \cref{fig:final-perspective} is adopted to expedite the development process. This design omits the grating polarizer and positions both ports within the same plane, ultimately proving an equally viable solution.
 
@@ -1222,13 +1222,13 @@ The structure illustrated in \cref{fig:final-perspective} represents the finaliz
 
 Universal Microwave Technology, Inc., a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner. Their state-of-the-art technology and proven expertise instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured performance of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation}, demonstrates excellent agreement with the high-fidelity simulations. The boresight gain exhibits a slight positive deviation towards higher values, potentially attributable to minor misalignments during measurement, although the precise cause remains indeterminate without further investigation.
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \includesvg[width=\textwidth]{src/meas_vs_sim_sparameters.svg}
     \caption{\label{fig:meas-vs-sim-sparameters}Measurement results: S-parameters}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}
     \centering
     \includesvg[width=\textwidth]{src/meas_vs_sim_boresight_radiation.svg}
     \caption{\label{fig:meas-vs-sim-boresight-radiation}Measurement results: polarization gains}
@@ -1255,7 +1255,7 @@ Despite the project's overall success, several potential areas for improvement a
 \label{appendix:constrained-optimization}
 In advanced optimization scenarios requiring algorithmic manipulation, such as geometric adjustments after new parameter values are set, the native optimization tool within CST Studio Suite is insufficient. While a range of settings is provided, the configuration is confined to optimization methods and algorithm-specific parameters. The remaining functionality is integrated within the operational framework of CST Studio Suite, thereby precluding the definition of proper constraints apart from specifying a bounding interval for each variable.
 
-However, the CST Studio Suite installation incorporates a collection of CST Python libraries, as documented in~\parencite{cst:python-libraries-documentation}. These libraries allow external control of a CST Studio Suite instance and access to a subset of its features via a Python programming interface.  Fortunately, the available features provide the requisite components for the construction of an optimizer class, thus enabling the establishment of an interface between an external optimization algorithm and automated simulation processes.
+However, the CST Studio Suite installation incorporates a collection of CST Python libraries, as documented in~\parencite{cst:python-libraries-documentation}. These libraries allow external control of a CST Studio Suite instance and access to a subset of its features via a Python programming interface. Fortunately, the available features provide the requisite components for the construction of an optimizer class, thus enabling the establishment of an interface between an external optimization algorithm and automated simulation processes.
 
 \begin{lstlisting}[caption={Optimizer class initialization}, label={lst:init}, language=Python]
 from cst.interface import DesignEnvironment
@@ -1347,7 +1347,7 @@ def evaluate_step(self, current_step: dict[str, Any]) -> float:
     return objective_value
 \end{lstlisting}
 
-In addition to the core optimization routines, the optimizer class incorporates ancillary methods, as shown in the presented listings. While these utilities play an essential role, they are not the primary focus of this discussion.  Among the utilities used in the listings are \texttt{get\_constraints} and \texttt{get\_options}, used in \cref{lst:minimize} and responsible for retrieving arguments relevant to the optimization method, and \texttt{parse\_results}, tasked with preparing raw data from CST.
+In addition to the core optimization routines, the optimizer class incorporates ancillary methods, as shown in the presented listings. While these utilities play an essential role, they are not the primary focus of this discussion. Among the utilities used in the listings are \texttt{get\_constraints} and \texttt{get\_options}, used in \cref{lst:minimize} and responsible for retrieving arguments relevant to the optimization method, and \texttt{parse\_results}, tasked with preparing raw data from CST.
 
 The foundational elements established thus far---simulation control, data retrieval, and performance evaluation---facilitate the integration of established optimization methods. Such methods are commonly found in data-oriented programming languages, with a particularly robust and widely recognized implementation available in the \emph{SciPy} library, an open-source scientific computing library for Python thoroughly documented in~\parencite{virtanen-et-al:scipy}.
 
@@ -1409,7 +1409,6 @@ Private Function isGratingTooNarrow( _
     wireDiameter As Double, _
     wireCount As Integer _
 ) As Boolean
-    Dim gapAroundGrating As Double
     gapAroundGrating = (waveguideSide - _
         wireCount * gratingGap - _
         wireDiameter) / 2
@@ -1428,7 +1427,6 @@ Private Function isIntersecting( _
     wireDiameter As Double, _
     wireCount As Integer _
 ) As Boolean
-    Dim gratingEdge As Double
     gratingEdge = (wireCount - 1) / 2 * _
         gratingGap + wireDiameter / 2
     If gratingEdge > waveguideSide / 2 Then
@@ -1442,9 +1440,15 @@ End Function
 %========== Appendix B: Measurement results ==========
 \chapter{Measurement results}
 \label{appendix:measurement-results}
-This appendix presents a comprehensive collection of data acquired from two separate measurement campaigns performed on the fabricated antenna prototype. The prototype fabrication and subsequent measurements were expertly carried out by Universal Microwave Technology, Inc. Their contribution in bringing the design to a physical realization and meticulously characterizing its performance is gratefully acknowledged. These datasets are compiled here to ensure a clear and concise presentation within the main body of the thesis. While certain key results have been incorporated into the main discussion for direct comparison with simulated data, this appendix serves as a complete and detailed repository of all measured parameters.
+This appendix compiles comprehensive measurement data from two campaigns conducted on the antenna prototype fabricated and tested by Universal Microwave Technology, Inc. Their contribution to realizing and characterizing the design is gratefully acknowledged. While key results are presented in the main text for comparison with simulations, this appendix provides a complete repository of all measured parameters, ensuring a concise presentation in the main body.
 
-Specifically, the data presented herein encompasses S-parameter measurements, providing insights into the antenna's impedance matching and power transmission characteristics. These measurements were performed using an Agilent Vector Network Analyzer (VNA). Additionally, the appendix includes the frequency responses of both boresight gain and boresight axial ratio, characterizing the antenna's performance across the operational bandwidth. These radiation properties, along with the radiation patterns, were measured in an in-house anechoic chamber using an open-ended waveguide as a sensing antenna. The radiation patterns are presented as elevation and azimuth cuts at $\qty{5}{GHz}$, $\qty{5.3}{GHz}$, and $\qty{5.5}{GHz}$ frequencies. This comprehensive dataset allows for a thorough and independent evaluation of the fabricated antenna's performance characteristics.
+The data presented includes S-parameters measured using an Agilent VNA, providing insights into impedance matching and power transmission. Additionally, frequency responses of boresight gain and axial ratio, characterized in an in-house anechoic chamber using an open-ended waveguide as a sensing antenna, are included. Radiation patterns are presented as elevation and azimuth cuts at $\qty{5}{GHz}$, $\qty{5.3}{GHz}$, and $\qty{5.5}{GHz}$. \Cref{fig:final-ports} depicts the back view of the finalized antenna structure, clarifying the designation of Port 1 and Port 2, as well as the orientation of the spherical coordinate system employed for subsequent radiation pattern measurements.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=.6\textwidth]{src/final_umt_ports.png}
+    \caption{\label{fig:final-ports}Back view on the final structure}
+\end{figure}
 
 \newpage
 \begin{figure}[!ht]
