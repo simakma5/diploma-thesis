@@ -21,11 +21,12 @@
 \RequirePackage{datetime}                                                       % Custom date formats
 \RequirePackage{paralist}           	                                        % Improved enumerate and itemize formatting
 \RequirePackage{enumitem}           	                                        % Enumerate customization
+\RequirePackage{dashrule}                                                       % Dashed lines
 \RequirePackage{indentfirst}        	                                        % First paragraph of a chapter indentation
 \RequirePackage{epigraph}					                                    % Epigraphs typesetting such as quotations at the start of a chapter
 \RequirePackage{imakeidx}				                                        % One or more indexes typesetting (must be put prior to hyperref)
 \RequirePackage[backend=biber,backref=false,style=ieee]{biblatex}               % Numbered references and overall bibliography support
-\RequirePackage{csquotes}                                                       % Context sensitive quotation facilities (recommended when using biblatex with babel)
+\RequirePackage[style=american]{csquotes}                                       % Context sensitive quotation facilities (recommended when using biblatex with babel)
 \RequirePackage[intoc]{nomencl}                                                 % Nomenclature glossary interface
 \RequirePackage{listings}                                                       % Typeset source code
 
@@ -36,7 +37,7 @@
 \RequirePackage{chngcntr}                                                       % Ability to control the equation counter
 
 %===== Cross-referencing =====
-\RequirePackage[pagebackref=false]{hyperref}                                    % Hypertext links and cross-referencing commands
+\RequirePackage[pagebackref=false,hidelinks]{hyperref}                          % Hypertext links and cross-referencing commands
 \RequirePackage[noabbrev,capitalise]{cleveref}                                  % Intelligent cross-referencing (must be put after amsmath and hyperref)
 
 %===== Fonts =====
@@ -75,21 +76,19 @@
 \counterwithin{equation}{chapter}
 
 %===== Hyperlinks (hyperref) =====
-\hypersetup{
-	colorlinks,
-	citecolor=blue,
-	filecolor=black,
-	linkcolor=blue,
-	urlcolor=blue
-}
+% \hypersetup{
+% 	colorlinks,
+% 	citecolor=blue,
+% 	filecolor=black,
+% 	linkcolor=blue,
+% 	urlcolor=blue
+% }
 
 %===== Fixed plural reference formats (cleveref) =====
 \crefformat{pluralequation}{equations~(#2#1#3)}
 \Crefformat{pluralequation}{Equations~(#2#1#3)}
 
 %===== Source code typsetting =====
-% \lstloadlanguages{[3]Python,[Visual]Basic}
-% \lstloadlanguages{[3]Python}
 \lstset{
     columns=fullflexible,
     xleftmargin=2em,
@@ -101,9 +100,6 @@
     literate={"}{\textquotedbl}1 {'}{\textquotesingle}1,
     showstringspaces=false
 }
-% \RequirePackage{etoolbox}
-% \BeforeBeginEnvironment{lstlisting}{\defaultfontfeatures{Ligatures={NoCommon, NoDiscretionary, NoHistoric, NoRequired, NoContextual}}}
-% \AfterEndEnvironment{lstlisting}{\defaultfontfeatures{Ligatures={TeX}}}
 
 %===== Epigraph format (epigraph) =====
 \setlength{\epigraphwidth}{0.8\textwidth}
@@ -198,6 +194,7 @@
 
 % ===== Frequency range =====
 \newcommand{\frequencyrange}{\qtyrange{4.7}{5.7}{\giga\hertz}}
+\newcommand{\frekvencnipasmo}{\qtyrange[range-phrase=\text{\foreignlanguage{czech}{ až }}]{4.7}{5.7}{\giga\hertz}}
 
 %==========================================
 %========== Mathematical symbols ==========

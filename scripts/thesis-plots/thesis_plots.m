@@ -127,7 +127,7 @@ saveas(gcf, fullfile(pwd, '\latex\src\polarizers_cutoff_frequencies.svg'), 'svg'
 % [~, axial_ratio2] = get_single_plot_data("axial_ratio2.txt");
 
 figure("Name", "Polarizer - radiation patterns");
-tiles = tiledlayout(3, 2, "TileSpacing", "compact");
+tiles = tiledlayout(3, 2, "TileSpacing", "loose");
 rlim_all = [-50, 10];
 
 pax = polaraxes(tiles);
@@ -259,19 +259,18 @@ saveas(gcf, fullfile(pwd, '\latex\src\dual_feed_sparameters.svg'), 'svg')
 [~, final_reflection] = get_single_plot_data("final_reflection.txt");
 
 figure("Name", "Antenna - conical horns comparison")
-tiles = tiledlayout(3, 2, "TileSpacing", "compact");
+tiles = tiledlayout(3, 1, "TileSpacing", "loose");
 rlim_all = [-40, 20];
 
 pax = polaraxes(tiles);
 pax.Layout.Tile = 1;
-pax.Layout.TileSpan = [1,2];
 hold on
 cst_polarplot(theta, magus_gain_pattern, rlim_all, pax)
 cst_polarplot(theta, final_gain_pattern, rlim_all, pax)
 hold off
 pax.Title.String = "Gain ($f = 5.2\ \mathrm{GHz}$)";
 
-nexttile([1, 2]);
+nexttile();
 hold on
 plot(freq_gain, magus_gain)
 plot(freq_gain, final_gain)
@@ -279,11 +278,10 @@ hold off
 grid on;
 box on;
 xlim([min(freq_gain), max(freq_gain)]);
-xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$G\ [\mathrm{dB}]$")
 title("Gain (boresight)")
 
-nexttile([1, 2]);
+nexttile();
 hold on
 plot(freq_reflection, magus_reflection)
 plot(freq_reflection, final_reflection)
@@ -294,6 +292,14 @@ xlim([min(freq_reflection), max(freq_reflection)]);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{11}\ [\mathrm{dB}]$")
 title("Reflection")
+
+% pax = polaraxes(tiles);
+% pax.Layout.Tile = 3;
+% hold on
+% cst_polarplot(theta, magus_gain_pattern, rlim_all, pax)
+% cst_polarplot(theta, final_gain_pattern, rlim_all, pax)
+% hold off
+% pax.Title.String = "Gain ($f = 5.2\ \mathrm{GHz}$)";
 
 leg = legend(["Antenna Magus", "Finalized"], "Orientation", "horizontal");
 leg.Layout.Tile = "north";
