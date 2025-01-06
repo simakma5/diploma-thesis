@@ -31,9 +31,9 @@
 \newlength{\twosubht}
 \newsavebox{\twosubbox}
 
-\makeindex[intoc]
-\makenomenclature
-\renewcommand{\nomname}{Glossary of Symbols}
+% \makeindex[intoc]
+% \makenomenclature
+% \renewcommand{\nomname}{Glossary of Symbols}
 
 \begin{document}
 
@@ -45,8 +45,7 @@
     \input{frontpage.tex}
 \end{titlepage}
 
-%========== Blank page ==========
-\newpage\blankpage
+\newpage\ \newpage
 
 % %========== Assignment ==========
 \includepdf[pages=-]{src/assignment.pdf}
@@ -57,11 +56,17 @@
 % %========== Declaration ==========
 \input{declaration.tex}
 
+\newpage\ \newpage
+
 % %========== Acknowledgements ==========
 \input{acknowledgements.tex}
 
+\newpage\ \newpage
+
 % %========== Abstract ==========
 \input{abstract.tex}
+
+\newpage\ \newpage
 
 % Start counting pages in arabic numerals
 \pagenumbering{arabic}
@@ -83,13 +88,13 @@ The design process leveraged several software tools. CST Studio Suite~\parencite
 
 \paragraph*{Synopsis.} \textbf{\cref{chapter:electrodynamics}} establishes the theoretical foundations of electromagnetic wave propagation in guided structures, starting from Maxwell's equations and culminating in the derivation of the wave equations for waveguide modes.
 
-\textbf{\cref{chapter:polarizer}} details the design and analysis of the waveguide polarizer, a critical component for achieving circular polarization. This chapter explores various polarizer designs, ultimately focusing on a novel approach utilizing a square waveguide with chamfered corners.
+\textbf{\cref{chapter:polarizer}} details the design and analysis of the waveguide polarizer, exploring various polarizer designs, and ultimately focusing on a novel approach utilizing a square waveguide with chamfered corners.
 
 \textbf{\cref{chapter:feeding-structure}} addresses the challenge of efficiently exciting the two orthogonal modes within the square waveguide using a dual-coaxial feed. A modified feeding structure is presented and optimized for minimal reflection and cross-talk.
 
-\textbf{\cref{chapter:antenna}} presents the design of a conical horn antenna adapted to the square waveguide output of the polarizer. This section discusses the optimization of the horn's geometry for achieving the desired gain and radiation characteristics.
+\textbf{\cref{chapter:antenna}} focuses on the design of a conical horn antenna, specifically adapted to interface with the square waveguide output of the polarizer developed in \cref{chapter:polarizer}. This section discusses the optimization of the horn's geometry for achieving the desired gain and radiation characteristics.
 
-\textbf{\cref{chapter:final-structure}} assembles the individual components into a complete antenna system. This chapter details the final design adjustments, including those made for manufacturability, and presents both simulated and measured performance results of the fabricated prototype.
+\textbf{\cref{chapter:final-structure}} details the culmination of the design process, integrating the individual components developed in previous chapters into a complete antenna system, and outlines the final design adjustments. Furthermore, it presents a comprehensive comparison of the simulated and measured performance results of the fabricated prototype, including a thorough discussion of the observed agreement and discrepancies.
 
 \paragraph*{Methodology.} The methodology combined numerical simulations with experimental validation. Full-wave electromagnetic simulations, conducted using CST Studio Suite, were used to analyse the performance of individual components and the integrated antenna system. Optimization algorithms, implemented in both CST Studio Suite and Python using the SciPy library, refined the design parameters for optimal performance. A prototype of the finalized design was fabricated and measured to validate the simulation results and demonstrate the feasibility of the proposed approach.
 
@@ -133,13 +138,13 @@ framework for analysing electromagnetic phenomena at any point in space and time
             \curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
         \end{align}
     \end{minipage}
-    \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }%
-    \nomenclature{$\vec E$}{electric field }%
-    \nomenclature{$\vec B$}{magnetic field }%
-    \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
-    \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
-    \nomenclature{$\vec J_{\mathrm e}$}{electric current density }%
-    \nomenclature{$\vec J_{\mathrm m}$}{magnetic current density }%
+    % \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }%
+    % \nomenclature{$\vec E$}{electric field }%
+    % \nomenclature{$\vec B$}{magnetic field }%
+    % \nomenclature{$\rho_{\mathrm e}$}{electric charge density }%
+    % \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
+    % \nomenclature{$\vec J_{\mathrm e}$}{electric current density }%
+    % \nomenclature{$\vec J_{\mathrm m}$}{magnetic current density }%
     \bigskip
 \end{subequations}
 
@@ -169,8 +174,8 @@ and the \emph{bound charge}~$\rho_{\mathrm b}=-\div\vec P$, produced by an elect
             \vec H &= \frac{1}{\mu_0}\vec H - \vec M.
         \end{align}
     \end{minipage}
-    \nomenclature{$\vec D$}{auxiliary electric field }%
-    \nomenclature{$\vec H$}{auxiliary magnetic field }%
+    % \nomenclature{$\vec D$}{auxiliary electric field }%
+    % \nomenclature{$\vec H$}{auxiliary magnetic field }%
     \bigskip
 \end{subequations}\\
 
@@ -210,10 +215,10 @@ While \cref{subeq:maxwell-general-matter} effectively express electromagnetic la
         \label{eq:constitutive-relation-permeability}
         \vec B &= \hat\mu \ast \vec H,
     \end{align}
-    \nomenclature{$\epsilon$}{permittivity }%
-    \nomenclature{$\mu$}{permeability }%
-    \index{constitutive relations}
-    \index{constitutive parameters}
+    % \nomenclature{$\epsilon$}{permittivity }%
+    % \nomenclature{$\mu$}{permeability }%
+    % \index{constitutive relations}
+    % \index{constitutive parameters}
 \end{subequations}
 where $\hat\epsilon$ and $\hat\mu$ are the material's \emph{permittivity} and \emph{permeability}, respectively, and the asterisk denotes \emph{convolution}.
 
@@ -222,7 +227,7 @@ where $\hat\epsilon$ and $\hat\mu$ are the material's \emph{permittivity} and \e
     \begin{align}
         \label{eq:constitutive-relation-conductivity}
         \vec J_{\mathrm c} &= \hat\sigma \ast \vec E,
-        \nomenclature{$\sigma$}{conductivity }%
+        % \nomenclature{$\sigma$}{conductivity }%
     \end{align}
     where $\hat\sigma$ is the material's \emph{conductivity}. \Cref{eq:constitutive-relation-conductivity}, together with \cref{subeq:constitutive-relations}, completes the required set of constitutive relations.
 \end{remark}
@@ -265,9 +270,9 @@ While the differential form of Maxwell's equations is a powerful tool for analys
         \label{eq:maxwell-equations-integral-curl-h}
         \oint_{\partial S} \vec H \cdot \d\vec l &= \int_S \vec J_{\mathrm e} \cdot \d\vec a + \frac{\d}{\d t}\int_S \vec D \cdot \d\vec a,
     \end{align}
-    \nomenclature{$\partial\Omega$}{boundary of set $\Omega$ }%
+    % \nomenclature{$\partial\Omega$}{boundary of set $\Omega$ }%
 \end{subequations}
-\index{boundary conditions}
+% \index{boundary conditions}
 where $S$ is any closed surface.
 
 Consider a boundary between two different media. The first medium is characterized by permittivity $\epsilon_1$ and permeability $\mu_1$, while the second medium is characterized by permittivity $\epsilon_2$ and permeability $\mu_2$. At this interface, electric and magnetic surface charge densities may be present, denoted by $q_{\mathrm f}$ and $q_{\mathrm m}$, respectively. Additionally, electric and magnetic surface current densities, denoted by $j_{\mathrm f}$ and $j_{\mathrm m}$, respectively, may also exist. The general \emph{boundary conditions} for electrodynamics are then obtained by applying \cref{subeq:maxwell-equations-integral} to arbitrary surfaces encompassing a portion of the interface, yielding\\
@@ -375,13 +380,13 @@ for the speed of electromagnetic waves in linear homogeneous media.
 \end{remark}
 
 \subsection{Monochromatic plane waves}
-\index{monochromatic plane wave}
+% \index{monochromatic plane wave}
 The electromagnetic theory presented thus far describes general vector fields that vary in space and time. However, as shown in \cref{subsection:the-wave-equations}, electromagnetic fields in source-free regions exhibit wave behaviour. Nonetheless, these time-varying vector fields remain complex and challenging to analyse in practical systems. Consider the elementary solution to the wave equation
 \begin{align}
     \label{eq:monochromatic-plane-wave}
     \hat{\vec\psi}(\vec r,t) &= \hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\].
 \end{align}
-\nomenclature{$\vec k$}{wave vector }%
+% \nomenclature{$\vec k$}{wave vector }%
 Here, $\hat{\vec k}$ is the complex \emph{wave vector} indicating the direction of wave propagation, and $\omega$ is the angular frequency of the wave. \Cref{eq:monochromatic-plane-wave} is expressed in terms of a \emph{complex wave function} with a \emph{complex amplitude} $\hat{\vec\Psi}_0 \equiv \vec\Psi_0\e^{\i\delta}$. This quantity encapsulates both the \emph{real amplitude} $\vec\Phi_0$ and the \emph{phase shift} $\delta$ of the physical wave. A sinusoidal wave representing this solution in physical reality can be extracted from \cref{eq:monochromatic-plane-wave} using \emph{Euler's formula}, yielding
 \begin{align}
     \label{eq:sinusoidal-wave}
@@ -435,7 +440,7 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
     \begin{align}
         \vec k \cdot \hat{\vec E}_0 = \vec k \cdot \hat{\vec B}_0 = 0,
     \end{align}
-    \nomenclature{$\vec e_\xi$}{unit vector in the $\xi$-direction }%
+    % \nomenclature{$\vec e_\xi$}{unit vector in the $\xi$-direction }%
     i.e., the electromagnetic fields are \emph{transverse}. Furthermore, either of \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields
     \begin{align}
         \hat{\vec B}_0 &= \frac1\omega\(\vec k \times \hat{\vec E}_0\) = \frac 1c\(\vec e_k \times \hat{\vec E}_0\).
@@ -448,8 +453,8 @@ As discussed in \cref{remark:nonequivalence-of-wave-equations-with-maxwells-equa
     &
         \norm{\vec e_n} &= 1.
     \end{align}
-    \nomenclature{$\vec e_n$}{polarization vector }%
-    \index{polarization vector}%
+    % \nomenclature{$\vec e_n$}{polarization vector }%
+    % \index{polarization vector}%
     With this definition, the complete solution to Maxwell's equations for a plane wave in free space takes the form of
     \begin{align}
         \vec E(\vec r, t) &= E_0\cos(\vec k \cdot \vec r - \omega t + \delta) \vec e_n,
@@ -497,10 +502,11 @@ Subsequent squaring and addition of \cref{eq:polarization-ellipse-a,eq:polarizat
     \label{eq:polarization-ellipse}
     \(\frac{A_x}{E_x}\)^2 + \(\frac{A_y}{E_y}\)^2 - 2\frac{A_x}{E_x}\frac{A_y}{E_y}\cos\(\delta\) &= \sin^2\(\delta\),
 \end{align}
-\index{elliptical polarization}
+% \index{elliptical polarization}
 where $\delta \equiv \delta_y-\delta_x$. Clearly, \cref{eq:polarization-ellipse} defines an ellipse in the plane transverse to the propagation direction. Accordingly, the general monochromatic plane wave described in \cref{eq:monochromatic-plane-wave} exhibits \emph{elliptical polarization}. The eccentricity and orientation of the ellipse are related to the phase difference $\delta$ and the amplitude ratio $E_y/E_x$. Upon inspecting \cref{eq:polarization-ellipse}, two special types of polarization can be identified for specific parameter values.
 
-\paragraph{Linear polarization.\index{linear polarization}} The first situation arises when the polarization ellipse degenerates into a straight line. This condition occurs when the electric field components are either in-phase or out-of-phase by half-wavelength, i.e.,
+\paragraph{Linear polarization.} % \index{linear polarization}
+The first situation arises when the polarization ellipse degenerates into a straight line. This condition occurs when the electric field components are either in-phase or out-of-phase by half-wavelength, i.e.,
 \begin{align}
     \label{eq:polarization-linear-condition}
     \delta = \delta_y-\delta_x = m\pi, \quad m \in \N_0.
@@ -511,7 +517,8 @@ This situation corresponds to \emph{linear polarization} and \cref{eq:polarizati
     \Re\[\hat{\vec E}(\vec r,t)\] &= \[E_x\vec e_x \pm E_y\vec e_y\]\cos\(\phi + \delta_x\).
 \end{align}
 
-\paragraph{Circular polarization.\index{circular polarization}} The alternative scenario arises when the polarization ellipse simplifies into a circle. This simplification occurs exclusively when the orthogonal electric field components possess equal amplitude and are out-of-phase by one-quarter wavelength, i.e.,
+\paragraph{Circular polarization.} % \index{circular polarization}
+The alternative scenario arises when the polarization ellipse simplifies into a circle. This simplification occurs exclusively when the orthogonal electric field components possess equal amplitude and are out-of-phase by one-quarter wavelength, i.e.,
 \begin{align}
     \label{eq:polarization-circular-condition}
     E_x = E_y &= \frac{E}{\sqrt 2},
@@ -626,7 +633,7 @@ where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-
         \[\partial^2_x+\partial^2_y+\(\frac{\omega}{c}\)^2-k^2\]B_z &= 0.
     \end{align}
 \end{subequations}
-\index{Helmholtz equations}
+% \index{Helmholtz equations}
 These equations, often referred to as the \emph{Helmholtz equations}, govern the longitudinal field components and play a crucial role in determining the allowed modes of propagation within the waveguide. These modes are categorized based on the presence or absence of longitudinal components in the electric and magnetic fields. \emph{Transverse electric} (TE) waves have $E_z=0$, while \emph{transverse magnetic} (TM) waves have $B_z=0$. The simplest waves, for which both $E_z=B_z=0$, are called \emph{transverse electromagnetic} (TEM) waves, but these cannot exist within a hollow waveguide due to boundary conditions.
 
 \begin{remark}[Non-existence of TEM waves in hollow waveguides]
@@ -665,7 +672,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
     \\
         \hat{\vec B}^+ &= \sum_\alpha C_\alpha^+\[\hat{\vec B}_{0,\alpha} + \vec e_zB_{z,\alpha}\]\exp\(-\i k_{\alpha}z\).
     \end{align}
-    \index{modal decomposition}
+    % \index{modal decomposition}
     Similarly, for the negative direction (denoted by the $-$ superscript), the decomposition is given by
     \begin{align}
         \hat{\vec E}^- &= \sum_\alpha C_\alpha^-\[\hat{\vec E}_{0,\alpha} - \vec e_zE_{z,\alpha}\]\exp\(\i k_{\alpha}z\),
@@ -735,16 +742,16 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
         \label{eq:cutoff-frequency}
         f_{mn} \equiv \frac c2\sqrt{\(\frac ma\)^2 + \(\frac nb\)^2},
     \end{align}
-    \index{cutoff frequency}
+    % \index{cutoff frequency}
     the wavenumber becomes imaginary. This signifies that the wave cannot propagate and instead decays exponentially within the waveguide. Such solutions are referred to as \emph{evanescent waves}. This cutoff frequency depends  on the mode numbers $(m, n)$ and the waveguide dimensions $(a, b)$. Modes having the same cutoff frequency are called \emph{degenerate}.
-    \index{degenerate modes}
+    % \index{degenerate modes}
 
     The wavelength corresponding to wavenumber $k$ in the direction of guided wave propagation is called the \emph{guide wavelength} and is given by
     \begin{align}
         \label{eq:guide-wavelength}
         \lambda_{\mathrm g} \equiv \frac{2\pi}{k} &= \frac{\lambda}{\sqrt{1-\(\dfrac{f_{mn}}{f}\)^2}} = \frac{\lambda}{\sqrt{1-\(\dfrac{\lambda}{\lambda_{mn}}\)^2}}.
     \end{align}
-    \index{guide wavelength}
+    % \index{guide wavelength}
     This guide wavelength is related to the free-space wavelength, $\lambda$, and the cutoff wavelength, $\lambda_{mn}$, for the $\TE mn$ mode.
 \end{example}
 
@@ -1186,12 +1193,12 @@ Ultimately, the latter configuration (b) was selected for the final design, prio
 
 \chapter{Final structure}
 \label{chapter:final-structure}
-This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Due to fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design to ensure compatibility with CNC machining processes while preserving the desired electromagnetic performance---this involved modifications such as modularizing the antenna and adapting features for CNC drilling feasibility. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc. The measured performance data and a comparative analysis against the simulated results are presented herein.
+This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Driven by fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc. The measured performance data is presented herein and compared against the simulated results, with a detailed discussion of the observed discrepancies.
 
 \section{Feed rework}
 Preliminary simulations indicate that the performance of the final structure deviates significantly from expectations, particularly concerning the operation of the dual-feeding mechanism. This discrepancy is primarily reflected in the S-parameters, as illustrated in \cref{fig:grating-vs-mvp-sparameters}. While the performance of the feed incorporating a grating polarizer is acceptable in isolation, the figure also presents the S-parameters for a configuration with the grating entirely removed. This latter configuration represents the most straightforward implementation of a dual-feeding structure, previously discussed and dismissed in \cref{section:dual-feed} due to inherent high cross-talk between ports. However, as demonstrated in \cref{fig:grating-vs-mvp-sparameters}, despite exhibiting excellent individual performance, the grating polarizer provides only negligible improvement in cross-talk mitigation. This minimal benefit comes at the expense of a substantial increase in manufacturing complexity, overall size, and, consequently, the cost of the final product.
 
-As previously addressed in \cref{section:dual-feed}, the manipulation of cross-talk levels can be achieved through increased grating density. Unfortunately, this approach concurrently results in significantly degrading port reflections, with the values established in \cref{eq:dual-feed-optimum} representing the optimal compromise. Consequently, integrating a grating polarizer fails to yield the anticipated performance improvements attributable to an as-yet-unidentified mechanism. A comprehensive investigation of this underlying mechanism necessitates further research, which falls outside this thesis's current scope and timeline, particularly considering the impending fabrication deadlines. Therefore, the MVP solution depicted in \cref{fig:final-perspective} is adopted to expedite the development process. This design omits the grating polarizer and positions both ports within the same plane, ultimately proving an equally viable solution.
+As previously addressed in \cref{section:dual-feed}, a manipulation of cross-talk levels can be achieved through increased grating density. Unfortunately, this tuning cannot improve the performance without significantly degrading port reflections. Consequently, integrating a grating polarizer fails to yield the anticipated performance improvements due to an as-yet-unidentified mechanism. A comprehensive investigation of this underlying mechanism necessitates further research, which falls outside this thesis's current scope and timeline, particularly considering the impending fabrication deadlines. Therefore, the MVP solution depicted in \cref{fig:final-perspective} is adopted to expedite the development process. This design omits the grating polarizer and positions both ports within the same plane, ultimately proving an equally viable solution.
 
 \begin{figure}[!ht]
     \centering
@@ -1207,7 +1214,7 @@ As previously addressed in \cref{section:dual-feed}, the manipulation of cross-t
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.8\textwidth]{src/final_perspective.png}
+    \includegraphics[width=.9\textwidth]{src/final_perspective.png}
     \caption{\label{fig:final-perspective}Final structure: MVP model}
 \end{figure}
 
@@ -1216,25 +1223,41 @@ The structure illustrated in \cref{fig:final-perspective} represents the finaliz
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.8\textwidth]{src/final_umt_perspective.png}
+    \includegraphics[width=.9\textwidth]{src/final_umt_perspective.png}
     \caption{\label{fig:final-umt-perspective}Final structure: DFM model}
 \end{figure}
-
-Universal Microwave Technology, Inc., a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner. Their state-of-the-art technology and proven expertise instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured performance of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation}, demonstrates excellent agreement with the high-fidelity simulations. The boresight gain exhibits a slight positive deviation towards higher values, potentially attributable to minor misalignments during measurement, although the precise cause remains indeterminate without further investigation.
-
-\begin{figure}
+Universal Microwave Technology, Inc., a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner. Their state-of-the-art technology and proven expertise instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured network parameters of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters}, demonstrates excellent agreement with the high-fidelity simulations.
+\begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas_vs_sim_sparameters.svg}
     \caption{\label{fig:meas-vs-sim-sparameters}Measurement results: S-parameters}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas_vs_sim_boresight_radiation.svg}
-    \caption{\label{fig:meas-vs-sim-boresight-radiation}Measurement results: polarization gains}
+    \includesvg[width=\textwidth]{src/meas_vs_sim_gain_and_aperture_efficiency.svg}
+    \caption{\label{fig:meas-vs-sim-gain-and-aperture-efficiency}Measurement results: gain and aperture efficiency}
 \end{figure}
 
-These two figures represent a subset of the complete measurement dataset, which has been compiled in its entirety in \cref{appendix:measurement-results}. This segregation of data into the appendix allows for a streamlined and focused presentation within the main body of the thesis while preserving a comprehensive repository of all measurement data acquired. Specifically, the data presented in \cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation} are extracted from the second set of measurements, as detailed in \cref{appendix:measurement-results}.
+However, a considerable discrepancy is observed between the measured and simulated boresight gain, raising concerns regarding the accuracy of the radiation property measurements. Analysis of the anechoic chamber setup suggests a potential violation of the far-field condition. This condition requires the antenna under test (AUT) to be positioned at a distance greater than the \emph{Fraunhofer distance}, defined as
+\begin{align}
+    \label{eq:farfield-condition}
+    d_{\mathrm F} &= \frac{2D^2}{\lambda},
+\end{align}
+where $D$ represents the diameter of the AUT's aperture, was violated. The likelihood of a measurement error is further reinforced by examining the aperture efficiency
+\begin{align}
+    \label{eq:aperture-efficiency}
+    \eta = \frac{A_{\mathrm{eff}}}{A_{\mathrm{phys}}} = \frac{\lambda^2}{4\pi^2R^2}G, 
+\end{align}
+where $A_{\mathrm{eff}}$ and $A_{\mathrm{phys}}$ are the \emph{effective} and \emph{physical} aperture areas, respectively, $G$ is the antenna gain, and $R = D/2$. Evaluating \cref{eq:aperture-efficiency} using the measured data and comparing it with the simulation results, as shown in \cref{fig:meas-vs-sim-gain-and-aperture-efficiency}, reveals a clear inconsistency. The simulation data aligns with the expected aperture efficiency of approximately $\qty{50}{\%}$, a typical value for a simple conical antenna. Conversely, the measured data yield efficiency values exceeding the physically permissible limit of $\qty{100}{\%}$. However, these near-field effects appear to influence both polarization measurements equally. Consequently, they effectively cancel out during relative measurements, such as the axial ratio depicted in \cref{fig:meas-vs-sim-axial-ratio} which exhibits excellent agreement with the simulation. The antenna parameters used during this discussion follow the usual definitions and can be found, e.g., in~\parencite{balanis:antenna-theory-analysis-and-design}.
+
+\begin{figure}[!ht]
+    \centering
+    \includesvg[width=\textwidth]{src/meas_vs_sim_axial_ratio.svg}
+    \caption{\label{fig:meas-vs-sim-axial-ratio}Measurement results: axial ratio}
+\end{figure}
+
+\Cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-gain-and-aperture-efficiency,fig:meas-vs-sim-axial-ratio} present a selected portion of the comprehensive measurement dataset, which is fully documented in Appendix \ref{appendix:measurement-results}. This selective presentation was employed to maintain a focused discussion while ensuring a complete record of all acquired data readily accessible in the appendix. Specifically, the data showcased in these figures were extracted from Measurement Campaign 2, as detailed in Appendix \ref{appendix:measurement-results}.
 
 %========== Conclusion ==========
 \chapter*{Conclusion}
@@ -1249,6 +1272,7 @@ A further objective was to fabricate a physical prototype of the designed antenn
 
 Despite the project's overall success, several potential areas for improvement are identified. The polarizer's performance could be enhanced by incorporating a tapered transition into the chamfered sections, potentially reducing reflections and improving the overall bandwidth, which warrants further investigation. Implementing multiple polarizer sections with varying geometries could also widen the operational bandwidth, albeit at the cost of increased complexity. Regarding the feeding structure, alternative coaxial-to-waveguide transition techniques, such as disc-loaded or prismatic probes, are known to widen the operation bandwidth. Finally, while the conical horn antenna provides satisfactory performance, considering a quad-ridge square pyramidal horn could offer a more robust and potentially broader bandwidth solution, especially for applications demanding higher polarization purity across a wider frequency range. These suggested improvements provide avenues for future research and development, building upon the solid foundation established by this thesis.
 
+\newpage\ \newpage
 \appendix
 %========== Appendix A: Constrained optimization ==========
 \chapter{Constrained optimization}
@@ -1460,7 +1484,7 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas1_boresight_radiation.svg}
-    \caption{\label{fig:meas1-boresight-radiation}Measurement 1: polarization gains}
+    \caption{\label{fig:meas1-boresight-radiation}Measurement 1: boresight radiation}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -1484,7 +1508,7 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas2_boresight_radiation.svg}
-    \caption{\label{fig:meas2-boresight-radiation}Measurement 2: polarization gains}
+    \caption{\label{fig:meas2-boresight-radiation}Measurement 2: boresight radiation}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -1499,13 +1523,13 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
     \caption{\label{fig:meas2-azimuth-radiation}Measurement 2: azimuth radiation pattern}
 \end{figure}
 
-%========== Nomenclature ==========
-\printnomenclature
+% %========== Nomenclature ==========
+% \printnomenclature
 
 %========== Bibliography ==========
 \printbibliography[heading=bibintoc]
 
-% %========== Index ==========
-\printindex
+% % %========== Index ==========
+% \printindex
 
 \end{document}

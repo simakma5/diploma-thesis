@@ -518,9 +518,111 @@ for meas = ["meas1", "meas2"]
     saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_sparameters.svg'), 'svg')
 end
 
-%% Measurement: boresight radiation
+%% Measurement vs simulation: gain and aperture efficiency
 [freq, sim_gain] = get_single_plot_data("final_boresight_gain.txt");
+[~, gain1] = get_umt_data("meas2_port1_gain.dat", "Gain");
+[~, gain2] = get_umt_data("meas2_port2_gain.dat", "Gain");
+lambda = 299792458./(freq*1e9);
+A_eff_sim = lambda.^2/(4*pi).*10.^(sim_gain/10);
+A_eff_meas1 = lambda.^2/(4*pi).*10.^(gain1/10);
+A_eff_meas2 = lambda.^2/(4*pi).*10.^(gain2/10);
+A_phys = pi*(130/2*1e-3)^2;
+
+figure("Name", "Measurement vs simulation: gain and aperture effciency");
+tiledlayout(2, 2, "TileSpacing", "compact")
+
+nexttile;
+hold on
+plot(freq, gain1)
+plot(freq, sim_gain)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([10, 25])
+ylabel("$G\ [\mathrm{dBi}]$")
+title("Port 1 boresight gain")
+
+nexttile;
+hold on
+plot(freq, gain2)
+plot(freq, sim_gain)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([10, 25])
+title("Port 2 boresight gain")
+
+nexttile;
+hold on
+plot(freq, A_eff_meas1/A_phys*100)
+plot(freq, A_eff_sim/A_phys*100)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([0, 250])
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$\eta\ [\%]$")
+title("Port 1 aperture efficiency")
+
+nexttile;
+hold on
+plot(freq, A_eff_meas2/A_phys*100)
+plot(freq, A_eff_sim/A_phys*100)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([0, 250])
+xlabel("$f\ [\mathrm{GHz}]$")
+title("Port 2 aperture efficiency")
+
+leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
+leg.Layout.Tile = "north";
+saveas(gcf, fullfile(pwd, '\latex\src\meas_vs_sim_gain_and_aperture_efficiency.svg'), 'svg')
+
+%% Measurement vs simulation: axial ratio
 [~, sim_ar] = get_single_plot_data("final_boresight_ar.txt");
+[~, ar1] = get_umt_data("meas2_port1_axial_ratio.dat", "Gain");
+[~, ar2] = get_umt_data("meas2_port2_axial_ratio.dat", "Gain");
+
+figure("Name", "Measurement vs simulation: axial ratio");
+tiledlayout(2, 1, "TileSpacing", "compact")
+
+nexttile;
+hold on
+plot(freq, ar1)
+plot(freq, sim_ar)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([0, 6])
+ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
+title("Port 1")
+
+nexttile;
+hold on
+plot(freq, ar2)
+plot(freq, sim_ar)
+hold off
+grid on;
+box on;
+xlim([min(freq), max(freq)]);
+ylim([0, 6])
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
+title("Port 2")
+
+leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
+leg.Layout.Tile = "north";
+saveas(gcf, fullfile(pwd, '\latex\src\meas_vs_sim_axial_ratio.svg'), 'svg')
+
+%% Measurement: boresight radiation
+% [freq, sim_gain] = get_single_plot_data("final_boresight_gain.txt");
+% [~, sim_ar] = get_single_plot_data("final_boresight_ar.txt");
 for meas = ["meas1", "meas2"]
     [~, gain1] = get_umt_data(meas + "_port1_gain.dat", "Gain");
     [~, gain2] = get_umt_data(meas + "_port2_gain.dat", "Gain");
@@ -583,7 +685,7 @@ for meas = ["meas1", "meas2"]
     saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_boresight_radiation.svg'), 'svg')
 end
 
-%% Measurement - radiation
+%% Measurement: radiation
 % [sim_theta, sim_port1_copol] = get_single_plot_data("final_port1_copol_5G0Hz.txt");
 for meas = ["meas1", "meas2"]
     for angle_var = ["elevation", "azimuth"]
