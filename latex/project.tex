@@ -1193,7 +1193,7 @@ Ultimately, the latter configuration (b) was selected for the final design, prio
 
 \chapter{Final structure}
 \label{chapter:final-structure}
-This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Driven by fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc. The measured performance data is presented herein and compared against the simulated results, with a detailed discussion of the observed discrepancies.
+This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Driven by fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc, (UMT). The measured performance data is presented herein and compared against the simulated results, with a detailed discussion of the observed discrepancies.
 
 \section{Feed rework}
 Preliminary simulations indicate that the performance of the final structure deviates significantly from expectations, particularly concerning the operation of the dual-feeding mechanism. This discrepancy is primarily reflected in the S-parameters, as illustrated in \cref{fig:grating-vs-mvp-sparameters}. While the performance of the feed incorporating a grating polarizer is acceptable in isolation, the figure also presents the S-parameters for a configuration with the grating entirely removed. This latter configuration represents the most straightforward implementation of a dual-feeding structure, previously discussed and dismissed in \cref{section:dual-feed} due to inherent high cross-talk between ports. However, as demonstrated in \cref{fig:grating-vs-mvp-sparameters}, despite exhibiting excellent individual performance, the grating polarizer provides only negligible improvement in cross-talk mitigation. This minimal benefit comes at the expense of a substantial increase in manufacturing complexity, overall size, and, consequently, the cost of the final product.
@@ -1219,14 +1219,15 @@ As previously addressed in \cref{section:dual-feed}, a manipulation of cross-tal
 \end{figure}
 
 \section{Product finalization}
-The structure illustrated in \cref{fig:final-perspective} represents the finalized model used for electromagnetic simulations, establishing a benchmark for subsequent comparison with measurement data. These verification simulations employed exceptionally fine meshing settings and stringent convergence criteria based on energy dissipation to ensure the utmost accuracy. Concurrently, the final model underwent a design review with the principal engineer at Universal Microwave Technology, Inc. This consultation led to the implementation of final DFM modifications. These adjustments, aimed at ensuring compatibility with standard CNC machining processes, involved modularizing the complete structure into five distinct components: the conical horn, square waveguide section, polarizer, dual-feed, and back-short. Each of these components was designed with standard waveguide flanges to facilitate assembly, and the antenna's geometry was further refined for efficient fabrication using drilling techniques. The resulting DFM-compliant model, depicted in \cref{fig:final-umt-perspective}, demonstrates that the internal dimensions remain unchanged, thereby preserving the critical electromagnetic performance characteristics of the original design.
+The structure illustrated in \cref{fig:final-perspective} represents the finalized model used for electromagnetic simulations, establishing a benchmark for subsequent comparison with measurement data. These verification simulations employed exceptionally fine meshing settings and stringent convergence criteria based on energy dissipation to ensure the utmost accuracy. Concurrently, the final model underwent a design review with the principal engineer at UMT. This consultation led to the implementation of final DFM modifications. These adjustments, aimed at ensuring compatibility with standard CNC machining processes, involved modularizing the complete structure into five distinct components: the conical horn, square waveguide section, polarizer, dual-feed, and back-short. Each of these components was designed with standard waveguide flanges to facilitate assembly, and the antenna's geometry was further refined for efficient fabrication using drilling techniques. The resulting DFM-compliant model, depicted in \cref{fig:final-umt-perspective}, demonstrates that the internal dimensions remain unchanged, thereby preserving the critical electromagnetic performance characteristics of the original design.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.9\textwidth]{src/final_umt_perspective.png}
     \caption{\label{fig:final-umt-perspective}Final structure: DFM model}
 \end{figure}
-Universal Microwave Technology, Inc., a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner. Their state-of-the-art technology and proven expertise instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured network parameters of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters}, demonstrates excellent agreement with the high-fidelity simulations.
+UMT, a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner for their state-of-the-art technology and proven expertise, which instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured network parameters of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters}, demonstrates excellent agreement with the high-fidelity simulations.
+
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas_vs_sim_sparameters.svg}
@@ -1239,7 +1240,7 @@ Universal Microwave Technology, Inc., a leading company in the design, developme
     \caption{\label{fig:meas-vs-sim-gain-and-aperture-efficiency}Measurement results: gain and aperture efficiency}
 \end{figure}
 
-However, a considerable discrepancy is observed between the measured and simulated boresight gain, raising concerns regarding the accuracy of the radiation property measurements. Analysis of the anechoic chamber setup suggests a potential violation of the far-field condition. This condition requires the antenna under test (AUT) to be positioned at a distance greater than the \emph{Fraunhofer distance}, defined as
+However, a considerable discrepancy is observed between the measured and simulated boresight gain, raising concerns regarding the accuracy of the radiation property measurements. Analysis of the anechoic chamber setup depicted in \cref{fig:chamber} suggests that the measurements may have been taken within the reactive near-field, potentially violating the far-field criterion. This condition requires the antenna under test (AUT) to be positioned at a distance greater than the \emph{Fraunhofer distance}, defined as
 \begin{align}
     \label{eq:farfield-condition}
     d_{\mathrm F} &= \frac{2D^2}{\lambda},
@@ -1257,7 +1258,18 @@ where $A_{\mathrm{eff}}$ and $A_{\mathrm{phys}}$ are the \emph{effective} and \e
     \caption{\label{fig:meas-vs-sim-axial-ratio}Measurement results: axial ratio}
 \end{figure}
 
-\Cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-gain-and-aperture-efficiency,fig:meas-vs-sim-axial-ratio} present a selected portion of the comprehensive measurement dataset, which is fully documented in Appendix \ref{appendix:measurement-results}. This selective presentation was employed to maintain a focused discussion while ensuring a complete record of all acquired data readily accessible in the appendix. Specifically, the data showcased in these figures were extracted from Measurement Campaign 2, as detailed in Appendix \ref{appendix:measurement-results}.
+\Cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-gain-and-aperture-efficiency,fig:meas-vs-sim-axial-ratio} present a selected portion of the comprehensive measurement dataset, which is fully documented in Appendix \ref{appendix:measurement-results}. This selective presentation was employed to maintain a focused discussion while ensuring a complete record of all acquired data readily accessible in the appendix. Specifically, the data showcased in these figures correspond to Measurement 2 from the appendix. To ensure clarity in interpreting measurement data both in this section and the appendix, \cref{fig:final-ports} depicts the back view of the finalized antenna structure, designating Port 1 and Port 2, and establishing the orientation of the spherical coordinate system employed for all subsequent radiation pattern measurements.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=.5\textwidth]{src/final_umt_ports.png}
+    \caption{\label{fig:final-ports}Back view of the final structure}
+\end{figure}
+
+\paragraph{Manufacturer's comment.} AA discussion regarding the potential violation of the far-field distance threshold was held with the principal engineer at UMT, the company responsible for the product's fabrication and measurement. It was confirmed that the radiation properties were measured within the AUT's near field, specifically at a distance of
+\begin{align}
+    d = \qty{23}{cm} < \qty{62}{cm} \approx d_{\mathrm{F}}\Big|_{\qty{5.5}{GHz}},
+\end{align}
+using an NSI-MI system employing the Near-Field Scanning (NFS) technique. NFS involves measuring the amplitude and phase of the electromagnetic field across a well-defined surface close to the AUT. Subsequently, these near-field measurements are mathematically transformed, typically using Fourier transforms or spherical wave expansions, to determine the far-field characteristics. While the NFS method is known for its precision, the complexity of the setup and data processing still makes it a potential source of the measurement error, as suggested by the unrealistic aperture efficiency values presented in \cref{fig:meas-vs-sim-gain-and-aperture-efficiency}. Aside from potential calibration or field transformation errors, a hypothetical concern arises regarding the size of the probe used for NFS. As shown in \cref{fig:chamber} depicts, a relatively large open-ended rectangular waveguide was employed as the receiving probe, which could potentially introduce distortions into the measured near field.
 
 %========== Conclusion ==========
 \chapter*{Conclusion}
@@ -1464,14 +1476,27 @@ End Function
 %========== Appendix B: Measurement results ==========
 \chapter{Measurement results}
 \label{appendix:measurement-results}
-This appendix compiles comprehensive measurement data from two campaigns conducted on the antenna prototype fabricated and tested by Universal Microwave Technology, Inc. Their contribution to realizing and characterizing the design is gratefully acknowledged. While key results are presented in the main text for comparison with simulations, this appendix provides a complete repository of all measured parameters, ensuring a concise presentation in the main body.
+This appendix details the comprehensive measurement data for the antenna prototype, acquired across two campaigns by UMT whose contribution is gratefully acknowledged. Key results are presented within the main body of the thesis for comparison with simulations, while this appendix serves as a complete repository of all measured parameters.
 
-The data presented includes S-parameters measured using an Agilent VNA, providing insights into impedance matching and power transmission. Additionally, frequency responses of boresight gain and axial ratio, characterized in an in-house anechoic chamber using an open-ended waveguide as a sensing antenna, are included. Radiation patterns are presented as elevation and azimuth cuts at $\qty{5}{GHz}$, $\qty{5.3}{GHz}$, and $\qty{5.5}{GHz}$. \Cref{fig:final-ports} depicts the back view of the finalized antenna structure, clarifying the designation of Port 1 and Port 2, as well as the orientation of the spherical coordinate system employed for subsequent radiation pattern measurements.
+The data presented includes S-parameters measured using an Agilent VNA, providing insights into impedance matching and power transmission across the operational frequency band. Furthermore, frequency responses of boresight gain and axial ratio are included. These parameters were measured in an in-house anechoic chamber using an open-ended waveguide as a sensing antenna. Radiation patterns, presented in the form of both elevation and azimuth cuts, were recorded at frequencies $\qty{5}{GHz}$, $\qty{5.3}{GHz}$, and $\qty{5.5}{GHz}$. Both measurement setups are illustrated in \cref{fig:measurement-setup}.
 
 \begin{figure}[!ht]
+    \sbox\twosubbox{%
+        \resizebox{\dimexpr.95\textwidth-1em}{!}{%
+            \includegraphics[height=3cm]{src/vna.png}%
+            \includegraphics[height=3cm]{src/chamber.png}%
+        }%
+    }
+    \setlength{\twosubht}{\ht\twosubbox}
+
     \centering
-    \includegraphics[width=.6\textwidth]{src/final_umt_ports.png}
-    \caption{\label{fig:final-ports}Back view on the final structure}
+    \subcaptionbox{\label{fig:vna}S-parameters}{
+        \includegraphics[height=\twosubht]{src/vna.png}
+    }\quad
+    \subcaptionbox{\label{fig:chamber}Radiation properties}{
+        \includegraphics[height=\twosubht]{src/chamber.png}
+    }
+    \caption{\label{fig:measurement-setup}Measurement setup}
 \end{figure}
 
 \newpage
@@ -1484,19 +1509,19 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas1_boresight_radiation.svg}
-    \caption{\label{fig:meas1-boresight-radiation}Measurement 1: boresight radiation}
+    \caption{\label{fig:meas1-boresight-radiation}Measurement 1: gain and axial ratio}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas1_elevation_radiation.svg}
-    \caption{\label{fig:meas1-elevation-radiation}Measurement 1: elevation radiation pattern}
+    \caption{\label{fig:meas1-elevation-radiation}Measurement 1: elevation radiation pattern ($\varphi=\ang{90}$)}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas1_azimuth_radiation.svg}
-    \caption{\label{fig:meas1-azimuth-radiation}Measurement 1: azimuth radiation pattern}
+    \caption{\label{fig:meas1-azimuth-radiation}Measurement 1: azimuth radiation pattern ($\varphi=\ang{0}$)}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -1508,19 +1533,19 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas2_boresight_radiation.svg}
-    \caption{\label{fig:meas2-boresight-radiation}Measurement 2: boresight radiation}
+    \caption{\label{fig:meas2-boresight-radiation}Measurement 2: gain and axial ratio}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas2_elevation_radiation.svg}
-    \caption{\label{fig:meas2-elevation-radiation}Measurement 2: elevation radiation pattern}
+    \caption{\label{fig:meas2-elevation-radiation}Measurement 2: elevation radiation pattern ($\varphi=\ang{90}$)}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/meas2_azimuth_radiation.svg}
-    \caption{\label{fig:meas2-azimuth-radiation}Measurement 2: azimuth radiation pattern}
+    \caption{\label{fig:meas2-azimuth-radiation}Measurement 2: azimuth radiation pattern ($\varphi=\ang{0}$)}
 \end{figure}
 
 % %========== Nomenclature ==========

@@ -76,7 +76,7 @@ xlim([min(freq), max(freq)]);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$E_2/E_1\ [\mathrm{dB}]$")
 
-leg = legend("$" + sweep_values + "\ \mathrm{mm}$", "Orientation", "horizontal");
+leg = legend("$" + sweep_values + "\,\mathrm{mm}$", "Orientation", "horizontal");
 leg.Layout.Tile = "north";
 
 saveas(gcf, fullfile(pwd, '\latex\src\circular_polarizer_cross_section.svg'), 'svg')
@@ -268,7 +268,7 @@ hold on
 cst_polarplot(theta, magus_gain_pattern, rlim_all, pax)
 cst_polarplot(theta, final_gain_pattern, rlim_all, pax)
 hold off
-pax.Title.String = "Gain ($f = 5.2\ \mathrm{GHz}$)";
+pax.Title.String = "Gain ($f = 5.2\,\mathrm{GHz}$)";
 
 nexttile();
 hold on
@@ -299,7 +299,7 @@ title("Reflection")
 % cst_polarplot(theta, magus_gain_pattern, rlim_all, pax)
 % cst_polarplot(theta, final_gain_pattern, rlim_all, pax)
 % hold off
-% pax.Title.String = "Gain ($f = 5.2\ \mathrm{GHz}$)";
+% pax.Title.String = "Gain ($f = 5.2\,\mathrm{GHz}$)";
 
 leg = legend(["Antenna Magus", "Finalized"], "Orientation", "horizontal");
 leg.Layout.Tile = "north";
@@ -541,7 +541,7 @@ box on;
 xlim([min(freq), max(freq)]);
 ylim([10, 25])
 ylabel("$G\ [\mathrm{dBi}]$")
-title("Port 1 boresight gain")
+title("Port 1")
 
 nexttile;
 hold on
@@ -552,7 +552,7 @@ grid on;
 box on;
 xlim([min(freq), max(freq)]);
 ylim([10, 25])
-title("Port 2 boresight gain")
+title("Port 2")
 
 nexttile;
 hold on
@@ -565,7 +565,7 @@ xlim([min(freq), max(freq)]);
 ylim([0, 250])
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$\eta\ [\%]$")
-title("Port 1 aperture efficiency")
+% title("Port 1")
 
 nexttile;
 hold on
@@ -577,7 +577,7 @@ box on;
 xlim([min(freq), max(freq)]);
 ylim([0, 250])
 xlabel("$f\ [\mathrm{GHz}]$")
-title("Port 2 aperture efficiency")
+% title("Port 2")
 
 leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
 leg.Layout.Tile = "north";
@@ -642,7 +642,7 @@ for meas = ["meas1", "meas2"]
     xlim([min(freq), max(freq)]);
     ylim([10, 25])
     ylabel("$G\ [\mathrm{dBi}]$")
-    title("Port 1 boresight gain")
+    title("Port 1")
 
     nexttile;
     hold on
@@ -653,7 +653,7 @@ for meas = ["meas1", "meas2"]
     box on;
     xlim([min(freq), max(freq)]);
     ylim([10, 25])
-    title("Port 2 boresight gain")
+    title("Port 2")
 
     nexttile;
     hold on
@@ -666,7 +666,7 @@ for meas = ["meas1", "meas2"]
     ylim([0, 6])
     xlabel("$f\ [\mathrm{GHz}]$")
     ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
-    title("Port 1 boresight axial ratio")
+    % title("Port 1")
 
     nexttile;
     hold on
@@ -678,7 +678,7 @@ for meas = ["meas1", "meas2"]
     xlim([min(freq), max(freq)]);
     ylim([0, 6])
     xlabel("$f\ [\mathrm{GHz}]$")
-    title("Port 2 boresight axial ratio")
+    % title("Port 2")
 
     % leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
     % leg.Layout.Tile = "north";
@@ -686,7 +686,6 @@ for meas = ["meas1", "meas2"]
 end
 
 %% Measurement: radiation
-% [sim_theta, sim_port1_copol] = get_single_plot_data("final_port1_copol_5G0Hz.txt");
 for meas = ["meas1", "meas2"]
     for angle_var = ["elevation", "azimuth"]
         files = [
@@ -695,9 +694,9 @@ for meas = ["meas1", "meas2"]
             "_port1_" + angle_var + "_5G5Hz.dat", "_port2_" + angle_var + "_5G5Hz.dat"
         ];
         titles =  [
-            "Port 1 ($5\ \mathrm{GHz}$)", "Port 2 ($5\ \mathrm{GHz}$)", ...
-            "Port 1 ($5.3\ \mathrm{GHz}$)", "Port 2 ($5.3\ \mathrm{GHz}$)", ...
-            "Port 1 ($5.5\ \mathrm{GHz}$)", "Port 2 ($5.5\ \mathrm{GHz}$)"
+            "Port 1 ($5\,\mathrm{GHz}$)", "Port 2 ($5\,\mathrm{GHz}$)", ...
+            "Port 1 ($5.3\,\mathrm{GHz}$)", "Port 2 ($5.3\,\mathrm{GHz}$)", ...
+            "Port 1 ($5.5\,\mathrm{GHz}$)", "Port 2 ($5.5\,\mathrm{GHz}$)"
         ];
         
         figure("Name", "Measurement " + meas{1}(end) + ": " + angle_var + " " + "pattern")
