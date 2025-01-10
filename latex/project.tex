@@ -4,24 +4,24 @@
 % !TeX spellcheck = english
 
 %========== Document settings ==========
-\documentclass[11pt,a4paper,twoside,openany]{report}
-\setlength\textwidth{145mm}
-\setlength\textheight{247mm}
-\setlength\oddsidemargin{14.2mm}
-\setlength\evensidemargin{0mm}
-\setlength\topmargin{0mm}
-\setlength\headsep{0mm}
-\setlength\headheight{0mm}
-\let\openright=\cleardoublepage
+\documentclass[14pt,a4paper]{ntust_report}
+% \setlength\textwidth{145mm}
+% \setlength\textheight{247mm}
+% \setlength\oddsidemargin{14.2mm}
+% \setlength\evensidemargin{0mm}
+% \setlength\topmargin{0mm}
+% \setlength\headsep{0mm}
+% \setlength\headheight{0mm}
+% \let\openright=\cleardoublepage
 
 %========== Language settings ==========
-\usepackage[main=british,czech]{babel}
+\usepackage[main=american,czech]{babel}
 
 %========== Packages =============
 \usepackage{thesis-package}
 
 %========== Date format ===============
-\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+% \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
 %========== Bibliography ==========
 \addbibresource{bibliography.bib}
@@ -35,40 +35,47 @@
 \makenomenclature
 \renewcommand{\nomname}{Glossary of Symbols}
 
+% ========== NTUST settings ==========
+% \usepackage{xeCJK}
+\setmainfont{Times New Roman}
+% \setCJKmainfont{cwTeXKai}
+% \XeTeXlinebreaklocale "zh"
+% \XeTeXlinebreakskip = 0pt plus 1pt
+
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=3.5cm,bmargin=2cm,lmargin=3cm,rmargin=3cm}
+\newcommand{\mybaselinestretch}{1.5}
+\renewcommand{\baselinestretch}{\mybaselinestretch}
+\parskip=2ex
+\parindent = 24Pt
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
 \begin{document}
 
 \pagenumbering{gobble}
 
 %========== Title page ==========
-% Suppress displaying the page number on the title page + count the following page as page 1 (not used)
-\begin{titlepage}
-    \input{frontpage.tex}
-\end{titlepage}
+\includepdf{src/coverpage.pdf}
 
-\newpage\ \newpage
+%========== Recommendation form ==========
+\includepdf{src/recommendation_form.pdf}
 
-% %========== Assignment ==========
-\includepdf[pages=-]{src/assignment.pdf}
+%========== Qualification form ==========
+\includepdf{src/qualification_form.pdf}
 
-% Start counting pages in roman numerals
 \pagenumbering{roman}
-
-% %========== Declaration ==========
-\input{declaration.tex}
-
-\newpage\ \newpage
-
-% %========== Acknowledgements ==========
-\input{acknowledgements.tex}
-
-\newpage\ \newpage
 
 % %========== Abstract ==========
 \input{abstract.tex}
 
-\newpage\ \newpage
+% %========== Acknowledgements ==========
+\input{acknowledgements.tex}
 
-% Start counting pages in arabic numerals
 \pagenumbering{arabic}
 
 %========== Table of contents ==========
@@ -84,7 +91,7 @@
 
 This thesis focuses on the design and implementation of a dual circularly polarized antenna operating within the $\frequencyrange$ frequency band. This range, a subset of the C-band, finds widespread use in various applications such as satellite communications, radar systems, and certain Wi-Fi standards. The selection of this frequency band was driven by the increasing demand for high-bandwidth, reliable communication and the availability of established waveguide technology within this range.
 
-The design process leveraged several software tools. CST Studio Suite~\parencite{cst} was the primary tool for full-wave electromagnetic simulations due to its comprehensive features for modelling and simulating complex electromagnetic structures, including waveguides and antennas. Its transient solver, based on the Finite Integration Technique (FIT), was particularly suitable for analysing the time-domain behaviour of the proposed designs. Antenna Magus~\parencite{antenna-magus} was integrated into the initial design stages, specifically for the conical horn antenna, expediting the prototyping process through its extensive database of antenna designs and ability to synthesize antenna geometries based on user-defined parameters. Advanced optimization routines were implemented in Python using the SciPy library~\parencite{virtanen-et-al:scipy}. SciPy, an open-source library built upon NumPy, offers a wide range of numerical algorithms, including those used to implement constrained optimization, as detailed in \cref{appendix:constrained-optimization}. The Nelder-Mead method, a derivative-free optimization technique, was employed to optimize the geometric parameters of the polarizer and the feeding structure. This method is well-suited for problems with non-smooth or noisy objective functions, which can arise from complex electromagnetic simulations. It was utilized both within CST's native optimizer tool and within the Python-based SciPy optimization framework. MATLAB~\parencite{matlab} was employed for data visualization and generating publication-ready plots due to its robust plotting capabilities and fine-grained control over figure aesthetics.
+The design process leveraged several software tools. CST Studio Suite~\parencite{cst} was the primary tool for full-wave electromagnetic simulations due to its comprehensive features for modelling and simulating complex electromagnetic structures, including waveguides and antennas. Its transient solver, based on the Finite Integration Technique (FIT), was particularly suitable for analyzing the time-domain behavior of the proposed designs. Antenna Magus~\parencite{antenna-magus} was integrated into the initial design stages, specifically for the conical horn antenna, expediting the prototyping process through its extensive database of antenna designs and ability to synthesize antenna geometries based on user-defined parameters. Advanced optimization routines were implemented in Python using the SciPy library~\parencite{virtanen-et-al:scipy}. SciPy, an open-source library built upon NumPy, offers a wide range of numerical algorithms, including those used to implement constrained optimization, as detailed in \cref{appendix:constrained-optimization}. The Nelder-Mead method, a derivative-free optimization technique, was employed to optimize the geometric parameters of the polarizer and the feeding structure. This method is well-suited for problems with non-smooth or noisy objective functions, which can arise from complex electromagnetic simulations. It was utilized both within CST's native optimizer tool and within the Python-based SciPy optimization framework. MATLAB~\parencite{matlab} was employed for data visualization and generating publication-ready plots due to its robust plotting capabilities and fine-grained control over figure aesthetics.
 
 \paragraph*{Synopsis.} \textbf{\cref{chapter:electrodynamics}} establishes the theoretical foundations of electromagnetic wave propagation in guided structures, starting from Maxwell's equations and culminating in the derivation of the wave equations for waveguide modes.
 
@@ -96,48 +103,41 @@ The design process leveraged several software tools. CST Studio Suite~\parencite
 
 \textbf{\cref{chapter:final-structure}} details the culmination of the design process, integrating the individual components developed in previous chapters into a complete antenna system, and outlines the final design adjustments. Furthermore, it presents a comprehensive comparison of the simulated and measured performance results of the fabricated prototype, including a thorough discussion of the observed agreement and discrepancies.
 
-\paragraph*{Methodology.} The methodology combined numerical simulations with experimental validation. Full-wave electromagnetic simulations, conducted using CST Studio Suite, were used to analyse the performance of individual components and the integrated antenna system. Optimization algorithms, implemented in both CST Studio Suite and Python using the SciPy library, refined the design parameters for optimal performance. A prototype of the finalized design was fabricated and measured to validate the simulation results and demonstrate the feasibility of the proposed approach.
+\paragraph*{Methodology.} The methodology combined numerical simulations with experimental validation. Full-wave electromagnetic simulations, conducted using CST Studio Suite, were used to analyze the performance of individual components and the integrated antenna system. Optimization algorithms, implemented in both CST Studio Suite and Python using the SciPy library, refined the design parameters for optimal performance. A prototype of the finalized design was fabricated and measured to validate the simulation results and demonstrate the feasibility of the proposed approach.
 
 
 %========== Chapter 1: Electrodynamics of guided waves ==========
 \chapter{Electrodynamics of guided waves}
 \label{chapter:electrodynamics}
-This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and a general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided waves are derived, and their solutions are analysed to elucidate the behaviour of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
+This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Beginning with Maxwell's equations and a general description of electromagnetic fields in various settings relevant to this work, the wave equations governing guided waves are derived, and their solutions are analyzed to elucidate the behavior of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
 
-The exposition endeavours to take inspiration and build upon the foundations laid in~\parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics,zangwill:modern-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive theoretical framework for further chapters.
+The exposition endeavors to take inspiration and build upon the foundations laid in~\parencite{balanis:advanced-engineering-electromagnetics,griffiths:introduction-to-electrodynamics,zangwill:modern-electrodynamics}, incorporating personal insights and notational preferences to present a cohesive theoretical framework for further chapters.
 
 \section{Fundamentals of electrodynamics}
 \label{section:fundamentals-of-electrodynamics}
-This section presents the fundamental principles of electromagnetism, starting with Maxwell's equations, which encapsulate the relationships between electric and magnetic fields and their sources. The response of different materials to these fields is then explored through the introduction of \emph{constitutive relations}. Finally, the focus is shifted to the behaviour of electromagnetic fields at material boundaries, providing essential \emph{boundary conditions} for solving electromagnetic problems.
+This section presents the fundamental principles of electromagnetism, starting with Maxwell's equations, which encapsulate the relationships between electric and magnetic fields and their sources. The response of different materials to these fields is then explored through the introduction of \emph{constitutive relations}. Finally, the focus is shifted to the behavior of electromagnetic fields at material boundaries, providing essential \emph{boundary conditions} for solving electromagnetic problems.
 
 \subsection{Maxwell's equations}
 \label{subsection:maxwells-equations}
 The differential form of Maxwell's equations, as presented below, constitutes the cornerstone of classical electromagnetism, providing a complete%
     \footnote{For actual completeness, save for some special properties stemming from interactions in matter, the equations must also be supplemented by the Lorentz's force law $\vec F = q(\vec E + \vec v \times \vec B)$.}
-framework for analysing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field}~$\vec E$ and \emph{magnetic field}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur.
+framework for analyzing electromagnetic phenomena at any point in space and time. These equations summarize the relations between \emph{electric field}~$\vec E$ and \emph{magnetic field}~$\vec B$ and their sources due to charge densities~$\rho$, current densities~$\vec J$, or the changing of the fields themselves. To ensure the validity of these expressions, let us assume that the field vectors are well-behaved functions exhibiting continuity and possessing continuous derivatives. This assumption holds for most electromagnetic systems, with exceptions arising at interfaces between distinct media where abrupt changes in charge and current densities may occur.
 
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-general}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-general-div-e}
-            \div\vec E &= \frac1{\epsilon_0}\rho_{\mathrm e},
-        \\
-            \label{eq:maxwell-general-curl-e}
-            \curl\vec E &= -\mu_0\vec J_{\mathrm m} - \partial_t\vec B,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-general-div-b}
-            \div\vec B &= \mu_0\rho_{\mathrm m},\vphantom{\frac1{\epsilon_0}}
-        \\
-            \label{eq:maxwell-general-curl-b}
-            \curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
-        \end{align}
-    \end{minipage}
+    \begin{align}
+        \label{eq:maxwell-general-div-e}
+        \div\vec E &= \frac1{\epsilon_0}\rho_{\mathrm e},
+    \\
+        \label{eq:maxwell-general-curl-e}
+        \curl\vec E &= -\mu_0\vec J_{\mathrm m} - \partial_t\vec B,
+    \\
+        \label{eq:maxwell-general-div-b}
+        \div\vec B &= \mu_0\rho_{\mathrm m},\vphantom{\frac1{\epsilon_0}}
+    \\
+        \label{eq:maxwell-general-curl-b}
+        \curl\vec B &= \mu_0\vec J_{\mathrm e} + \mu_0\epsilon_0\partial_t\vec E,
+    \end{align}
     \nomenclature{$\partial_\xi$}{partial derivative w.r.t. variable $\xi$ }%
     \nomenclature{$\vec E$}{electric field }%
     \nomenclature{$\vec B$}{magnetic field }%
@@ -145,64 +145,47 @@ framework for analysing electromagnetic phenomena at any point in space and time
     \nomenclature{$\rho_{\mathrm m}$}{magnetic charge density }%
     \nomenclature{$\vec J_{\mathrm e}$}{electric current density }%
     \nomenclature{$\vec J_{\mathrm m}$}{magnetic current density }%
-    \bigskip
 \end{subequations}
 
 A notable aspect of \cref{subeq:maxwell-general} is the inclusion of the magnetic charge density $\rho_{\mathrm m}$ and magnetic current density $\vec J_{\mathrm m}$, which are part of the \enquote{generalized concept}. Although these quantities, despite diligent search, were never physically observed, their introduction establishes a pleasing balance in Maxwell's equations while being theoretically sound as well. This concept is further utilized when solving advanced physical problems in applied physics and engineering. This is facilitated by the introduction of equivalent magnetic charge and current, which can be used to conveniently express fields as if generated by these fictitious sources, especially in problems where the exact form of the electromagnetic field would otherwise be complicated to elucidate.
 
-Mathematically, \cref{subeq:maxwell-general}, like any differential equations, form a complete problem only when supplemented with suitable boundary conditions in a more traditional sense, such as the behaviour of the vector fields \enquote{in infinity}. These are typically \enquote{obvious} from the problem-solving context, e.g., fields vanishing at large distances from localized charge distribution, etc.
+Mathematically, \cref{subeq:maxwell-general}, like any differential equations, form a complete problem only when supplemented with suitable boundary conditions in a more traditional sense, such as the behavior of the vector fields \enquote{in infinity}. These are typically \enquote{obvious} from the problem-solving context, e.g., fields vanishing at large distances from localized charge distribution, etc.
 
 \subsection{Electromagnetic properties of matter}
-Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-general} provide a complete description of electromagnetic phenomena, an alternative formulation offers a more convenient approach for analysing materials susceptible to electric and magnetic polarization.
+Although Maxwell's equations in their fundamental form \eqref{subeq:maxwell-general} provide a complete description of electromagnetic phenomena, an alternative formulation offers a more convenient approach for analyzing materials susceptible to electric and magnetic polarization.
 
 Within such media, the total electric charge density~$\rho_{\mathrm e}$ can be expressed as a sum of the \emph{free charge} density~$\rho_{\mathrm f}$, which constitutes the \emph{actual source} charge,%
     \footnote{It is important to reinforce the idea that the magnetic charge and current are fictitious \enquote{source} quantities. Therefore, they are already, by definition, purely \emph{free} quantities.}
 and the \emph{bound charge}~$\rho_{\mathrm b}=-\div\vec P$, produced by an electric polarization~$\vec P$ of the material. Moreover, changing electric fields also induce changing polarization, producing \emph{polarization current}~$\vec J_{\mathrm p}=\partial_t\vec P$, which adds to the \emph{free current}~$\vec J_{\mathrm f}$. Similarly to electric polarization, a magnetic polarization~$\vec M$ results in a bound current~$\vec J_{\mathrm b}=\curl\vec M$. These effects, inherently connected to the susceptibility of materials to be polarized, influence the total electromagnetic field in their vicinity. Consequently, auxiliary field quantities were introduced that account for the presence of such media\\
 \begin{subequations}
     \label[pluralequation]{subeq:auxiliary-fields}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:eq:auxiliary-field-d}
-            \vec D &= \epsilon_0(\vec E + \vec P)\vphantom{\frac{1}{\mu_0}},
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:eq:auxiliary-field-h}
-            \vec H &= \frac{1}{\mu_0}\vec H - \vec M.
-        \end{align}
-    \end{minipage}
+    \begin{align}
+        \label{eq:eq:auxiliary-field-d}
+        \vec D &= \epsilon_0(\vec E + \vec P)\vphantom{\frac{1}{\mu_0}},
+    \\
+        \label{eq:eq:auxiliary-field-h}
+        \vec H &= \frac{1}{\mu_0}\vec H - \vec M.
+    \end{align}
     \nomenclature{$\vec D$}{auxiliary electric field }%
     \nomenclature{$\vec H$}{auxiliary magnetic field }%
-    \bigskip
-\end{subequations}\\
+\end{subequations}
 
 This approach allows for expressing Maxwell's equations in a form that directly relates the electric and magnetic fields to the free charge and free current, which are sources that can be controlled directly. Using the field quantities defined by \cref{subeq:auxiliary-fields}, Maxwell's \cref{subeq:maxwell-general} read\\
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-general-matter}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-general-matter-div-d}
-            \div\vec D &= \rho_{\mathrm f},
-        \\
-            \label{eq:maxwell-general-matter-curl-e}
-            \curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-general-matter-div-b}
-            \div\vec B &= \rho_{\mathrm{m}},
-        \\
-            \label{eq:maxwell-general-matter-curl-h}
-            \curl\vec H &= \vec J_{\mathrm f} + \partial_t\vec D,
-        \end{align}
-    \end{minipage}
-    \bigskip
+    \begin{align}
+        \label{eq:maxwell-general-matter-div-d}
+        \div\vec D &= \rho_{\mathrm f},
+    \\
+        \label{eq:maxwell-general-matter-curl-e}
+        \curl\vec E &= -\vec J_{\mathrm m} - \partial_t\vec B,
+    \\
+        \label{eq:maxwell-general-matter-div-b}
+        \div\vec B &= \rho_{\mathrm{m}},
+    \\
+        \label{eq:maxwell-general-matter-curl-h}
+        \curl\vec H &= \vec J_{\mathrm f} + \partial_t\vec D,
+    \end{align}
 \end{subequations}
 
 While \cref{subeq:maxwell-general-matter} effectively express electromagnetic laws within media, their hybrid notation, involving both $\vec E$ and $\vec D$ and $\vec B$ and $\vec H$, necessitates the use of \emph{constitutive relations}. These relations, which establish correspondence between the respective electric and magnetic field quantities, are material-dependent and reflect the specific response of a medium to electric and magnetic fields. These relationships can generally be expressed as
@@ -254,7 +237,7 @@ The \emph{constitutive parameters} $\hat\epsilon$, $\hat\mu$, and $\hat\sigma$, 
 \end{example}
 
 \subsection{Boundary conditions}
-While the differential form of Maxwell's equations is a powerful tool for analysing electromagnetic fields within continuous media, material boundaries introduce discontinuities that require special treatment. These discontinuities in the fields arise at interfaces between media with different electrical properties or at surfaces carrying charge or current densities. To accurately describe the behaviour of the fields across such boundaries, Maxwell's equations in their integral form, which naturally incorporate these discontinuities, are more convenient. This form is obtained by applying integral theorems from vector calculus to \cref{subeq:maxwell-general-matter}, which then take on the form of
+While the differential form of Maxwell's equations is a powerful tool for analyzing electromagnetic fields within continuous media, material boundaries introduce discontinuities that require special treatment. These discontinuities in the fields arise at interfaces between media with different electrical properties or at surfaces carrying charge or current densities. To accurately describe the behavior of the fields across such boundaries, Maxwell's equations in their integral form, which naturally incorporate these discontinuities, are more convenient. This form is obtained by applying integral theorems from vector calculus to \cref{subeq:maxwell-general-matter}, which then take on the form of
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-equations-integral}
     \begin{align}
@@ -278,27 +261,19 @@ where $S$ is any closed surface.
 Consider a boundary between two different media. The first medium is characterized by permittivity $\epsilon_1$ and permeability $\mu_1$, while the second medium is characterized by permittivity $\epsilon_2$ and permeability $\mu_2$. At this interface, electric and magnetic surface charge densities may be present, denoted by $q_{\mathrm f}$ and $q_{\mathrm m}$, respectively. Additionally, electric and magnetic surface current densities, denoted by $j_{\mathrm f}$ and $j_{\mathrm m}$, respectively, may also exist. The general \emph{boundary conditions} for electrodynamics are then obtained by applying \cref{subeq:maxwell-equations-integral} to arbitrary surfaces encompassing a portion of the interface, yielding\\
 \begin{subequations}
     \label[pluralequation]{subeq:boundary-conditions}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:boundary-conditions-d-normal}
-            \vec e_n \cdot (\vec D_1 - \vec D_2) &= q_{\mathrm f},
-        \\
-            \label{eq:boundary-conditions-e-tangential}
-            -\vec e_n \times (\vec E_1 - \vec E_2) &= \vec j_{\mathrm m},
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:boundary-conditions-b-normal}
-            \vec e_n \cdot (\vec B_1 - \vec B_2) &= q_{\mathrm m},
-        \\
-            \label{eq:boundary-conditions-H-tangential}
-            \vec e_n \times (\vec H_1 - \vec H_2) &= \vec j_{\mathrm f}.
-        \end{align}
-    \end{minipage}
-    \bigskip
+    \begin{align}
+        \label{eq:boundary-conditions-d-normal}
+        \vec e_n \cdot (\vec D_1 - \vec D_2) &= q_{\mathrm f},
+    \\
+        \label{eq:boundary-conditions-e-tangential}
+        -\vec e_n \times (\vec E_1 - \vec E_2) &= \vec j_{\mathrm m},
+    \\
+        \label{eq:boundary-conditions-b-normal}
+        \vec e_n \cdot (\vec B_1 - \vec B_2) &= q_{\mathrm m},
+    \\
+        \label{eq:boundary-conditions-H-tangential}
+        \vec e_n \times (\vec H_1 - \vec H_2) &= \vec j_{\mathrm f}.
+    \end{align}
 \end{subequations}
 
 \section{Electromagnetic waves}
@@ -310,64 +285,43 @@ With the foundations of electromagnetism established, the focus is now shifted t
 Maxwell's equations provide a comprehensive description of electromagnetic phenomena, but their coupled nature can make them challenging to solve directly. Decoupling the equations and expressing them individually in terms of the electric and magnetic fields is often advantageous to facilitate analysis, particularly in source-free regions. Inside regions with no \emph{free} charge or \emph{free} current, Maxwell's \cref{subeq:maxwell-general-matter} take on the form of\\
 \begin{subequations}
     \label[pluralequation]{subeq:maxwell-sourceless}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-sourceless-div-d}
-            \div \vec D &= 0,
-        \\
-            \label{eq:maxwell-sourceless-curl-e}
-            \curl \vec E &= -\partial_t\vec B,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:maxwell-sourceless-div-b}
-            \div\vec B &= 0,
-        \\
-            \label{eq:maxwell-sourceless-curl-h}
-            \curl\vec H &= \sigma\vec E + \partial_t\vec D.
-        \end{align}
-    \end{minipage}\bigskip
-\end{subequations}\\
+    \begin{align}
+        \label{eq:maxwell-sourceless-div-d}
+        \div \vec D &= 0,
+    \\
+        \label{eq:maxwell-sourceless-curl-e}
+        \curl \vec E &= -\partial_t\vec B,
+    \\
+        \label{eq:maxwell-sourceless-div-b}
+        \div\vec B &= 0,
+    \\
+        \label{eq:maxwell-sourceless-curl-h}
+        \curl\vec H &= \sigma\vec E + \partial_t\vec D.
+    \end{align}
+\end{subequations}
 Furthermore, if the medium is \emph{linear} and \emph{homogeneous}, \cref{eq:maxwell-sourceless-curl-h} can be fully expressed in terms of $\vec E$. With this simplification, applying the curl to \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h} yields\\
 \begin{subequations}
     \label[pluralequation]{subeq:wave-equations-lossy}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:wave-equation-e}
-            \Delta\vec E &= \mu\sigma\partial_t\vec E + \mu\epsilon\partial^2_t\vec E,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:wave-equation-b}
-            \Delta\vec B &= \mu\sigma\partial_t\vec B + \mu\epsilon\partial^2_t\vec B.
-        \end{align}
-    \end{minipage}\bigskip
+    \begin{align}
+        \label{eq:wave-equation-e}
+        \Delta\vec E &= \mu\sigma\partial_t\vec E + \mu\epsilon\partial^2_t\vec E,
+    \\
+        \label{eq:wave-equation-b}
+        \Delta\vec B &= \mu\sigma\partial_t\vec B + \mu\epsilon\partial^2_t\vec B.
+    \end{align}
 \end{subequations}
 
 Therefore, electric and magnetic fields in linear homogeneous media both clearly satisfy the wave equation with a linear damping term $\mu\sigma\partial_t$, introduced by conductive losses. Moreover, in regions with $\sigma = 0$, such as free space or ideal insulators, \cref{subeq:wave-equations-lossy} simplify even more to\\
 \begin{subequations}
     \label[pluralequation]{subeq:wave-equations-lossless}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:wave-equation-e-lossless}
-            \Delta\vec E &= \mu\epsilon\partial^2_t\vec E,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:wave-equations-b-lossless}
-            \Delta\vec B &= \mu\epsilon\partial^2_t\vec B,
-        \end{align}
-    \end{minipage}\bigskip
-\end{subequations}\\
+    \begin{align}
+        \label{eq:wave-equation-e-lossless}
+        \Delta\vec E &= \mu\epsilon\partial^2_t\vec E,
+    \\
+        \label{eq:wave-equations-b-lossless}
+        \Delta\vec B &= \mu\epsilon\partial^2_t\vec B,
+    \end{align}
+\end{subequations}
 taking on the form of classical wave equations, which are ubiquitous in physics. This consequently yields the formula
 \begin{align}
     v &= \frac{1}{\sqrt{\epsilon\mu}} = \frac{c}{\sqrt{\epsilon_r\mu_r}}
@@ -381,7 +335,7 @@ for the speed of electromagnetic waves in linear homogeneous media.
 
 \subsection{Monochromatic plane waves}
 \index{monochromatic plane wave}
-The electromagnetic theory presented thus far describes general vector fields that vary in space and time. However, as shown in \cref{subsection:the-wave-equations}, electromagnetic fields in source-free regions exhibit wave behaviour. Nonetheless, these time-varying vector fields remain complex and challenging to analyse in practical systems. Consider the elementary solution to the wave equation
+The electromagnetic theory presented thus far describes general vector fields that vary in space and time. However, as shown in \cref{subsection:the-wave-equations}, electromagnetic fields in source-free regions exhibit wave behavior. Nonetheless, these time-varying vector fields remain complex and challenging to analyze in practical systems. Consider the elementary solution to the wave equation
 \begin{align}
     \label{eq:monochromatic-plane-wave}
     \hat{\vec\psi}(\vec r,t) &= \hat{\vec\Psi}_0\exp\[\i\(\hat{\vec k} \cdot \vec r-\omega t\)\].
@@ -546,7 +500,9 @@ The exposition given so far is aligned with Augustin-Jean Fresnel's general defi
     \end{align}
     These vectors maintain orthonormality. Using this basis, it is evident that the real part of the thus-formed complex electric field
     \begin{align}
-        \hat{\vec E}_\pm(\vec r,t) &= E\vec e_\pm\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\] = \frac{E}{\sqrt 2}\[\vec e_x \pm \i\vec e_y\]\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\],
+        \hat{\vec E}_\pm(\vec r,t) &= E\vec e_\pm\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\]
+    \\
+        &= \frac{E}{\sqrt 2}\[\vec e_x \pm \i\vec e_y\]\exp\[\i\(\hat{\vec k}\cdot\vec r - \omega t\)\],
     \end{align}
     evaluated at $\vec r = 0$, is equivalent to \cref{eq:polarization-circular-e-r0}. Because the ordered set of vectors defined by \cref{eq:polarization-circular-complex-vectors} constitutes a valid basis for the transverse plane, analogous to the $(\vec e_x,\vec e_y)$ basis, the expression
     \begin{align}
@@ -556,72 +512,51 @@ The exposition given so far is aligned with Augustin-Jean Fresnel's general defi
 \end{remark}
 
 \subsection{Guided waves}
-The behaviour of electromagnetic waves within a waveguide is now explored. An assumption is made to provide a clear framework for analysis that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
+The behavior of electromagnetic waves within a waveguide is now explored. An assumption is made to provide a clear framework for analysis that the waveguide walls are perfect electric conductors (PEC), implying the absence of surface sources. This idealization leads to specific boundary conditions\\
 \begin{subequations}
     \label[pluralequation]{subeq:guided-waves-boundary-conditions}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:guided-waves-boundary-condition-e}
-            \vec e_n \times \vec E &= 0,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:guided-waves-boundary-condition-b}
-            \vec e_n \cdot \vec B &= 0.
-        \end{align}
-    \end{minipage}\bigskip
-\end{subequations}\\
+    \begin{align}
+        \label{eq:guided-waves-boundary-condition-e}
+        \vec e_n \times \vec E &= 0,
+    \\
+        \label{eq:guided-waves-boundary-condition-b}
+        \vec e_n \cdot \vec B &= 0.
+    \end{align}
+\end{subequations}
 It is essential to recognize that free charges and currents will be induced on the surface precisely to enforce these constraints.
 
 Furthermore, the focus is on monochromatic plane waves propagating along the waveguide. This implies that the electric and magnetic fields have a harmonic time dependence with a single angular frequency $\omega$. The $\hat{\phantom{x}}$ notation is dispensed with as $\hat k$ is real for the cases of interest. The general form of the fields is then given by \cref{subeq:monochromatic-plane-wave-fields}, where the $z$-axis is aligned with the waveguide's longitudinal direction. The complex amplitudes of the fields,\\
 \begin{subequations}
     \label[pluralequation]{subeq:complex-amplitudes}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label[pluralequation]{subeq:complex-amplitude-e}
-            \hat{\vec E}_0 &= E_x\vec e_x + E_y\vec e_y + E_z\vec e_z,
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label[pluralequation]{subeq:complex-amplitude-b}
-            \hat{\vec B}_0 &= B_x\vec e_x + B_y\vec e_y + B_z\vec e_z,
-        \end{align}
-    \end{minipage}\bigskip
-\end{subequations}\\
+    \begin{align}
+        \label{subeq:complex-amplitude-e}
+        \hat{\vec E}_0 &= E_x\vec e_x + E_y\vec e_y + E_z\vec e_z,
+    \\
+        \label{subeq:complex-amplitude-b}
+        \hat{\vec B}_0 &= B_x\vec e_x + B_y\vec e_y + B_z\vec e_z,
+    \end{align}
+\end{subequations}
 are functions of the transverse coordinates, $x$ and $y$, reflecting the spatial variations of the fields within the waveguide cross-section.
 
 To further simplify the analysis, the waveguide is considered source-free, meaning that no free charges or currents are \emph{impressed} within the waveguide. This allows the utilization of the simplified form of Maxwell's equations \eqref{subeq:maxwell-sourceless}. Due to the assumed linearity of the medium within the waveguide, these equations are expressed in terms of $\vec E$ and $\vec B$.
 
-With these assumptions in place, the behaviour of guided waves can be analysed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
+With these assumptions in place, the behavior of guided waves can be analyzed. From \cref{eq:maxwell-sourceless-curl-e,eq:maxwell-sourceless-curl-h}, adapted for a linear medium, a set of coupled differential equations relating the transverse components of the electric and magnetic fields is obtained. These equations can be solved to express the transverse field components in terms of the longitudinal components, taking the form of\\
 \begin{subequations}
     \label[pluralequation]{subeq:guided-wave-transverse-fields}
-    \noindent\centering
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:guided-wave-ex}
-            E_x &= \zeta\(k\partial_xE_z+\omega\partial_yB_z\)\vphantom{\frac{\omega}{c^2}},
-        \\
-            \label{eq:guided-wave-ey}
-            E_y &= \zeta\(k\partial_yE_z-\omega\partial_xB_z\)\vphantom{\frac{\omega}{c^2}},
-        \end{align}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-        \begin{align}
-            \label{eq:guided-wave-bx}
-            B_x &= \zeta\(k\partial_xB_z-\frac{\omega}{c^2}\partial_yE_z\),
-        \\
-            \label{eq:guided-wave-by}
-            B_y &= \zeta\(k\partial_yB_z+\frac{\omega}{c^2}\partial_xE_z\),
-        \end{align}
-    \end{minipage}\bigskip
-\end{subequations}\\
+    \begin{align}
+        \label{eq:guided-wave-ex}
+        E_x &= \zeta\(k\partial_xE_z+\omega\partial_yB_z\)\vphantom{\frac{\omega}{c^2}},
+    \\
+        \label{eq:guided-wave-ey}
+        E_y &= \zeta\(k\partial_yE_z-\omega\partial_xB_z\)\vphantom{\frac{\omega}{c^2}},
+    \\
+        \label{eq:guided-wave-bx}
+        B_x &= \zeta\(k\partial_xB_z-\frac{\omega}{c^2}\partial_yE_z\),
+    \\
+        \label{eq:guided-wave-by}
+        B_y &= \zeta\(k\partial_yB_z+\frac{\omega}{c^2}\partial_xE_z\),
+    \end{align}
+\end{subequations}
 where $\zeta = \i/((\omega/c)^2-k^2)$. Finally, substituting \cref{subeq:guided-wave-transverse-fields} into \cref{eq:maxwell-sourceless-div-d,eq:maxwell-sourceless-div-b} yields the uncoupled equations
 \begin{subequations}
     \label[pluralequation]{subeq:guided-wave-longitudinal-fields}
@@ -647,7 +582,7 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
 
 \begin{remark}[Modal decomposition of guided waves]
     \label{remark:modal-decomposition-of-guided-waves}
-    The \cref{subeq:guided-wave-longitudinal-fields} for $E_z$ and $B_z$ are instances of the \emph{Helmholtz equation} with Dirichlet and Neumann boundary conditions, respectively. This mathematical structure is the eigenvalue problem for the Laplace operator arising in various physical contexts.
+    \Cref{subeq:guided-wave-longitudinal-fields} for $E_z$ and $B_z$ are instances of the \emph{Helmholtz equation} with Dirichlet and Neumann boundary conditions, respectively. This mathematical structure is the eigenvalue problem for the Laplace operator arising in various physical contexts.
     
     For instance, the same equation and boundary conditions govern the vertical displacements of a vibrating drumhead. In this analogy, TM modes correspond to a drumhead with fixed boundaries, while TE modes correspond to a drumhead with free boundaries. The TM case is also isomorphic to the Schr\"odinger problem for a free particle's wave functions and energy eigenvalues in a two-dimensional box with rigid walls. Seeking inspiration in these analogous problems provides valuable intuition when thinking about a waveguide's modal eigenfunctions and eigenvalues. Some key mathematical results stemming from these analogies include:
     \begin{enumerate}[label=(\alph*)]
@@ -695,21 +630,14 @@ These equations, often referred to as the \emph{Helmholtz equations}, govern the
     Substituting this product into \cref{eq:guided-wave-bz} yields a differential equation that can be rearranged by dividing through by $B_z$. This rearranged equation reveals that the $x$-dependent and $y$-dependent terms must be constant, leading to two ordinary differential equations,\\
     \begin{subequations}
         \label[pluralequation]{subeq:rectangular-waveguide-te-odes}
-        \noindent\centering
-        \begin{minipage}{0.45\textwidth}
-            \begin{align}
-                \label{eq:rectangular-waveguide-te-ode-x}
-                \frac1X X'' &= -k_x^2,
-            \end{align}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.45\textwidth}
-            \begin{align}
-                \label{eq:rectangular-waveguide-te-ode-y}
-                \frac1Y Y'' &= -k_y^2.
-            \end{align}
-        \end{minipage}\bigskip
-    \end{subequations}\\
+        \begin{align}
+            \label{eq:rectangular-waveguide-te-ode-x}
+            \frac1X X'' &= -k_x^2,
+        \\
+            \label{eq:rectangular-waveguide-te-ode-y}
+            \frac1Y Y'' &= -k_y^2.
+        \end{align}
+    \end{subequations}
     Additionally, a relationship between the separation constants, $k_x$ and $k_y$, and the wave number, $k$, is established:
     \begin{align}
         \label{eq:rectangular-waveguide-te-k}
@@ -776,7 +704,7 @@ The description of circular polarization expressed compactly in \cref{eq:polariz
 \end{itemize}
 
 \section{Literature survey}
-While the methods established above can be refined and adjusted to achieve favourable results in typical metrics for linear-to-circular polarizers, each also exhibits inherent limitations. While simple to implement, dielectric vane polarizers encounter narrow bandwidth issues and suffer from significant power limitations due to inherent dielectric losses. The dielectric losses are encompassed in \cref{eq:wave-number} as any real dielectric exhibits a small but non-zero conductivity $\sigma > 0$. These losses become particularly pronounced at higher frequencies and power levels, restricting their applicability in certain scenarios. In contrast, septum polarizers offer promising capabilities for a wide range of applications, particularly in power handling and the efficient generation of both right-hand and left-hand circular polarization. As noted by~\parencite{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer}, modifications to septum designs, such as integrating RF MEMS switches, can effectively achieve reconfigurability and control over the handedness of the produced circular polarization. However, the size and weight of septum structures can pose significant constraints, especially in compact or weight-sensitive applications. Furthermore, as highlighted by~\parencite{wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}, alternative septum geometries, such as tapered slots, while offering potential design variations, do not necessarily demonstrate substantial performance improvements over conventional stepped septum designs. While capable of converting linearly polarized input into circular polarizations and operating at higher power levels, iris polarizers often exhibit challenges related to \enquote{overmoding} within their structures, necessitating precise mode-matching to maintain a satisfactory axial ratio across a broad frequency band. As observed by~\parencite{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer}, variations in iris design, such as incorporating ridges on four sides instead of two, can be explored. Moreover, as emphasized by~\parencite{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}, the design of iris arrays requires extensive analysis of the optimal geometry, often involving complex mathematical techniques, to achieve desired performance characteristics. This complexity is further compounded when considering wider bandwidth operation, as noted by~\parencite{piltyay-et-al:new-tunable-iris-post-square-waveguide-polarizers-for-satelliste-information-systems}, which may necessitate cascading individual sections and careful consideration of different ridge types and transmission matrix approaches. Finally, as demonstrated by~\parencite{deutschmann-arne:broadband-septum-polarizer-with-triangular-common-port}, innovative manufacturing techniques, such as additive manufacturing, combined with alternative waveguide geometries like triangular waveguides, offer potential avenues for further advancement in polarizer design, encompassing design, manufacturing, and measurement aspects.
+While the methods established above can be refined and adjusted to achieve favorable results in typical metrics for linear-to-circular polarizers, each also exhibits inherent limitations. While simple to implement, dielectric vane polarizers encounter narrow bandwidth issues and suffer from significant power limitations due to inherent dielectric losses. The dielectric losses are encompassed in \cref{eq:wave-number} as any real dielectric exhibits a small but non-zero conductivity $\sigma > 0$. These losses become particularly pronounced at higher frequencies and power levels, restricting their applicability in certain scenarios. In contrast, septum polarizers offer promising capabilities for a wide range of applications, particularly in power handling and the efficient generation of both right-hand and left-hand circular polarization. As noted by~\parencite{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer}, modifications to septum designs, such as integrating RF MEMS switches, can effectively achieve reconfigurability and control over the handedness of the produced circular polarization. However, the size and weight of septum structures can pose significant constraints, especially in compact or weight-sensitive applications. Furthermore, as highlighted by~\parencite{wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}, alternative septum geometries, such as tapered slots, while offering potential design variations, do not necessarily demonstrate substantial performance improvements over conventional stepped septum designs. While capable of converting linearly polarized input into circular polarizations and operating at higher power levels, iris polarizers often exhibit challenges related to \enquote{overmoding} within their structures, necessitating precise mode-matching to maintain a satisfactory axial ratio across a broad frequency band. As observed by~\parencite{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer}, variations in iris design, such as incorporating ridges on four sides instead of two, can be explored. Moreover, as emphasized by~\parencite{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}, the design of iris arrays requires extensive analysis of the optimal geometry, often involving complex mathematical techniques, to achieve desired performance characteristics. This complexity is further compounded when considering wider bandwidth operation, as noted by~\parencite{piltyay-et-al:new-tunable-iris-post-square-waveguide-polarizers-for-satelliste-information-systems}, which may necessitate cascading individual sections and careful consideration of different ridge types and transmission matrix approaches. Finally, as demonstrated by~\parencite{deutschmann-arne:broadband-septum-polarizer-with-triangular-common-port}, innovative manufacturing techniques, such as additive manufacturing, combined with alternative waveguide geometries like triangular waveguides, offer potential avenues for further advancement in polarizer design, encompassing design, manufacturing, and measurement aspects.
 
 An approach diverging from these standard methods is designing waveguide geometries utilizing mode dispersion to manipulate electromagnetic waves. Two prominent examples of modified waveguides include elliptical and waveguides with shaped metallic inserts. As demonstrated in~\parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}, in the context of a wideband circularly polarized horn antenna, elliptical waveguides leverage their inherent anisotropy to induce the required phase shift. The use of tapered elliptical waveguides, as also explored in~\parencite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}, facilitates wideband operation. On the other hand, waveguides with shaped metallic inserts introduce field perturbations to achieve the desired polarization transformation. As shown in~\parencite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges,bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns,bhardwaj-volakis:hexagonal-waveguide-based-circularly-polarized-horn-antennas-for-submmwave-terahertz-band,bhardwaj-volakis:circularly-polarized-horn-antennas-for-terahertz-communications-using-differential-mode-dispersion-in-hexagonal-waveguides}, these inserts can take various forms, including square or triangular blocks inserted into diagonally opposite corners of a square waveguide. Due to the modified geometry and resulting boundary conditions of such waveguides, their modes experience variations in their transverse field distributions and, consequently, their effective transverse wavenumbers. This difference in transverse wavenumbers necessitates a corresponding difference in their longitudinal wavenumbers, or phase constants, to satisfy the waveguide's dispersion relation, which links the transverse and longitudinal wavenumbers. Consequently, an accumulative phase difference develops between the modes as they propagate along the length of the polarizer. Furthermore, as explored in~\parencite{garcia-marin-masa-campos:bowtie-shaped-radiating-element-for-single-and-dual-circular-polarization}, more optimal cross-sectional shapes, such as a bow-tie configuration, can enhance performance, although often at the expense of increased manufacturing complexity. While the higher frequency regions targeted in most of the explored articles are not the primary focus of this work, the underlying principles of achieving polarization control through modified waveguide cross-sections provide valuable insights and inspiration for the design of the polarizer presented herein.
 
@@ -813,25 +741,25 @@ of the circular waveguide are presented in \cref{fig:circular-waveguide-mode1,fi
     \centering
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/waveguide_square_mode1.png}
+        \includegraphics[width=.65\textwidth]{src/waveguide_square_mode1.png}
         \caption{\label{fig:square-waveguide-mode1}}
     \end{subfigure}
     \hspace{0.5cm}
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/waveguide_square_mode2.png}
+        \includegraphics[width=.65\textwidth]{src/waveguide_square_mode2.png}
         \caption{\label{fig:square-waveguide-mode2}}
     \end{subfigure}
     \\
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/waveguide_circular_mode1.png}
+        \includegraphics[width=.65\textwidth]{src/waveguide_circular_mode1.png}
         \caption{\label{fig:circular-waveguide-mode1}}
     \end{subfigure}
     \hspace{0.5cm}
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/waveguide_circular_mode2.png}
+        \includegraphics[width=.65\textwidth]{src/waveguide_circular_mode2.png}
         \caption{\label{fig:circular-waveguide-mode2}}
     \end{subfigure}
     \caption{\label{fig:symmetric-waveguide-modes}Symmetric waveguides: fundamental modes}
@@ -841,31 +769,31 @@ of the circular waveguide are presented in \cref{fig:circular-waveguide-mode1,fi
     \centering
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.7\textwidth]{src/polarizer_square_mode1.png}
+        \includegraphics[width=.6\textwidth]{src/polarizer_square_mode1.png}
         \caption{\label{fig:square-polarizer-mode1}}
     \end{subfigure}
     \hspace{0.5cm}
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.7\textwidth]{src/polarizer_square_mode2.png}
+        \includegraphics[width=.6\textwidth]{src/polarizer_square_mode2.png}
         \caption{\label{fig:square-polarizer-mode2}}
     \end{subfigure}
     \\
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/polarizer_circular_mode1.png}
+        \includegraphics[width=.65\textwidth]{src/polarizer_circular_mode1.png}
         \caption{\label{fig:circular-polarizer-mode1}}
     \end{subfigure}
     \hspace{0.5cm}
     \begin{subfigure}{.45\textwidth}
         \centering
-        \includegraphics[width=.75\textwidth]{src/polarizer_circular_mode2.png}
+        \includegraphics[width=.65\textwidth]{src/polarizer_circular_mode2.png}
         \caption{\label{fig:circular-polarizer-mode2}}
     \end{subfigure}
     \caption{\label{fig:symmetric-polarizer-modes}Symmetric polarizers: fundamental modes}
 \end{figure}
 
-With the incident modes established, the eigenmodes of the polarizers, which are the identical waveguides but now \emph{with} the shapes inserted, are analysed. The eigenmodes take the form presented in \cref{fig:square-polarizer-mode1,fig:square-polarizer-mode2} for the square geometry, whereas the circular waveguide with inserts supports two fundamental modes depicted in \cref{fig:circular-polarizer-mode1,fig:circular-polarizer-mode2}. As expected, the transverse field exhibits a standing wave behaviour in both cases as dictated by the boundary conditions on a conductive surface. More importantly, for the polarization transformation, the metallic shapes perturb the electromagnetic fields, changing the propagation constants of the existing modes. Crucially, the presence of these inserts breaks the original symmetry of the waveguide, causing a dispersion, or difference in phase velocity, between the two fundamental modes of propagation. This fact is illustrated in \cref{fig:symmetric-polarizer-modes}, wherein in both geometries, one of the modes perceives a different electric path than the other. This dispersion is the key mechanism for achieving circular polarization. The phase difference between the two fundamental modes accumulates as the electromagnetic wave propagates along the waveguide. This cumulative phase lag can be precisely controlled by carefully selecting the geometry and placement of the inserts and the length of the waveguide. In the context of a polarizer designed to generate circular polarization, the goal is to achieve precisely one-quarter wavelength phase difference between the two modes at the output. As shown in \cref{eq:polarization-circular-condition}, this quadrature phase relationship, combined with equal amplitudes of the two modes, generates a circularly polarized wave. The eigenmode analysis allows for accurately determining the modal field distributions, enabling precise design and optimization of the polarizer to achieve the desired phase shift and polarization state.
+With the incident modes established, the eigenmodes of the polarizers, which are the identical waveguides but now \emph{with} the shapes inserted, are analyzed. The eigenmodes take the form presented in \cref{fig:square-polarizer-mode1,fig:square-polarizer-mode2} for the square geometry, whereas the circular waveguide with inserts supports two fundamental modes depicted in \cref{fig:circular-polarizer-mode1,fig:circular-polarizer-mode2}. As expected, the transverse field exhibits a standing wave behavior in both cases as dictated by the boundary conditions on a conductive surface. More importantly, for the polarization transformation, the metallic shapes perturb the electromagnetic fields, changing the propagation constants of the existing modes. Crucially, the presence of these inserts breaks the original symmetry of the waveguide, causing a dispersion, or difference in phase velocity, between the two fundamental modes of propagation. This fact is illustrated in \cref{fig:symmetric-polarizer-modes}, wherein in both geometries, one of the modes perceives a different electric path than the other. This dispersion is the key mechanism for achieving circular polarization. The phase difference between the two fundamental modes accumulates as the electromagnetic wave propagates along the waveguide. This cumulative phase lag can be precisely controlled by carefully selecting the geometry and placement of the inserts and the length of the waveguide. In the context of a polarizer designed to generate circular polarization, the goal is to achieve precisely one-quarter wavelength phase difference between the two modes at the output. As shown in \cref{eq:polarization-circular-condition}, this quadrature phase relationship, combined with equal amplitudes of the two modes, generates a circularly polarized wave. The eigenmode analysis allows for accurately determining the modal field distributions, enabling precise design and optimization of the polarizer to achieve the desired phase shift and polarization state.
 
 \begin{remark}[Dual polarization capability]
     \label{remark:dual-polarization-capatibility}
@@ -895,7 +823,7 @@ where $E_1$ and $E_2$ are the amplitudes of the two modes and the polarizer outp
 \label{subsection:comparison-of-symmetric-waveguides}
 To conclude the eigenmode analysis, a decision will be made, using the previously introduced figures of merit, regarding which geometry is better suited for polarization control, considering both practical and performance aspects. Ideally, a minimal frequency dependence of both figures, \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio}, is desired. However, due to the inherently resonant operational principle of the waveguide, achieving feasible performance across an ultrawide band with a single section of such a polarizing structure is not considered possible.
 
-Before proceeding, the practical evaluation of \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio}  should be addressed. Given that both polarizers are analysed as uniform waveguides (\cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}), the propagation dispersion between the two modes, and consequently both metrics, can be approximated as constant throughout the polarizer, i.e., $\partial_z\Delta k_L=0$. This approximation allows \cref{eq:polarizer-specific-phase-shift} to be expressed as
+Before proceeding, the practical evaluation of \cref{eq:polarizer-specific-phase-shift,eq:polarizer-amplitude-ratio}  should be addressed. Given that both polarizers are analyzed as uniform waveguides (\cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}), the propagation dispersion between the two modes, and consequently both metrics, can be approximated as constant throughout the polarizer, i.e., $\partial_z\Delta k_L=0$. This approximation allows \cref{eq:polarizer-specific-phase-shift} to be expressed as
 \begin{align}
     \label{eq:polarizer-phase-shift}
     \Delta k_L(f) &= \[k_2-k_1\](f),
@@ -915,27 +843,27 @@ representing the polarizer length required to achieve a mode phase shift of $\pi
     conducted for a polarizer shorter than that required to produce a $\pi/4$ phase shift.}
 This modified objective function can be readily computed using the \emph{Template-Based Post-Processing} feature within CST Studio Suite, using $\Delta\phi(f)$ obtained from the $E$-field probe result. Moreover, the practical feasibility of the polarizer is inherently incorporated into this formulation.
 
-The two polarizers depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective} are modelled with a similar cutoff frequency to facilitate a fair comparison. A diameter of $\qty{50}{mm}$ for the circular waveguide and a side length of $\qty{50}{mm}$ for the square waveguide are selected for the operating band of $\frequencyrange$. This selection results in a cutoff frequency of approximately $\qty{3}{GHz}$ for both underlying waveguides. As previously discussed, both polarizer metrics, \cref{eq:polarizer-amplitude-ratio,eq:polarizer-length-for-90deg}, are predominantly influenced by the cross-sectional geometry. Consequently, both polarizers have been parameterized by the width, $w$, of their chamfering inserts, as depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}.
-
-\begin{figure}[h]
+\begin{figure}[!htb]
     \centering
     \includesvg[width=\textwidth]{src/polarizers_cutoff_frequencies.svg}
     \caption{\label{fig:polarizers-cutoff-frequencies}Polarizers: cutoff frequencies}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htb]
     \centering
     \includesvg[width=\textwidth]{src/square_polarizer_cross_section.svg}
     \caption{\label{fig:square-polarizer-cross-section}Square polarizer: cross-section tuning}
 \end{figure}
 
-\begin{figure}
+The two polarizers depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective} are modelled with a similar cutoff frequency to facilitate a fair comparison. A diameter of $\qty{50}{mm}$ for the circular waveguide and a side length of $\qty{50}{mm}$ for the square waveguide are selected for the operating band of $\frequencyrange$. This selection results in a cutoff frequency of approximately $\qty{3}{GHz}$ for both underlying waveguides. As previously discussed, both polarizer metrics, \cref{eq:polarizer-amplitude-ratio,eq:polarizer-length-for-90deg}, are predominantly influenced by the cross-sectional geometry. Consequently, both polarizers have been parameterized by the width, $w$, of their chamfering inserts, as depicted in \cref{fig:polarizer-square-perspective,fig:polarizer-circular-perspective}.
+
+The mode cutoff frequency dispersion in \cref{fig:polarizers-cutoff-frequencies} is observed to be similar for both polarizers. However, a comparison of \cref{fig:square-polarizer-cross-section,fig:circular-polarizer-cross-section} reveals that the square waveguide achieves superior phase dispersion while maintaining a lower amplitude dispersion gradient. Henceforth, this text concerns the design of a square waveguide polarizer, and the simple term \emph{polarizer} will refer to this specific kind.
+
+\begin{figure}[!htb]
     \centering
     \includesvg[width=\textwidth]{src/circular_polarizer_cross_section.svg}
     \caption{\label{fig:circular-polarizer-cross-section}Circular polarizer: cross-section tuning}
 \end{figure}
-
-The mode cutoff frequency dispersion in \cref{fig:polarizers-cutoff-frequencies} is observed to be similar for both polarizers. However, a comparison of \cref{fig:square-polarizer-cross-section,fig:circular-polarizer-cross-section} reveals that the square waveguide achieves superior phase dispersion while maintaining a lower amplitude dispersion gradient. Henceforth, this text concerns the design of a square waveguide polarizer, and the simple term \emph{polarizer} will refer to this specific kind.
 
 \section{Square waveguide polarizer}
 With the fundamental waveguide structure established, the complete polarizer design can now be elaborated upon. This section outlines the design procedure, including all key considerations and design choices made. The process begins by defining the design requirements, which will serve as the foundation for modelling the structure.
@@ -950,14 +878,12 @@ Subsequently, simulations were carried out to confirm the suitability of this di
 
 With the side length established, the next step involved determining the dimensions of the chamfering and the overall length of the polarizer. These parameters were determined through a parametric sweep using simulations. This involved systematically varying the chamfering width and observing its impact on the polarizer's performance. The results of this parametric sweep are presented in \cref{fig:square-polarizer-cross-section}.
 
-After carefully analysing the simulated results, a chamfering width of $\qty{23}{mm}$ and a polarizer length of $\qty{126}{mm}$ were chosen. These values were selected to provide optimal performance with respect to polarization purity, meaning the ability to effectively transform a linearly polarized wave into a circularly polarized one. Additionally, these dimensions maintain a satisfactory axial ratio, which, as represented by the amplitude ratio in \cref{eq:polarizer-amplitude-ratio}, is a critical measure of the quality of the generated circular polarization.
+After carefully analyzing the simulated results, a chamfering width of $\qty{23}{mm}$ and a polarizer length of $\qty{126}{mm}$ were chosen. These values were selected to provide optimal performance with respect to polarization purity, meaning the ability to effectively transform a linearly polarized wave into a circularly polarized one. Additionally, these dimensions maintain a satisfactory axial ratio, which, as represented by the amplitude ratio in \cref{eq:polarizer-amplitude-ratio}, is a critical measure of the quality of the generated circular polarization.
 
 \subsection{Simulation results}
-The polarizer design section concludes with an evaluation of the polarizer's performance under full-wave simulation. Previous simulations were limited to analysing the eigenmode properties of the polarizer geometry. Consequently, it remains to be verified that the proposed solution functions as intended, i.e., that a linearly polarized $\TE 01$ or $\TE 10$ wave, guided by a square waveguide (as depicted in \cref{fig:square-waveguide-mode1,fig:square-waveguide-mode2}), is effectively converted into a circularly polarized wave upon excitation of the structure.
+The polarizer design section concludes with an evaluation of the polarizer's performance under full-wave simulation. Previous simulations were limited to analyzing the eigenmode properties of the polarizer geometry. Consequently, it remains to be verified that the proposed solution functions as intended, i.e., that a linearly polarized $\TE 01$ or $\TE 10$ wave, guided by a square waveguide (as depicted in \cref{fig:square-waveguide-mode1,fig:square-waveguide-mode2}), is effectively converted into a circularly polarized wave upon excitation of the structure.
 
 To simulate more realistic operating conditions, two sections of standard rectangular waveguide, with the same side length as the polarizer, are introduced at each end of the polarizer structure, as depicted in \cref{fig:polarizer-perspective}. The input waveguide section facilitates the excitation of the polarizer with a linearly polarized wave. The output waveguide section serves as a rudimentary radiating element, allowing for an initial assessment of the radiated field. It also allows for verification that the generated circular wave maintains its integrity during the transition from the polarizer to a subsequent waveguide section while also minimizing the influence of reflections. This configuration further permits an examination of the radiation characteristics of the open-ended waveguide, providing preliminary insights into parameters such as co-polarization, cross-polarization directivity, and axial ratio, effectively representing a minimalist circularly polarized antenna.
-
-The results, in the form of radiation patterns for co- and cross-polarizations of both incident waveguide modes, are presented in \cref{fig:polarizer-radiation}. Other antenna parameters, such as scattering parameters, are not studied since the antenna in \cref{fig:polarizer-perspective} serves only as a validation of the polarizing functionality. While serving as a valid check of the radiation properties, the radiation from an open-ended waveguide suffers from large reflections due to the unmatched transition from a waveguide into free space. Perhaps the most crucial quality factor of circular polarization, the axial ratio, is evaluated in the far-field and is analogous to \cref{eq:polarizer-amplitude-ratio}, which describes the ratio of the orthogonal $E$-field components.
 
 \begin{figure}[!ht]
     \centering
@@ -965,7 +891,9 @@ The results, in the form of radiation patterns for co- and cross-polarizations o
     \caption{\label{fig:polarizer-perspective}Final polarizer: model}
 \end{figure}
 
-These results confirm the previous eigenmode analysis. As shown in \cref{fig:polarizer-radiation}, the axial ratio maintains a low value (with values below $<\qty{3}{dB}$ generally acceptable), even reaching $\qty{0}{dB}$ around the centre of the design band. The elevation radiation patterns are displayed at the centre frequency.
+The results, in the form of radiation patterns for co polarization and cross polarization of both incident waveguide modes, are presented in \cref{fig:polarizer-radiation}. Other antenna parameters, such as scattering parameters, are not studied since the antenna in \cref{fig:polarizer-perspective} serves only as a validation of the polarizing functionality. While serving as a valid check of the radiation properties, the radiation from an open-ended waveguide suffers from large reflections due to the unmatched transition from a waveguide into free space. Perhaps the most crucial quality factor of circular polarization, the axial ratio, is evaluated in the far-field and is analogous to \cref{eq:polarizer-amplitude-ratio}, which describes the ratio of the orthogonal $E$-field components.
+
+These results confirm the previous eigenmode analysis. As shown in \cref{fig:polarizer-radiation}, the axial ratio maintains a low value (with values below $<\qty{3}{dB}$ generally acceptable), even reaching $\qty{0}{dB}$ around the center of the design band. The elevation radiation patterns are displayed at the center frequency.
 
 \begin{figure}[!ht]
     \centering
@@ -1007,13 +935,13 @@ due to its ease of implementation and tuning, especially when compared to altern
 The performance of a single right-angle transition, as illustrated in \cref{fig:single-feed-model}, depends crucially on the precise tuning of two key parameters: the probe length, denoted by $l_1$, and its distance from the \enquote{back-short}, denoted by $d_1$. This section will focus on determining the optimal values of these parameters to achieve efficient power transfer within the dominant $\TE 10$ mode.
 
 Design guidelines typically suggest a probe length of half the waveguide's narrow dimension. Considering that rectangular waveguides are generally built with a $2:1$ side length ratio,%
-    \footnote{The wider dimension $A$ is typically chosen to be $3\lambda/4$ at the centre frequency as fundamental $\TE 10$ mode propagation is limited by the lower mode cutoff, occurring for $\lambda=2A$, and the higher mode cutoff, for $\lambda = A$. Consequently, utilizing the $2:1$ ratio, the narrow dimension is $3\lambda/8$.}
+    \footnote{The wider dimension $A$ is typically chosen to be $3\lambda/4$ at the center frequency as fundamental $\TE 10$ mode propagation is limited by the lower mode cutoff, occurring for $\lambda=2A$, and the higher mode cutoff, for $\lambda = A$. Consequently, utilizing the $2:1$ ratio, the narrow dimension is $3\lambda/8$.}
 the suggested probe length is given by
 \begin{align}
     \label{eq:probe-length}
     l_1 &= \frac{3}{16}\lambda_{\mathrm c},
 \end{align}
-where $\lambda_{\mathrm c}$ is the centre wavelength. The probe acts similarly to a monopole antenna radiating into the waveguide. For optimal radiation, a monopole antenna's length should be somewhat smaller than one-quarter of the operating wavelength due to the deviation from the idealized elementary dipole model, which assumes an infinitely thin conductor. Furthermore, the analogy is imperfect due to the presence of the waveguide walls and the influence of fringing capacitance at the probe tip. Consequently, the empirical value presented in \cref{eq:probe-length} aligns well with the theory of monopole antenna radiation as the working principle of the transition.
+where $\lambda_{\mathrm c}$ is the center wavelength. The probe acts similarly to a monopole antenna radiating into the waveguide. For optimal radiation, a monopole antenna's length should be somewhat smaller than one-quarter of the operating wavelength due to the deviation from the idealized elementary dipole model, which assumes an infinitely thin conductor. Furthermore, the analogy is imperfect due to the presence of the waveguide walls and the influence of fringing capacitance at the probe tip. Consequently, the empirical value presented in \cref{eq:probe-length} aligns well with the theory of monopole antenna radiation as the working principle of the transition.
 
 Since the monopole radiates omnidirectional the half-space above the waveguide wall, a significant portion of the input power is directed towards the back-short. Therefore, the distance to this shorting wall, $d_1$, is primarily determined by the requirement for constructive interference of the wave reflected by the back-short with the waves emanating from the probe in the desired direction. To understand this, consider the wave propagation within the dominant $\TE 10$ mode. The back-short, acting as a conductive, hence a highly reflective wall, introduces a phase shift of $\pi$ upon reflection. For constructive interference, the total phase shift experienced by the wave during its round-trip journey from the probe to the back-short and back to the probe must be an integer multiple of $2\pi$. The simplest solution that satisfies the constructive interference requirement is to set the back-short distance to one-quarter of the guide wavelength.%
     \footnote{The relevant wavelength in this scenario is the guide wavelength, $\lambda_g$, which represents the wavelength of the propagating wave within the waveguide under the dominant $\TE 10$ mode. This is distinct from the free-space wavelength $\lambda$, as detailed in \cref{example:te-waves-in-a-rectangular-waveguide}, and is given by \cref{eq:guide-wavelength}.}
@@ -1047,7 +975,7 @@ The design of a dual-feeding structure presents significant challenges, necessit
 
 A novel approach, introduced in~\parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, utilizes a \emph{grating polarizer} to facilitate feeding probe displacement. This method theoretically enables arbitrary probe displacement without significantly degrading the performance of either port. As illustrated in \cref{fig:dual-feed-model}, the concept introduces a grating made of wires aligned parallel with the displaced port (Port 2). Due to its orientation, the grating is designed to discriminate the horizontally polarized waves radiated from Port 2, acting as a reflecting wall, while remaining transparent to vertically polarized waves, oscillating orthogonal to the wires, incident from the non-displaced port (Port 1).
 
-\begin{figure}[bh]
+\begin{figure}[!ht]
     \sbox\twosubbox{%
         \resizebox{\dimexpr.95\textwidth-1em}{!}{%
             \includegraphics[height=3cm]{src/dual_feed_side_cut_view.png}%
@@ -1066,21 +994,21 @@ A novel approach, introduced in~\parencite{karki-et-al:dual-polarized-probe-for-
     \caption{\label{fig:dual-feed-model}Dual feed: section views}
 \end{figure}
 
-Optimizing the proposed structure is considerably more complex. However, analysing the anticipated impact of individual parameters can improve initial estimates or eliminate them from the final optimization. For instance, the port parameters (probe length and distance from the back-short) can be assumed to primarily influence the reflection from the corresponding port without significantly affecting the other. Similarly, the distance, $d_g$, between Port 1 and the grating polarizer is assumed to have a negligible impact on reflection from Port 2 ($S_{22}$). Finally, the grating geometry parameters, $g$ and $r$ (intuitively representing \enquote{grating density}), must be optimized with respect to both ports. As shown in~\parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, careful selection of these parameters is crucial to managing the trade-off between reflection from Port 1 ($S_{11}$) and port cross-talk ($S_{21}$), whereby a lower grating density reduces $S_{11}$ at the expense of increased $S_{21}$, and vice versa.
+Optimizing the proposed structure is considerably more complex. However, analyzing the anticipated impact of individual parameters can improve initial estimates or eliminate them from the final optimization. For instance, the port parameters (probe length and distance from the back-short) can be assumed to primarily influence the reflection from the corresponding port without significantly affecting the other. Similarly, the distance, $d_g$, between Port 1 and the grating polarizer is assumed to have a negligible impact on reflection from Port 2 ($S_{22}$). Finally, the grating geometry parameters, $g$ and $r$ (intuitively representing \enquote{grating density}), must be optimized with respect to both ports. As shown in~\parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, careful selection of these parameters is crucial to managing the trade-off between reflection from Port 1 ($S_{11}$) and port cross-talk ($S_{21}$), whereby a lower grating density reduces $S_{11}$ at the expense of increased $S_{21}$, and vice versa.
 
 \subsection{Grating}
 \label{subsection:grating}
-As hinted above, a strategic approach is taken whereby certain variables are selectively eliminated to streamline the optimization process. After adding a grating to Port 1, the impact of the grating distance $d_g$ on $S_{11}$ can be analysed and optimized, as $d_g$ is expected to have a negligible effect on $S_{22}$. While ideally, the grating should be transparent to Port 1 excitation and exhibit minimal influence on $S_{11}$, this is an oversimplification. Although not detrimental to the overall concept, the grating's placement necessitates careful consideration.
+As hinted above, a strategic approach is taken whereby certain variables are selectively eliminated to streamline the optimization process. After adding a grating to Port 1, the impact of the grating distance $d_g$ on $S_{11}$ can be analyzed and optimized, as $d_g$ is expected to have a negligible effect on $S_{22}$. While ideally, the grating should be transparent to Port 1 excitation and exhibit minimal influence on $S_{11}$, this is an oversimplification. Although not detrimental to the overall concept, the grating's placement necessitates careful consideration.
 
-Despite the generally low reflected energy from the grating, its introduction results in resonant behaviour in $S_{11}$, causing sharp increases in reflection at specific frequencies. As shown in \cref{fig:grating-distance-sweep}, the resonant wavelength is directly proportional to $d_g$. Full-wave simulation at the resonant frequency reveals that the grating and back-short form a resonant cavity, but only when the reflection from the grating destructively interferes with the forward-propagating wave at the cavity's midpoint. This point creates a node for a standing wave, forming a cavity mode depicted in \cref{fig:cavity-resonant}, likely resulting from a superposition of fundamental modes.
+Despite the generally low reflected energy from the grating, its introduction results in resonant behavior in $S_{11}$, causing sharp increases in reflection at specific frequencies. As shown in \cref{fig:grating-distance-sweep}, the resonant wavelength is directly proportional to $d_g$. Full-wave simulation at the resonant frequency reveals that the grating and back-short form a resonant cavity, but only when the reflection from the grating destructively interferes with the forward-propagating wave at the cavity's midpoint. This point creates a node for a standing wave, forming a cavity mode depicted in \cref{fig:cavity-resonant}, likely resulting from a superposition of fundamental modes.
 
-\begin{figure}[bh]
+\begin{figure}[!ht]
     \centering
     \includesvg[width=\textwidth]{src/grating_distance_sweep.svg}
     \caption{\label{fig:grating-distance-sweep}Single feed with grating: grating distance sweep}
 \end{figure}
 
-\begin{figure}[th]
+\begin{figure}[!ht]
     \centering
     \begin{subfigure}{.3\textwidth}
         \centering
@@ -1102,7 +1030,7 @@ Despite the generally low reflected energy from the grating, its introduction re
     \caption{\label{fig:cavity-resonant}Cavity resonance: electric field section views}
 \end{figure}
 
-The results presented in \cref{fig:grating-distance-sweep} are consistent with the tuning results reported in~\parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, where the authors identify recurring local minima in reflection at the centre frequency for $d_g = \lambda_{\mathrm g}/4$ and $d_g = 3\lambda_{\mathrm g}/4$. In contrast, a local maximum is observed for $d_g = \lambda_{\mathrm g}/2$. The referenced work further demonstrates that selecting $d_g = \lambda_{\mathrm g}/4$ is suboptimal, as the port cross-talk continually diminishes with increasing $d_g$, eventually saturating around $d_g = \lambda_{\mathrm g}/2$, provided that $d_2\approx d_1$. Consequently, a potential optimal value is given by
+The results presented in \cref{fig:grating-distance-sweep} are consistent with the tuning results reported in~\parencite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, where the authors identify recurring local minima in reflection at the center frequency for $d_g = \lambda_{\mathrm g}/4$ and $d_g = 3\lambda_{\mathrm g}/4$. In contrast, a local maximum is observed for $d_g = \lambda_{\mathrm g}/2$. The referenced work further demonstrates that selecting $d_g = \lambda_{\mathrm g}/4$ is suboptimal, as the port cross-talk continually diminishes with increasing $d_g$, eventually saturating around $d_g = \lambda_{\mathrm g}/2$, provided that $d_2\approx d_1$. Consequently, a potential optimal value is given by
 \begin{align}
     \label{eq:grating-distance}
     d_g &= \frac{3}{4}\lambda_{\mathrm g}
@@ -1153,12 +1081,12 @@ and the final model is depicted in \cref{fig:dual-feed-perspective}.
 
 \chapter{Antenna}
 \label{chapter:antenna}
-This chapter details the design of the third and final component of the system under consideration. As depicted in \cref{fig:polarizer-radiation}, the polarizer demonstrates the potential for generating waves with favourable far-field radiation characteristics. However, to facilitate a smooth transition between the waveguide and free space, the structure must be coupled with an antenna exhibiting moderate gain, approximately $\qty{15}{dBi}$. Furthermore, the antenna needs to support circular polarization. These requirements, particularly within the context of waveguide technology, suggest the utilization of a symmetrical antenna. While a pyramidal horn antenna with a square aperture could be inferred from the polarizer geometry, a conical horn antenna, adapted to the square polarizer outlet, is selected for this application due to its more straightforward fabrication process and robust support of circular polarization.
+This chapter details the design of the third and final component of the system under consideration. As depicted in \cref{fig:polarizer-radiation}, the polarizer demonstrates the potential for generating waves with favorable far-field radiation characteristics. However, to facilitate a smooth transition between the waveguide and free space, the structure must be coupled with an antenna exhibiting moderate gain, approximately $\qty{15}{dBi}$. Furthermore, the antenna needs to support circular polarization. These requirements, particularly within the context of waveguide technology, suggest the utilization of a symmetrical antenna. While a pyramidal horn antenna with a square aperture could be inferred from the polarizer geometry, a conical horn antenna, adapted to the square polarizer outlet, is selected for this application due to its more straightforward fabrication process and robust support of circular polarization.
 
 \section{Conical horn}
 The radiation characteristics of conical horn antennas, including gain, aperture phase distributions, loss factors, and amplitude patterns, have been comprehensively re-examined in~\parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns} utilizing spherical and quadratic aperture phase distributions. Moreover, a novel methodology for accurate computation of far-field amplitude patterns, including those in the far side and back lobe regions, was developed therein. This methodology leverages geometrical optics and diffraction theory, incorporating the Method of Equivalent Currents, which utilizes magnetic source quantities as discussed in \cref{subsection:maxwells-equations}.
 
-The theoretical work presented in~\parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns} and similar publications is anticipated to be integrated into the practical functionalities offered by Antenna Magus. This software facilitates the automatic synthesis of antenna designs, predicated on desired performance requirements, through neural networks. These networks are trained on an extensive database comprising existing antenna models and their corresponding performance data. Moreover, seamless integration with CST Studio Suite is supported, allowing for direct export of the synthesized antenna designs into the CST simulation environment for further analysis. An antenna model demonstrating this design approach, demanding the target gain of $\qty{15}{dBi}$ at the centre frequency of $\qty{5.2}{GHz}$, is illustrated in \cref{fig:conical-horn-magus-perspective}.
+The theoretical work presented in~\parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns} and similar publications is anticipated to be integrated into the practical functionalities offered by Antenna Magus. This software facilitates the automatic synthesis of antenna designs, predicated on desired performance requirements, through neural networks. These networks are trained on an extensive database comprising existing antenna models and their corresponding performance data. Moreover, seamless integration with CST Studio Suite is supported, allowing for direct export of the synthesized antenna designs into the CST simulation environment for further analysis. An antenna model demonstrating this design approach, demanding the target gain of $\qty{15}{dBi}$ at the center frequency of $\qty{5.2}{GHz}$, is illustrated in \cref{fig:conical-horn-magus-perspective}.
 
 \begin{figure}[!ht]
     \centering
@@ -1177,7 +1105,7 @@ The theoretical work presented in~\parencite{aboserwal-et-al:conical-horn-gain-a
 \end{figure}
 
 The antenna depicted in \cref{fig:conical-horn-magus-perspective} provides a robust performance benchmark for subsequent adaptation into a rectangular waveguide configuration. Maintaining the original horn dimensions while modifying the feed from a circular to a rectangular waveguide is hypothesized to yield comparable results, contingent upon a smooth rectangular-to-conical transition that minimizes reflections detrimental to horn performance. Parametric sweeps of the horn flare diameter, $D_f$, and flare length, $L_f$, indicate that the target gain can be realized through various combinations of these parameters. Notably, for each value of flare length, the relationship between gain and flare diameter exhibits a concave function characterized by a distinct local maximum.%
-    \footnote{This behaviour is observed and examined in Figure 3 of~\parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns}.}
+    \footnote{This behavior is observed and examined in Figure 3 of~\parencite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns}.}
 Consequently, selecting optimal parameters necessitates a trade-off between achieving the desired gain with a sufficient margin and minimizing the overall antenna dimensions. Two promising configurations were identified:
 \begin{enumerate}[label=(\alph*)]
     \item $D_f = \qty{120}{mm}$, $L_f = \qty{60}{mm}$, yielding a gain of $\qty{15}{dBi}$,
@@ -1208,7 +1136,7 @@ As previously addressed in \cref{section:dual-feed}, a manipulation of cross-tal
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.9\textwidth]{src/final_perspective.png}
+    \includegraphics[width=.8\textwidth]{src/final_perspective.png}
     \caption{\label{fig:final-perspective}Final structure: MVP model}
 \end{figure}
 
@@ -1217,7 +1145,7 @@ The structure illustrated in \cref{fig:final-perspective} represents the finaliz
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.9\textwidth]{src/final_umt_perspective.png}
+    \includegraphics[width=.8\textwidth]{src/final_umt_perspective.png}
     \caption{\label{fig:final-umt-perspective}Final structure: DFM model}
 \end{figure}
 UMT, a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner for their state-of-the-art technology and proven expertise, which instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, both the measured network parameters and the radiation properties, presented in \cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation}, respectively, demonstrate very good agreement with the high-fidelity simulations.
@@ -1246,7 +1174,7 @@ UMT, a leading company in the design, development, and manufacturing of custom c
 \label{chapter:conclusion}
 \addcontentsline{toc}{chapter}{\nameref{chapter:conclusion}}
 
-The thesis presents a comprehensive study on the design, fabrication, and measurement of a novel dual circularly polarized antenna operating within the $\frequencyrange$ frequency band. The work demonstrates high academic rigour and successfully achieves its core objectives, culminating in a functional prototype that exhibits excellent agreement between simulated and measured performance.
+The thesis presents a comprehensive study on the design, fabrication, and measurement of a novel dual circularly polarized antenna operating within the $\frequencyrange$ frequency band. The work demonstrates high academic rigor and successfully achieves its core objectives, culminating in a functional prototype that exhibits excellent agreement between simulated and measured performance.
 
 The primary academic goal of this thesis was to develop a waveguide-based antenna capable of producing switchable right-hand and left-hand circular polarization. This was achieved by introducing a novel polarizer design based on a square waveguide with chamfered corners, effectively creating a hexagonal waveguide structure. Through rigorous electromagnetic simulations and experimental validation, the thesis successfully demonstrates that this design allows for easy switching between polarization handedness by simply exciting one of the two orthogonal fundamental modes of the waveguide. This is a significant achievement with potential applications in polarization multiplexing, where dynamically controlling the polarization state can increase channel capacity. Moreover, the simple and robust design of the polarizer makes it suitable for scenarios where achieving polarization diversity might be challenging, such as in compact or integrated systems. The successful development of this novel polarizer constitutes the most significant academic contribution of this work, showcasing an innovative approach to polarization control in waveguide technology.
 
@@ -1254,7 +1182,9 @@ A further objective was to fabricate a physical prototype of the designed antenn
 
 Despite the project's overall success, several potential areas for improvement are identified. The polarizer's performance could be enhanced by incorporating a tapered transition into the chamfered sections, potentially reducing reflections and improving the overall bandwidth, which warrants further investigation. Implementing multiple polarizer sections with varying geometries could also widen the operational bandwidth, albeit at the cost of increased complexity. Regarding the feeding structure, alternative coaxial-to-waveguide transition techniques, such as disc-loaded or prismatic probes, are known to widen the operation bandwidth. Finally, while the conical horn antenna provides satisfactory performance, considering a quad-ridge square pyramidal horn could offer a more robust and potentially broader bandwidth solution, especially for applications demanding higher polarization purity across a wider frequency range. These suggested improvements provide avenues for future research and development, building upon the solid foundation established by this thesis.
 
-\newpage\ \newpage
+%========== Bibliography ==========
+\printbibliography[heading=bibintoc,title={References}]
+
 \appendix
 %========== Appendix A: Constrained optimization ==========
 \chapter{Constrained optimization}
@@ -1263,6 +1193,9 @@ In advanced optimization scenarios requiring algorithmic manipulation, such as g
 
 However, the CST Studio Suite installation incorporates a collection of CST Python libraries, as documented in~\parencite{cst:python-libraries-documentation}. These libraries allow external control of a CST Studio Suite instance and access to a subset of its features via a Python programming interface. Fortunately, the available features provide the requisite components for the construction of an optimizer class, thus enabling the establishment of an interface between an external optimization algorithm and automated simulation processes.
 
+The code snippet in \cref{lst:init} illustrates a segment of the class initialization method. During initialization, the class receives the path to the target project, an optimization configuration in a dictionary data structure that allows for optimization method customization, results processing logic, objective functions and others, and an optional path to a VBA script. This script, if provided, is executed within CST Studio Suite using its built-in BASIC interpreter during each optimization step after new parameter values are set. Beyond this, the complete initialization method defines various runtime variables for progress tracking and unpacks the optimization configuration dictionary into individual attributes to enhance runtime efficiency. These latter components are not central to the described core functionality and are omitted in the snippet.
+
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Optimizer class initialization}, label={lst:init}, language=Python]
 from cst.interface import DesignEnvironment
 from cst.results import ProjectFile, ResultItem
@@ -1287,14 +1220,20 @@ def __init__(
         self.project_path, allow_interactive=True
     ).get_3d()
 \end{lstlisting}
-
-The code snippet in \cref{lst:init} illustrates a segment of the class initialization method. During initialization, the class receives the path to the target project, an optimization configuration in a dictionary data structure that allows for optimization method customization, results processing logic, objective functions and others, and an optional path to a VBA script. This script, if provided, is executed within CST Studio Suite using its built-in BASIC interpreter during each optimization step after new parameter values are set. Beyond this, the complete initialization method defines various runtime variables for progress tracking and unpacks the optimization configuration dictionary into individual attributes to enhance runtime efficiency. These latter components are not central to the described core functionality and are omitted in the snippet.
+\end{minipage}
 
 The primary motivation behind developing a custom optimizer lies in the ability to tailor the \emph{objective function}. This function is evaluated at each iteration of the optimization process, serving to quantify performance, termed the \emph{objective value}, for a given set of parameters suggested by the optimization algorithm. Within the context of simulation software, this typically involves updating the model with new parameter values, executing a simulation, and assessing the objective value. Constraints can thus be enforced by integrating a geometry check and potential adjustments after the model's structure is updated with the new parameter values. An implementation of this strategy within the optimizer class, with minor details omitted for clarity, is presented in \cref{lst:objective_function}.
 
+For improved clarity and logical flow, the processing of simulation results is encapsulated within a dedicated method. This modular approach is beneficial due to the organization of CST Python libraries into multiple modules. As illustrated in \cref{lst:init}, the implementation utilizes the following two modules:
+\begin{itemize}
+    \item \texttt{cst.interface} provides classes that facilitate the interface for controlling CST Studio Suite.
+    \item \texttt{cst.results} enables read-only access to one-dimensional results stored in CST project files.
+\end{itemize}
+As shown in \cref{lst:objective_function}, the main body of the objective function concludes with a completed simulation, followed by saving the project to ensure the project files' accessibility to the result module. Subsequently, these results are processed and evaluated using the function detailed in \cref{lst:evaluate_step}.
+
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Objective function}, label={lst:objective_function}, language=Python]
 def objective_function(self, x: np.ndarray) -> float:
-    # Update parameters
     update_parameters = "Sub Main()\n"
     current_step = {}
     for name, value in zip(self.variable_names, x.round(5)):
@@ -1303,34 +1242,26 @@ def objective_function(self, x: np.ndarray) -> float:
         )
         current_step[name] = value
     update_parameters += (
-        "RebuildOnParametricChange(True, False)\nEnd Sub\n"
+        "RebuildOnParametricChange(True, False)\n"
     )
+    update_parameters += "End Sub\n"
     self.project.schematic.execute_vba_code(
         update_parameters, timeout=None
     )
-    # Execute geometry adjustment VBA script, if provided
     if self.check_geometry:
         self.project.schematic.execute_vba_code(
             self.check_geometry, timeout=None
         )
-    # Run simulation
     try:
         self.project.modeler.run_solver()
         self.last_run_id += 1
     finally:
         self.project.save(include_results=True)
-    # Evaluate objective value
     return self.evaluate_step(current_step)
 \end{lstlisting}
+\end{minipage}
 
-For improved clarity and logical flow, the processing of simulation results is encapsulated within a dedicated method. This modular approach is beneficial due to the organization of CST Python libraries into multiple modules. As illustrated in \cref{lst:init}, the implementation utilizes the following two modules:
-\begin{itemize}
-    \item \texttt{cst.interface} provides classes that facilitate the interface for controlling CST Studio Suite.
-    \item \texttt{cst.results} enables read-only access to one-dimensional results stored in CST project files.
-\end{itemize}
-As shown in \cref{lst:objective_function}, the main body of the objective function concludes with a completed simulation, followed by saving the project to ensure the project files' accessibility to the result module. Subsequently, these results are processed and evaluated using the function detailed in \cref{lst:evaluate_step}. For brevity, the function evaluates the results using the \emph{Sum of Differences} norm. The full implementation allows for choosing the goal norm 
-via the optimization configuration dictionary.
-
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Optimization step evaluation}, label={lst:evaluate_step}, language=Python]
 def evaluate_step(self, current_step: dict[str, Any]) -> float:
     # Get results
@@ -1349,14 +1280,19 @@ def evaluate_step(self, current_step: dict[str, Any]) -> float:
         average_difference = sum(
             result - goal["target"]
         ) / len(result)
-        objective_value += goal["weight"] * average_difference
+        objective_value += (
+            goal["weight"]
+            * average_difference
+        )
     return objective_value
 \end{lstlisting}
+\end{minipage}
 
 In addition to the core optimization routines, the optimizer class incorporates ancillary methods, as shown in the presented listings. While these utilities play an essential role, they are not the primary focus of this discussion. Among the utilities used in the listings are \texttt{get\_constraints} and \texttt{get\_options}, used in \cref{lst:minimize} and responsible for retrieving arguments relevant to the optimization method, and \texttt{parse\_results}, tasked with preparing raw data from CST.
 
 The foundational elements established thus far---simulation control, data retrieval, and performance evaluation---facilitate the integration of established optimization methods. Such methods are commonly found in data-oriented programming languages, with a particularly robust and widely recognized implementation available in the \emph{SciPy} library, an open-source scientific computing library for Python thoroughly documented in~\parencite{virtanen-et-al:scipy}.
 
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Use of CSTOptimizer with SciPy}, label={lst:minimize}, language=Python]
 from scipy.optimize import minimize
 
@@ -1369,11 +1305,20 @@ result = minimize(
     options=optimizer.get_options(),
 )
 \end{lstlisting}
+\end{minipage}
 
 \Cref{lst:minimize} assembles the complete logic, integrating all previously described components to enable an entire optimization process. While some supplementary logic concerning algorithm termination and the saving of optimal parameters is omitted here for brevity, all essential elements are present.
 
-The VBA script for geometry validation and potential adjustments, executed within CST Studio Suite following parametric modifications, as outlined in \cref{lst:objective_function}, represents the primary advantage of this approach. This entire side project originated as a solution to the problematic optimization behaviour described in \cref{subsection:dual-feed-optimization}. Therefore, the VBA script designed explicitly for adjusting the grating within a dual-feeding structure for a square waveguide is presented in \cref{lst:grating-adjustment}. This script serves both as a practical use case for the developed optimizer class and as a direct solution to the issue identified in the main body of this work.
+The VBA script for geometry validation and potential adjustments, executed within CST Studio Suite following parametric modifications, as outlined in \cref{lst:objective_function}, represents the primary advantage of this approach. This entire side project originated as a solution to the problematic optimization behavior described in \cref{subsection:dual-feed-optimization}. Therefore, the VBA script designed explicitly for adjusting the grating within a dual-feeding structure for a square waveguide is presented in \cref{lst:grating-adjustment}. This script serves both as a practical use case for the developed optimizer class and as a direct solution to the issue identified in the main body of this work.
 
+\Cref{lst:grating-adjustment} again represents a segment of a larger code base, omitting rudimentary steps like variable definitions and error handling for brevity. The script utilizes three custom functions. Two of these functions perform geometric validity checks related to two cases of invalid grating arrangements with varying gaps:
+\begin{enumerate}[label=(\alph*)]
+    \item A gap that is too narrow, resulting in a gap between the grating and waveguide walls.
+    \item A gap that is too wide, resulting in wires intersecting with the waveguide walls.
+\end{enumerate}
+The functions detailed in \cref{lst:is-grating-too-narrow} and \cref{lst:is-intersecting} detect these two cases, respectively. They are corrected in the main program loop by adding or removing grating wires as needed.
+
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Grating adjustment script}, label={lst:grating-adjustment}, language=VBScript]
 waveguideSide = GetParameter("waveguideSide")
 gratingGap = GetParameter("gratingGap")
@@ -1400,14 +1345,9 @@ If wireCount <> GetParameter("wireCount") Then
     Call RebuildOnParametricChange(True, False)
 End If
 \end{lstlisting}
+\end{minipage}
 
-\Cref{lst:grating-adjustment} again represents a segment of a larger code base, omitting rudimentary steps like variable definitions and error handling for brevity. The script utilizes three custom functions. Two of these functions perform geometric validity checks related to two cases of invalid grating arrangements with varying gaps:
-\begin{enumerate}[label=(\alph*)]
-    \item A gap that is too narrow, resulting in a gap between the grating and waveguide walls.
-    \item A gap that is too wide, resulting in wires intersecting with the waveguide walls.
-\end{enumerate}
-The functions detailed in \cref{lst:is-grating-too-narrow} and \cref{lst:is-intersecting} detect these two cases, respectively. They are corrected in the main program loop by adding or removing grating wires as needed.
-
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Check for a gap around the grating}, label={lst:is-grating-too-narrow}, language=VBScript]
 Private Function isGratingTooNarrow( _
     waveguideSide As Double, _
@@ -1425,7 +1365,9 @@ Private Function isGratingTooNarrow( _
     End If
 End Function
 \end{lstlisting}
+\end{minipage}
 
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[caption={Check for intersection with waveguide walls}, label={lst:is-intersecting}, language=VBScript]
 Private Function isIntersecting( _
     waveguideSide As Double, _
@@ -1442,13 +1384,14 @@ Private Function isIntersecting( _
     End If
 End Function
 \end{lstlisting}
+\end{minipage}
 
 %========== Appendix B: Measurement results ==========
 \chapter{Measurement results}
 \label{appendix:measurement-results}
 This appendix serves as a comprehensive repository for the complete set of measurement data acquired for the antenna prototype, facilitating a thorough analysis and validation of its performance characteristics. While key findings are summarized in the main body of the thesis for a preliminary evaluation, this appendix provides a detailed presentation of all measured parameters, particularly the complete azimuthal and elevation radiation patterns captured across various frequencies within the operational band.
 
-Two distinct experimental campaigns were conducted to fully characterize the prototype. The first campaign focused on S-parameter measurements, providing insights into impedance matching and power transmission across the operational frequency band using an Agilent Vector Network Analyser (VNA); these measurements were performed by UMT, whose contributions are gratefully acknowledged. The second campaign, conducted in the department anechoic chamber, evaluated the prototype's radiation characteristics. A double-ridged horn antenna was employed as the receiving antenna during these measurements. The experimental setups for both measurement campaigns are visually depicted in \cref{fig:measurement-setup}.
+Two distinct experimental campaigns were conducted to fully characterize the prototype. The first campaign focused on S-parameter measurements, providing insights into impedance matching and power transmission across the operational frequency band using an Agilent Vector Network Analyzer (VNA); these measurements were performed by UMT, whose contributions are gratefully acknowledged. The second campaign, conducted in the department anechoic chamber, evaluated the prototype's radiation characteristics. A double-ridged horn antenna was employed as the receiving antenna during these measurements. The experimental setups for both measurement campaigns are visually depicted in \cref{fig:measurement-setup}.
 
 \begin{figure}[!ht]
     \sbox\twosubbox{%
@@ -1505,14 +1448,5 @@ Two distinct experimental campaigns were conducted to fully characterize the pro
     \includesvg[width=\textwidth]{src/antenna2_port2_azimuth.svg}
     \caption{\label{fig:measurement-azimuth-pattern-port2}Measurement: port 2 azimuth radiation pattern ($\varphi=\ang{0}$)}
 \end{figure}
-
-% %========== Nomenclature ==========
-% \printnomenclature
-
-%========== Bibliography ==========
-\printbibliography[heading=bibintoc]
-
-% % %========== Index ==========
-% \printindex
 
 \end{document}

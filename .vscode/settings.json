@@ -14,9 +14,9 @@
         "notebook.source.organizeImports": "explicit"
     },
     "ruff.lint.run": "onType",
-    "ruff.lint.args": ["--config", "line-length=120"],
+    "ruff.lint.args": ["--config", "line-length=50"],
     "ruff.format.args": [
         "--config",
-        "line-length=120"
+        "line-length=50"
     ],
 }
