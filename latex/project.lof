@@ -9,10 +9,10 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Symmetric polarizers: models}}{23}{figure.caption.8}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Symmetric waveguides: fundamental modes}}{24}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Symmetric polarizers: fundamental modes}}{24}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Polarizers: cutoff frequencies}}{27}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Square polarizer: cross-section tuning}}{28}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Circular polarizer: cross-section tuning}}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Symmetric polarizers: fundamental modes}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Polarizers: cutoff frequencies}}{28}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Square polarizer: cross-section tuning}}{29}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Circular polarizer: cross-section tuning}}{29}{figure.caption.14}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Final polarizer: model}}{30}{figure.caption.16}%
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Final polarizer: radiation properties}}{31}{figure.caption.17}%
 \addvspace {10\p@ }
@@ -32,17 +32,14 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Final structure: MVP model}}{44}{figure.caption.31}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Final structure: DFM model}}{45}{figure.caption.32}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Measurement results: S-parameters}}{46}{figure.caption.33}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Measurement results: gain and aperture efficiency}}{46}{figure.caption.34}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Measurement results: axial ratio}}{47}{figure.caption.35}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Back view of the final structure}}{48}{figure.caption.36}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Measurement results: boresight radiation}}{46}{figure.caption.34}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Back view of the final structure}}{47}{figure.caption.35}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Measurement setup}}{56}{figure.caption.39}%
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Measurement 1: S-parameters}}{57}{figure.caption.40}%
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Measurement 1: gain and axial ratio}}{57}{figure.caption.41}%
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Measurement 1: elevation radiation pattern ($\varphi =\ang {90}$)}}{58}{figure.caption.42}%
-\contentsline {figure}{\numberline {B.5}{\ignorespaces Measurement 1: azimuth radiation pattern ($\varphi =\ang {0}$)}}{59}{figure.caption.43}%
-\contentsline {figure}{\numberline {B.6}{\ignorespaces Measurement 2: S-parameters}}{60}{figure.caption.44}%
-\contentsline {figure}{\numberline {B.7}{\ignorespaces Measurement 2: gain and axial ratio}}{60}{figure.caption.45}%
-\contentsline {figure}{\numberline {B.8}{\ignorespaces Measurement 2: elevation radiation pattern ($\varphi =\ang {90}$)}}{61}{figure.caption.46}%
-\contentsline {figure}{\numberline {B.9}{\ignorespaces Measurement 2: azimuth radiation pattern ($\varphi =\ang {0}$)}}{62}{figure.caption.47}%
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Measurement setup}}{56}{figure.caption.37}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Measurement: S-parameters}}{56}{figure.caption.38}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Measurement: boresight gain and axial ratio}}{57}{figure.caption.39}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Measurement: port 1 elevation radiation pattern ($\varphi =\ang {90}$)}}{58}{figure.caption.40}%
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Measurement: port 1 azimuth radiation pattern ($\varphi =\ang {0}$)}}{59}{figure.caption.41}%
+\contentsline {figure}{\numberline {B.6}{\ignorespaces Measurement: port 2 elevation radiation pattern ($\varphi =\ang {90}$)}}{60}{figure.caption.42}%
+\contentsline {figure}{\numberline {B.7}{\ignorespaces Measurement: port 2 azimuth radiation pattern ($\varphi =\ang {0}$)}}{61}{figure.caption.43}%

@@ -3,6 +3,7 @@ close all; clear; clc;
 addpath(genpath(fileparts(matlab.desktop.editor.getActiveFilename) + "\"))
 s = settings;
 s.matlab.appearance.figure.GraphicsTheme.TemporaryValue = "light";
+frequency_range = [4.8, 5.7];
 set(groot, 'DefaultTextInterpreter', 'latex');
 set(groot, 'DefaultAxesTickLabelInterpreter', 'latex');
 set(groot, 'DefaultLegendInterpreter', 'latex');
@@ -25,7 +26,7 @@ end
 hold off
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 ylabel("$L_\perp\ [\mathrm{mm}]$")
 
 nexttile;
@@ -36,7 +37,7 @@ end
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$E_2/E_1\ [\mathrm{dB}]$")
 
@@ -61,7 +62,7 @@ end
 hold off
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 ylabel("$L_\perp\ [\mathrm{mm}]$")
 
 nexttile;
@@ -72,7 +73,7 @@ end
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$E_2/E_1\ [\mathrm{dB}]$")
 
@@ -157,7 +158,7 @@ plot(freq, axial_ratio1)
 hold off
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
 title("Axial ratio (identical for both modes)")
@@ -172,7 +173,7 @@ figure("Name", "Feed - single (reflection)");
 plot(freq, reflection)
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{11}\ [\mathrm{dB}]$")
 set(gcf, "Position", [680, 618, 560, 260])
@@ -190,7 +191,7 @@ end
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{11}\ [\mathrm{dB}]$")
 sweep_values_legend = ["$\lambda_{\mathrm g}/4$", "$3\lambda_{\mathrm g}/8$", "$\lambda_{\mathrm g}/2$", "$5\lambda_{\mathrm g}/8$", "$3\lambda_{\mathrm g}/4$"];
@@ -205,7 +206,7 @@ figure("Name", "Feed - single with grating (reflection)");
 plot(freq, reflection)
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{11}\ [\mathrm{dB}]$")
 set(gcf, "Position", [680, 618, 560, 260])
@@ -229,7 +230,7 @@ plot(freq, s22)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 ylabel("$[\mathrm{dB}]$")
 
 nexttile;
@@ -241,7 +242,7 @@ plot(freq, s12)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$[\mathrm{dB}]$")
 
@@ -277,7 +278,7 @@ plot(freq_gain, final_gain)
 hold off
 grid on;
 box on;
-xlim([min(freq_gain), max(freq_gain)]);
+xlim(frequency_range);
 ylabel("$G\ [\mathrm{dB}]$")
 title("Gain (boresight)")
 
@@ -288,7 +289,7 @@ plot(freq_reflection, final_reflection)
 hold off
 grid on;
 box on;
-xlim([min(freq_reflection), max(freq_reflection)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{11}\ [\mathrm{dB}]$")
 title("Reflection")
@@ -330,9 +331,9 @@ plot(freq, mvp_s11)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
-xlabel("$f\ [\mathrm{GHz}]$")
+xlim(frequency_range);
 ylabel("$S_{11}\ [\mathrm{dB}]$")
+
 
 nexttile;
 hold on;
@@ -341,8 +342,7 @@ plot(freq, mvp_s12)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
-xlabel("$f\ [\mathrm{GHz}]$")
+xlim(frequency_range);
 ylabel("$S_{12}\ [\mathrm{dB}]$")
 
 nexttile;
@@ -352,7 +352,7 @@ plot(freq, mvp_s21)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{21}\ [\mathrm{dB}]$")
 
@@ -363,7 +363,7 @@ plot(freq, mvp_s22)
 hold off;
 grid on;
 box on;
-xlim([min(freq), max(freq)]);
+xlim(frequency_range);
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{22}\ [\mathrm{dB}]$")
 
@@ -371,94 +371,14 @@ leg = legend(["Grating", "No grating"], "Orientation", "horizontal");
 leg.Layout.Tile = "north";
 saveas(gcf, fullfile(pwd, '\latex\src\grating_vs_mvp_sparameters.svg'), 'svg')
 
-%% Final - grating vs MVP comparison (gain)
-% [theta, grating_gain] = get_single_plot_data("final_grating_gain_5G2.txt");
-% [~, mvp_gain] = get_single_plot_data("final_gain_5G2.txt");
-% 
-% figure("Name", "Final - grating vs MVP comparison (gain)")
-% tiles = tiledlayout(1, 2, "TileSpacing", "compact");
-% rlim_all = [-40, 20];
-% 
-% pax = polaraxes(tiles);
-% pax.Layout.Tile = 1;
-% hold on
-% cst_polarplot(theta, grating_gain{1}, rlim_all, pax)
-% cst_polarplot(theta, mvp_gain{1}, rlim_all, pax)
-% hold off
-% pax.Title.String = "Port 1";
-% 
-% pax = polaraxes(tiles);
-% pax.Layout.Tile = 2;
-% hold on
-% cst_polarplot(theta, grating_gain{2}, rlim_all, pax)
-% cst_polarplot(theta, mvp_gain{2}, rlim_all, pax)
-% hold off
-% pax.Title.String = "Port 2";
-% 
-% leg = legend(["Grating", "No grating"], "Orientation", "horizontal");
-% leg.Layout.Tile = "north";
-% saveas(gcf, fullfile(pwd, '\latex\src\grating_vs_mvp_gain.svg'), 'svg')
-
-%% Final - grating vs MVP comparison (polarizations)
-% [freq, grating_ar] = get_single_plot_data("final_grating_boresight_ar.txt");
-% [freq_mvp, mvp_ar] = get_single_plot_data("final_boresight_ar.txt");
-% [~, grating_pol] = get_single_plot_data("final_grating_boresight_polarizations.txt");
-% [~, mvp_pol] = get_single_plot_data("final_boresight_polarizations.txt");
-% 
-% figure("Name", "Feed - grating vs MVP comparison (polarizations)");
-% tiles = tiledlayout(3, 1, "TileSpacing", "compact");
-% 
-% nexttile;
-% hold on;
-% plot(freq, grating_ar{1})
-% plot(freq, grating_ar{2})
-% plot(freq_mvp, mvp_ar{2}, "LineStyle", "--", "Color", [.4 .4 .4])
-% hold off;
-% grid on;
-% box on;
-% xlim([min(freq), max(freq)]);
-% ylim([0, 7]);
-% ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
-% title("Axial ratio")
-% 
-% nexttile;
-% hold on;
-% plot(freq, grating_pol{3})
-% plot(freq, grating_pol{2})
-% plot(freq_mvp, mvp_pol{2}, "LineStyle", "--", "Color", [.4 .4 .4])
-% hold off;
-% grid on;
-% box on;
-% xlim([min(freq), max(freq)]);
-% ylabel("$G\ [\mathrm{dBi}]$")
-% title("Co-polarization")
-% 
-% nexttile;
-% hold on;
-% plot(freq, grating_pol{1})
-% plot(freq, grating_pol{4})
-% plot(freq_mvp, mvp_pol{1}, "LineStyle", "--", "Color", [.4 .4 .4])
-% hold off;
-% grid on;
-% box on;
-% xlim([min(freq), max(freq)]);
-% xlabel("$f\ [\mathrm{GHz}]$")
-% ylabel("$G\ [\mathrm{dBi}]$")
-% title("Cross-polarization")
-% 
-% leg = legend(["Grating (port 1)", "Grating (port 2)", "No grating"], "Orientation", "horizontal");
-% leg.Layout.Tile = "north";
-% set(gcf, "Position", [680, 178, 560, 800])
-% saveas(gcf, fullfile(pwd, '\latex\src\grating_vs_mvp_polarization.svg'), 'svg')
-
-%% Measurement: S-parameters
+%% UMT measurement: S-parameters
 sim_data = sparameters("final.s2p");
 sim_freq = sim_data.Frequencies(:)*1e-9;
 sim_s11 = 20*log10(abs(squeeze(sim_data.Parameters(1, 1, :))));
 sim_s21 = 20*log10(abs(squeeze(sim_data.Parameters(2, 1, :))));
 sim_s12 = 20*log10(abs(squeeze(sim_data.Parameters(1, 2, :))));
 sim_s22 = 20*log10(abs(squeeze(sim_data.Parameters(2, 2, :))));
-for meas = ["meas1", "meas2"]
+for meas = ["meas2"]% ["meas1", "meas2"]
     meas_data = sparameters(meas + "_sparameters.s2p");
     meas_freq = meas_data.Frequencies(:)*1e-9;
     meas_s11 = 20*log10(abs(squeeze(meas_data.Parameters(1, 1, :))));
@@ -472,250 +392,125 @@ for meas = ["meas1", "meas2"]
     nexttile;
     hold on
     plot(meas_freq, meas_s11)
-    % plot(sim_freq, sim_s11)
+    plot(sim_freq, sim_s11)
     hold off
     grid on;
     box on;
-    xlim([min(meas_freq), max(meas_freq)]);
-    xlabel("$f\ [\mathrm{GHz}]$")
+    xlim(frequency_range);
     ylabel("$S_{11}\ [\mathrm{dB}]$")
     
     nexttile;
     hold on
     plot(meas_freq, meas_s21)
-    % plot(sim_freq, sim_s21)
+    plot(sim_freq, sim_s21)
     hold off
     grid on;
     box on;
-    xlim([min(meas_freq), max(meas_freq)]);
-    xlabel("$f\ [\mathrm{GHz}]$")
+    xlim(frequency_range);
     ylabel("$S_{12}\ [\mathrm{dB}]$")
     
     nexttile;
     hold on
     plot(meas_freq, meas_s21)
-    % plot(sim_freq, sim_s21)
+    plot(sim_freq, sim_s21)
     hold off
     grid on;
     box on;
-    xlim([min(meas_freq), max(meas_freq)]);
+    xlim(frequency_range);
     xlabel("$f\ [\mathrm{GHz}]$")
     ylabel("$S_{21}\ [\mathrm{dB}]$")
     
     nexttile;
     hold on
     plot(meas_freq, meas_s22)
-    % plot(sim_freq, sim_s22)
+    plot(sim_freq, sim_s22)
     hold off
     grid on;
     box on;
-    xlim([min(meas_freq), max(meas_freq)]);
+    xlim(frequency_range);
     xlabel("$f\ [\mathrm{GHz}]$")
     ylabel("$S_{22}\ [\mathrm{dB}]$")
     
-    % leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
-    % leg.Layout.Tile = "north";
+    leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
+    leg.Layout.Tile = "north";
     saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_sparameters.svg'), 'svg')
 end
 
-%% Measurement vs simulation: gain and aperture efficiency
-[freq, sim_gain] = get_single_plot_data("final_boresight_gain.txt");
-[~, gain1] = get_umt_data("meas2_port1_gain.dat", "Gain");
-[~, gain2] = get_umt_data("meas2_port2_gain.dat", "Gain");
-lambda = 299792458./(freq*1e9);
-A_eff_sim = lambda.^2/(4*pi).*10.^(sim_gain/10);
-A_eff_meas1 = lambda.^2/(4*pi).*10.^(gain1/10);
-A_eff_meas2 = lambda.^2/(4*pi).*10.^(gain2/10);
-A_phys = pi*(130/2*1e-3)^2;
-
-figure("Name", "Measurement vs simulation: gain and aperture effciency");
-tiledlayout(2, 2, "TileSpacing", "compact")
-
-nexttile;
-hold on
-plot(freq, gain1)
-plot(freq, sim_gain)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([10, 25])
-ylabel("$G\ [\mathrm{dBi}]$")
-title("Port 1")
-
-nexttile;
-hold on
-plot(freq, gain2)
-plot(freq, sim_gain)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([10, 25])
-title("Port 2")
-
-nexttile;
-hold on
-plot(freq, A_eff_meas1/A_phys*100)
-plot(freq, A_eff_sim/A_phys*100)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([0, 250])
-xlabel("$f\ [\mathrm{GHz}]$")
-ylabel("$\eta\ [\%]$")
-% title("Port 1")
-
-nexttile;
-hold on
-plot(freq, A_eff_meas2/A_phys*100)
-plot(freq, A_eff_sim/A_phys*100)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([0, 250])
-xlabel("$f\ [\mathrm{GHz}]$")
-% title("Port 2")
-
-leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
-leg.Layout.Tile = "north";
-saveas(gcf, fullfile(pwd, '\latex\src\meas_vs_sim_gain_and_aperture_efficiency.svg'), 'svg')
-
-%% Measurement vs simulation: axial ratio
+%% NTUST measurement: boresight radiation
+freq = [4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7]';
+[sim_freq, sim_gain] = get_single_plot_data("final_boresight_gain.txt");
 [~, sim_ar] = get_single_plot_data("final_boresight_ar.txt");
-[~, ar1] = get_umt_data("meas2_port1_axial_ratio.dat", "Gain");
-[~, ar2] = get_umt_data("meas2_port2_axial_ratio.dat", "Gain");
+antenna = "antenna2";
+% for antenna = ["antenna1", "antenna2"]
+azimuth = readtable(antenna + "_port1_azimuth.xls", "Sheet", "Overview", "Range", "G2:Q2");
+azimuth = azimuth{1, :}';
+elevation = readtable(antenna + "_port1_elevation.xls", "Sheet", "Overview", "Range", "G2:Q2");
+elevation = elevation{1, :}';
+gain = (azimuth + elevation)./2;
+azimuth_h = readtable(antenna + "_port1_azimuth.xls", "Sheet", "Overview", "Range", "G20:Q20");
+azimuth_h = azimuth_h{1, :}';
+azimuth_v = readtable(antenna + "_port1_azimuth.xls", "Sheet", "Overview", "Range", "G25:Q25");
+azimuth_v = azimuth_v{1, :}';
+elevation_h = readtable(antenna + "_port1_elevation.xls", "Sheet", "Overview", "Range", "G20:Q20");
+elevation_h = elevation_h{1, :}';
+elevation_v = readtable(antenna + "_port1_elevation.xls", "Sheet", "Overview", "Range", "G25:Q25");
+elevation_v = elevation_v{1, :}';
+ar = min(abs(elevation_h - elevation_v), abs(azimuth_h - azimuth_v));
 
-figure("Name", "Measurement vs simulation: axial ratio");
-tiledlayout(2, 1, "TileSpacing", "compact")
+figure("Name", "NTUST mesaurement: boresight radiation (" + antenna + ")");
+tiledlayout(2, 1, "TileSpacing", "compact");
 
-nexttile;
-hold on
-plot(freq, ar1)
-plot(freq, sim_ar)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([0, 6])
-ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
-title("Port 1")
+nexttile();
+plot(freq, gain, sim_freq, sim_gain)
+xlim(frequency_range);
+box on
+grid on
+ylabel("$G\ [\mathrm{dBi}]$")
 
-nexttile;
-hold on
-plot(freq, ar2)
-plot(freq, sim_ar)
-hold off
-grid on;
-box on;
-xlim([min(freq), max(freq)]);
-ylim([0, 6])
+nexttile();
+plot(freq, ar, freq, sim_ar)
+xlim(frequency_range)
+ylim([0, 10])
+box on
+grid on
 xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
-title("Port 2")
 
-leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
+leg = legend(["Measurement", "Simuation"], "Orientation", "Horizontal");
 leg.Layout.Tile = "north";
-saveas(gcf, fullfile(pwd, '\latex\src\meas_vs_sim_axial_ratio.svg'), 'svg')
+saveas(gcf, fullfile(pwd, '\latex\src\' + antenna + '_boresight_radiation.svg'), 'svg')
+% end
 
-%% Measurement: boresight radiation
-% [freq, sim_gain] = get_single_plot_data("final_boresight_gain.txt");
-% [~, sim_ar] = get_single_plot_data("final_boresight_ar.txt");
-for meas = ["meas1", "meas2"]
-    [~, gain1] = get_umt_data(meas + "_port1_gain.dat", "Gain");
-    [~, gain2] = get_umt_data(meas + "_port2_gain.dat", "Gain");
-    [~, ar1] = get_umt_data(meas + "_port1_axial_ratio.dat", "Gain");
-    [~, ar2] = get_umt_data(meas + "_port2_axial_ratio.dat", "Gain");
-    
-    figure("Name", "Measurement " + meas{1}(end) + ": boresight radiation");
-    tiledlayout(2, 2, "TileSpacing", "compact")
-
-    nexttile;
-    hold on
-    plot(freq, gain1)
-    % plot(freq, sim_gain)
-    hold off
-    grid on;
-    box on;
-    xlim([min(freq), max(freq)]);
-    ylim([10, 25])
-    ylabel("$G\ [\mathrm{dBi}]$")
-    title("Port 1")
-
-    nexttile;
-    hold on
-    plot(freq, gain2)
-    % plot(freq, sim_gain)
-    hold off
-    grid on;
-    box on;
-    xlim([min(freq), max(freq)]);
-    ylim([10, 25])
-    title("Port 2")
-
-    nexttile;
-    hold on
-    plot(freq, ar1)
-    % plot(freq, sim_ar)
-    hold off
-    grid on;
-    box on;
-    xlim([min(freq), max(freq)]);
-    ylim([0, 6])
-    xlabel("$f\ [\mathrm{GHz}]$")
-    ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
-    % title("Port 1")
-
-    nexttile;
-    hold on
-    plot(freq, ar2)
-    % plot(freq, sim_ar)
-    hold off
-    grid on;
-    box on;
-    xlim([min(freq), max(freq)]);
-    ylim([0, 6])
-    xlabel("$f\ [\mathrm{GHz}]$")
-    % title("Port 2")
-
-    % leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
-    % leg.Layout.Tile = "north";
-    saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_boresight_radiation.svg'), 'svg')
-end
-
-%% Measurement: radiation
-for meas = ["meas1", "meas2"]
-    for angle_var = ["elevation", "azimuth"]
-        files = [
-            "_port1_" + angle_var + "_5G0Hz.dat", "_port2_" + angle_var + "_5G0Hz.dat", ...
-            "_port1_" + angle_var + "_5G3Hz.dat", "_port2_" + angle_var + "_5G3Hz.dat", ...
-            "_port1_" + angle_var + "_5G5Hz.dat", "_port2_" + angle_var + "_5G5Hz.dat"
-        ];
-        titles =  [
-            "Port 1 ($5\,\mathrm{GHz}$)", "Port 2 ($5\,\mathrm{GHz}$)", ...
-            "Port 1 ($5.3\,\mathrm{GHz}$)", "Port 2 ($5.3\,\mathrm{GHz}$)", ...
-            "Port 1 ($5.5\,\mathrm{GHz}$)", "Port 2 ($5.5\,\mathrm{GHz}$)"
-        ];
-        
-        figure("Name", "Measurement " + meas{1}(end) + ": " + angle_var + " " + "pattern")
-        tiles = tiledlayout(3, 2, "TileSpacing", "compact");
-        rlim = [-40, 20];
-        for i = 1:6
-            pax = polaraxes(tiles);
-            [angle, gains] = get_umt_data(meas + files(i), ["Co-pol.", "Cross-pol."]);
-            polarplot(deg2rad(angle), gains{1}, deg2rad(angle), gains{2})
-            pax.ThetaZeroLocation = 'top';
-            pax.ThetaLim = [-90, 90];
-            pax.RLim = rlim;
-            pax.Layout.Tile = i;
-            pax.Title.String = titles(i);
+%% NTUST measurement: radiation pattern
+frequencies = ["4.8GHz", "5.1GHz", "5.4GHz", "5.7GHz"];
+for antenna = ["antenna2"]%, "antenna1"]
+    for cut = ["elevation", "azimuth"]
+        for port = ["port1", "port2"]
+            figure("Name", "Measurement: " + port + ", " + cut + " pattern");
+            tiles = tiledlayout(2, 2, "TileSpacing", "loose");
+            for freq = frequencies
+                [sim_theta, sim_gain] = get_single_plot_data("final_gain_" + port + "_" + cut + "_" + freq + ".txt");
+                theta = readtable(antenna + "_" + port + "_" + cut + ".xls", "Sheet", freq, "Range", "B71:FZ71");
+                theta = theta{1, :}' - 180;
+                gain = readtable(antenna + "_" + port + "_" + cut + ".xls", "Sheet", freq, "Range", "B72:FZ72");
+                gain = gain{1, :}';
+                
+                pax = polaraxes(tiles);
+                pax.Layout.Tile = find(frequencies==freq);
+                hold on
+                polarplot(deg2rad(theta), gain, deg2rad(sim_theta), sim_gain)
+                polarplot(deg2rad(theta), 15*ones(length(theta)), "--", "Color", [0.7, 0.7, 0.7])
+                hold off
+                pax.ThetaZeroLocation = 'top';
+                pax.ThetaLim = [-180, 180];
+                pax.RLim = [-40, 20];
+                title(freq{1}(1:3) + " GHz")
+            end
+            leg = legend(["Measurement", "Simulation"], "Orientation", "Horizontal", "Location", "northoutside");
+            leg.Layout.Tile = "north";
+            set(gcf, "Position", [680, 318, 560, 560])
+            saveas(gcf, fullfile(pwd, '\latex\src\' + antenna + '_' + port + '_' + cut + '.svg'), 'svg')
         end
-        leg = legend(["Co-polarization", "Cross-polarization"], "Orientation", "Horizontal");
-        leg.Layout.Tile = "north";
-        set(gcf, "Position", [680, 318, 560, 700])
-        saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_' + angle_var + '_radiation.svg'), 'svg')
     end
 end
 

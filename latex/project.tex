@@ -762,7 +762,7 @@ The analysis presented in this chapter establishes the fundamental principles go
 The design process of a waveguide polarizer is detailed in this chapter. An initial survey of existing literature, including relevant conference papers and research articles, is undertaken. Based on this survey, the performance characteristics of various design concepts are compared and contrasted. A solution to the design problem is proposed, with a rationale for the selected approach. Following this selection, an in-depth eigenmode analysis of the chosen structure is performed. As demonstrated in this chapter, this analysis yields crucial insights into the operational principles, allows for the recognition of key performance parameters, and provides the foundation for defining the optimization problem. The chosen structure is subsequently implemented and optimized within CST Studio Suite for a specified target frequency band. The inherent trade-offs between key performance parameters are then discussed with reference to established principles of guided wave propagation in rectangular waveguides. Finally, the simulated performance of the designed component is presented graphically, derived from full-wave simulations.
 
 \section{Principle of operation}
-Typically, the inherent characteristics of symmetric waveguides are leveraged to achieve dual polarization This choice stems from their unique ability to enable independent control over two orthogonal polarization states possessing identical propagation characteristics. Such independent control is essential for polarization manipulation, facilitating the adjustment of these orthogonal modes' relative phase and amplitude to achieve the desired polarization states. This capability is applied directly in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were elaborated on mathematically in \cref{subsection:the-wave-equations}.
+Typically, the inherent characteristics of symmetric waveguides are leveraged to achieve polarization transformation. This choice stems from their unique ability to enable independent control over two orthogonal polarization states possessing identical propagation characteristics. Such independent control is essential for polarization manipulation, facilitating the adjustment of these orthogonal modes' relative phase and amplitude to achieve the desired polarization states. This capability is applied directly in the design of the dual linear-to-circular polarizer detailed herein. The desired polarization states of RHCP and LHCP were elaborated on mathematically in \cref{subsection:the-wave-equations}.
 
 This crucial characteristic arises from two fundamental properties rooted in the electrodynamics of symmetric waveguides. Firstly, their geometric symmetry, manifesting as mirror or rotational symmetry, permits the existence of two fundamental degenerate modes. As illustrated in \cref{example:te-waves-in-a-rectangular-waveguide}, a square waveguide exhibits this characteristic with its $\TE 10$ and $\TE 01$ modes. Secondly, as detailed in \cref{remark:modal-decomposition-of-guided-waves}, a fundamental principle derived from Maxwell's equations dictates that any two distinct modes within a waveguide are mutually orthogonal. This orthogonality expressed mathematically in \cref{eq:mode-orthogonality}, ensures that the power flow associated with the interaction of any two distinct modes is zero. In essence, transverse symmetry enables the existence of orthogonally polarized modes, while their inherent orthogonality ensures their independent propagation without coupling or interference.
 
@@ -1193,7 +1193,7 @@ Ultimately, the latter configuration (b) was selected for the final design, prio
 
 \chapter{Final structure}
 \label{chapter:final-structure}
-This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Driven by fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design. The resulting DFM-compliant design was fabricated and characterized by Universal Microwave Technology, Inc, (UMT). The measured performance data is presented herein and compared against the simulated results, with a detailed discussion of the observed discrepancies.
+This concluding chapter details the finalization of the antenna design, transitioning from individual component designs presented in \cref{chapter:polarizer,chapter:antenna} to a fully integrated and manufacturable product. The process begins with an assessment of initial full-system simulation results and an analysis of identified discrepancies. Driven by fabrication time constraints, a Minimum Viable Product (MVP) was developed, prioritizing core functionality. Subsequently, Design for Manufacturing (DFM) adjustments were incorporated into the structural design. The resulting DFM-compliant design was fabricated by Universal Microwave Technology, Inc. (UMT). The measurement data, including the network parameters and radiation properties, are presented herein and compared against the simulated results, with a discussion of performance alignment.
 
 \section{Feed rework}
 Preliminary simulations indicate that the performance of the final structure deviates significantly from expectations, particularly concerning the operation of the dual-feeding mechanism. This discrepancy is primarily reflected in the S-parameters, as illustrated in \cref{fig:grating-vs-mvp-sparameters}. While the performance of the feed incorporating a grating polarizer is acceptable in isolation, the figure also presents the S-parameters for a configuration with the grating entirely removed. This latter configuration represents the most straightforward implementation of a dual-feeding structure, previously discussed and dismissed in \cref{section:dual-feed} due to inherent high cross-talk between ports. However, as demonstrated in \cref{fig:grating-vs-mvp-sparameters}, despite exhibiting excellent individual performance, the grating polarizer provides only negligible improvement in cross-talk mitigation. This minimal benefit comes at the expense of a substantial increase in manufacturing complexity, overall size, and, consequently, the cost of the final product.
@@ -1206,12 +1206,6 @@ As previously addressed in \cref{section:dual-feed}, a manipulation of cross-tal
     \caption{\label{fig:grating-vs-mvp-sparameters}Final structure: grating performance}
 \end{figure}
 
-% \begin{figure}[!ht]
-%     \centering
-%     \includesvg[width=\textwidth]{src/grating_vs_mvp_polarization.svg}
-%     \caption{\label{fig:grating-vs-mvp-polarizations}Polarization gain}
-% \end{figure}
-
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.9\textwidth]{src/final_perspective.png}
@@ -1219,57 +1213,33 @@ As previously addressed in \cref{section:dual-feed}, a manipulation of cross-tal
 \end{figure}
 
 \section{Product finalization}
-The structure illustrated in \cref{fig:final-perspective} represents the finalized model used for electromagnetic simulations, establishing a benchmark for subsequent comparison with measurement data. These verification simulations employed exceptionally fine meshing settings and stringent convergence criteria based on energy dissipation to ensure the utmost accuracy. Concurrently, the final model underwent a design review with the principal engineer at UMT. This consultation led to the implementation of final DFM modifications. These adjustments, aimed at ensuring compatibility with standard CNC machining processes, involved modularizing the complete structure into five distinct components: the conical horn, square waveguide section, polarizer, dual-feed, and back-short. Each of these components was designed with standard waveguide flanges to facilitate assembly, and the antenna's geometry was further refined for efficient fabrication using drilling techniques. The resulting DFM-compliant model, depicted in \cref{fig:final-umt-perspective}, demonstrates that the internal dimensions remain unchanged, thereby preserving the critical electromagnetic performance characteristics of the original design.
+The structure illustrated in \cref{fig:final-perspective} represents the finalized model used for electromagnetic simulations, establishing a benchmark for subsequent comparison with measurement data. These verification simulations employed exceptionally fine meshing settings and stringent convergence criteria based on energy dissipation to ensure the utmost accuracy. Concurrently, the final model underwent a design review with the principal engineer at UMT. This consultation led to the implementation of final DFM modifications. These adjustments, aimed at ensuring compatibility with standard CNC machining processes, involved modularizing the complete structure into five distinct components: conical horn, square waveguide section, polarizer, dual-feed, and back-short. Each of these components was designed with standard waveguide flanges to facilitate assembly, and the antenna's geometry was further refined for efficient fabrication using drilling techniques. The resulting DFM-compliant model, depicted in \cref{fig:final-umt-perspective}, demonstrates that the internal dimensions remain unchanged, thereby preserving the critical electromagnetic performance characteristics of the original design.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.9\textwidth]{src/final_umt_perspective.png}
     \caption{\label{fig:final-umt-perspective}Final structure: DFM model}
 \end{figure}
-UMT, a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner for their state-of-the-art technology and proven expertise, which instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, the measured network parameters of the fabricated antenna, presented in \cref{fig:meas-vs-sim-sparameters}, demonstrates excellent agreement with the high-fidelity simulations.
+UMT, a leading company in the design, development, and manufacturing of custom components, antennas, and cables for microwave and millimetre-wave frequency bands, was selected as the fabrication partner for their state-of-the-art technology and proven expertise, which instilled high confidence that the product would be fabricated with minimal manufacturing tolerances. As anticipated, both the measured network parameters and the radiation properties, presented in \cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation}, respectively, demonstrate very good agreement with the high-fidelity simulations.
 
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas_vs_sim_sparameters.svg}
+    \includesvg[width=\textwidth]{src/meas2_sparameters.svg}
     \caption{\label{fig:meas-vs-sim-sparameters}Measurement results: S-parameters}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas_vs_sim_gain_and_aperture_efficiency.svg}
-    \caption{\label{fig:meas-vs-sim-gain-and-aperture-efficiency}Measurement results: gain and aperture efficiency}
+    \includesvg[width=\textwidth]{src/antenna2_boresight_radiation.svg}
+    \caption{\label{fig:meas-vs-sim-boresight-radiation}Measurement results: boresight radiation}
 \end{figure}
 
-However, a considerable discrepancy is observed between the measured and simulated boresight gain, raising concerns regarding the accuracy of the radiation property measurements. Analysis of the anechoic chamber setup depicted in \cref{fig:chamber} suggests that the measurements may have been taken within the reactive near-field, potentially violating the far-field criterion. This condition requires the antenna under test (AUT) to be positioned at a distance greater than the \emph{Fraunhofer distance}, defined as
-\begin{align}
-    \label{eq:farfield-condition}
-    d_{\mathrm F} &= \frac{2D^2}{\lambda},
-\end{align}
-where $D$ represents the diameter of the AUT's aperture, was violated. The likelihood of a measurement error is further reinforced by examining the aperture efficiency
-\begin{align}
-    \label{eq:aperture-efficiency}
-    \eta = \frac{A_{\mathrm{eff}}}{A_{\mathrm{phys}}} = \frac{\lambda^2}{4\pi^2R^2}G, 
-\end{align}
-where $A_{\mathrm{eff}}$ and $A_{\mathrm{phys}}$ are the \emph{effective} and \emph{physical} aperture areas, respectively, $G$ is the antenna gain, and $R = D/2$. Evaluating \cref{eq:aperture-efficiency} using the measured data and comparing it with the simulation results, as shown in \cref{fig:meas-vs-sim-gain-and-aperture-efficiency}, reveals a clear inconsistency. The simulation data aligns with the expected aperture efficiency of approximately $\qty{50}{\%}$, a typical value for a simple conical antenna. Conversely, the measured data yield efficiency values exceeding the physically permissible limit of $\qty{100}{\%}$. However, these near-field effects appear to influence both polarization measurements equally. Consequently, they effectively cancel out during relative measurements, such as the axial ratio depicted in \cref{fig:meas-vs-sim-axial-ratio} which exhibits excellent agreement with the simulation. The antenna parameters used during this discussion follow the usual definitions and can be found, e.g., in~\parencite{balanis:antenna-theory-analysis-and-design}.
-
-\begin{figure}[!ht]
-    \centering
-    \includesvg[width=\textwidth]{src/meas_vs_sim_axial_ratio.svg}
-    \caption{\label{fig:meas-vs-sim-axial-ratio}Measurement results: axial ratio}
-\end{figure}
-
-\Cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-gain-and-aperture-efficiency,fig:meas-vs-sim-axial-ratio} present a selected portion of the comprehensive measurement dataset, which is fully documented in Appendix \ref{appendix:measurement-results}. This selective presentation was employed to maintain a focused discussion while ensuring a complete record of all acquired data readily accessible in the appendix. Specifically, the data showcased in these figures correspond to Measurement 2 from the appendix. To ensure clarity in interpreting measurement data both in this section and the appendix, \cref{fig:final-ports} depicts the back view of the finalized antenna structure, designating Port 1 and Port 2, and establishing the orientation of the spherical coordinate system employed for all subsequent radiation pattern measurements.
+\Cref{fig:meas-vs-sim-sparameters,fig:meas-vs-sim-boresight-radiation} present a selected portion of the comprehensive measurement dataset, which is fully documented in Appendix \ref{appendix:measurement-results} along with azimuth and elevation cuts of the radiation pattern at various frequencies of the operating band. This selective presentation was employed to maintain a focused discussion while ensuring a complete record of all acquired data readily accessible in the appendix. To ensure clarity in interpreting measurement data both in this section and the appendix, \cref{fig:final-ports} depicts the back view of the finalized antenna structure, designating Port 1 and Port 2, and establishing the orientation of the spherical coordinate system employed for all subsequent radiation pattern measurements.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.5\textwidth]{src/final_umt_ports.png}
     \caption{\label{fig:final-ports}Back view of the final structure}
 \end{figure}
-
-\paragraph{Manufacturer's comment.} AA discussion regarding the potential violation of the far-field distance threshold was held with the principal engineer at UMT, the company responsible for the product's fabrication and measurement. It was confirmed that the radiation properties were measured within the AUT's near field, specifically at a distance of
-\begin{align}
-    d = \qty{23}{cm} < \qty{62}{cm} \approx d_{\mathrm{F}}\Big|_{\qty{5.5}{GHz}},
-\end{align}
-using an NSI-MI system employing the Near-Field Scanning (NFS) technique. NFS involves measuring the amplitude and phase of the electromagnetic field across a well-defined surface close to the AUT. Subsequently, these near-field measurements are mathematically transformed, typically using Fourier transforms or spherical wave expansions, to determine the far-field characteristics. While the NFS method is known for its precision, the complexity of the setup and data processing still makes it a potential source of the measurement error, as suggested by the unrealistic aperture efficiency values presented in \cref{fig:meas-vs-sim-gain-and-aperture-efficiency}. Aside from potential calibration or field transformation errors, a hypothetical concern arises regarding the size of the probe used for NFS. As shown in \cref{fig:chamber} depicts, a relatively large open-ended rectangular waveguide was employed as the receiving probe, which could potentially introduce distortions into the measured near field.
 
 %========== Conclusion ==========
 \chapter*{Conclusion}
@@ -1476,9 +1446,9 @@ End Function
 %========== Appendix B: Measurement results ==========
 \chapter{Measurement results}
 \label{appendix:measurement-results}
-This appendix details the comprehensive measurement data for the antenna prototype, acquired across two campaigns by UMT whose contribution is gratefully acknowledged. Key results are presented within the main body of the thesis for comparison with simulations, while this appendix serves as a complete repository of all measured parameters.
+This appendix serves as a comprehensive repository for the complete set of measurement data acquired for the antenna prototype, facilitating a thorough analysis and validation of its performance characteristics. While key findings are summarized in the main body of the thesis for a preliminary evaluation, this appendix provides a detailed presentation of all measured parameters, particularly the complete azimuthal and elevation radiation patterns captured across various frequencies within the operational band.
 
-The data presented includes S-parameters measured using an Agilent VNA, providing insights into impedance matching and power transmission across the operational frequency band. Furthermore, frequency responses of boresight gain and axial ratio are included. These parameters were measured in an in-house anechoic chamber using an open-ended waveguide as a sensing antenna. Radiation patterns, presented in the form of both elevation and azimuth cuts, were recorded at frequencies $\qty{5}{GHz}$, $\qty{5.3}{GHz}$, and $\qty{5.5}{GHz}$. Both measurement setups are illustrated in \cref{fig:measurement-setup}.
+Two distinct experimental campaigns were conducted to fully characterize the prototype. The first campaign focused on S-parameter measurements, providing insights into impedance matching and power transmission across the operational frequency band using an Agilent Vector Network Analyser (VNA); these measurements were performed by UMT, whose contributions are gratefully acknowledged. The second campaign, conducted in the department anechoic chamber, evaluated the prototype's radiation characteristics. A double-ridged horn antenna was employed as the receiving antenna during these measurements. The experimental setups for both measurement campaigns are visually depicted in \cref{fig:measurement-setup}.
 
 \begin{figure}[!ht]
     \sbox\twosubbox{%
@@ -1502,50 +1472,38 @@ The data presented includes S-parameters measured using an Agilent VNA, providin
 \newpage
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas1_sparameters.svg}
-    \caption{\label{fig:meas1-sparameters}Measurement 1: S-parameters}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includesvg[width=\textwidth]{src/meas1_boresight_radiation.svg}
-    \caption{\label{fig:meas1-boresight-radiation}Measurement 1: gain and axial ratio}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includesvg[width=\textwidth]{src/meas1_elevation_radiation.svg}
-    \caption{\label{fig:meas1-elevation-radiation}Measurement 1: elevation radiation pattern ($\varphi=\ang{90}$)}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includesvg[width=\textwidth]{src/meas1_azimuth_radiation.svg}
-    \caption{\label{fig:meas1-azimuth-radiation}Measurement 1: azimuth radiation pattern ($\varphi=\ang{0}$)}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
     \includesvg[width=\textwidth]{src/meas2_sparameters.svg}
-    \caption{\label{fig:meas2-sparameters}Measurement 2: S-parameters}
+    \caption{\label{fig:measurement-sparameters}Measurement: S-parameters}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas2_boresight_radiation.svg}
-    \caption{\label{fig:meas2-boresight-radiation}Measurement 2: gain and axial ratio}
+    \includesvg[width=\textwidth]{src/antenna2_boresight_radiation.svg}
+    \caption{\label{fig:measurement-boresight-radiation}Measurement: boresight gain and axial ratio}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas2_elevation_radiation.svg}
-    \caption{\label{fig:meas2-elevation-radiation}Measurement 2: elevation radiation pattern ($\varphi=\ang{90}$)}
+    \includesvg[width=\textwidth]{src/antenna2_port1_elevation.svg}
+    \caption{\label{fig:measurement-elevation-pattern-port1}Measurement: port 1 elevation radiation pattern ($\varphi=\ang{90}$)}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includesvg[width=\textwidth]{src/meas2_azimuth_radiation.svg}
-    \caption{\label{fig:meas2-azimuth-radiation}Measurement 2: azimuth radiation pattern ($\varphi=\ang{0}$)}
+    \includesvg[width=\textwidth]{src/antenna2_port1_azimuth.svg}
+    \caption{\label{fig:measurement-azimuth-pattern-port1}Measurement: port 1 azimuth radiation pattern ($\varphi=\ang{0}$)}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includesvg[width=\textwidth]{src/antenna2_port2_elevation.svg}
+    \caption{\label{fig:measurement-elevation-pattern-port2}Measurement: port 2 elevation radiation pattern ($\varphi=\ang{90}$)}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includesvg[width=\textwidth]{src/antenna2_port2_azimuth.svg}
+    \caption{\label{fig:measurement-azimuth-pattern-port2}Measurement: port 2 azimuth radiation pattern ($\varphi=\ang{0}$)}
 \end{figure}
 
 % %========== Nomenclature ==========
