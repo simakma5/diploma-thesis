@@ -3,17 +3,21 @@ close all; clear; clc;
 addpath(genpath(fileparts(matlab.desktop.editor.getActiveFilename) + "\"))
 s = settings;
 s.matlab.appearance.figure.GraphicsTheme.TemporaryValue = "light";
-frequency_range = [4.8, 5.7];
 set(groot, 'DefaultTextInterpreter', 'latex');
 set(groot, 'DefaultAxesTickLabelInterpreter', 'latex');
 set(groot, 'DefaultLegendInterpreter', 'latex');
 set(groot, 'DefaultAxesYAxisLocation', 'left');
+set(groot,'defaultAxesFontName','Times New Roman')
+set(groot, 'defaultAxesFontSize', 12)
 disp('LaTeX interpreter and left-side Y-axis set as default.');
+frequency_range = [4.8, 5.7];
+c = 299792458;
 
 %% Eigenmode analysis: square (cross-section)
 sweep_values = importdata("square_sweep_values.txt")';
 [freq, polarizer_length] = get_sweep_plot_data("square_length_for_90deg.txt", "chamferWidth", sweep_values);
 [~, amplitude_ratio] = get_sweep_plot_data("square_amplitude_ratio.txt", "chamferWidth", sweep_values);
+lambda = c./freq*1e-6;  % in mm
 
 figure("Name", "Eigenmode analysis - square (cross-section)");
 tiledlayout(2, 1, "TileSpacing", "compact");
@@ -21,13 +25,13 @@ tiledlayout(2, 1, "TileSpacing", "compact");
 nexttile;
 hold on;
 for sweep = 1:length(sweep_values)
-    plot(freq, polarizer_length{sweep});
+    plot(freq, polarizer_length{sweep}./lambda);
 end
 hold off
 grid on;
 box on;
 xlim(frequency_range);
-ylabel("$L_\perp\ [\mathrm{mm}]$")
+ylabel("$L_\perp/\lambda\ [-]$")
 
 nexttile;
 hold on
@@ -44,12 +48,14 @@ ylabel("$E_2/E_1\ [\mathrm{dB}]$")
 leg = legend("$" + sweep_values + "\ \mathrm{mm}$", "Orientation", "horizontal");
 leg.Layout.Tile = "north";
 
+set(gcf, "Position", [680, 58, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\square_polarizer_cross_section.svg'), 'svg')
 
 %% Eigenmode analysis: circular (cross-section)
 sweep_values = importdata("circular_sweep_values.txt")';
 [freq, polarizer_length] = get_sweep_plot_data("circular_length_for_90deg.txt", "chamferWidth", sweep_values);
 [~, amplitude_ratio] = get_sweep_plot_data("circular_amplitude_ratio.txt", "chamferWidth", sweep_values);
+lambda = c./freq*1e-6;  % in mm
 
 figure("Name", "Eigenmode analysis - circular (cross-section)");
 tiledlayout(2, 1, "TileSpacing", "compact");
@@ -57,13 +63,13 @@ tiledlayout(2, 1, "TileSpacing", "compact");
 nexttile;
 hold on;
 for sweep = 1:length(sweep_values)
-    plot(freq, polarizer_length{sweep});
+    plot(freq, polarizer_length{sweep}./lambda);
 end
 hold off
 grid on;
 box on;
 xlim(frequency_range);
-ylabel("$L_\perp\ [\mathrm{mm}]$")
+ylabel("$L_\perp/\lambda\ [-]$")
 
 nexttile;
 hold on
@@ -80,6 +86,7 @@ ylabel("$E_2/E_1\ [\mathrm{dB}]$")
 leg = legend("$" + sweep_values + "\,\mathrm{mm}$", "Orientation", "horizontal");
 leg.Layout.Tile = "north";
 
+set(gcf, "Position", [680, 58, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\circular_polarizer_cross_section.svg'), 'svg')
 
 %% Eigenmode analysis: cutoff frequencies
@@ -117,6 +124,7 @@ ylabel("$f_{\mathrm{cutoff}}\ [\mathrm{GHz}]$")
 legend(["Mode 1", "Mode 2"], "Location", "east")
 title("Circular waveguide")
 
+set(gcf, "Position", [680, 58, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\polarizers_cutoff_frequencies.svg'), 'svg')
 
 %% Polarizer: radiation patterns
@@ -154,7 +162,6 @@ pax.Title.String = "LHCP (mode 2)";
 nexttile([1, 2]);
 hold on
 plot(freq, axial_ratio1)
-% plot(freq, axial_ratio2)
 hold off
 grid on;
 box on;
@@ -163,7 +170,7 @@ xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
 title("Axial ratio (identical for both modes)")
 
-set(gcf, "Position", [680, 178, 560, 700])
+set(gcf, "Position", [680, 178, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\polarizer_radiation.svg'), 'svg')
 
 %% Feed: single (reflection)
@@ -322,7 +329,7 @@ mvp_s12 = 20*log10(abs(squeeze(mvp.Parameters(1, 2, :))));
 mvp_s22 = 20*log10(abs(squeeze(mvp.Parameters(2, 2, :))));
 
 figure("Name", "Final structure: grating vs MVP comparison (S-parameters)")
-tiledlayout(2, 2, "TileSpacing", "compact")
+tiledlayout(4, 1, "TileSpacing", "compact")
 
 nexttile;
 hold on;
@@ -333,7 +340,6 @@ grid on;
 box on;
 xlim(frequency_range);
 ylabel("$S_{11}\ [\mathrm{dB}]$")
-
 
 nexttile;
 hold on;
@@ -353,7 +359,6 @@ hold off;
 grid on;
 box on;
 xlim(frequency_range);
-xlabel("$f\ [\mathrm{GHz}]$")
 ylabel("$S_{21}\ [\mathrm{dB}]$")
 
 nexttile;
@@ -369,6 +374,7 @@ ylabel("$S_{22}\ [\mathrm{dB}]$")
 
 leg = legend(["Grating", "No grating"], "Orientation", "horizontal");
 leg.Layout.Tile = "north";
+set(gcf, "Position", [680, 78, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\grating_vs_mvp_sparameters.svg'), 'svg')
 
 %% UMT measurement: S-parameters
@@ -387,7 +393,7 @@ for meas = ["meas2"]% ["meas1", "meas2"]
     meas_s22 = 20*log10(abs(squeeze(meas_data.Parameters(2, 2, :))));
     
     figure("Name", "Measurement " + meas{1}(end) + ": S-parameters")
-    tiledlayout(2, 2, "TileSpacing", "compact")
+    tiledlayout(4, 1, "TileSpacing", "compact")
     
     nexttile;
     hold on
@@ -433,6 +439,7 @@ for meas = ["meas2"]% ["meas1", "meas2"]
     
     leg = legend(["Measurement", "Simulation"], "Orientation", "horizontal");
     leg.Layout.Tile = "north";
+    set(gcf, "Position", [680, 78, 560, 800])
     saveas(gcf, fullfile(pwd, '\latex\src\' + meas + '_sparameters.svg'), 'svg')
 end
 
@@ -463,6 +470,7 @@ tiledlayout(2, 1, "TileSpacing", "compact");
 nexttile();
 plot(freq, gain, sim_freq, sim_gain)
 xlim(frequency_range);
+ylim([11, 16])
 box on
 grid on
 ylabel("$G\ [\mathrm{dBi}]$")
@@ -470,7 +478,7 @@ ylabel("$G\ [\mathrm{dBi}]$")
 nexttile();
 plot(freq, ar, freq, sim_ar)
 xlim(frequency_range)
-ylim([0, 10])
+ylim([0, 6])
 box on
 grid on
 xlabel("$f\ [\mathrm{GHz}]$")
@@ -478,16 +486,17 @@ ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
 
 leg = legend(["Measurement", "Simuation"], "Orientation", "Horizontal");
 leg.Layout.Tile = "north";
+set(gcf, "Position", [680, 58, 560, 600])
 saveas(gcf, fullfile(pwd, '\latex\src\' + antenna + '_boresight_radiation.svg'), 'svg')
 % end
 
 %% NTUST measurement: radiation pattern
-frequencies = ["4.8GHz", "5.1GHz", "5.4GHz", "5.7GHz"];
+frequencies = ["4.8GHz", "5.1GHz", "5.4GHz"];%, "5.7GHz"];
 for antenna = ["antenna2"]%, "antenna1"]
     for cut = ["elevation", "azimuth"]
         for port = ["port1", "port2"]
             figure("Name", "Measurement: " + port + ", " + cut + " pattern");
-            tiles = tiledlayout(2, 2, "TileSpacing", "loose");
+            tiles = tiledlayout(3, 1, "TileSpacing", "compact");
             for freq = frequencies
                 [sim_theta, sim_gain] = get_single_plot_data("final_gain_" + port + "_" + cut + "_" + freq + ".txt");
                 theta = readtable(antenna + "_" + port + "_" + cut + ".xls", "Sheet", freq, "Range", "B71:FZ71");
@@ -508,7 +517,7 @@ for antenna = ["antenna2"]%, "antenna1"]
             end
             leg = legend(["Measurement", "Simulation"], "Orientation", "Horizontal", "Location", "northoutside");
             leg.Layout.Tile = "north";
-            set(gcf, "Position", [680, 318, 560, 560])
+            set(gcf, "Position", [680, 58, 560, 820])
             saveas(gcf, fullfile(pwd, '\latex\src\' + antenna + '_' + port + '_' + cut + '.svg'), 'svg')
         end
     end
