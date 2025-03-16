@@ -1,0 +1,242 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Latex Template for The Papers Submitted to ISAP 2025
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[conference,a4paper]{isap2025}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+
+\setlength{\topmargin}{-5mm}
+\setlength{\textheight}{240mm}
+\setlength{\textwidth}{177mm}
+\setlength{\oddsidemargin}{-9mm}
+\setlength{\evensidemargin}{-9mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{
+Title for the Paper Submitted to ISAP2025
+}
+
+\author{
+First Author$^{1*}$, Second Author$^1$, Third Author$^2$, and Fourth Author$^3$
+\\
+$^1$ First Department, First University, Address including country name
+\\
+$^2$ Second Department, Second University, Address including country name
+\\
+$^3$ Third Company, Address including country name
+\\
+$^*$ Corresponding author, email: first@author.com
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\baselineskip 4.5mm
+
+\maketitle
+
+\begin{abstract}
+Please include a brief abstract here. The abstract should be limited to 50--200 words and should concisely state what was done, how it was done, principal results, and their significance. Please also provide 3 to 5 index terms using 9 point Times New Roman Bold font. 
+\textcolor{red}{
+This format is similar as IEEE conference format, however, column of the author(s) list is slightly different. 
+}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Antennas, propagation, EM wave theory, AP-related topics.
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+This \LaTeX \ template provides authors with most of the formatting specifications (e.g. margins, column widths, line spacing, and text fonts) needed for preparing electronic versions of their papers. Please do not alter any of the formatting in this template when you prepare your paper.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preparing Your Paper}
+
+ISAP2025 papers are limited to \underline{\bf two pages}. 
+\underline{Any submitted}
+\underline{paper that exceeds this limit will be rejected.}  
+Please use this template without changing any settings so that you can easily make you paper comply with the ISAP 2025 manuscript. Do not add any kind of pagination anywhere in the paper. Do not manually number the headings -- the template will do that for you.
+
+Use the \underline{\bf A4 paper size} for your paper, which is 210 mm wide and 297 mm long. The top margin is 30 mm and the bottom margin is 25 mm, and the left and right margins are 17 mm. With the exception of the title and author section, your paper must be in a two column format with a space of 6 mm between columns. 
+
+Each major section begins with a Heading in 10 point Times New Roman Bold font left-aligned within the column and numbered using Arabic numerals (except for Acknowledgement and References sections), followed by a period, a single space, and the title using an initial capital letter for each word. The paragraph description of the section heading line should be set for 18 points before, 6 points after, and the line spacing should be set to exactly 12 points.
+
+All paragraphs of text, including the abstract, figure captions, and references, should be justified at the left and the right edges.
+
+For the body of your paper, use 10-point Times New Roman font and set your line spacing at "exactly 12 points" with 0 points before and after. Indent each paragraph by 3.2 mm. Table I lists the various font and paragraph settings for each artifact of the manuscript. Further details are provided in the remainder of this paper for specific situations.
+
+\begin{table}[htb]
+\caption{Type Sizes for Papers}
+\begin{center}
+\begin{tabular}{|c|p{30mm}|p{15mm}|p{15mm}|}
+\hline
+Type & \multicolumn{3}{|c|}{Appearance} 
+\\
+\cline{2-4} 
+size & \multirow{2}{*}{Regular} & \multirow{2}{*}{Bold} & \multirow{2}{*}{Italic}
+\\[-0.5mm]
+(pts.) & & & 
+\\
+\hline
+6 & Table superscripts & & 
+\\
+\hline
+8 & References, tables, table names$^a$, footnotes, text subscripts, and superscripts & & 
+\\ 
+\hline
+9 & & Abstract, Index Terms	& 
+\\ 
+\hline
+10 & Authors' affiliations, main text, equations, table captions$^a$, figure captions & Section titles & Subheading
+\\
+\hline
+11 & Authors' names	& & 
+\\
+\hline
+24 & Paper title & &	
+\\
+\hline
+\end{tabular}
+\end{center}
+\hspace*{15mm}
+$^a$Uppercase		
+\label{tab1}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Helpful Hints}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Figures and Tables}
+
+Place each figure and/or table within the width of a single column, as illustrated by Fig. 1 below and Table I above. Large figures and tables may span across both columns. Figure captions should be below the figures; table headings should appear above the tables. Insert figures and tables after they are cited in the text. 
+
+Use the abbreviation "Fig. 1," even at the beginning of a sentence. Figure labels should be legible, about 10-point type.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=32mm]{isap2025logo.eps}
+\caption{ISAP2025 logo as a figure example.}
+\label{fig1}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Reference}
+
+Number citations consecutively in square brackets \cite{b1}-\cite{b5}. Punctuation follows the bracket. Refer simply to the reference number, as in \cite{b2}, \cite{b3}. Use "Ref. \cite{b4}" or "Reference \cite{b4}" at the beginning of a sentence: "Reference \cite{b4} was the first ..."
+
+Give all authors' names; use "et al." if there are six authors or more. Papers that have not been published, even if they have been submitted for publication, should be cited as "unpublished" \cite{b6}. Papers that have been accepted for publication should be cited as "in press" \cite{b7}. Capitalize only the first word in a paper title, except for proper nouns and element symbols.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Abbreviations and Acronyms}
+
+Define abbreviations and acronyms the first time they are used in the text, even if they have been defined in the abstract.  Abbreviations such as IEICE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title unless they are unavoidable.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Equation}
+
+Number equations consecutively with equation numbers in parentheses flush with the right margin, as in (\ref{eqn1}). To make your equations more compact, you may use the solidus ( / ), the exp function, or appropriate exponents. Italicize Roman symbols for quantities and variables, but not Greek symbols.  Use an en dash (--) rather than a hyphen for a minus sign.  Use parentheses to avoid ambiguities in denominators. Punctuate equations with commas or periods when they are part of a sentence, as in 
+\begin{equation}
+a + b = c
+\label{eqn1}
+\end{equation}
+
+Symbols in your equation should be defined before the equation appears or immediately following. Use "(\ref{eqn1})," not "Eq. (\ref{eqn1})" or "equation (\ref{eqn1})," except at the beginning of a sentence:  "Equation (\ref{eqn1}) is ..."
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Other Recommendation}
+
+Use two spaces after periods (full stops). Hyphenate complex modifiers: "zero-field-cooled magnetization." Avoid dangling participles, such as, "Using (1), the potential was calculated." Write instead, "The potential was calculated using (1)," or "Using (1), we calculated the potential."
+
+Use a zero before decimal points: "0.25," not ".25." Use "cm3," not "cc." Do not mix complete spellings and abbreviations of units: "Wb/m2" or "webers per square meter," not "webers/m2." Spell units when they appear in text:  "... a few henries," not "... a few H." If your native language is not English, try to get a native English-speaking colleague to proofread your paper.  Do not add page numbers.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Units}
+
+Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as "3.5-inch disk drive."
+
+Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusion}
+
+Following the instructions in this paper template will improve the quality of your paper and the 2025 International Symposium on Antennas and Propagation (ISAP) Proceedings. Thank you for your contribution to ISAP 2025. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Acknowledgment}
+
+Insert acknowledgment, if any.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{00}
+\bibitem{b1} 
+A. Maxwell, 
+"Antennas and propagation for ISAP 2025," 
+{\it IEICE Trans. Commun.}, 
+vol. E99-B, no. 1, pp. 101-112, Jan. 2025.
+
+\bibitem{b2}
+B. C. Faraday, 
+{\it Book for ISAP 2025}.  
+Wiley: New York, 2003, pp.68-73.
+
+\bibitem{b3}
+D. E. Gauss, 
+"Mobile antennas for ISAP 2025," 
+{\it Microwave Opt. Technol. Lett.},
+vol. 51, pp. 190-194, 2009.
+
+\bibitem{b4}
+F. Ampere, 
+"EM wave theory in ISAP 2025," 
+in {\it Proc. International Symposium on Antennas and Propagation (ISAP)}, 2012, 
+Nagoya, Japan, pp. 100-101.
+
+\bibitem{b5}
+G. Maxwell, 
+"Antennas and propagation in ISAP 2025," 
+in {\it Proc. IEEE Antennas Propagat. Soc. Int. Symp.}, 2012, 
+Orlando, FL, USA, pp. 100-101.
+
+\bibitem{b6}
+H. Faraday, 
+"Title of paper," 
+unpublished.
+
+\bibitem{b7}
+I. Green, 
+"Title of paper," 
+{\it IEEE Trans. Antennas Propagat.},
+in press. 
+\end{thebibliography}
+
+\end{document}
+

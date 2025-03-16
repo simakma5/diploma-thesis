@@ -1,0 +1,196 @@
+\documentclass[conference,a4paper]{isap2025}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\topmargin}{-5mm}
+\setlength{\textheight}{240mm}
+\setlength{\textwidth}{177mm}
+\setlength{\oddsidemargin}{-9mm}
+\setlength{\evensidemargin}{-9mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Compact Dual-CP Waveguide Polarizer with a Wire-Grating Dual Feed}
+
+\author{
+Martin Šimák$^{1*}$, Ding-Bing Lin$^1$, and Pavel Hazdra$^2$
+\\
+$^1$ Department of Electronic and Computer Engineering, NTUST, Taipei City, Taiwan
+\\
+$^2$ Department of Electromagnetic Field, CTU in Prague, Prague 6, Czechia
+\\
+$^*$ Email: martin.simaak@gmail.com
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\baselineskip 4.5mm
+
+\maketitle
+
+\begin{abstract}
+This paper presents a compact dual circularly polarized (CP) waveguide polarizer for the 4.7 GHz to 5.7 GHz band.  The design features a square waveguide with chamfered corners and a novel wire-grating-based dual feed.  The polarizer generates right-hand and left-hand CP by selectively exciting orthogonal fundamental waveguide modes. The dual feed facilitates this excitation.  Electromagnetic simulations using CST Studio Suite demonstrate the design's feasibility, showcasing the generation of dual CP and confirming the polarizer's performance within the specified frequency range. This design offers a compact and efficient approach to dual-CP polarization, suitable for applications requiring polarization diversity.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Circular polarization, waveguide polarizer, hexagonal waveguide, eigenmode analysis, dual feed.
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+Achieving dual circular polarization (CP) in waveguides presents challenges. Traditional methods, such as dielectric vane polarizers, exhibit bandwidth limitations and power losses, while septum and iris polarizers introduce complexity in size, weight, and fabrication \cite{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer}-\cite{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}. Elliptical waveguides or waveguides with shaped metallic inserts offer improved performance but often increase manufacturing difficulty \cite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}, \cite{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges}.  Inspired by~\cite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}, this paper introduces a design using a square waveguide with chamfered corners, achieving a balance between performance and manufacturability.  By leveraging mode dispersion through geometric modifications, this approach provides a robust and easily fabricated solution for dual CP.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Polarizer Design}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Principle of Operation}
+The core concept of this dual-CP waveguide polarizer is the manipulation of mode dispersion.  Introducing metallic inserts into the corners of a square waveguide breaks the symmetry, causing the phase velocities of the two fundamental modes to diverge (Fig.~\ref{fig:polarizer-modes}).  This phase difference accumulates as the wave propagates.  Precise control of insert geometry and waveguide length achieves a 90-degree phase shift (quadrature), the essential condition for CP. The inherent symmetry of the design dictates that exciting the waveguide with orthogonal modes produces opposite-handed CP.  Thus, the polarizer achieves dual-CP operation by switching between orthogonal excitations. This approach simplifies fabrication compared to more complex designs while enabling effective field manipulation for precise polarization control.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.22\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/polarizer_mode1.png}
+        \caption{}
+        \label{fig:polarizer-mode1}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{.22\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/polarizer_mode2.png}
+        \caption{}
+        \label{fig:polarizer-mode2}
+    \end{subfigure}
+    \caption{Polarizer eigenmodes.}
+    \label{fig:polarizer-modes}
+\end{figure}
+
+\subsection{Optimization and Figures of Merit}
+Eigenmode analysis guides the optimization, with the primary goal of minimizing polarizer length ($L$) while maintaining CP performance.  This requires maximizing the \emph{specific mode phase shift}, defined as:
+
+\begin{equation}
+    \label{eq:polarizer-specific-phase-shift}
+    \Delta k_L(f) = \frac 1L \int_0^L \left[k_2-k_1\right](z,f)\,\mathrm d z,
+\end{equation}
+where $k_1$ and $k_2$ are the propagation constants of the two polarizer modes, and $z$ is the propagation direction.  This represents the average difference in propagation constants, analogous to birefringence in optics, quantifying the phase difference accumulation.  Equation~(\ref{eq:polarizer-specific-phase-shift}) addresses one CP condition; the other is equal mode amplitudes:
+
+\begin{equation}
+    \label{eq:polarizer-amplitude-ratio}
+    \left[E_2/E_1\right]_{z=L} = 1,
+\end{equation}
+where $E_1$ and $E_2$ are the mode amplitudes at the polarizer output.  The optimization objective function is a weighted aggregate of (\ref{eq:polarizer-specific-phase-shift}) and (\ref{eq:polarizer-amplitude-ratio}), with the variables being the geometric parameters of the polarizer's cross-section.  Increasing insert size increases phase shift per unit length but also introduces greater amplitude distortions, creating an inherent trade-off.
+
+\subsection{Simulation Results}
+The final structure is a square waveguide with a $\qty{50}{mm}$ side length and corners chamfered by triangular prisms with a $\qty{23}{mm}$ hypotenuse.  With a polarizer length of $\qty{126}{mm}$, simulations (Fig.~\ref{fig:polarizer-axial-ratio}) confirm the eigenmode analysis.  After optimizing the cross-sectional geometry, the axial ratio remains low, reaching $\qty{0}{dB}$ near the center of the design band, indicating successful CP generation.
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=0.45\textwidth]{src/polarizer_axial_ratio.png}
+    \caption{Axial ratio of the polarizer.}
+    \label{fig:polarizer-axial-ratio}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dual Feed Design}
+The polarizer requires a dual-feed structure to excite the orthogonal $\text{TE}_{10}$ and $\text{TE}_{01}$ modes with minimal coupling.  A standard right-angle coaxial-to-rectangular waveguide transition \cite{fabregas-et-al:coaxial-to-rectangular-waveguide-transitions} can excite a single linearly polarized mode. To achieve dual-mode excitation, a novel approach, inspired by \cite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}, uses a wire grating polarizer (Fig.~\ref{fig:dual-feed-model}). A wire grating parallel to the displaced Port 2 reflects horizontally polarized waves while remaining transparent to vertically polarized waves from Port 1.
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=.45\textwidth]{src/dual_feed_side_cut_view.png}
+    \caption{Dual feed model.}
+    \label{fig:dual-feed-model}
+\end{figure}
+
+Optimized parameters (Fig.~\ref{fig:dual-feed-model}) include a wire grating with spacing $g = \qty{5.2}{mm}$, wire diameter $r = \qty{2}{mm}$, and displacement $d_g = \qty{60.81}{mm}$ from Port 1.  Both coaxial probes (Port 1 and 2) have equal distances from the back-short ($d_1=d_2 = \qty{15.62}{mm}$) and equal lengths ($l_1=l_2=\qty{12.32}{mm}$). These values were determined through iterative simulations, minimizing reflection coefficients and cross-talk. The resulting dual feed (Fig.~\ref{fig:dual-feed-performance}) successfully excites the $\text{TE}_{10}$ and $\text{TE}_{01}$ modes, enabling dual-CP operation.
+
+\begin{figure}[hbt]
+    \centering
+    \includegraphics[width=.45\textwidth]{src/dual_feed_performance.png}
+    \caption{Dual feed performance.}
+    \label{fig:dual-feed-performance}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusion}
+This paper presents a novel dual-CP waveguide polarizer using a chamfered square waveguide and a wire-grating-based dual feed. The design leverages mode dispersion for dual-CP operation, and the dual feed enables orthogonal mode excitation. Simulations confirm the design's feasibility and performance within the target frequency band.  This compact and efficient approach is suitable for applications requiring polarization diversity.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{00}
+\bibitem{cst}
+Dassault Syst{\`e}mes, ``CST Studio Suite,'' version 2024.5. [Online]. Available: \url{https://www.3ds.com/products/simulia/cst-studio-suite}.
+
+\bibitem{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer}
+J. A. Ruiz-Cruz, M. M. Fahmi, M. Daneshmand, and R. R. Mansour, 
+``Compact reconfigurable waveguide circular polarizer,''
+in *Proc. IEEE MTT-S Int. Microwave Symp.*, Baltimore, MD, USA, 2011, pp. 1-4, 
+doi: 10.1109/MWSYM.2011.5972872.
+
+\bibitem{wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}
+X. Wang, X. Huang, and X. Jin, 
+``Novel square/rectangle waveguide septum polarizer,''
+in *Proc. IEEE Int. Conf. Ubiquitous Wireless Broadband (ICUWB)*, Nanjing, China, 2016, pp. 1-4, 
+doi: 10.1109/ICUWB.2016.7790510.
+
+\bibitem{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer}
+H. Song, L. Jia, J. Tan, Y. Zhang, and S. Liu, 
+``Design of Wideband Quad-Ridge Waveguide Polarizer,''
+in *Proc. 2023 4th China Int. SAR Symp. (CISS)*, Xian, China, 2023, pp. 1-6, 
+doi: 10.1109/CISS60136.2023.10379971.
+
+\bibitem{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}
+G. Virone, R. Tascone, O. A. Peverini, and R. Orta, 
+``Optimum-Iris-Set Concept for Waveguide Polarizers,''
+*IEEE Microw. Wireless Compon. Lett.*, vol. 17, no. 3, pp. 202-204, Mar. 2007, 
+doi: 10.1109/LMWC.2006.890474.
+
+\bibitem{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}
+H.-Y. Yu, J. Yu, X. Liu, Y. Yao, and X. Chen, 
+``A Wideband Circularly Polarized Horn Antenna With a Tapered Elliptical Waveguide Polarizer,''
+*IEEE Trans. Antennas Propag.*, vol. 67, no. 6, pp. 3695-3703, Jun. 2019, 
+doi: 10.1109/TAP.2019.2905789.
+
+\bibitem{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges}
+L. A. Rud and K. S. Shpachenko, 
+``Polarizers on sections of square waveguides with inner corner ridges,''
+in *Proc. 2011 VIII Int. Conf. Antenna Theory and Techniques (ICATT)*, Kyiv, Ukraine, 2011, pp. 338-340, 
+doi: 10.1109/ICATT.2011.6170775.
+
+\bibitem{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}
+S. Bhardwaj and J. Volakis, 
+``Hexagonal waveguides: New class of waveguides for mm-wave circularly polarized horns,''
+in *Proc. 2018 Int. Appl. Comput. Electromagn. Soc. Symp. (ACES)*, Denver, CO, USA, 2018, pp. 1-2, 
+doi: 10.23919/ROPACES.2018.8364165.
+
+\bibitem{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}
+S. K. Karki, J. Ala-Laurinaho, and V. Viikari, 
+``Dual-Polarized Probe for Planar Near-Field Measurement,''
+*IEEE Antennas Wireless Propag. Lett.*, vol. 22, no. 3, pp. 576-580, Mar. 2023, 
+doi: 10.1109/LAWP.2022.3218731.
+
+\bibitem{fabregas-et-al:coaxial-to-rectangular-waveguide-transitions}
+I. Fabregas, K. Shamsaifar, and J. M. Rebollar, 
+``Coaxial to rectangular waveguide transitions,'' 
+in *Proc. IEEE Antennas Propag. Soc. Int. Symp.*, Chicago, IL, USA, 1992, pp. 2122-2125 vol.4, 
+doi: 10.1109/APS.1992.221447.
+
+\end{thebibliography}
+
+\end{document}

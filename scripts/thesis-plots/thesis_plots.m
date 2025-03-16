@@ -8,7 +8,7 @@ set(groot, 'DefaultAxesTickLabelInterpreter', 'latex');
 set(groot, 'DefaultLegendInterpreter', 'latex');
 set(groot, 'DefaultAxesYAxisLocation', 'left');
 set(groot,'defaultAxesFontName','Times New Roman')
-set(groot, 'defaultAxesFontSize', 12)
+set(groot, 'defaultAxesFontSize', 14)
 disp('LaTeX interpreter and left-side Y-axis set as default.');
 frequency_range = [4.8, 5.7];
 c = 299792458;
@@ -173,6 +173,20 @@ title("Axial ratio (identical for both modes)")
 set(gcf, "Position", [680, 178, 560, 800])
 saveas(gcf, fullfile(pwd, '\latex\src\polarizer_radiation.svg'), 'svg')
 
+%% ISAP 2025: polarizer AR
+[freq, axial_ratio1] = get_single_plot_data("axial_ratio1.txt");
+
+figure;
+plot(freq, axial_ratio1, "LineWidth", 1.5)
+grid on;
+box on;
+xlim(frequency_range);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$\mathrm{AR}\ [\mathrm{dB}]$")
+
+set(gcf, "Position", [680, 178, 560, 260])
+saveas(gcf, fullfile(pwd, '\isap2025\src\polarizer_axial_ratio.png'), 'png')
+
 %% Feed: single (reflection)
 [freq, reflection] = get_single_plot_data("single_feed_reflection.txt");
 
@@ -257,6 +271,46 @@ leg = legend(["$S_{11}$", "$S_{22}$", "$S_{21}$", "$S_{12}$"], "Orientation", "h
 leg.Layout.Tile = "north";
 
 saveas(gcf, fullfile(pwd, '\latex\src\dual_feed_sparameters.svg'), 'svg')
+
+%% ISAP 2025: dual feed performance
+sdata = sparameters("dual_feed.s2p");
+freq = sdata.Frequencies*1e-9;
+s11 = 20*log10(abs(squeeze(sdata.Parameters(1, 1, :))));
+s21 = 20*log10(abs(squeeze(sdata.Parameters(2, 1, :))));
+s12 = 20*log10(abs(squeeze(sdata.Parameters(1, 2, :))));
+s22 = 20*log10(abs(squeeze(sdata.Parameters(2, 2, :))));
+
+figure;
+tiledlayout(2, 1, "TileSpacing", "compact");
+
+nexttile;
+hold on;
+plot(freq, s11, "LineWidth", 1.5)
+plot(freq, s22, "LineWidth", 1.5)
+hold off;
+grid on;
+box on;
+xlim(frequency_range);
+ylabel("$[\mathrm{dB}]$")
+
+nexttile;
+hold on;
+plot(0,0, "LineWidth", 1.5)
+plot(0,0, "LineWidth", 1.5)
+plot(freq, s21, "LineWidth", 1.5)
+plot(freq, s12, "LineWidth", 1.5)
+hold off;
+grid on;
+box on;
+xlim(frequency_range);
+xlabel("$f\ [\mathrm{GHz}]$")
+ylabel("$[\mathrm{dB}]$")
+
+leg = legend(["$S_{11}$", "$S_{22}$", "$S_{21}$", "$S_{12}$"], "Orientation", "horizontal");
+leg.Layout.Tile = "north";
+
+set(gcf, "Position", [680, 178, 560, 460])
+saveas(gcf, fullfile(pwd, '\isap2025\src\dual_feed_performance.png'), 'png')
 
 %% Antenna: conical horns comparison
 [theta, magus_gain_pattern] = get_single_plot_data("magus_gain_pattern.txt");
