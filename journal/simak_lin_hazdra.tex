@@ -1,0 +1,154 @@
+\documentclass[lettersize,journal]{IEEEtran}
+
+% ========== Packages ==========
+\usepackage{amsmath,amsfonts}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{graphicx}
+% \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\usepackage{balance}
+
+% ========== Custom packages ==========
+\usepackage{siunitx}
+
+% ========== Custom definitions ==========
+\newcommand{\frequencyrange}{\qtyrange{4.8}{5.7}{\giga\hertz}}
+\newcommand{\TEM}{\text{TEM}}
+\newcommand{\TE}[2]{\text{TE}_{#1#2}}
+\newcommand{\TM}[2]{\text{TM}_{#1#2}}
+
+% ========== Title ==========
+\title{Dual Circularly Polarized Waveguide Antenna}
+
+% ========== Authors ==========
+\author{Martin Šimák,~\IEEEmembership{Student Member,~IEEE,}~Ding-Bing Lin,~\IEEEmembership{Member,~IEEE,}~and~Pavel Hazdra,~\IEEEmembership{Member,~IEEE}%
+\thanks{M. Šimák is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei, Taiwan.}%
+\thanks{D. B. Lin is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei, Taiwan.}%
+\thanks{P. Hazdra is with Department of Electromagnetic Field, Czech Technical University in Prague, Prague, Czechia.}%
+}
+
+% ==========  ==========
+\markboth{IEEE Antennas and Wireless Propagation Letters}%
+{M. Šimák, D.-B. Lin, and P. Hazdra: Dual Circularly Polarized Waveguide Antenna}
+
+% ========== Document ==========
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This paper introduces a novel dual circularly polarized (CP) antenna for the 4.8~GHz to 5.7~GHz band, featuring a compact and readily manufacturable design. The antenna integrates a chamfered-corner square waveguide polarizer, a dual-coaxial feed, and a conical horn. Right-hand (RHCP) and left-hand (LHCP) circular polarization are achieved by selectively exciting fundamental modes within the square waveguide using the dual-coaxial feed. The conical horn, optimized using Antenna Magus and integrated with the polarizer, achieves target gain specifications. CST Studio Suite simulations validated the design, and measurements of the fabricated prototype confirm an axial ratio below 4~dB and a gain of approximately 12~dBi to 15~dBi across the band. The proposed antenna offers a promising solution for satellite communications, radar, and related wireless applications requiring dual CP operation.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Circular polarization, waveguide polarizer, dual feed, conical horn antenna, hexagonal waveguide, eigenmode analysis, electromagnetic simulation.
+\end{IEEEkeywords}
+
+% ========== Chapter 1: Introduction ==========
+\section{Introduction}
+
+\IEEEPARstart{D}{ual} circularly polarized (CP) antennas are essential components in various wireless systems, including satellite communications and radar, requiring both right-hand (RHCP) and left-hand (LHCP) polarization capabilities~\cite{cite1, cite2}. Waveguide-based polarizers offer a robust solution for achieving dual-CP operation due to their inherent ability to support two orthogonal, degenerate modes. This introduction briefly reviews existing waveguide polarizer techniques and introduces a novel, easily manufacturable design approach. A subsequent section will detail the polarizer design itself.
+
+Traditional waveguide polarizers for generating circular polarization typically fall into three main categories: dielectric vane, septum, and iris polarizers~\cite{cite3, cite4, cite5}. Dielectric vane polarizers, while simple to implement, suffer from narrow bandwidths and dielectric losses, limiting their power handling capabilities~\cite{cite6}. Septum polarizers offer good power handling and dual-CP generation but can be bulky and complex to reconfigure~\cite{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer, wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}. Iris polarizers, capable of higher power operation, often face challenges with overmoding and require intricate design for wideband performance~\cite{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer, virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers, piltyay-et-al:new-tunable-iris-post-square-waveguide-polarizers-for-satelliste-information-systems}. Recent work has explored alternative waveguide geometries, including elliptical and those with shaped metallic inserts, to leverage mode dispersion for polarization control~\cite{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer, rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges, bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns, bhardwaj-volakis:hexagonal-waveguide-based-circularly-polarized-horn-antennas-for-submmwave-terahertz-band, bhardwaj-volakis:circularly-polarized-horn-antennas-for-terahertz-communications-using-differential-mode-dispersion-in-hexagonal-waveguides, garcia-marin-masa-campos:bowtie-shaped-radiating-element-for-single-and-dual-circular-polarization}.
+
+This paper presents a novel dual-CP antenna operating in the $\frequencyrange$ band. The antenna system integrates a specially designed square waveguide polarizer, a dual-coaxial feed, and a conical horn. The core of the design lies in the polarizer, which achieves the required 90-degree phase shift between orthogonal modes through geometric modifications to the waveguide cross-section, inspired by approaches used in patch antennas~\cite{cite_patch_antenna}. This approach offers a balance between performance, compactness, and ease of fabrication. The dual-coaxial feed provides the necessary excitation for both RHCP and LHCP operation, while the conical horn provides the desired gain characteristics. The design was validated through electromagnetic simulations using CST Studio Suite~\cite{cst}, and experimental results from a fabricated prototype demonstrate excellent agreement with simulations. Key performance metrics include an axial ratio below $\qty{4}{dB}$ and a gain of approximately $\qtyrange{12}{15}{dBi}$ across the operating band.
+
+The remainder of this paper is organized as follows: Section II details the design of the proposed polarizer. Section III describes... [Continue with the structure of your paper].
+
+% ========== Chapter 1: Polarizer Design ==========
+\section{Polarizer Design}
+\label{sec:polarizer_design}
+
+The proposed dual-CP antenna utilizes a novel square waveguide polarizer design based on introducing geometric modifications to the waveguide cross-section. This approach, inspired by techniques used in patch antennas \cite{cite_patch_antenna}, involves inserting simple shapes into opposing corners of a standard square waveguide. Specifically, triangular prisms are used, forming a hexagonal-like cross-section similar to structures explored in \cite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}. This geometry was chosen for its relative ease of fabrication compared to curved inserts, while offering effective field manipulation for polarization control. A trade-off for this manufacturability is a moderately wide operating bandwidth, as the principle relies on mode dispersion induced by the resonant nature of the inserts.
+
+The fundamental principle relies on breaking the degeneracy of the fundamental $\TE 10$ and $\TE 01$ modes of the square waveguide. The inserted prisms perturb the fields, resulting in two new orthogonal eigenmodes with distinct propagation constants, $k_1(f)$ and $k_2(f)$. This difference in propagation constants, $\Delta k_L(f) = k_2(f) - k_1(f)$, causes a differential phase shift, $\Delta\phi(f) = L \cdot \Delta k_L(f)$, to accumulate between the two modes as they propagate along the polarizer length $L$. The design objective is to achieve $\Delta\phi \approx \pi/2$ across the desired operating band while maintaining approximately equal amplitudes for the two modes, which corresponds to a low axial ratio (AR). Due to the diagonal symmetry of the structure, achieving optimal performance for one sense of CP (e.g., RHCP from $\TE 01$) inherently ensures similar performance for the opposite sense (LHCP from $\TE 10$) \cite{balanis:advanced-engineering-electromagnetics}.
+
+Initial investigations using eigenmode analysis (CST Studio Suite \cite{cst}) compared the performance of square waveguides with triangular inserts and circular waveguides with cylindrical segment inserts. Assuming uniform waveguides, the key metrics evaluated were the specific phase shift (related to the length required for $\pi/2$ shift, $L_\perp$) and the amplitude ratio of the modes. While both geometries showed similar mode cutoff frequency dispersion (see Fig.~\ref{fig:polarizers-cutoff-frequencies}), the square waveguide configuration demonstrated superior phase dispersion characteristics while maintaining a lower amplitude dispersion gradient across the target frequency band (Fig.~\ref{fig:comparison_plots}). Consequently, the square waveguide with triangular inserts was selected for further development.
+
+The specific design targets the $\frequencyrange$ band, relevant for satellite communications and radar applications. An initial square waveguide side length of $a = \qty{50}{mm}$ was chosen, corresponding to the standard WR-187 waveguide \cite{spinner:waveguide-specifications}, though the inserts modify the cutoff frequencies. Eigenmode simulations confirmed this dimension provides adequate bandwidth considering the lower cutoff frequency introduced by the inserts (Fig.~\ref{fig:polarizers-cutoff-frequencies}).
+
+A parametric sweep varying the chamfering width $w$ (defined as the side length of the triangular prism cross-section, see Fig.~\ref{fig:polarizer_geometry}) and the polarizer length $L$ was performed using CST Studio Suite. The goal was to minimize the far-field axial ratio (AR) across the operating band. Based on the sweep results (summarized in Fig.~\ref{fig:sweep_results}), a chamfering width of $w = \qty{23}{mm}$ and a polarizer length of $L = \qty{126}{mm}$ were selected.
+
+To validate the design, a full-wave simulation of the finalized polarizer section, connected between two standard $a \times a$ square waveguide sections (input and output), was performed. The input was excited with the fundamental $\TE 10$ or $\TE 01$ mode. The far-field axial ratio was evaluated from the radiated fields at the output waveguide aperture. The results, shown in Fig.~\ref{fig:polarizer_ar_plot}, confirm excellent performance, with the AR remaining below $\qty{3}{dB}$ across the entire $\frequencyrange$ band and reaching near $\qty{0}{dB}$ around the center frequency. Representative radiation patterns (Fig.~\ref{fig:polarizer_radiation_pattern}) further confirm the generation of high-purity CP waves.
+
+% ========== Bibliography ==========
+\begin{thebibliography}{1}
+    
+    \bibitem{cite1}
+    % You need to replace this with a real citation. This is a placeholder for general dual-CP antenna importance.
+    H.~Author and A.~Another, ``Title of relevant paper/book on dual-CP antennas,'' \emph{Journal/Conference Name}, vol.~X, no.~Y, pp. ZZZ--ZZZ, Year.
+    
+    \bibitem{cite2}
+    % You need to replace this with a real citation. This is a placeholder for general dual-CP antenna applications (satellite comms, radar).
+    S.~Author and B.~Another, ``Title of another relevant paper/book on dual-CP antenna applications,'' \emph{Journal/Conference Name}, vol.~X, no.~Y, pp. ZZZ--ZZZ, Year.
+    
+    \bibitem{cite3}
+    % You need to replace this with a real citation. Placeholder for general overview of waveguide polarizer techniques.
+    T.~Thirdauthor, ``Overview of waveguide polarizers,'' \emph{Some Relevant Journal}, 20XX.
+    
+    \bibitem{cite4}
+    % You need to replace this with a real citation. Another placeholder for general overview of waveguide polarizer techniques.
+    F.~Fourthauthor, ``Another overview of waveguide polarizers,'' \emph{Another Relevant Journal}, 20XX.
+    
+    \bibitem{cite5}
+    % You need to replace this with a real citation. A third placeholder for general overview of waveguide polarizer techniques.
+    V.~Fifthauthor, ``Waveguide Polarizers: a review,'' in \emph{Conference Proceedings}, 20XX.
+    
+    \bibitem{cite6}
+    % You need to replace this. Placeholder for a source detailing limitations of dielectric vane polarizers.
+    G.~Sixthauthor, ``Limitations of vane polarizers,'' 20XX.
+    
+    \bibitem{ruiz-cruz-et-al:compact-reconfigurable-waveguide-circular-polarizer}
+    J.~A. Ruiz-Cruz, M.~M. Fahmi, M.~Daneshmand, and R.~R. Mansour, ``Compact reconfigurable waveguide circular polarizer,'' in \emph{2011 IEEE MTT-S International Microwave Symposium}, Baltimore, MD, USA, 2011, pp. 1--4.
+    
+    \bibitem{wang-et-al:novel-square-rectangle-waveguide-septum-polarizer}
+    X.~Wang, X.~Huang, and X.~Jin, ``Novel square/rectangle waveguide septum polarizer,'' in \emph{2016 IEEE International Conference on Ubiquitous Wireless Broadband (ICUWB)}, Nanjing, China, 2016, pp. 1--4.
+    
+    \bibitem{song-et-al:design-of-wideband-quad-ridge-waveguide-polarizer}
+    H.~Song, L.~Jia, J.~Tan, Y.~Zhang, and S.~Liu, ``Design of wideband quad-ridge waveguide polarizer,'' in \emph{2023 4th China International SAR Symposium (CISS)}, Xian, China, 2023, pp. 1--6.
+    
+    \bibitem{virone-et-al:optimum-iris-set-concept-for-waveguide-polarizers}
+    G.~Virone, R.~Tascone, O.~A. Peverini, and R.~Orta, ``Optimum-iris-set concept for waveguide polarizers,'' \emph{IEEE Microwave and Wireless Components Letters}, vol.~17, no.~3, pp. 202--204, Mar. 2007.
+    
+    \bibitem{piltyay-et-al:new-tunable-iris-post-square-waveguide-polarizers-for-satelliste-information-systems}
+    S.~Piltyay, A.~Bulashenko, H.~Kushnir, and O.~Bulashenko, ``New tunable iris-post square waveguide polarizers for satellite information systems,'' in \emph{2020 IEEE 2nd International Conference on Advanced Trends in Information Theory (ATIT)}, Kyiv, Ukraine, 2020, pp. 342--348.
+    
+    \bibitem{yu-et-al:a-wideband-circularly-polarized-horn-antenna-with-a-tapered-elliptical-waveguide-polarizer}
+    H.-Y. Yu, J.~Yu, X.~Liu, Y.~Yao, and X.~Chen, ``A wideband circularly polarized horn antenna with a tapered elliptical waveguide polarizer,'' \emph{IEEE Transactions on Antennas and Propagation}, vol.~67, no.~6, pp. 3695--3703, Jun. 2019.
+    
+    \bibitem{rud-shpachenko:polarizers-on-sections-of-square-waveguides-with-inner-corner-ridges}
+    L.~A. Rud and K.~S. Shpachenko, ``Polarizers on sections of square waveguides with inner corner ridges,'' in \emph{2011 VIII International Conference on Antenna Theory and Techniques}, Kyiv, Ukraine, 2011, pp. 338--340.
+    
+    \bibitem{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}
+    S.~Bhardwaj and J.~Volakis, ``Hexagonal waveguides: New class of waveguides for mm-wave circulaly polarized horns,'' in \emph{2018 International Applied Computational Electromagnetics Society Symposium (ACES)}, Denver, CO, USA, 2018, pp. 1--2.
+    
+    \bibitem{bhardwaj-volakis:hexagonal-waveguide-based-circularly-polarized-horn-antennas-for-submmwave-terahertz-band}
+    S.~Bhardwaj and J.~L. Volakis, ``Hexagonal waveguide based circularly polarized horn antennas for sub-mm-wave/terahertz band,'' \emph{IEEE Transactions on Antennas and Propagation}, vol.~66, no.~7, pp. 3366--3374, Jul. 2018.
+    
+    \bibitem{bhardwaj-volakis:circularly-polarized-horn-antennas-for-terahertz-communications-using-differential-mode-dispersion-in-hexagonal-waveguides}
+    ------, ``Circularly-polarized horn antennas for terahertz communication using differential-mode dispersion in hexagonal waveguides,'' in \emph{2017 IEEE International Symposium on Antennas and Propagation \& USNC/URSI National Radio Science Meeting}, San Diego, CA, USA, 2017, pp. 2571--2572.
+    
+    \bibitem{garcia-marin-masa-campos:bowtie-shaped-radiating-element-for-single-and-dual-circular-polarization}
+    E.~Garcia-Marin, J.~L. Masa-Campos, P.~Sanchez-Olivares, and J.~A. Ruiz-Cruz, ``Bow-tie-shaped radiating element for single and dual circular polarization,'' \emph{IEEE Transactions on Antennas and Propagation}, vol.~68, no.~2, pp. 754--764, Feb. 2020.
+    
+    \bibitem{cite_patch_antenna}
+    % You MUST replace this with a proper citation to a paper on patch antennas with chamfered corners for circular polarization. This is very important to support the "inspiration" claim.
+    AUTHOR, ``TITLE,'' \emph{JOURNAL}, YEAR.
+
+    \bibitem{cst}
+    Dassault Syst{\`e}mes, ``CST Studio Suite, version 2024.5,'' [Online]. Available: \url{https://www.3ds.com/products-services/simulia/products/cst-studio-suite}. [Accessed: Dec. 31, 2024].
+
+    \bibitem{balanis:advanced-engineering-electromagnetics}
+    C.~A. Balanis, \emph{Advanced Engineering Electromagnetics}. Wiley, 2012.
+
+    \bibitem{spinner:waveguide-specifications}
+    H.-U. Nickel, ``Cross reference for hollow metallic waveguides,'' SPINNER GmbH, Tech. Rep. TD-00036, Jul. 2024. [Online]. Available: \url{https://www.spinner-group.com/images/download/technical_documents/SPINNER_TD00036.pdf}. [Accessed: Dec. 29, 2024].
+    
+    \end{thebibliography}
+
+
+\end{document}

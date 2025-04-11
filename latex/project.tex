@@ -1,9 +1,9 @@
-%========== Compiler Directives ==========
+% ========== Compiler Directives ==========
 % !TeX program = lualatex                                   
 % !TeX encoding = utf8
 % !TeX spellcheck = english
 
-%========== Document settings ==========
+% ========== Document settings ==========
 \documentclass[14pt,a4paper]{ntust_report}
 % \setlength\textwidth{145mm}
 % \setlength\textheight{247mm}
@@ -14,19 +14,19 @@
 % \setlength\headheight{0mm}
 % \let\openright=\cleardoublepage
 
-%========== Language settings ==========
+% ========== Language settings ==========
 \usepackage[main=american,czech]{babel}
 
-%========== Packages =============
+% ========== Packages =============
 \usepackage{thesis-package}
 
-%========== Date format ===============
+% ========== Date format ===============
 % \newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
 
-%========== Bibliography ==========
+% ========== Bibliography ==========
 \addbibresource{bibliography.bib}
 
-%========== Draft settings ==========
+% ========== Draft settings ==========
 \usepackage{lipsum}
 \newlength{\twosubht}
 \newsavebox{\twosubbox}
@@ -59,32 +59,32 @@
 
 \pagenumbering{gobble}
 
-%========== Title page ==========
+% ========== Title page ==========
 \includepdf{src/coverpage.pdf}
 
-%========== Recommendation form ==========
+% ========== Recommendation form ==========
 \includepdf{src/recommendation_form.pdf}
 
-%========== Qualification form ==========
+% ========== Qualification form ==========
 \includepdf{src/qualification_form.pdf}
 
 \pagenumbering{roman}
 
-% %========== Abstract ==========
+% % ========== Abstract ==========
 \input{abstract.tex}
 
-% %========== Acknowledgements ==========
+% % ========== Acknowledgements ==========
 \input{acknowledgements.tex}
 
 \pagenumbering{arabic}
 
-%========== Table of contents ==========
+% ========== Table of contents ==========
 \tableofcontents
 
-%========== List of figures ==========
+% ========== List of figures ==========
 \listoffigures
 
-%========== Introduction ==========
+% ========== Introduction ==========
 \chapter*{Introduction}
 \label{chapter:introduction}
 \addcontentsline{toc}{chapter}{\nameref{chapter:introduction}}
@@ -108,7 +108,7 @@ The design process leveraged several software tools. CST Studio Suite~\parencite
 \paragraph*{Methodology.} The methodology combined numerical simulations with experimental validation. Full-wave electromagnetic simulations, conducted using CST Studio Suite, were used to analyze the performance of individual components and the integrated antenna system. Optimization algorithms, implemented in both CST Studio Suite and Python using the SciPy library, refined the design parameters for optimal performance. A prototype of the finalized design was fabricated and measured to validate the simulation results and demonstrate the feasibility of the proposed approach.
 
 
-%========== Chapter 1: Electrodynamics of guided waves ==========
+% ========== Chapter 1: Electrodynamics of guided waves ==========
 \chapter{Electrodynamics of guided waves}
 \label{chapter:electrodynamics}
 This chapter establishes the theoretical foundation for the analysis and design of a waveguide-based antenna system. Building on the Maxwell's equations and a general description of electromagnetic fields in various settings, the wave equations governing guided waves are derived, and their solutions are analyzed to elucidate the behavior of electromagnetic fields within waveguides. This analysis provides a framework for understanding the operation of structures designed in the following chapters. While focusing on the essential elements of waveguide theory, this chapter provides a comprehensive treatment of the subject and establishes the notation used throughout this work.
@@ -1018,7 +1018,7 @@ As anticipated, both the measured network parameters and the radiation propertie
 
 
 
-%========== Conclusion ==========
+% ========== Conclusion ==========
 \chapter*{Conclusion}
 \label{chapter:conclusion}
 \addcontentsline{toc}{chapter}{\nameref{chapter:conclusion}}
@@ -1031,7 +1031,7 @@ A further objective was to fabricate a physical prototype of the designed antenn
 
 Despite the project's overall success, several potential areas for improvement are identified. The polarizer's performance could be enhanced by incorporating a tapered transition into the chamfered sections, potentially reducing reflections and improving the overall bandwidth, which warrants further investigation. Implementing multiple polarizer sections with varying geometries could also widen the operational bandwidth, albeit at the cost of increased complexity. Regarding the feeding structure, alternative coaxial-to-waveguide transition techniques, such as disc-loaded or prismatic probes, are known to widen the operation bandwidth. Finally, while the conical horn antenna provides satisfactory performance, considering a quad-ridge square pyramidal horn could offer a more robust and potentially broader bandwidth solution, especially for applications demanding higher polarization purity across a wider frequency range. These suggested improvements provide avenues for future research and development, building upon the solid foundation established by this thesis.
 
-%========== Bibliography ==========
+% ========== Bibliography ==========
 \printbibliography[heading=bibintoc,title={References}]
 
 \end{document}
