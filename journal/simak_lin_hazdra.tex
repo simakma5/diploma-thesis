@@ -1,4 +1,5 @@
-\documentclass[lettersize,journal]{IEEEtran}
+\documentclass[journal]{IEEEtran}
+% TODO: Rectify wrong references and find missing ones instead of placeholders.
 
 % ========== Packages ==========
 \usepackage{amsmath,amsfonts}
@@ -26,8 +27,8 @@
 
 % ========== Authors ==========
 \author{Martin Šimák,~\IEEEmembership{Student Member,~IEEE,}~Ding-Bing Lin,~\IEEEmembership{Member,~IEEE,}~and~Pavel Hazdra,~\IEEEmembership{Member,~IEEE}%
-\thanks{M. Šimák is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei, Taiwan.}%
-\thanks{D. B. Lin is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei, Taiwan.}%
+\thanks{M. Šimák is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei City, Taiwan.}%
+\thanks{D. B. Lin is with Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology, Taipei City, Taiwan.}%
 \thanks{P. Hazdra is with Department of Electromagnetic Field, Czech Technical University in Prague, Prague, Czechia.}%
 }
 
@@ -63,17 +64,34 @@ The remainder of this paper is organized as follows: Section II details the desi
 \section{Polarizer Design}
 \label{sec:polarizer_design}
 
-The proposed dual-CP antenna utilizes a novel square waveguide polarizer design based on introducing geometric modifications to the waveguide cross-section. This approach, inspired by techniques used in patch antennas \cite{cite_patch_antenna}, involves inserting simple shapes into opposing corners of a standard square waveguide. Specifically, triangular prisms are used, forming a hexagonal-like cross-section similar to structures explored in \cite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}. This geometry was chosen for its relative ease of fabrication compared to curved inserts, while offering effective field manipulation for polarization control. A trade-off for this manufacturability is a moderately wide operating bandwidth, as the principle relies on mode dispersion induced by the resonant nature of the inserts.
+The proposed dual-CP antenna utilizes a novel square waveguide polarizer design based on introducing geometric modifications to the waveguide cross-section. This approach, inspired by techniques used in patch antennas~\cite{cite_patch_antenna}, involves inserting simple shapes into opposing corners of a standard square waveguide. Specifically, triangular prisms are used, forming a hexagonal-like cross-section similar to structures explored in~\cite{bhardwaj-volakis:hexagonal-waveguides-new-class-of-waveguides-for-mmwave-circularly-polarized-horns}. This geometry was chosen for its relative ease of fabrication compared to curved inserts, while offering effective field manipulation for polarization control. A trade-off for this manufacturability is a moderately wide operating bandwidth, as the principle relies on mode dispersion induced by the resonant nature of the inserts.
 
-The fundamental principle relies on breaking the degeneracy of the fundamental $\TE 10$ and $\TE 01$ modes of the square waveguide. The inserted prisms perturb the fields, resulting in two new orthogonal eigenmodes with distinct propagation constants, $k_1(f)$ and $k_2(f)$. This difference in propagation constants, $\Delta k_L(f) = k_2(f) - k_1(f)$, causes a differential phase shift, $\Delta\phi(f) = L \cdot \Delta k_L(f)$, to accumulate between the two modes as they propagate along the polarizer length $L$. The design objective is to achieve $\Delta\phi \approx \pi/2$ across the desired operating band while maintaining approximately equal amplitudes for the two modes, which corresponds to a low axial ratio (AR). Due to the diagonal symmetry of the structure, achieving optimal performance for one sense of CP (e.g., RHCP from $\TE 01$) inherently ensures similar performance for the opposite sense (LHCP from $\TE 10$) \cite{balanis:advanced-engineering-electromagnetics}.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=.8\linewidth]{src/polarizer_perspective.png}
+    \caption{\label{fig:polarizer-perspective} Perspective view of the square waveguide polarizer.}
+\end{figure}
 
-Initial investigations using eigenmode analysis (CST Studio Suite \cite{cst}) compared the performance of square waveguides with triangular inserts and circular waveguides with cylindrical segment inserts. Assuming uniform waveguides, the key metrics evaluated were the specific phase shift (related to the length required for $\pi/2$ shift, $L_\perp$) and the amplitude ratio of the modes. While both geometries showed similar mode cutoff frequency dispersion (see Fig.~\ref{fig:polarizers-cutoff-frequencies}), the square waveguide configuration demonstrated superior phase dispersion characteristics while maintaining a lower amplitude dispersion gradient across the target frequency band (Fig.~\ref{fig:comparison_plots}). Consequently, the square waveguide with triangular inserts was selected for further development.
+The fundamental principle relies on breaking the degeneracy of the fundamental $\TE 10$ and $\TE 01$ modes of the square waveguide. The inserted prisms perturb the fields, resulting in two new orthogonal eigenmodes with distinct propagation constants, $k_1$ and $k_2$. This difference in propagation constants, $\Delta k_L$, causes a differential phase shift, $\Delta\phi_L$, to accumulate between the two modes as they propagate along the polarizer length $L$. The design objective is to achieve the differential phase shift of approximately $\pi/2$ across the desired operating band while maintaining approximately equal amplitudes for the two modes. By definition, achieving the first condition yields elliptical polarization. Furthermore, simultaneously fulfilling the latter condition corresponds to circular polarization with low axial ratio (AR), i.e., high polarization purity. Due to the diagonal symmetry of the structure, achieving optimal performance for one sense of CP (e.g., RHCP from $\TE 01$) inherently ensures similar performance for the opposite sense (LHCP from $\TE 10$)~\cite{balanis:advanced-engineering-electromagnetics}.
+% TODO: remove reference?
 
-The specific design targets the $\frequencyrange$ band, relevant for satellite communications and radar applications. An initial square waveguide side length of $a = \qty{50}{mm}$ was chosen, corresponding to the standard WR-187 waveguide \cite{spinner:waveguide-specifications}, though the inserts modify the cutoff frequencies. Eigenmode simulations confirmed this dimension provides adequate bandwidth considering the lower cutoff frequency introduced by the inserts (Fig.~\ref{fig:polarizers-cutoff-frequencies}).
+Initial investigations comprised the eigenmode analysis using CST Studio Suite of square waveguides with triangular prisms for inserts and circular waveguides with cylindrical segments. Assuming uniform waveguides, the key metrics evaluated were the specific phase shift and the amplitude ratio of the modes. While both geometries showed similar mode cutoff frequency dispersion, the square waveguide configuration demonstrated superior phase dispersion characteristics while maintaining a lower amplitude dispersion gradient across the target frequency band. Consequently, the square waveguide with triangular inserts was selected for further development. The specific design targets the $\frequencyrange$ band, relevant for satellite communications and radar applications. An initial square waveguide side length of $a = \qty{50}{mm}$ was chosen, corresponding to the standard WR-187 waveguide~\cite{spinner:waveguide-specifications}, though the inserts modify the cutoff frequencies. Eigenmode simulations confirmed this dimension provides adequate bandwidth considering the lower cutoff frequency introduced by the inserts.
 
-A parametric sweep varying the chamfering width $w$ (defined as the side length of the triangular prism cross-section, see Fig.~\ref{fig:polarizer_geometry}) and the polarizer length $L$ was performed using CST Studio Suite. The goal was to minimize the far-field axial ratio (AR) across the operating band. Based on the sweep results (summarized in Fig.~\ref{fig:sweep_results}), a chamfering width of $w = \qty{23}{mm}$ and a polarizer length of $L = \qty{126}{mm}$ were selected.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\linewidth]{src/polarizer_sweep.png}
+    \caption{\label{fig:polarizer-sweep} Performance of the square waveguide polarizer cross-section. The quantity $L_\perp$ represents the length required for a $\pi/2$ phase shift between the two modes.}
+\end{figure}
 
-To validate the design, a full-wave simulation of the finalized polarizer section, connected between two standard $a \times a$ square waveguide sections (input and output), was performed. The input was excited with the fundamental $\TE 10$ or $\TE 01$ mode. The far-field axial ratio was evaluated from the radiated fields at the output waveguide aperture. The results, shown in Fig.~\ref{fig:polarizer_ar_plot}, confirm excellent performance, with the AR remaining below $\qty{3}{dB}$ across the entire $\frequencyrange$ band and reaching near $\qty{0}{dB}$ around the center frequency. Representative radiation patterns (Fig.~\ref{fig:polarizer_radiation_pattern}) further confirm the generation of high-purity CP waves.
+A parametric sweep varying the chamfering width $w$ was performed. The goal was to find a cross-section facilitating an acceptable trade-off between the polarizer length required to achieve sufficient mode dispersion at the output (i.e., to fulfill the condition on circular polarization), while maintaining close-to-equal mode amplitudes. Based on the sweep results (summarized in Fig.~\ref{fig:polarizer-sweep}), a chamfering width of $w = \qty{23}{mm}$ and a polarizer length of $L = 2.2\lambda \approx \qty{126}{mm}$ were selected.
+
+To validate the design, a full-wave simulation of the finalized polarizer section, connected between two standard $a \times a$ square waveguide sections (input and output), was performed. The input was fed with the fundamental $\TE 10$ or $\TE 01$ mode, providing the necessary excitation to evaluate the far-field axial ratio from the radiated fields at the output waveguide aperture. The results, shown in Fig.~\ref{fig:polarizer_radiation}, confirm excellent performance, with the AR remaining below $\qty{3}{dB}$ across the entire $\frequencyrange$ band and reaching near $\qty{0}{dB}$ around the center frequency. Representative radiation patterns further confirm the generation of high-purity CP waves and the diagonal symmetry of the polarizer structure assumed earlier.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{src/polarizer_radiation.png}
+    \caption{\label{fig:polarizer_radiation} Hello.}
+\end{figure}
 
 % ========== Bibliography ==========
 \begin{thebibliography}{1}
