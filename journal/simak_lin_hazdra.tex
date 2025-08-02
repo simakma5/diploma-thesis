@@ -1,20 +1,29 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[journal,9pt]{IEEEtran}
+%Aug 23, 2023. This template is for IEEE's Short paper/Brief article/ Techinical Correspondence, 16pt center pagewide title, 2 columns, 
+%9/11pt  body text.8/9pt footnote, abstract, ref. No biographies.
 
 % ========== Packages ==========
 \usepackage[british]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amsfonts}
-% \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-\usepackage[caption=false,font=normalsize]{subfig}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+%Please use all packages specified with their parameters otherwise the results may not be the same.
+
 \usepackage{textcomp}
 \usepackage{stfloats}
 \usepackage{url}
+\usepackage{verbatim}
 \usepackage{graphicx}
-% \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-\usepackage{balance}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+%updated: Aug 30, 2022: Dead links and support email addresses were removed; Running-head, article title were changed to genric publication
+% updated with editorial comments 8/9/2021
 \usepackage{siunitx}
 
 % ========== Custom definitions ==========
@@ -23,8 +32,11 @@
 \newcommand{\TE}[2]{\text{TE}_{#1#2}}
 \newcommand{\TM}[2]{\text{TM}_{#1#2}}
 
+% ========== Document ==========
+\begin{document}
+
 % ========== Title ==========
-\title{Hexagonal Waveguide Polarizer for a Compact Dual Circularly Polarized Antenna}
+\title{\huge{Hexagonal Waveguide Polarizer for a Compact Dual Circularly Polarized Antenna}}
 
 % ========== Authors ==========
 \author{Martin Šimák,~\IEEEmembership{Student Member,~IEEE,}~Ding-Bing Lin,~\IEEEmembership{Member,~IEEE,}~and~Pavel Hazdra,~\IEEEmembership{Member,~IEEE}%
@@ -34,11 +46,12 @@
 }
 
 % ========== Headers ==========
-\markboth{IEEE Antennas and Wireless Propagation Letters}%
+\markboth{IEEE Transactions on Antennas and Propagation}%
 {M. Šimák, D.-B. Lin, and P. Hazdra: Hexagonal Waveguide Polarizer for a Compact Dual Circularly Polarized Antenna}
 
-% ========== Document ==========
-\begin{document}
+% \IEEEpubid{0000--0000~\copyright~2023 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
 
 \maketitle
 
@@ -50,7 +63,7 @@
 Circular polarization, waveguide polarizer, dual feed, conical horn antenna, hexagonal waveguide, eigenmode analysis, electromagnetic simulation.
 \end{IEEEkeywords}
 
-% ========== Chapter I: Introduction ==========
+% ========== Section I: Introduction ==========
 \section{Introduction}
 
 \IEEEPARstart{D}{ual} circularly polarized (CP) antennas are essential components in various wireless systems, including satellite communications and radar, requiring both right-hand (RHCP) and left-hand (LHCP) polarization capabilities~\cite{jia-et-al:dual-circularly-polarized-antennas-with-low-cross-polarization-for-gnss-r-applications, zang-et-al:single-layer-dual-circularly-polarized-antenna-elements-for-automotive-radar-at-77-ghz}. Waveguide-based polarizers offer a robust solution for achieving dual-CP operation due to their inherent ability to support two orthogonal, degenerate modes. This introduction briefly reviews existing waveguide polarizer techniques and introduces a novel, easily manufacturable design approach.
@@ -62,11 +75,11 @@ This paper presents a novel dual-CP antenna operating in the $\frequencyrange$ b
 The rest of this paper is organized as follows: Section~\ref{sec:passive-radiating-structure-design} details the design of the passive radiating components. Section~\ref{sec:dual-mode-feeding-structure-and-integration} describes the feeding structure and system integration. Section~\ref{sec:experimental-validation} presents the experimental validation of the fabricated prototype, followed by the conclusion in Section~V.
 
 
-% ========== Chapter II: Passive Radiating Structure Design ==========
+% ========== Section II: Passive Radiating Structure Design ==========
 \section{Passive Radiating Structure Design}
 \label{sec:passive-radiating-structure-design}
 
-% ========== Chapter II-A: Hexagonal Waveguide Polarizer ==========
+% ========== Section II-A: Hexagonal Waveguide Polarizer ==========
 \subsection{Hexagonal Waveguide Polarizer}
 \label{subsec:hexagonal-waveguide-polarizer}
 
@@ -102,14 +115,14 @@ To validate the design, a full-wave simulation of the finalized polarizer sectio
 In addition to axial ratio, the cross-polarization discrimination (XPD) was evaluated in the boresight direction for both excitation ports. The maximum XPD reaches approximately $\qty{38}{dB}$, while the overall XPD remains better than $\qty{18}{dB}$ across the operating band, directly corresponding to the observed axial ratio. Furthermore, the $\qty{2}{dB}$ axial ratio beamwidth (ARBW) is approximately $\qty{80}{\degree}$, indicating robust polarization purity over a wide angular range.
 
 
-% ========== Chapter II-B: Conical Horn Radiator ==========
+% ========== Section II-B: Conical Horn Radiator ==========
 \subsection{Conical Horn Radiator}
 \label{subsec:conical-horn-radiator}
 
 A conical horn antenna was selected to radiate the wave from the polarizer into free space, chosen for its axial symmetry and suitability for CP applications. The horn was initially synthesized using Antenna Magus~\cite{antenna-magus} for a target gain of $\qty{15}{dBi}$. It was then adapted to the square aperture of the polarizer and its dimensions optimized in CST Studio Suite, guided by the well-understood relationship between gain and horn geometry~\cite{aboserwal-et-al:conical-horn-gain-and-amplitude-patterns}. The final dimensions of flare diameter $D_f = \qty{130}{mm}$ and flare length $L_f = \qty{70}{mm}$ were chosen to provide sufficient gain margin while maintaining a compact footprint. Simulation of the horn confirmed excellent polarization purity and a peak gain of $\qty{15.5}{dBi}$.
 
 
-% ========== Chapter III: Dual-Mode Feeding Structure and Integration ==========
+% ========== Section III: Dual-Mode Feeding Structure and Integration ==========
 \section{Dual-Mode Feeding Structure and Integration}
 \label{sec:dual-mode-feeding-structure-and-integration}
 
@@ -119,50 +132,29 @@ To facilitate the excitation of a circularly polarized wave in the subsequent an
 
 The foundation of our design is the right-angle coaxial-to-waveguide transition, a widely documented method~\cite{fabregas-et-al:coaxial-to-rectangular-waveguide-transitions}. In this configuration, the inner conductor of a coaxial cable protrudes into the waveguide, forming a monopole-like probe. The efficiency of power transfer into the desired waveguide mode is primarily governed by two parameters: the probe length, $l$, and its distance from the short-circuited end of the waveguide, the back-short, $d$. For optimal performance, the probe length is tuned to be near a quarter of the operating wavelength ($l \approx \lambda/4$), accounting for the probe's finite thickness and fringing capacitance. The distance to the back-short is set to approximately a quarter of the guide wavelength ($d \approx \lambda_g/4$) to ensure that the wave reflected by the back-short constructively interferes with the forward-propagating wave radiated by the probe. While higher-order resonances exist for $d = (2\nu+1)\lambda_g/4$ where $\nu \in \mathbb{N}$, these result in significantly narrower bandwidths and are thus avoided.
 
-To excite the orthogonal mode, a second, perpendicularly oriented probe is introduced. A simplistic implementation, placing both probes within the same transverse plane, was initially assumed to result in high mutual coupling, prompting the search for a more sophisticated approach. While longitudinally displacing one port can improve isolation, it necessitates retuning its back-short distance, which, as previously noted, is optimal only at a specific distance, limiting performance.
-
-To overcome this challenge, we propose a dual-feed structure that utilizes a wire-grating polarizer to isolate the two ports, inspired by the concept presented in~\cite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}. As depicted in Fig.~\ref{fig:dual-feed-conceptual}, the two orthogonal probes (Port~1 and Port~2) are longitudinally displaced. A wire grating, oriented parallel to the electric field of the mode excited by Port~2, is placed between them. This grating is designed to be effectively transparent to the vertically polarized wave from Port~1 while acting as a reflecting surface, or a virtual back-short, for the horizontally polarized wave from Port~2. This arrangement allows both probes to maintain their optimal back-short distances---$d_1$ for Port~1 relative to the physical back-short, and $d_2$ for Port~2 relative to the grating---while achieving significant physical separation.
-
 \begin{figure}[!b]
     \centering
     \includegraphics[width=.93\linewidth]{src/dual_feed_side_cut_view.png}
     \caption{\label{fig:dual-feed-conceptual}Conceptual design of the high-isolation dual-feed structure with a wire grating polarizer.}
 \end{figure}
 
-The design and optimization of this structure involve several critical considerations. The primary new parameter is the distance, $d_g$, between Port~1 and the wire grating. While the grating is largely transparent to Port~1, it is not perfect and introduces reflections. The back-short and the grating form a resonant cavity for Port~1, leading to sharp degradation in the reflection coefficient, $S_{11}$, at specific frequencies. The resonant frequency of this cavity is inversely proportional to the grating distance $d_g$. Analysis reveals that while a grating distance of $d_g \approx \lambda_g/4$ provides a local minimum for the reflection coefficient ($S_{11}$), port isolation ($S_{21}$) improves with increasing $d_g$. A grating distance of $d_g \approx 3\lambda_g/4$ was found to provide a superior trade-off between reflection and isolation, consistent with findings reported in~\cite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}. The final optimization also includes the grating's geometry, specifically the wire radius, $r$, and the gap between wires, $g$, which control its reflectivity and, consequently, the performance of Port~2 and the overall port isolation.
+To excite the orthogonal mode, a second, perpendicularly oriented probe is introduced. A simplistic implementation, placing both probes within the same transverse plane, was initially assumed to result in high mutual coupling, prompting the search for a more sophisticated approach. While longitudinally displacing one port can improve isolation, it necessitates retuning its back-short distance, which, as previously noted, is optimal only at a specific distance, limiting performance.
 
-The multi-variable optimization of all key parameters, $\{d_1, l_1, d_g, d_2, l_2, r, g\}$, was performed using the Nelder-Mead Simplex method, implemented in Python via the SciPy library~\cite{virtanen-et-al:scipy}. The optimization process was automated by a custom Python script, which systematically adjusted the design variables and evaluated their impact on the antenna's performance. This script interfaces directly with CST Studio Suite by leveraging its dedicated Python libraries~\cite{cst:python-libraries-documentation}, enabling external control of the simulation environment. For each optimization step, the script updates the CST model parameters, executes geometry checks and adjustments, and launches a new electromagnetic simulation. The resulting S-parameters are retrieved and analysed to compute an objective function that simultaneously minimizes the reflection coefficients ($S_{11}$ and $S_{22}$) and maximizes port-to-port isolation (minimizing $S_{21}$) over the specified frequency range. This iterative process continues until convergence is achieved, with the script ensuring that the best parameter set is saved upon completion or exit.
-
-\begin{figure}[!b]
+\begin{figure}[!t]
     \centering
     \includegraphics[width=\linewidth]{src/dual_feed_sparameters.eps}
     \caption{\label{fig:dual-feed-sparameters}Simulated S-parameters of the conceptual high-isolation dual-feed structure.}
 \end{figure}
 
-The final design demonstrates excellent performance (see Fig.~\ref{fig:dual-feed-sparameters}), with return loss for both ports remaining above $\qty{10}{dB}$ and port-to-port isolation ($S_{21}$ and $S_{12}$) better than $\qty{40}{dB}$ across the operational band. A minor ripple in the simulated S-parameters near $\qty{4.94}{GHz}$ is attributed to a weak cavity resonance between the back-short and the grating. This effect, a consequence of the grating's finite transparency, is expected to be negligible in practice due to conductor losses. However, it underscores the critical role of grating design in the antenna's overall performance.
-
-\subsection{Integration and Design Simplification}
-
-While the wire-grating feed demonstrated excellent simulated isolation as a standalone component, full-wave analysis of the integrated antenna system revealed complex coupling effects between the feed, polarizer, and horn that were not present in component-level simulations. To ensure robust performance and streamline manufacturability, a simplified feed topology was adopted for the final prototype. This implementation places the two orthogonal coaxial probes in the same transverse plane, accepting a moderate trade-off in port isolation for improved system-level performance and predictability.
-
-
-% ========== Chapter IV: Experimental Validation ==========
-\section{Experimental Validation}
-\label{sec:experimental-validation}
-
-To validate the final antenna design, a prototype incorporating the simplified dual-feed structure was fabricated and measured. This approach prioritized system integration robustness and manufacturability. For fabrication, the antenna was modularized into five flanged sections (antenna, waveguide, polarizer, dual-feed, and back-short), as shown in Fig.~\ref{fig:final-perspective}.
-
 \begin{figure}[!b]
 \centering
 \includegraphics[width=\linewidth]{src/final_perspective.png}
-\caption{\label{fig:final-perspective}Exploded view of the DFM-compliant antenna model, highlighting its modular construction. The modules are numbered from front to back: 1)~conical horn antenna, 2)~square waveguide section, 3)~hexagonal polarizer, 4)~simplified dual-feed structure, and 5)~back-short wall.}
+\caption{\label{fig:final-perspective}Exploded view of the Design for Manufacturing (DFM)-compliant antenna model, highlighting its modular construction. The modules are numbered from front to back: 1)~conical horn antenna, 2)~square waveguide section, 3)~hexagonal waveguide polarizer, 4)~simplified dual-feed structure, and 5)~back-short wall.}
 \end{figure}
 
-The measured and simulated S-parameters are compared in Fig.~\ref{fig:final-sparameters}. The return loss for both ports ($S_{11}$, $S_{22}$) remains above $\qty{10}{dB}$ across the operating band, indicating a good impedance match. The port isolation ($S_{21}$, $S_{12}$) also stays above $\qty{10}{dB}$. The slight difference in return loss between Port 1 and Port 2 is due to reflections from the subsequent polarizer sections, which have different cross-sectional geometries for each port. Conversely, the port coupling is perfectly symmetrical because the primary contribution comes from the immediate coupling between neighbouring probes, which is identical for both ports.
+To overcome this challenge, we propose a dual-feed structure that utilizes a wire-grating polarizer to isolate the two ports, inspired by the concept presented in~\cite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}. As depicted in Fig.~\ref{fig:dual-feed-conceptual}, the two orthogonal probes (Port~1 and Port~2) are longitudinally displaced. A wire grating, oriented parallel to the electric field of the mode excited by Port~2, is placed between them. This grating is designed to be effectively transparent to the vertically polarized wave from Port~1 while acting as a reflecting surface, or a virtual back-short, for the horizontally polarized wave from Port~2. This arrangement allows both probes to maintain their optimal back-short distances---$d_1$ for Port~1 relative to the physical back-short, and $d_2$ for Port~2 relative to the grating---while achieving significant physical separation.
 
-Radiation properties were measured in an anechoic chamber. Fig.~\ref{fig:final-boresight-radiation} presents the boresight realized gain and AR. The measured gain ranges from $\qty{12}{dBi}$ to $\qty{15}{dBi}$, and the AR remains below $\qty{4}{dB}$ for both ports, confirming successful dual-CP operation. Radiation patterns%
-    \footnote{The symmetry of the waveguide components ensures that the radiation pattern in the elevation plane from Port~1 is identical to the radiation pattern in the azimuth plane from Port~2, and vice versa. Furthermore, the azimuthal and elevation planes exhibit similar performance; hence, the patterns are presented only for Port~1.}
-presented in Fig.~\ref{fig:final-radiation} show excellent agreement between measurement and simulation, validating the overall design.
+The design and optimization of this structure involve several critical considerations. The primary new parameter is the distance, $d_g$, between Port~1 and the wire grating. While the grating is largely transparent to Port~1, it is not perfect and introduces reflections. The back-short and the grating form a resonant cavity for Port~1, leading to sharp degradation in the reflection coefficient, $S_{11}$, at specific frequencies. The resonant frequency of this cavity is inversely proportional to the grating distance $d_g$. Analysis reveals that while a grating distance of $d_g \approx \lambda_g/4$ provides a local minimum for the reflection coefficient ($S_{11}$), port isolation ($S_{21}$) improves with increasing $d_g$. A grating distance of $d_g \approx 3\lambda_g/4$ was found to provide a superior trade-off between reflection and isolation, consistent with findings reported in~\cite{karki-et-al:dual-polarized-probe-for-planar-near-field-measurement}. The final optimization also includes the grating's geometry, specifically the wire radius, $r$, and the gap between wires, $g$, which control its reflectivity and, consequently, the performance of Port~2 and the overall port isolation.
 
 \begin{figure}[!b]
 \centering
@@ -170,7 +162,9 @@ presented in Fig.~\ref{fig:final-radiation} show excellent agreement between mea
 \caption{\label{fig:final-sparameters}Comparison of measured and simulated S-parameters for the fabricated prototype with the simplified feed.}
 \end{figure}
 
-Notably, the measured gain is slightly higher and the axial ratio lower than predicted by simulation. This discrepancy may be attributed to a combination of factors. Possible causes include measurement uncertainties (such as calibration errors, chamber reflections, or misalignment), manufacturing tolerances that resulted in smoother surfaces or more optimal dimensions than modelled, and material properties differing from those assumed in simulation (e.g., lower actual losses). Additionally, minor assembly imperfections or connector effects could have influenced the results. Overall, the combined effect of these factors likely accounts for the observed differences.
+The multi-variable optimization of all key parameters, $\{d_1, l_1, d_g, d_2, l_2, r, g\}$, was performed using the Nelder-Mead Simplex method, implemented in Python via the SciPy library~\cite{virtanen-et-al:scipy}. The optimization process was automated by a custom Python script, which systematically adjusted the design variables and evaluated their impact on the antenna's performance. This script interfaces directly with CST Studio Suite by leveraging its dedicated Python libraries~\cite{cst:python-libraries-documentation}, enabling external control of the simulation environment. For each optimization step, the script updates the CST model parameters, executes geometry checks and adjustments, and launches a new electromagnetic simulation. The resulting S-parameters are retrieved and analysed to compute an objective function that simultaneously minimizes the reflection coefficients ($S_{11}$ and $S_{22}$) and maximizes port-to-port isolation (minimizing $S_{21}$) over the specified frequency range. This iterative process continues until convergence is achieved, with the script ensuring that the best parameter set is saved upon completion or exit.
+
+The final design demonstrates excellent performance (see Fig.~\ref{fig:dual-feed-sparameters}), with return loss for both ports remaining above $\qty{10}{dB}$ and port-to-port isolation ($S_{21}$ and $S_{12}$) better than $\qty{40}{dB}$ across the operational band. A minor ripple in the simulated S-parameters near $\qty{4.94}{GHz}$ is attributed to a weak cavity resonance between the back-short and the grating. This effect, a consequence of the grating's finite transparency, is expected to be negligible in practice due to conductor losses. However, it underscores the critical role of grating design in the antenna's overall performance.
 
 \begin{figure}[!b]
 \centering
@@ -178,8 +172,35 @@ Notably, the measured gain is slightly higher and the axial ratio lower than pre
 \caption{\label{fig:final-boresight-radiation}Comparison of measured and simulated boresight gain and axial ratio. Due to the structure's symmetry, the performance is identical for both LHCP (Port 1) and RHCP (Port 2).}
 \end{figure}
 
+\subsection{Integration and Design Simplification}
 
-% ========== Chapter V: Conclusion ==========
+While the wire-grating feed demonstrated excellent simulated isolation as a standalone component, full-wave analysis of the integrated antenna system revealed complex coupling effects between the feed, polarizer, and horn that were not present in component-level simulations. To ensure robust performance and streamline manufacturability, a simplified feed topology was adopted for the final prototype. This implementation places the two orthogonal coaxial probes in the same transverse plane, accepting a moderate trade-off in port isolation for improved system-level performance and predictability.
+
+
+% ========== Section IV: Experimental Validation ==========
+\section{Experimental Validation}
+\label{sec:experimental-validation}
+
+To validate the final antenna design, a prototype incorporating the simplified dual-feed structure was fabricated and measured. This approach prioritized system integration robustness and manufacturability. For fabrication, the antenna was modularized into five flanged sections (antenna, waveguide, polarizer, dual-feed, and back-short), as shown in Fig.~\ref{fig:final-perspective}.
+
+The measured and simulated S-parameters are compared in Fig.~\ref{fig:final-sparameters}. The return loss for both ports ($S_{11}$, $S_{22}$) remains above $\qty{10}{dB}$ across the operating band, indicating a good impedance match. The port isolation ($S_{21}$, $S_{12}$) also stays above $\qty{10}{dB}$. The slight difference in return loss between Port 1 and Port 2 is due to reflections from the subsequent polarizer sections, which have different cross-sectional geometries for each port. Conversely, the port coupling is perfectly symmetrical because the primary contribution comes from the immediate coupling between neighbouring probes, which is identical for both ports.
+
+Radiation properties were measured in an anechoic chamber. Fig.~\ref{fig:final-boresight-radiation} presents the boresight realized gain and AR. The measured gain ranges from $\qty{12}{dBi}$ to $\qty{15}{dBi}$, and the AR remains below $\qty{4}{dB}$ for both ports, confirming successful dual-CP operation. Radiation patterns%
+    \footnote{The symmetry of the waveguide components ensures that the radiation pattern in the elevation plane from Port~1 is identical to the radiation pattern in the azimuth plane from Port~2, and vice versa. Furthermore, the azimuthal and elevation planes exhibit similar performance; hence, the patterns are presented only for Port~1.}
+presented in Fig.~\ref{fig:final-radiation} show excellent agreement between measurement and simulation, validating the overall design.
+
+Notably, the measured gain is slightly higher and the axial ratio lower than predicted by simulation. This discrepancy may be attributed to a combination of factors. Possible causes include measurement uncertainties (such as calibration errors, chamber reflections, or misalignment), manufacturing tolerances that resulted in smoother surfaces or more optimal dimensions than modelled, and material properties differing from those assumed in simulation (e.g., lower actual losses). Additionally, minor assembly imperfections or connector effects could have influenced the results. Overall, the combined effect of these factors likely accounts for the observed differences.
+
+\begin{figure}[!t]
+\centering
+\subfloat[]{\includegraphics[width=.45\textwidth]{src/final_radiation_pattern_azimuth.eps}}
+\\
+\subfloat[]{\includegraphics[width=.45\textwidth]{src/final_radiation_pattern_elevation.eps}}
+\caption{\label{fig:final-radiation}(a) Measured and simulated co-polarization radiation pattern for Port 1 at $\qty{5.2}{GHz}$ in the azimuthal plane ($\varphi=\ang{0}$). (b) Measured and simulated co-polarization radiation pattern for Port 1 at $\qty{5.2}{GHz}$ in the elevation plane ($\varphi=\ang{90}$).}
+\end{figure}
+
+
+% ========== Section V: Conclusion ==========
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -188,7 +209,6 @@ This letter presented the design and validation of a compact dual circularly pol
 Additionally, our work proposed a high-isolation feeding structure concept, which achieved over $\qty{40}{dB}$ of simulated isolation. This finding provides a valuable path forward for future dual-polarized antenna designs, particularly for applications where high isolation is critical and manufacturing constraints are less restrictive. The proposed antenna and its associated design concepts offer a promising solution for satellite communications, radar, and other wireless systems requiring high-performance dual circular polarization.
 
 
-\clearpage
 % ========== Data Availability Statement ==========
 \section*{Data Availability Statement}
 \label{sec:data-availability-statement}
@@ -206,14 +226,7 @@ The data and code that support the findings of this study are openly available i
 \label{sec:acknowledgments}
 
 The authors would like to express their sincere gratitude to Universal Microwave Technology, Inc. for their crucial support in this research. We thank them for the fabrication of the antenna prototype and for performing the S-parameter measurements. Without their expertise and resources, the experimental validation of this work would not have been possible. We are also thankful for their timely and professional communication during the final stages of the project.
-
-\begin{figure*}[!ht]
-\centering
-\subfloat[]{\includegraphics[width=.45\textwidth]{src/final_radiation_pattern_azimuth.eps}}
-\qquad
-\subfloat[]{\includegraphics[width=.45\textwidth]{src/final_radiation_pattern_elevation.eps}}
-\caption{\label{fig:final-radiation}(a) Measured and simulated co-polarization radiation pattern for Port 1 at $\qty{5.2}{GHz}$ in the azimuthal plane ($\varphi=\ang{0}$). (b) Measured and simulated co-polarization radiation pattern for Port 1 at $\qty{5.2}{GHz}$ in the elevation plane ($\varphi=\ang{90}$).}
-\end{figure*}
+% \clearpage
 
 
 % ========== Bibliography ==========
